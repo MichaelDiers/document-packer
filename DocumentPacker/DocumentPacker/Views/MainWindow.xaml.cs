@@ -2,11 +2,12 @@
 
 using System.Windows;
 using DocumentPacker.Contracts.ViewModels;
+using DocumentPacker.Contracts.Views;
 
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow : Window, IMainWindow
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="MainWindow" /> class.

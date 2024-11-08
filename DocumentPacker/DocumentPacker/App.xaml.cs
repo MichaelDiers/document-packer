@@ -1,8 +1,8 @@
 ﻿namespace DocumentPacker;
 
 using System.Windows;
+using DocumentPacker.Contracts.Views;
 using DocumentPacker.Extensions;
-using DocumentPacker.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -43,6 +43,6 @@ public partial class App : Application
     /// <param name="e">The <see cref="StartupEventArgs" /> instance containing the event data.</param>
     private void OnStartup(object sender, StartupEventArgs e)
     {
-        App.ServiceProvider.GetRequiredService<MainWindow>().Show();
+        App.ServiceProvider.GetRequiredService<IMainWindow>().Show();
     }
 }

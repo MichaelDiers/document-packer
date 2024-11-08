@@ -1,6 +1,7 @@
 ﻿namespace DocumentPacker.Extensions;
 
 using DocumentPacker.Contracts.ViewModels;
+using DocumentPacker.Contracts.Views;
 using DocumentPacker.ViewModels;
 using DocumentPacker.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,7 @@ public static class ServiceCollectionExtensions
     /// <returns>The given <paramref name="services" />.</returns>
     public static IServiceCollection AddDependencies(this IServiceCollection services)
     {
-        services.AddSingleton<MainWindow>();
+        services.AddSingleton<IMainWindow, MainWindow>();
         services.AddSingleton<IMainViewModel, MainViewModel>();
 
         return services;
