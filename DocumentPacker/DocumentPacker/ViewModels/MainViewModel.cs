@@ -5,6 +5,6 @@ using DocumentPacker.Contracts.ViewModels;
 /// <summary>
 ///     Describes the main view model.
 /// </summary>
-internal class MainViewModel : IMainViewModel
+internal class MainViewModel : BaseViewModel, IMainViewModel
 {
 }
