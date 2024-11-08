@@ -2,6 +2,7 @@
 
 using System.Windows;
 using DocumentPacker.Extensions;
+using DocumentPacker.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
