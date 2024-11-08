@@ -1,0 +1,21 @@
+﻿namespace DocumentPacker.Extensions;
+
+using Microsoft.Extensions.DependencyInjection;
+
+/// <summary>
+///     Extensions for <see cref="IServiceCollection" />.
+/// </summary>
+public static class ServiceCollectionExtensions
+{
+    /// <summary>
+    ///     Adds all dependencies of the application.
+    /// </summary>
+    /// <param name="services">Dependencies are added to the given services.</param>
+    /// <returns>The given <paramref name="services" />.</returns>
+    public static IServiceCollection AddDependencies(this IServiceCollection services)
+    {
+        services.AddSingleton<MainWindow>();
+
+        return services;
+    }
+}
