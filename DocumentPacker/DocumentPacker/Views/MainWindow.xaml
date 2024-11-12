@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <StackPanel>
-        <TextBlock Text="{Binding Path=(viewModels:TaskCommand.IsExecutingCommands)}"/>
-        <TextBlock Text="{Binding RunExecuted1}"/>
+        <TextBlock Text="{Binding Path=(viewModels:TaskCommand.IsExecutingCommands)}" />
+        <TextBlock Text="{Binding RunExecuted1}" />
         <Button Command="{Binding RunCommand1}">RunCommand1</Button>
-        <TextBlock Text="{Binding RunExecuted2}"/>
+        <TextBlock Text="{Binding RunExecuted2}" />
         <Button Command="{Binding RunCommand2}">RunCommand2</Button>
-        <TextBlock Text="{Binding RunExecuted3}"/>
+        <TextBlock Text="{Binding RunExecuted3}" />
         <Button Command="{Binding RunCommand3}">RunCommand3</Button>
         <Button Command="{Binding RunCommand1.CancelCommand}">Cancel</Button>
     </StackPanel>

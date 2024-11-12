@@ -20,6 +20,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IMainWindow, MainWindow>();
         services.AddSingleton<IMainViewModel, MainViewModel>();
+        services.AddSingleton<IDispatcher, ThreadDispatcher>();
 
         return services;
     }

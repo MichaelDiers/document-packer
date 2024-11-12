@@ -1,7 +1,8 @@
 ﻿namespace DocumentPacker.ViewModels;
 
 using System.Windows.Input;
-using System.Windows.Threading;
+using DocumentPacker.Contracts.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 ///     An <see cref="ICommand" />  implementation that runs the <see cref="ICommand.Execute" />
@@ -10,6 +11,11 @@ using System.Windows.Threading;
 /// <seealso cref="System.Windows.Input.ICommand" />
 public class TaskCommand : ICommand
 {
+    /// <summary>
+    ///     The global cancel command that cancels all running commands.
+    /// </summary>
+    private static TaskCommand? cancelCommand;
+
     /// <summary>
     ///     The <see cref="CancellationTokenSource" /> reinatialized if a <see cref="ICommand.Execute" />
     ///     is started and the <see cref="numberOfExecutingCommands" /> is equal to zero.
@@ -34,7 +40,7 @@ public class TaskCommand : ICommand
     /// <summary>
     ///     A dispatcher for the ui thread.
     /// </summary>
-    private readonly Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+    private readonly IDispatcher dispatcher;
 
     /// <summary>
     ///     Defines the method to be called when the command is invoked.
@@ -52,16 +58,18 @@ public class TaskCommand : ICommand
     /// <param name="canExecute">Defines the method that determines whether the command can execute in its current state.</param>
     /// <param name="execute">Defines the method to be called when the command is invoked.</param>
     /// <param name="isCancelCommand">if set to <c>true</c> the command is used for the cancellation of another command.</param>
-    protected TaskCommand(
+    /// <param name="dispatcher">A dispatcher for the ui thread.</param>
+    public TaskCommand(
         Func<object?, bool> canExecute,
         Func<object?, CancellationToken, Task> execute,
-        bool isCancelCommand
+        bool isCancelCommand,
+        IDispatcher? dispatcher = null
     )
-
     {
         this.canExecute = canExecute;
         this.execute = execute;
         this.isCancelCommand = isCancelCommand;
+        this.dispatcher = dispatcher ?? App.ServiceProvider.GetRequiredService<IDispatcher>();
     }
 
     /// <summary>
@@ -93,15 +101,17 @@ public class TaskCommand : ICommand
     ///     Gets the cancel command that cancels all <see cref="ICommand.Execute" /> that are
     ///     associated to <see cref="cancellationTokenSource" />.
     /// </summary>
-    public static TaskCommand CancelCommand =>
-        new(
-            _ => TaskCommand.IsExecutingCommands,
-            (_, _) =>
-            {
-                TaskCommand.cancellationTokenSource?.Cancel();
-                return Task.CompletedTask;
-            },
-            true);
+    public static TaskCommand? CancelCommand
+    {
+        get => TaskCommand.cancelCommand;
+        private set
+        {
+            TaskCommand.cancelCommand = value;
+            TaskCommand.CancelCommandChanged?.Invoke(
+                null,
+                EventArgs.Empty);
+        }
+    }
 
     /// <summary>
     ///     Gets a value indicating whether this instance is executing commands.
@@ -136,7 +146,7 @@ public class TaskCommand : ICommand
     ///     Data used by the command.  If the command does not require data to be passed, this object can
     ///     be set to <see langword="null" />.
     /// </param>
-    public virtual void Execute(object? parameter)
+    public void Execute(object? parameter)
     {
         if (this.dispatcher.CheckAccess())
         {
@@ -167,11 +177,17 @@ public class TaskCommand : ICommand
                                         null,
                                         EventArgs.Empty);
                                     TaskCommand.cancellationTokenSource = null;
+                                    TaskCommand.CancelCommand = null;
                                 }
                             }
                         });
                 });
     }
+
+    /// <summary>
+    ///     Occurs when <see cref="CancelCommand" /> changed.
+    /// </summary>
+    public static event EventHandler? CancelCommandChanged;
 
     /// <summary>
     ///     Occurs when <see cref="IsExecutingCommands" /> changed.
@@ -199,6 +215,16 @@ public class TaskCommand : ICommand
 
                 // init the token source for cancellation operations
                 TaskCommand.cancellationTokenSource = new CancellationTokenSource();
+
+                TaskCommand.CancelCommand = new TaskCommand(
+                    _ => TaskCommand.IsExecutingCommands,
+                    (_, _) =>
+                    {
+                        TaskCommand.cancellationTokenSource?.Cancel();
+                        return Task.CompletedTask;
+                    },
+                    true,
+                    this.dispatcher);
             }
         }
     }
