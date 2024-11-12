@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="DocumentPacker.Views.Overlay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:DocumentPacker.ViewModels"
+             Panel.ZIndex="1000">
+    <Border BorderBrush="Black"
+            BorderThickness="1"
+            Background="#80000000">
+        <Grid>
+            <Button Height="100"
+                    Width="200"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Command="{Binding Path=(viewModels:TaskCommand.CancelCommand)}">
+                Cancel
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>
