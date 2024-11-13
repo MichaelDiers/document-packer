@@ -21,7 +21,7 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <localViews:Overlay
+        <localViews:CancelCommandOverlay
             Grid.Row="0"
             Grid.RowSpan="4"
             Visibility="{Binding Path=(viewModels:TaskCommand.IsExecutingCommands), Converter={StaticResource BoolToVisibilityConverter}}" />

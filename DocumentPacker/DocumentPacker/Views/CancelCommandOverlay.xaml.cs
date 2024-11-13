@@ -3,11 +3,11 @@
 using System.Windows.Controls;
 
 /// <summary>
-///     Interaction logic for Overlay.xaml
+///     Interaction logic for CancelCommandOverlay.xaml
 /// </summary>
-public partial class Overlay : UserControl
+public partial class CancelCommandOverlay : UserControl
 {
-    public Overlay()
+    public CancelCommandOverlay()
     {
         this.InitializeComponent();
     }

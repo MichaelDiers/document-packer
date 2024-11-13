@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="DocumentPacker.Views.FatalErrorMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/FatalErrorMessageOverlayStyle.xaml" />
+    </UserControl.Resources>
+    <Border Style="{StaticResource InnerBorder}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding FatalErrorMessage}" />
+            <Button Grid.Row="1" Command="{Binding CloseFatalErrorMessageCommand}">OK</Button>
+        </Grid>
+    </Border>
+</UserControl>
