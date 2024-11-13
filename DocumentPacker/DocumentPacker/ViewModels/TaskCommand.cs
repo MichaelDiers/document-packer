@@ -162,7 +162,7 @@ public class TaskCommand : ICommand
                     parameter,
                     TaskCommand.cancellationTokenSource?.Token ?? CancellationToken.None))
             .ContinueWith(
-                _ =>
+                task =>
                 {
                     this.dispatcher.Invoke(
                         () =>
@@ -180,6 +180,17 @@ public class TaskCommand : ICommand
                                     TaskCommand.CancelCommand = null;
                                 }
                             }
+
+                            if (task is {IsFaulted: true, Exception: not null})
+                            {
+                                // todo: user friendly error message
+                                var message = task.Exception.Flatten()
+                                    .InnerExceptions.Select(ex => ex.Message)
+                                    .Aggregate((message1, message2) => $"{message1} {message2}");
+                                TaskCommand.FatalError?.Invoke(
+                                    this,
+                                    message);
+                            }
                         });
                 });
     }
@@ -188,6 +199,11 @@ public class TaskCommand : ICommand
     ///     Occurs when <see cref="CancelCommand" /> changed.
     /// </summary>
     public static event EventHandler? CancelCommandChanged;
+
+    /// <summary>
+    ///     Occurs when <see cref="CancelCommand" /> changed.
+    /// </summary>
+    public static event EventHandler<string>? FatalError;
 
     /// <summary>
     ///     Occurs when <see cref="IsExecutingCommands" /> changed.

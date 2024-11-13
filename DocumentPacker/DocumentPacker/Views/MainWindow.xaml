@@ -12,6 +12,7 @@
         Keyboard.PreviewKeyDown="OnPreviewKeyDown">
     <Window.Resources>
         <localViews:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <localViews:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -24,6 +25,10 @@
             Grid.Row="0"
             Grid.RowSpan="4"
             Visibility="{Binding Path=(viewModels:TaskCommand.IsExecutingCommands), Converter={StaticResource BoolToVisibilityConverter}}" />
+        <localViews:FatalErrorMessage
+            Grid.Row="0"
+            Grid.RowSpan="4"
+            Visibility="{Binding Path=FatalErrorMessage, Converter={StaticResource NullToVisibilityConverter}}" />
         <TextBlock Grid.Row="0" Text="{Binding Path=(viewModels:TaskCommand.IsExecutingCommands)}" />
         <Border Grid.Row="1">
             <StackPanel>

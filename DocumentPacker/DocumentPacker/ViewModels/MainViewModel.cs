@@ -1,5 +1,6 @@
 ﻿namespace DocumentPacker.ViewModels;
 
+using System.Reflection;
 using System.Windows.Input;
 using DocumentPacker.Contracts.ViewModels;
 
@@ -8,27 +9,60 @@ using DocumentPacker.Contracts.ViewModels;
 /// </summary>
 internal class MainViewModel : BaseViewModel, IMainViewModel
 {
+    /// <summary>
+    ///     The fatal error message text.
+    /// </summary>
+    private string? fatalErrorMessage;
+
     private bool runExecuted1;
     private bool runExecuted2;
     private bool runExecuted3;
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
+    /// </summary>
+    public MainViewModel()
+    {
+        TaskCommand.FatalError += (sender, s) => this.FatalErrorMessage = s;
+    }
+
+    /// <summary>
+    ///     Gets the close fatal error message command.
+    /// </summary>
+    public ICommand CloseFatalErrorMessageCommand =>
+        new TaskCommand(
+            _ => this.FatalErrorMessage is not null,
+            (_, _) =>
+            {
+                this.FatalErrorMessage = null;
+                return Task.CompletedTask;
+            });
+
+    /// <summary>
+    ///     Gets or sets the fatal error message text.
+    /// </summary>
+    public string? FatalErrorMessage
+    {
+        get => this.fatalErrorMessage;
+        set =>
+            this.SetField(
+                ref this.fatalErrorMessage,
+                value);
+    }
+
     public ICommand RunCommand1 =>
         new TaskCommand(
             _ => !this.RunExecuted1,
-            (_, cancellationToken) =>
+            async (_, cancellationToken) =>
             {
-                for (var i = 0; i < 5; i++)
-                {
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        break;
-                    }
-
-                    Thread.Sleep(1000);
-                }
-
+                await Task.Delay(
+                    40,
+                    cancellationToken);
+                throw new AggregateException(
+                    new AccessViolationException("foo."),
+                    new AbandonedMutexException("bar."),
+                    new AmbiguousMatchException());
                 this.RunExecuted1 = true;
-                return Task.CompletedTask;
             });
 
     public ICommand RunCommand2 =>
