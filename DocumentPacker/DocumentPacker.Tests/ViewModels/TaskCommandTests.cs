@@ -133,6 +133,42 @@ public class TaskCommandTests : IDisposable
     }
 
     [Fact]
+    public async Task FatalErrorDoesNotOccurIfBackgroundTaskTerminates()
+    {
+        var command = this.CreateCommand(
+            _ => true,
+            (_, _) => Task.CompletedTask);
+
+        string? actualError = null;
+        TaskCommand.FatalError += (_, message) => { actualError = message; };
+
+        command.Execute(null);
+        await this.WaitForCommandTermination();
+
+        Assert.Null(actualError);
+    }
+
+    [Fact]
+    public async Task FatalErrorOccursIfBackgroundTaskThrowsAnError()
+    {
+        const string expectedError = nameof(expectedError);
+        var command = this.CreateCommand(
+            _ => true,
+            (_, _) => throw new Exception(expectedError));
+
+        string? actualError = null;
+        TaskCommand.FatalError += (_, message) => { actualError = message; };
+
+        command.Execute(null);
+        await this.WaitForCommandTermination();
+
+        Assert.NotNull(actualError);
+        Assert.Equal(
+            expectedError,
+            actualError);
+    }
+
+    [Fact]
     public async Task IsExecutingCommandsChangedIsRaisedIfCommandIsExecuting()
     {
         var command = this.CreateCommand(
