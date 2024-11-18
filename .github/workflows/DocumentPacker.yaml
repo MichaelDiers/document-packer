@@ -1,0 +1,12 @@
+name: Build and test DocumentPacker
+on:
+  push:
+    paths:
+      - DocumentPacker
+      - .github/workflows/DocumentPacker.yaml
+  workflow_dispatch:
+jobs:
+  build-and-test:
+    uses: MichaelDiers/github-workflows/.github/workflows/dotnet-build-and-test.yaml@main
+    with:
+      solution-directory: DocumentPacker
