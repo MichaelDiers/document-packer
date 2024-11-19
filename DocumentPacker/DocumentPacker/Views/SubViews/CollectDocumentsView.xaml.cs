@@ -5,6 +5,7 @@ using System.Windows.Controls;
 /// <summary>
 ///     Interaction logic for CollectDocumentsView.xaml
 /// </summary>
+// ReSharper disable once RedundantExtendsListEntry
 public partial class CollectDocumentsView : UserControl
 {
     /// <summary>

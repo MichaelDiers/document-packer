@@ -72,7 +72,7 @@ public class TaskCommandTests : IDisposable
         Assert.True(TaskCommand.CancelCommand.CanExecute(null));
         TaskCommand.CancelCommand.Execute(null);
 
-        await this.WaitForCommandTermination();
+        await TaskCommandTests.WaitForCommandTermination();
 
         Assert.False(TaskCommand.IsExecutingCommands);
         Assert.False(commandTerminated);
@@ -143,7 +143,7 @@ public class TaskCommandTests : IDisposable
         TaskCommand.FatalError += (_, message) => { actualError = message; };
 
         command.Execute(null);
-        await this.WaitForCommandTermination();
+        await TaskCommandTests.WaitForCommandTermination();
 
         Assert.Null(actualError);
     }
@@ -160,7 +160,7 @@ public class TaskCommandTests : IDisposable
         TaskCommand.FatalError += (_, message) => { actualError = message; };
 
         command.Execute(null);
-        await this.WaitForCommandTermination();
+        await TaskCommandTests.WaitForCommandTermination();
 
         Assert.NotNull(actualError);
         Assert.Equal(
@@ -179,7 +179,7 @@ public class TaskCommandTests : IDisposable
 
         command.Execute(null);
 
-        await this.WaitForCommandTermination();
+        await TaskCommandTests.WaitForCommandTermination();
 
         Assert.Equal(
             2,
@@ -259,7 +259,7 @@ public class TaskCommandTests : IDisposable
             this.dispatcherMock.Object);
     }
 
-    private async Task WaitForCommandTermination(int delay = TaskCommandTests.DefaultDelay)
+    private static async Task WaitForCommandTermination(int delay = TaskCommandTests.DefaultDelay)
     {
         for (var i = 0; i < 100 && TaskCommand.IsExecutingCommands; ++i)
         {

@@ -41,6 +41,7 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
     /// <param name="loadConfigurationViewModel">The load configuration sub view model.</param>
     /// <param name="startUpViewModel">The startup sub view model.</param>
     /// <param name="viewHandler">The view handler.</param>
+    // ReSharper disable SuggestBaseTypeForParameterInConstructor
     public MainViewModel(
         ICollectDocumentsViewModel collectDocumentsViewModel,
         ILoadConfigurationViewModel loadConfigurationViewModel,
@@ -60,6 +61,8 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
             SubViewId.StartUp,
             _ => this.SubViewModel = startUpViewModel);
     }
+
+    // ReSharper enable SuggestBaseTypeForParameterInConstructor
 
     /// <summary>
     ///     Gets the close fatal error message command.

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 ///     Interaction logic for App.xaml
 /// </summary>
+// ReSharper disable once RedundantExtendsListEntry
 public partial class App : Application
 {
     /// <summary>
@@ -20,11 +21,7 @@ public partial class App : Application
     ///     Gets the service provider used for resolving dependencies.
     /// </summary>
     /// <remarks>Value is initialized on first access.</remarks>
-    public static IServiceProvider ServiceProvider
-    {
-        get => App.provider ?? (App.provider = App.InitServiceProvider());
-        private set => App.provider = value;
-    }
+    public static IServiceProvider ServiceProvider => App.provider ?? (App.provider = App.InitServiceProvider());
 
     /// <summary>
     ///     Initializes the service provider and the application dependencies.

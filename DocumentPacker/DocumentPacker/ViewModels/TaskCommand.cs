@@ -181,16 +181,18 @@ public class TaskCommand : ICommand
                                 }
                             }
 
-                            if (task is {IsFaulted: true, Exception: not null})
+                            if (task is not {IsFaulted: true, Exception: not null})
                             {
-                                // todo: user friendly error message
-                                var message = task.Exception.Flatten()
-                                    .InnerExceptions.Select(ex => ex.Message)
-                                    .Aggregate((message1, message2) => $"{message1} {message2}");
-                                TaskCommand.FatalError?.Invoke(
-                                    this,
-                                    message);
+                                return;
                             }
+
+                            // todo: user friendly error message
+                            var message = task.Exception.Flatten()
+                                .InnerExceptions.Select(ex => ex.Message)
+                                .Aggregate((message1, message2) => $"{message1} {message2}");
+                            TaskCommand.FatalError?.Invoke(
+                                this,
+                                message);
                         });
                 });
     }
@@ -219,29 +221,31 @@ public class TaskCommand : ICommand
         {
             TaskCommand.numberOfExecutingCommands++;
 
-            if (TaskCommand.numberOfExecutingCommands == 1)
+            if (TaskCommand.numberOfExecutingCommands != 1)
             {
-                // check for can execute changes
-                CommandManager.InvalidateRequerySuggested();
-
-                // update the dependent isExecutingCommands
-                TaskCommand.IsExecutingCommandsChanged?.Invoke(
-                    null,
-                    EventArgs.Empty);
-
-                // init the token source for cancellation operations
-                TaskCommand.cancellationTokenSource = new CancellationTokenSource();
-
-                TaskCommand.CancelCommand = new TaskCommand(
-                    _ => TaskCommand.IsExecutingCommands,
-                    (_, _) =>
-                    {
-                        TaskCommand.cancellationTokenSource?.Cancel();
-                        return Task.CompletedTask;
-                    },
-                    true,
-                    this.dispatcher);
+                return;
             }
+
+            // check for can execute changes
+            CommandManager.InvalidateRequerySuggested();
+
+            // update the dependent isExecutingCommands
+            TaskCommand.IsExecutingCommandsChanged?.Invoke(
+                null,
+                EventArgs.Empty);
+
+            // init the token source for cancellation operations
+            TaskCommand.cancellationTokenSource = new CancellationTokenSource();
+
+            TaskCommand.CancelCommand = new TaskCommand(
+                _ => TaskCommand.IsExecutingCommands,
+                (_, _) =>
+                {
+                    TaskCommand.cancellationTokenSource?.Cancel();
+                    return Task.CompletedTask;
+                },
+                true,
+                this.dispatcher);
         }
     }
 }

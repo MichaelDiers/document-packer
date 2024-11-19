@@ -5,6 +5,7 @@ using System.Windows.Controls;
 /// <summary>
 ///     Interaction logic for LoadConfigurationView.xaml
 /// </summary>
+// ReSharper disable once RedundantExtendsListEntry
 public partial class LoadConfigurationView : UserControl
 {
     /// <summary>

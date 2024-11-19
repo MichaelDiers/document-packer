@@ -5,6 +5,7 @@ using System.Windows.Controls;
 /// <summary>
 ///     Interaction logic for StartUpView.xaml
 /// </summary>
+// ReSharper disable once RedundantExtendsListEntry
 public partial class StartUpView : UserControl
 {
     /// <summary>
