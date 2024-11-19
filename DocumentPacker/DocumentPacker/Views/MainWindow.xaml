@@ -5,17 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:DocumentPacker.ViewModels"
         xmlns:localViews="clr-namespace:DocumentPacker.Views"
+        xmlns:converters="clr-namespace:DocumentPacker.Views.Converters"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
         Width="800"
-        Keyboard.PreviewKeyDown="OnPreviewKeyDown">
+        Keyboard.PreviewKeyDown="OnPreviewKeyDown"
+        x:Name="Self">
     <Window.Resources>
         <localViews:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <localViews:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <converters:SubViewIdToViewConverter x:Key="SubViewIdToViewConverter" />
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -29,24 +33,14 @@
             Grid.Row="0"
             Grid.RowSpan="4"
             Visibility="{Binding Path=FatalErrorMessage, Converter={StaticResource NullToVisibilityConverter}}" />
-        <TextBlock Grid.Row="0" Text="{Binding Path=(viewModels:TaskCommand.IsExecutingCommands)}" />
-        <Border Grid.Row="1">
-            <StackPanel>
-                <TextBlock Text="{Binding RunExecuted1}" />
-                <Button Command="{Binding RunCommand1}">RunCommand1</Button>
-            </StackPanel>
-        </Border>
-        <Border Grid.Row="2">
-            <StackPanel>
-                <TextBlock Text="{Binding RunExecuted2}" />
-                <Button Command="{Binding RunCommand2}">RunCommand2</Button>
-            </StackPanel>
-        </Border>
-        <Border Grid.Row="3">
-            <StackPanel>
-                <TextBlock Text="{Binding RunExecuted3}" />
-                <Button Command="{Binding RunCommand3}">RunCommand3</Button>
-            </StackPanel>
-        </Border>
+        <Button
+            Grid.Row="0"
+            Command="{Binding HomeCommand}">
+            Home
+        </Button>
+        <ContentControl
+            Grid.Row="1"
+            Content="{Binding ElementName=Self, Path=DataContext.SubViewModel.SubViewId, Converter={StaticResource SubViewIdToViewConverter}}"
+            DataContext="{Binding SubViewModel}" />
     </Grid>
 </Window>

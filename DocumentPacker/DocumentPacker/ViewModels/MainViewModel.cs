@@ -1,8 +1,11 @@
 ﻿namespace DocumentPacker.ViewModels;
 
-using System.Reflection;
 using System.Windows.Input;
+using DocumentPacker.Contracts;
 using DocumentPacker.Contracts.ViewModels;
+using DocumentPacker.Contracts.ViewModels.SubViewModels;
+using DocumentPacker.ViewModels.SubViewModels;
+using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 ///     Describes the main view model.
@@ -14,16 +17,48 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
     /// </summary>
     private string? fatalErrorMessage;
 
-    private bool runExecuted1;
-    private bool runExecuted2;
-    private bool runExecuted3;
+    /// <summary>
+    ///     The current sub view model.
+    /// </summary>
+    private ISubViewModel subViewModel = new StartUpViewModel();
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
     /// </summary>
     public MainViewModel()
+        : this(
+            App.ServiceProvider.GetRequiredService<ICollectDocumentsViewModel>(),
+            App.ServiceProvider.GetRequiredService<ILoadConfigurationViewModel>(),
+            App.ServiceProvider.GetRequiredService<IStartUpViewModel>(),
+            App.ServiceProvider.GetRequiredService<IViewHandler>())
     {
-        TaskCommand.FatalError += (sender, s) => this.FatalErrorMessage = s;
+    }
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
+    /// </summary>
+    /// <param name="collectDocumentsViewModel">The collect documents sub view model.</param>
+    /// <param name="loadConfigurationViewModel">The load configuration sub view model.</param>
+    /// <param name="startUpViewModel">The startup sub view model.</param>
+    /// <param name="viewHandler">The view handler.</param>
+    public MainViewModel(
+        ICollectDocumentsViewModel collectDocumentsViewModel,
+        ILoadConfigurationViewModel loadConfigurationViewModel,
+        IStartUpViewModel startUpViewModel,
+        IViewHandler viewHandler
+    )
+    {
+        TaskCommand.FatalError += (_, message) => this.FatalErrorMessage = message;
+
+        viewHandler.RegisterView<object>(
+            SubViewId.CollectDocuments,
+            _ => this.SubViewModel = collectDocumentsViewModel);
+        viewHandler.RegisterView<object>(
+            SubViewId.LoadConfiguration,
+            _ => this.SubViewModel = loadConfigurationViewModel);
+        viewHandler.RegisterView<object>(
+            SubViewId.StartUp,
+            _ => this.SubViewModel = startUpViewModel);
     }
 
     /// <summary>
@@ -50,68 +85,27 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
                 value);
     }
 
-    public ICommand RunCommand1 =>
+    /// <summary>
+    ///     Gets the home command.
+    /// </summary>
+    public ICommand HomeCommand =>
         new TaskCommand(
-            _ => !this.RunExecuted1,
-            async (_, cancellationToken) =>
+            _ => this.SubViewModel.SubViewId != SubViewId.StartUp,
+            (_, _) =>
             {
-                await Task.Delay(
-                    40,
-                    cancellationToken);
-                throw new AggregateException(
-                    new AccessViolationException("foo."),
-                    new AbandonedMutexException("bar."),
-                    new AmbiguousMatchException());
-                this.RunExecuted1 = true;
+                App.ServiceProvider.GetRequiredService<IViewHandler>().RequestView(SubViewId.StartUp);
+                return Task.CompletedTask;
             });
 
-    public ICommand RunCommand2 =>
-        new TaskCommand(
-            _ => !this.RunExecuted2,
-            async (_, cancellationToken) =>
-            {
-                await Task.Delay(
-                    4000,
-                    cancellationToken);
-
-                this.RunExecuted2 = true;
-            });
-
-    public ICommand RunCommand3 =>
-        new TaskCommand(
-            _ => !this.RunExecuted3 && this.RunExecuted1 && this.RunExecuted2,
-            async (_, cancellationToken) =>
-            {
-                await Task.Delay(
-                    4000,
-                    cancellationToken);
-                this.RunExecuted3 = true;
-            });
-
-    public bool RunExecuted1
+    /// <summary>
+    ///     Gets or sets the sub view model.
+    /// </summary>
+    public ISubViewModel SubViewModel
     {
-        get => this.runExecuted1;
+        get => this.subViewModel;
         set =>
             this.SetField(
-                ref this.runExecuted1,
-                value);
-    }
-
-    public bool RunExecuted2
-    {
-        get => this.runExecuted2;
-        set =>
-            this.SetField(
-                ref this.runExecuted2,
-                value);
-    }
-
-    public bool RunExecuted3
-    {
-        get => this.runExecuted3;
-        set =>
-            this.SetField(
-                ref this.runExecuted3,
+                ref this.subViewModel,
                 value);
     }
 }

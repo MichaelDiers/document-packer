@@ -266,6 +266,60 @@
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAlwaysTreatStructAsNotReorderableMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EPredefinedNamingRulesToUserRulesUpgrade/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Description/@EntryValue">add wpf mvvm property</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER/Expression/@EntryValue">decapitalize(MVVM_PROP_NAME)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FTYPE/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FTYPE/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FTYPE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Shortcut/@EntryValue">mvvmProp</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Text/@EntryValue">private $MVVM_PROP_TYPE$ $MVVM_PROP_NAME_LOWER$; &#xD;
+&#xD;
+public $MVVM_PROP_TYPE$ $MVVM_PROP_NAME$&#xD;
+    {&#xD;
+        get =&gt; this.$MVVM_PROP_NAME_LOWER$;&#xD;
+        set =&gt;&#xD;
+            this.SetField(&#xD;
+                ref this.$MVVM_PROP_NAME_LOWER$,&#xD;
+                value);&#xD;
+    }</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Description/@EntryValue">WPF mvvm command</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Field/=MVVM_005FCOMMAND_005FNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Field/=MVVM_005FCOMMAND_005FNAME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Field/=MVVM_005FCOMMAND_005FNAME_005FCOMMENT/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Field/=MVVM_005FCOMMAND_005FNAME_005FCOMMENT/Expression/@EntryValue">decapitalize(MVVM_COMMAND_NAME)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Field/=MVVM_005FCOMMAND_005FNAME_005FCOMMENT/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Field/=MVVM_005FCOMMAND_005FNAME_005FCOMMENT/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Shortcut/@EntryValue">mvvmCommand</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Text/@EntryValue">/// &lt;summary&gt;&#xD;
+///     Gets the $MVVM_COMMAND_NAME_COMMENT$ command.&#xD;
+/// &lt;/summary&gt;&#xD;
+public ICommand $MVVM_COMMAND_NAME$Command =&gt;&#xD;
+	new TaskCommand(&#xD;
+		_ =&gt; true,&#xD;
+		(_, _) =&gt;&#xD;
+        {&#xD;
+			return Task.CompletedTask;&#xD;
+		}&#xD;
+	);</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=auit/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=ffmpeg/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=firestore/@EntryIndexedValue">True</s:Boolean>

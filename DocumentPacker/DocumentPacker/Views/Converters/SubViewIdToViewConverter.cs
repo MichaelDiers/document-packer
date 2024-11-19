@@ -1,14 +1,16 @@
-﻿namespace DocumentPacker.Views;
+﻿namespace DocumentPacker.Views.Converters;
 
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
+using DocumentPacker.Contracts;
+using DocumentPacker.Views.SubViews;
+using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-///     Converter from <see cref="bool" /> to <see cref="Visibility" />.
+///     A converter from <see cref="SubViewId" /> to view converter.
 /// </summary>
 /// <seealso cref="System.Windows.Data.IValueConverter" />
-public class BoolToVisibilityConverter : IValueConverter
+public class SubViewIdToViewConverter : IValueConverter
 {
     /// <summary>Converts a value.</summary>
     /// <param name="value">The value produced by the binding source.</param>
@@ -23,20 +25,30 @@ public class BoolToVisibilityConverter : IValueConverter
         CultureInfo culture
     )
     {
-        if (value == null)
+        if (value is null)
         {
-            return Visibility.Collapsed;
+            throw new ArgumentNullException(nameof(value));
         }
 
-        try
+        if (!Enum.TryParse<SubViewId>(
+                value.ToString(),
+                out var subViewId) ||
+            subViewId == SubViewId.None)
         {
-            var boolValue = (bool) value;
-            return boolValue ? Visibility.Visible : Visibility.Collapsed;
+            throw new ArgumentException(
+                $"Unknown {nameof(SubViewId)}: {value}",
+                nameof(value));
         }
-        catch (InvalidCastException)
+
+        return subViewId switch
         {
-            return Visibility.Collapsed;
-        }
+            SubViewId.CollectDocuments => App.ServiceProvider.GetRequiredService<CollectDocumentsView>(),
+            SubViewId.LoadConfiguration => App.ServiceProvider.GetRequiredService<LoadConfigurationView>(),
+            SubViewId.StartUp => App.ServiceProvider.GetRequiredService<StartUpView>(),
+            _ => throw new ArgumentException(
+                $"Unsupported {nameof(SubViewId)}: {value}",
+                nameof(value))
+        };
     }
 
     /// <summary>Converts a value.</summary>
@@ -45,7 +57,7 @@ public class BoolToVisibilityConverter : IValueConverter
     /// <param name="parameter">The converter parameter to use.</param>
     /// <param name="culture">The culture to use in the converter.</param>
     /// <returns>A converted value. If the method returns <see langword="null" />, the valid null value is used.</returns>
-    /// <exception cref="NotImplementedException">Method is not implemented.</exception>
+    /// <exception cref="NotImplementedException">The method is not implemented.</exception>
     public object ConvertBack(
         object? value,
         Type targetType,
