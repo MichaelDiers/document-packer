@@ -31,8 +31,7 @@ internal class LoadConfigurationViewModel() : SubViewModel(SubViewId.LoadConfigu
     /// <summary>
     ///     Gets the load configuration file command.
     /// </summary>
-    public ICommand LoadConfigurationFileCommand =>
-        new TaskCommand(
-            fileName => fileName is not null && !string.IsNullOrWhiteSpace(fileName as string),
-            (fileName, cancellationToken) => Task.CompletedTask);
+    public ICommand LoadConfigurationFileCommand { get; } = new TaskCommand(
+        fileName => fileName is not null && !string.IsNullOrWhiteSpace(fileName as string),
+        (fileName, cancellationToken) => Task.CompletedTask);
 }
