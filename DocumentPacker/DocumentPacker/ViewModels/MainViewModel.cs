@@ -28,6 +28,7 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
     public MainViewModel()
         : this(
             App.ServiceProvider.GetRequiredService<ICollectDocumentsViewModel>(),
+            App.ServiceProvider.GetRequiredService<ICreateConfigurationViewModel>(),
             App.ServiceProvider.GetRequiredService<ILoadConfigurationViewModel>(),
             App.ServiceProvider.GetRequiredService<IStartUpViewModel>(),
             App.ServiceProvider.GetRequiredService<IViewHandler>())
@@ -38,12 +39,14 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
     ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
     /// </summary>
     /// <param name="collectDocumentsViewModel">The collect documents sub view model.</param>
+    /// <param name="createConfigurationViewModel">The create configuration sub view model.</param>
     /// <param name="loadConfigurationViewModel">The load configuration sub view model.</param>
     /// <param name="startUpViewModel">The startup sub view model.</param>
     /// <param name="viewHandler">The view handler.</param>
     // ReSharper disable SuggestBaseTypeForParameterInConstructor
     public MainViewModel(
         ICollectDocumentsViewModel collectDocumentsViewModel,
+        ICreateConfigurationViewModel createConfigurationViewModel,
         ILoadConfigurationViewModel loadConfigurationViewModel,
         IStartUpViewModel startUpViewModel,
         IViewHandler viewHandler
@@ -54,6 +57,9 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
         viewHandler.RegisterView<object>(
             SubViewId.CollectDocuments,
             _ => this.SubViewModel = collectDocumentsViewModel);
+        viewHandler.RegisterView<object>(
+            SubViewId.CreateConfiguration,
+            _ => this.SubViewModel = createConfigurationViewModel);
         viewHandler.RegisterView<object>(
             SubViewId.LoadConfiguration,
             _ => this.SubViewModel = loadConfigurationViewModel);

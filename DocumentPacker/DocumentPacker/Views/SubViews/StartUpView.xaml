@@ -5,6 +5,11 @@
     <StackPanel Orientation="Horizontal">
         <Button
             Command="{Binding SelectNextViewCommand}"
+            CommandParameter="{x:Static contracts:SubViewId.CreateConfiguration}">
+            Create Configuration
+        </Button>
+        <Button
+            Command="{Binding SelectNextViewCommand}"
             CommandParameter="{x:Static contracts:SubViewId.LoadConfiguration}">
             LoadConfigurationView
         </Button>

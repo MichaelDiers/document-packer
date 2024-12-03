@@ -16,6 +16,11 @@ public enum SubViewId
     CollectDocuments,
 
     /// <summary>
+    ///     The create configuration view.
+    /// </summary>
+    CreateConfiguration,
+
+    /// <summary>
     ///     The load configuration view.
     /// </summary>
     LoadConfiguration,

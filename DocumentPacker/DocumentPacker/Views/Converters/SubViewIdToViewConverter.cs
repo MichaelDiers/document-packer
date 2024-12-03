@@ -43,6 +43,7 @@ public class SubViewIdToViewConverter : IValueConverter
         return subViewId switch
         {
             SubViewId.CollectDocuments => App.ServiceProvider.GetRequiredService<CollectDocumentsView>(),
+            SubViewId.CreateConfiguration => App.ServiceProvider.GetRequiredService<CreateConfigurationView>(),
             SubViewId.LoadConfiguration => App.ServiceProvider.GetRequiredService<LoadConfigurationView>(),
             SubViewId.StartUp => App.ServiceProvider.GetRequiredService<StartUpView>(),
             _ => throw new ArgumentException(

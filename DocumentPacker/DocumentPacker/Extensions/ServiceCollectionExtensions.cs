@@ -24,11 +24,13 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IMainViewModel, MainViewModel>();
         services.AddSingleton<ICollectDocumentsViewModel, CollectDocumentsViewModel>();
+        services.AddSingleton<ICreateConfigurationViewModel, CreateConfigurationViewModel>();
         services.AddSingleton<ILoadConfigurationViewModel, LoadConfigurationViewModel>();
         services.AddSingleton<IStartUpViewModel, StartUpViewModel>();
 
         services.AddSingleton<IMainWindow, MainWindow>();
         services.AddSingleton<CollectDocumentsView>();
+        services.AddSingleton<CreateConfigurationView>();
         services.AddSingleton<LoadConfigurationView>();
         services.AddSingleton<StartUpView>();
 
