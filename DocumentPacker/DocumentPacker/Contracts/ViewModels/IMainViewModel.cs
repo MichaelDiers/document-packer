@@ -27,4 +27,14 @@ public interface IMainViewModel
     ///     Gets or sets the sub view model.
     /// </summary>
     ISubViewModel SubViewModel { get; }
+
+    /// <summary>
+    ///     Gets or sets the title.
+    /// </summary>
+    string Title { get; set; }
+
+    /// <summary>
+    ///     Gets or sets the version of the application.
+    /// </summary>
+    string Version { get; set; }
 }

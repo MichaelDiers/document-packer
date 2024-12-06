@@ -23,6 +23,16 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
     private ISubViewModel subViewModel = new StartUpViewModel();
 
     /// <summary>
+    ///     The title of the window.
+    /// </summary>
+    private string title = "DocumentPacker";
+
+    /// <summary>
+    ///     The version of the application.
+    /// </summary>
+    private string version = "v0.0.1";
+
+    /// <summary>
     ///     Initializes a new instance of the <see cref="MainViewModel" /> class.
     /// </summary>
     public MainViewModel()
@@ -43,7 +53,6 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
     /// <param name="loadConfigurationViewModel">The load configuration sub view model.</param>
     /// <param name="startUpViewModel">The startup sub view model.</param>
     /// <param name="viewHandler">The view handler.</param>
-    // ReSharper disable SuggestBaseTypeForParameterInConstructor
     public MainViewModel(
         ICollectDocumentsViewModel collectDocumentsViewModel,
         ICreateConfigurationViewModel createConfigurationViewModel,
@@ -67,8 +76,6 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
             SubViewId.StartUp,
             _ => this.SubViewModel = startUpViewModel);
     }
-
-    // ReSharper enable SuggestBaseTypeForParameterInConstructor
 
     /// <summary>
     ///     Gets the close fatal error message command.
@@ -115,6 +122,30 @@ internal class MainViewModel : BaseViewModel, IMainViewModel
         set =>
             this.SetField(
                 ref this.subViewModel,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the title.
+    /// </summary>
+    public string Title
+    {
+        get => this.title;
+        set =>
+            this.SetField(
+                ref this.title,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the version of the application.
+    /// </summary>
+    public string Version
+    {
+        get => this.version;
+        set =>
+            this.SetField(
+                ref this.version,
                 value);
     }
 }

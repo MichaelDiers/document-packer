@@ -1,12 +1,13 @@
 ﻿namespace DocumentPacker.ViewModels.SubViewModels;
 
 using DocumentPacker.Contracts;
+using DocumentPacker.Contracts.ViewModels.SubViewModels;
 
 /// <summary>
 ///     Describes a configuration item.
 /// </summary>
 /// <seealso cref="DocumentPacker.ViewModels.BaseViewModel" />
-internal class ConfigurationItemViewModel : BaseViewModel
+internal class ConfigurationItemViewModel : BaseViewModel, IConfigurationItemViewModel
 {
     /// <summary>
     ///     The configuration item type.
@@ -14,9 +15,9 @@ internal class ConfigurationItemViewModel : BaseViewModel
     private ConfigurationItemType configurationItemType;
 
     /// <summary>
-    ///     The value of the item.
+    ///     The name of the item.
     /// </summary>
-    private string? value;
+    private string? name;
 
     /// <summary>
     ///     Gets or sets the type of the configuration item.
@@ -31,14 +32,14 @@ internal class ConfigurationItemViewModel : BaseViewModel
     }
 
     /// <summary>
-    ///     Gets or sets the configuration value.
+    ///     Gets or sets the configuration name.
     /// </summary>
-    public string? Value
+    public string? Name
     {
-        get => this.value;
+        get => this.name;
         set =>
             this.SetField(
-                ref this.value,
+                ref this.name,
                 value);
     }
 }

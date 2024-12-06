@@ -13,5 +13,5 @@ public interface IConfigurationItemViewModel
     /// <summary>
     ///     Gets or sets the configuration value.
     /// </summary>
-    string? Value { get; set; }
+    string? Name { get; set; }
 }
