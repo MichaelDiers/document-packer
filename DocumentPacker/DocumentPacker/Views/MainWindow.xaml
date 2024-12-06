@@ -4,6 +4,7 @@
         xmlns:viewModels="clr-namespace:DocumentPacker.ViewModels"
         xmlns:localViews="clr-namespace:DocumentPacker.Views"
         xmlns:converters="clr-namespace:DocumentPacker.Views.Converters"
+        xmlns:contracts="clr-namespace:DocumentPacker.Contracts"
         Keyboard.PreviewKeyDown="OnPreviewKeyDown"
         x:Name="Self"
         Icon="/Assets/icon.png"
@@ -12,6 +13,7 @@
     <Window.Resources>
         <localViews:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <localViews:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <converters:SubViewIdToVisibilityConverter  x:Key="SubViewIdToVisibilityConverter"/>
         <converters:SubViewIdToViewConverter x:Key="SubViewIdToViewConverter" />
     </Window.Resources>
     <Grid>
@@ -20,6 +22,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <localViews:CancelCommandOverlay
             Grid.Row="0"
             Grid.RowSpan="3"
@@ -30,15 +35,17 @@
             Visibility="{Binding Path=FatalErrorMessage, Converter={StaticResource NullToVisibilityConverter}}" />
         <Button
             Grid.Row="0"
-            Command="{Binding HomeCommand}">
-            Home
-        </Button>
+            Command="{Binding HomeCommand}"
+            Content="back"
+            HorizontalAlignment="Left"
+            Visibility="{Binding ElementName=Self, Path=DataContext.SubViewModel.SubViewId, Converter={StaticResource SubViewIdToVisibilityConverter}, ConverterParameter={x:Static contracts:SubViewId.StartUp}}"/>
         <ContentControl
             Grid.Row="1"
             Content="{Binding ElementName=Self, Path=DataContext.SubViewModel.SubViewId, Converter={StaticResource SubViewIdToViewConverter}}"
             DataContext="{Binding SubViewModel}" />
         <TextBlock
             Grid.Row="2"
+            HorizontalAlignment="Right"
             Text="v0.0.1" />
     </Grid>
 </Window>
