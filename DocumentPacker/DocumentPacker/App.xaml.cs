@@ -2,8 +2,8 @@
 
 using System.Windows;
 using System.Windows.Threading;
+using DocumentPacker.ApplicationInit.DependencyInjection;
 using DocumentPacker.Contracts.Views;
-using DocumentPacker.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -20,19 +20,9 @@ public partial class App : Application
     /// <summary>
     ///     Gets the service provider used for resolving dependencies.
     /// </summary>
-    /// <remarks>Value is initialized on first access.</remarks>
-    public static IServiceProvider ServiceProvider => App.provider ?? (App.provider = App.InitServiceProvider());
-
-    /// <summary>
-    ///     Initializes the service provider and the application dependencies.
-    /// </summary>
-    /// <returns>The initialized <see cref="IServiceProvider" />.</returns>
-    private static IServiceProvider InitServiceProvider()
-    {
-        var services = new ServiceCollection();
-        services.AddDependencies();
-        return services.BuildServiceProvider();
-    }
+    /// <remarks>Name is initialized on first access.</remarks>
+    public static IServiceProvider ServiceProvider =>
+        App.provider ?? (App.provider = ServiceProviderInitializer.Init());
 
     /// <summary>
     ///     Called when an unhandled exception is raised.
