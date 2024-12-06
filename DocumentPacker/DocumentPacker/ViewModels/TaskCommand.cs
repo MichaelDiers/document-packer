@@ -203,7 +203,7 @@ public class TaskCommand : ICommand
     public static event EventHandler? CancelCommandChanged;
 
     /// <summary>
-    ///     Occurs when <see cref="CancelCommand" /> changed.
+    ///     Occurs when <see cref="FatalError" /> occurs.
     /// </summary>
     public static event EventHandler<string>? FatalError;
 
