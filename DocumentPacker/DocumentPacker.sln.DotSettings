@@ -51,8 +51,7 @@
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/HtmlFormatter/TagAttributesFormat/@EntryValue">FirstAttributeOnSingleLine</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/HtmlFormatter/TagsAreNotIndentedInside/@EntryValue"></s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/HtmlFormatter/TagSpaceBeforeHeaderEnd1/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;?xml version="1.0" encoding="utf-16"?&gt;&#xD;
-&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
+	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
   &lt;TypePattern DisplayName="Non-reorderable types"&gt;&#xD;
     &lt;TypePattern.Match&gt;&#xD;
       &lt;Or&gt;&#xD;
@@ -76,8 +75,8 @@
         &lt;HasMember&gt;&#xD;
           &lt;And&gt;&#xD;
             &lt;Kind Is="Method" /&gt;&#xD;
-            &lt;HasAttribute Name="Xunit.FactAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="Xunit.TheoryAttribute" Inherited="True" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="Xunit.FactAttribute" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="Xunit.TheoryAttribute" /&gt;&#xD;
           &lt;/And&gt;&#xD;
         &lt;/HasMember&gt;&#xD;
       &lt;/And&gt;&#xD;
@@ -93,11 +92,11 @@
         &lt;/Or&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Kind Order="Constructor" /&gt;&#xD;
+        &lt;Kind Is="0" Order="Constructor" /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="All other members" /&gt;&#xD;
-    &lt;Entry Priority="100" DisplayName="Test Methods"&gt;&#xD;
+    &lt;Entry DisplayName="Test Methods" Priority="100"&gt;&#xD;
       &lt;Entry.Match&gt;&#xD;
         &lt;And&gt;&#xD;
           &lt;Kind Is="Method" /&gt;&#xD;
@@ -115,8 +114,8 @@
       &lt;And&gt;&#xD;
         &lt;Kind Is="Class" /&gt;&#xD;
         &lt;Or&gt;&#xD;
-          &lt;HasAttribute Name="NUnit.Framework.TestFixtureAttribute" Inherited="True" /&gt;&#xD;
-          &lt;HasAttribute Name="NUnit.Framework.TestFixtureSourceAttribute" Inherited="True" /&gt;&#xD;
+          &lt;HasAttribute Inherited="True" Name="NUnit.Framework.TestFixtureAttribute" /&gt;&#xD;
+          &lt;HasAttribute Inherited="True" Name="NUnit.Framework.TestFixtureSourceAttribute" /&gt;&#xD;
           &lt;HasMember&gt;&#xD;
             &lt;And&gt;&#xD;
               &lt;Kind Is="Method" /&gt;&#xD;
@@ -133,18 +132,18 @@
         &lt;And&gt;&#xD;
           &lt;Kind Is="Method" /&gt;&#xD;
           &lt;Or&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.SetUpAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.TearDownAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.TestFixtureSetUpAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.TestFixtureTearDownAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.OneTimeSetUpAttribute" Inherited="True" /&gt;&#xD;
-            &lt;HasAttribute Name="NUnit.Framework.OneTimeTearDownAttribute" Inherited="True" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="NUnit.Framework.SetUpAttribute" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="NUnit.Framework.TearDownAttribute" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="NUnit.Framework.TestFixtureSetUpAttribute" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="NUnit.Framework.TestFixtureTearDownAttribute" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="NUnit.Framework.OneTimeSetUpAttribute" /&gt;&#xD;
+            &lt;HasAttribute Inherited="True" Name="NUnit.Framework.OneTimeTearDownAttribute" /&gt;&#xD;
           &lt;/Or&gt;&#xD;
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="All other members" /&gt;&#xD;
-    &lt;Entry Priority="100" DisplayName="Test Methods"&gt;&#xD;
+    &lt;Entry DisplayName="Test Methods" Priority="100"&gt;&#xD;
       &lt;Entry.Match&gt;&#xD;
         &lt;And&gt;&#xD;
           &lt;Kind Is="Method" /&gt;&#xD;
@@ -159,7 +158,7 @@
     &lt;/Entry&gt;&#xD;
   &lt;/TypePattern&gt;&#xD;
   &lt;TypePattern DisplayName="Default Pattern"&gt;&#xD;
-    &lt;Entry Priority="100" DisplayName="Public Delegates"&gt;&#xD;
+    &lt;Entry DisplayName="Public Delegates" Priority="100"&gt;&#xD;
       &lt;Entry.Match&gt;&#xD;
         &lt;And&gt;&#xD;
           &lt;Access Is="Public" /&gt;&#xD;
@@ -170,7 +169,7 @@
         &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
-    &lt;Entry Priority="100" DisplayName="Public Enums"&gt;&#xD;
+    &lt;Entry DisplayName="Public Enums" Priority="100"&gt;&#xD;
       &lt;Entry.Match&gt;&#xD;
         &lt;And&gt;&#xD;
           &lt;Access Is="Public" /&gt;&#xD;
@@ -216,6 +215,7 @@
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
         &lt;Static /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Properties, Indexers"&gt;&#xD;
@@ -226,10 +226,11 @@
         &lt;/Or&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
-    &lt;Entry Priority="100" DisplayName="Interface Implementations"&gt;&#xD;
+    &lt;Entry DisplayName="Interface Implementations" Priority="0"&gt;&#xD;
       &lt;Entry.Match&gt;&#xD;
         &lt;And&gt;&#xD;
           &lt;Kind Is="Member" /&gt;&#xD;
@@ -237,13 +238,12 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;ImplementsInterface /&gt;&#xD;
         &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="All other members"&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
@@ -274,7 +274,12 @@
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME/Order/@EntryValue">1</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER/Expression/@EntryValue">decapitalize(MVVM_PROP_NAME)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER_005FCOMMENT/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER_005FCOMMENT/Expression/@EntryValue">decapitalize(MVVM_PROP_NAME)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER_005FCOMMENT/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FNAME_005FLOWER_005FCOMMENT/Order/@EntryValue">3</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FTYPE/@KeyIndexDefined">True</s:Boolean>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FTYPE/InitialRange/@EntryValue">1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Field/=MVVM_005FPROP_005FTYPE/Order/@EntryValue">0</s:Int64>
@@ -284,16 +289,22 @@
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Shortcut/@EntryValue">mvvmProp</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
-	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Text/@EntryValue">private $MVVM_PROP_TYPE$ $MVVM_PROP_NAME_LOWER$; &#xD;
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Text/@EntryValue">/// &lt;summary&gt;&#xD;
+///     The $MVVM_PROP_NAME_LOWER_COMMENT$.&#xD;
+/// &lt;/summary&gt;&#xD;
+private $MVVM_PROP_TYPE$ $MVVM_PROP_NAME_LOWER$; &#xD;
 &#xD;
+/// &lt;summary&gt;&#xD;
+///     Gets or sets the $MVVM_PROP_NAME_LOWER_COMMENT$.&#xD;
+/// &lt;/summary&gt;&#xD;
 public $MVVM_PROP_TYPE$ $MVVM_PROP_NAME$&#xD;
-    {&#xD;
-        get =&gt; this.$MVVM_PROP_NAME_LOWER$;&#xD;
-        set =&gt;&#xD;
-            this.SetField(&#xD;
-                ref this.$MVVM_PROP_NAME_LOWER$,&#xD;
-                value);&#xD;
-    }</s:String>
+{&#xD;
+    get =&gt; this.$MVVM_PROP_NAME_LOWER$;&#xD;
+    set =&gt;&#xD;
+        this.SetField(&#xD;
+            ref this.$MVVM_PROP_NAME_LOWER$,&#xD;
+            value);&#xD;
+}</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=AE15E8C10ABD704DB3A6EAFA972EB814/Description/@EntryValue">WPF mvvm command</s:String>
@@ -320,6 +331,28 @@ public ICommand $MVVM_COMMAND_NAME$Command =&gt;&#xD;
 			return Task.CompletedTask;&#xD;
 		}&#xD;
 	);</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FINIT/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FINIT/Expression/@EntryValue">constant("= ")</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FINIT/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FNAME/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FNAME_005FLOWER/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FNAME_005FLOWER/Expression/@EntryValue">decapitalize(PROP_NAME)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FNAME_005FLOWER/Order/@EntryValue">3</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FTYPE/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Field/=PROP_005FTYPE/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Shortcut/@EntryValue">prop</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EC9C4073FAE880419ADBDA71E656727E/Text/@EntryValue">/// &lt;summary&gt;&#xD;
+///     Gets or sets the $PROP_NAME_LOWER$.&#xD;
+/// &lt;/summary&gt;&#xD;
+public $PROP_TYPE$ $PROP_NAME$ { get; set; } $PROP_INIT$;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=auit/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=ffmpeg/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=firestore/@EntryIndexedValue">True</s:Boolean>
