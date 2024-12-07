@@ -10,10 +10,30 @@
 
   <ItemGroup>
     <None Remove="Assets\icon.png" />
+    <None Remove="Assets\material_symbol_add.png" />
+    <None Remove="Assets\material_symbol_compress.png" />
+    <None Remove="Assets\material_symbol_file_open.png" />
+    <None Remove="Assets\material_symbol_home.png" />
+    <None Remove="Assets\material_symbol_save.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Assets\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\material_symbol_add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\material_symbol_compress.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\material_symbol_file_open.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\material_symbol_home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\material_symbol_save.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
