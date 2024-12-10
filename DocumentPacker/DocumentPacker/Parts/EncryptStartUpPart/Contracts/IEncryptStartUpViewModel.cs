@@ -1,10 +1,12 @@
 ﻿namespace DocumentPacker.Parts.EncryptStartUpPart.Contracts;
 
-using DocumentPacker.Parts.Contracts;
-
 /// <summary>
-///     The view model data that are displayed at the encryption startup view.
+///     The encrypt startup view model.
 /// </summary>
-internal interface IEncryptStartUpViewModel : IPartViewModel
+internal interface IEncryptStartUpViewModel
 {
+    /// <summary>
+    ///     Gets the links of the view.
+    /// </summary>
+    IEnumerable<IEncryptStartUpLinkViewModel> Links { get; }
 }

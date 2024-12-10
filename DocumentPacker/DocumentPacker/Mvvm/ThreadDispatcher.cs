@@ -5,7 +5,7 @@ using System.Windows.Threading;
 /// <summary>
 ///     A wrapper for <see cref="Dispatcher" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Contracts.ViewModels.IDispatcher" />
+/// <seealso cref="IDispatcher" />
 internal class ThreadDispatcher : IDispatcher
 {
     /// <summary>

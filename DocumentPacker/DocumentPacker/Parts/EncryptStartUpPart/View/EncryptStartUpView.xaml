@@ -3,10 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DocumentPacker.Parts.EncryptStartUpPart.View"
+             xmlns:contracts="clr-namespace:DocumentPacker.Parts.EncryptStartUpPart.Contracts"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            <TextBlock Text="ESV"/>
-    </Grid>
+             d:DataContext="{d:DesignInstance Type=contracts:IEncryptStartUpViewModel, IsDesignTimeCreatable=False}">
+    <ItemsControl ItemsSource="{Binding Links, Mode=OneTime}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Button 
+                    Command="{Binding FollowLinkCommand, Mode=OneTime}"
+                    Margin="5"
+                    Padding="5">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Name, Mode=OneTime}" />
+                        <TextBlock Text="{Binding Description, Mode=OneTime}" />
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

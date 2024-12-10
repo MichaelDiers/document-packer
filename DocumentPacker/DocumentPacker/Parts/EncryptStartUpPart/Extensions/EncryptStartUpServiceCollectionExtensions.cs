@@ -1,6 +1,8 @@
 ﻿namespace DocumentPacker.Parts.EncryptStartUpPart.Extensions;
 
+using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.Contracts;
+using DocumentPacker.Parts.EncryptStartUpPart.Contracts;
 using DocumentPacker.Parts.EncryptStartUpPart.View;
 using DocumentPacker.Parts.EncryptStartUpPart.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,21 @@ public static class EncryptStartUpServiceCollectionExtensions
         services.TryAddKeyedSingleton<IPartView, EncryptStartUpView>(Part.EncryptStartUp);
 
         // view model
+        services.AddSingleton<IEncryptStartUpLinkViewModel>(
+            _ => new EncryptStartUpLinkViewModel(
+                "Load a configuration",
+                "Load",
+                new SyncCommand(
+                    _ => true,
+                    _ => { })));
+        services.AddSingleton<IEncryptStartUpLinkViewModel>(
+            _ => new EncryptStartUpLinkViewModel(
+                "Create a configuration",
+                "Create",
+                new SyncCommand(
+                    _ => true,
+                    _ => { })));
+
         services.TryAddKeyedSingleton<IPartViewModel, EncryptStartUpViewModel>(Part.EncryptStartUp);
 
         return services;

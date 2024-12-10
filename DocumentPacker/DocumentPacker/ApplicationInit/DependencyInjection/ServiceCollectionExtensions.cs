@@ -21,6 +21,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddConfiguration();
 
+        services.AddSingleton<IDispatcher, ThreadDispatcher>();
+
         // parts
         services.TryAddStartUpDependencies();
         services.TryAddEncryptStartUpDependencies();
@@ -28,7 +30,6 @@ public static class ServiceCollectionExtensions
         // window
         services.TryAddDocumentPackerPartDependencies();
 
-        services.AddSingleton<IDispatcher, ThreadDispatcher>();
         //services.AddSingleton<IViewHandler, ViewHandler>();
 
         return services;
