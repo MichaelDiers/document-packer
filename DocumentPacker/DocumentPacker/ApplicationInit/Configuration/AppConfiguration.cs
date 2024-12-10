@@ -7,6 +7,11 @@
 internal class AppConfiguration : IAppConfiguration
 {
     /// <summary>
+    ///     Gets or sets the application icon.
+    /// </summary>
+    public string Icon { get; set; } = "";
+
+    /// <summary>
     ///     Gets or sets the title.
     /// </summary>
     public string Title { get; set; } = "";

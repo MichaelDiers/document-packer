@@ -6,6 +6,11 @@
 public interface IAppConfiguration
 {
     /// <summary>
+    ///     Gets the application icon.
+    /// </summary>
+    string Icon { get; }
+
+    /// <summary>
     ///     Gets the title.
     /// </summary>
     string Title { get; }
