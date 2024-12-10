@@ -13,5 +13,10 @@ public enum Part
     /// <summary>
     ///     The startup part.
     /// </summary>
-    StartUp
+    StartUp,
+
+    /// <summary>
+    ///     The encrypt start up part.
+    /// </summary>
+    EncryptStartUp
 }

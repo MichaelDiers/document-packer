@@ -3,6 +3,7 @@
 using DocumentPacker.ApplicationInit.Configuration;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.DocumentPackerPart.Extensions;
+using DocumentPacker.Parts.EncryptStartUpPart.Extensions;
 using DocumentPacker.Parts.StartUpPart.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +23,7 @@ public static class ServiceCollectionExtensions
 
         // parts
         services.TryAddStartUpDependencies();
+        services.TryAddEncryptStartUpDependencies();
 
         // window
         services.TryAddDocumentPackerPartDependencies();

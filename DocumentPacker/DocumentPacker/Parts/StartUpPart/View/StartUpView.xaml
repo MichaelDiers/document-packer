@@ -9,7 +9,10 @@
     <ItemsControl ItemsSource="{Binding Links, Mode=OneTime}">
         <ItemsControl.ItemTemplate>
             <DataTemplate>
-                <Button Command="{Binding FollowLinkCommand, Mode=OneTime}">
+                <Button 
+                    Command="{Binding FollowLinkCommand, Mode=OneTime}"
+                    Margin="5"
+                    Padding="5">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Name, Mode=OneTime}" />
                         <TextBlock Text="{Binding Description, Mode=OneTime}" />

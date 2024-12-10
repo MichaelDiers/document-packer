@@ -27,19 +27,19 @@ public static class StartUpServiceCollectionExtensions
         services.AddSingleton<IStartUpLinkViewModel>(
             _ => new StartUpLinkViewModel(
                 "Encrypt",
-                "Encrypt",
+                "Encrypt documents and text.",
                 new SyncCommand(
-                    _ => false,
-                    _ => { })));
+                    _ => true,
+                    _ => App.RequestView(Part.EncryptStartUp))));
         services.AddSingleton<IStartUpLinkViewModel>(
             _ => new StartUpLinkViewModel(
                 "Decrypt",
-                "Decrypt",
+                "Decrypt documents and text",
                 new SyncCommand(
-                    _ => false,
+                    _ => true,
                     _ => { })));
 
-        services.TryAddSingleton<IStartUpViewModel, StartUpViewModel>();
+        services.TryAddKeyedSingleton<IPartViewModel, StartUpViewModel>(Part.StartUp);
 
         return services;
     }

@@ -3,6 +3,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using DocumentPacker.ApplicationInit.DependencyInjection;
+using DocumentPacker.Parts.Contracts;
 using DocumentPacker.Parts.DocumentPackerPart.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +24,22 @@ public partial class App : Application
     /// <remarks>Name is initialized on first access.</remarks>
     public static IServiceProvider ServiceProvider =>
         App.provider ?? (App.provider = ServiceProviderInitializer.Init());
+
+    /// <summary>
+    ///     Requests the view specified by <paramref name="part" />.
+    /// </summary>
+    /// <param name="part">The requested application part.</param>
+    public static void RequestView(Part part)
+    {
+        App.RequestViewEvent?.Invoke(
+            null,
+            new RequestViewEventArgs(part));
+    }
+
+    /// <summary>
+    ///     Occurs when an application part is requested.
+    /// </summary>
+    public static event EventHandler<RequestViewEventArgs>? RequestViewEvent;
 
     /// <summary>
     ///     Called when an unhandled exception is raised.
