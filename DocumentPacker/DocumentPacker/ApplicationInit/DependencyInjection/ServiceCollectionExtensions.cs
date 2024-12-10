@@ -1,14 +1,9 @@
 ﻿namespace DocumentPacker.ApplicationInit.DependencyInjection;
 
 using DocumentPacker.ApplicationInit.Configuration;
-using DocumentPacker.Contracts;
-using DocumentPacker.Contracts.ViewModels;
-using DocumentPacker.Contracts.ViewModels.SubViewModels;
-using DocumentPacker.Contracts.Views;
-using DocumentPacker.ViewModels;
-using DocumentPacker.ViewModels.SubViewModels;
-using DocumentPacker.Views;
-using DocumentPacker.Views.SubViews;
+using DocumentPacker.Mvvm;
+using DocumentPacker.Parts.DocumentPackerPart.Extensions;
+using DocumentPacker.Parts.StartUpPart.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -25,20 +20,14 @@ public static class ServiceCollectionExtensions
     {
         services.AddConfiguration();
 
-        services.AddSingleton<IMainViewModel, MainViewModel>();
-        services.AddSingleton<ICollectDocumentsViewModel, CollectDocumentsViewModel>();
-        services.AddSingleton<ICreateConfigurationViewModel, CreateConfigurationViewModel>();
-        services.AddSingleton<ILoadConfigurationViewModel, LoadConfigurationViewModel>();
-        services.AddSingleton<IStartUpViewModel, StartUpViewModel>();
+        // parts
+        services.TryAddStartUpDependencies();
 
-        services.AddSingleton<IMainWindow, MainWindow>();
-        services.AddSingleton<CollectDocumentsView>();
-        services.AddSingleton<CreateConfigurationView>();
-        services.AddSingleton<LoadConfigurationView>();
-        services.AddSingleton<StartUpView>();
+        // window
+        services.TryAddDocumentPackerPartDependencies();
 
         services.AddSingleton<IDispatcher, ThreadDispatcher>();
-        services.AddSingleton<IViewHandler, ViewHandler>();
+        //services.AddSingleton<IViewHandler, ViewHandler>();
 
         return services;
     }

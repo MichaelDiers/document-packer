@@ -3,6 +3,8 @@
 using System.Windows;
 using System.Windows.Threading;
 using DocumentPacker.ApplicationInit.DependencyInjection;
+using DocumentPacker.Parts.DocumentPackerPart.Contracts;
+using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 ///     Interaction logic for App.xaml
@@ -37,5 +39,17 @@ public partial class App : Application
             MessageBoxResult.OK,
             MessageBoxOptions.None);
         e.Handled = true;
+    }
+
+    /// <summary>
+    ///     Called when at application startup.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The <see cref="StartupEventArgs" /> instance containing the event data.</param>
+    private void OnStartup(object sender, StartupEventArgs e)
+    {
+        var view = App.ServiceProvider.GetRequiredService<IDocumentPackerWindow>();
+        view.DataContext = App.ServiceProvider.GetRequiredService<IDocumentPackerViewModel>();
+        view.Show();
     }
 }

@@ -30,7 +30,7 @@ public class ConfigurationServiceCollectionExtensionsTests
         var initializer = this.provider.GetRequiredService<IAppConfigurationInitializer>();
         var configuration = initializer.Init();
 
-        this.AssertConfiguration(configuration);
+        ConfigurationServiceCollectionExtensionsTests.AssertConfiguration(configuration);
     }
 
     [Fact]
@@ -38,14 +38,18 @@ public class ConfigurationServiceCollectionExtensionsTests
     {
         var configuration = this.provider.GetRequiredService<IAppConfiguration>();
 
-        this.AssertConfiguration(configuration);
+        ConfigurationServiceCollectionExtensionsTests.AssertConfiguration(configuration);
     }
 
-    private void AssertConfiguration(IAppConfiguration configuration)
+    private static void AssertConfiguration(IAppConfiguration configuration)
     {
+        const string expectedIcon = "Icon Test";
         const string expectedTitle = "DocumentPacker Test";
         const string expectedVersion = "v0.0.1 Test";
 
+        Assert.Equal(
+            expectedIcon,
+            configuration.Icon);
         Assert.Equal(
             expectedTitle,
             configuration.Title);
