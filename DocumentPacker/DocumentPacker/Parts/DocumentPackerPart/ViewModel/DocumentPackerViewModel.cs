@@ -17,11 +17,6 @@ internal class DocumentPackerViewModel : BaseViewModel, IDocumentPackerViewModel
     private string icon;
 
     /// <summary>
-    ///     The title of the application window.
-    /// </summary>
-    private string title;
-
-    /// <summary>
     ///     The version of the application.
     /// </summary>
     private string version;
@@ -45,7 +40,6 @@ internal class DocumentPackerViewModel : BaseViewModel, IDocumentPackerViewModel
     /// <param name="configuration">The configuration of the application.</param>
     public DocumentPackerViewModel(IAppConfiguration configuration)
         : this(
-            configuration.Title,
             configuration.Version,
             configuration.Icon,
             App.ServiceProvider.GetRequiredKeyedService<IPartViewModel>(Part.StartUp))
@@ -55,19 +49,12 @@ internal class DocumentPackerViewModel : BaseViewModel, IDocumentPackerViewModel
     /// <summary>
     ///     The main view model of the application that is the data context of the application window.
     /// </summary>
-    /// <param name="title">The title of the application window.</param>
     /// <param name="version">The version of the application.</param>
     /// <param name="icon">The icon of the application window.</param>
     /// <param name="viewModelPart">The view model of the application part.</param>
-    public DocumentPackerViewModel(
-        string title,
-        string version,
-        string icon,
-        IPartViewModel viewModelPart
-    )
+    public DocumentPackerViewModel(string version, string icon, IPartViewModel viewModelPart)
     {
         this.icon = icon;
-        this.title = title;
         this.version = version;
         this.viewModelPart = viewModelPart;
 
@@ -83,18 +70,6 @@ internal class DocumentPackerViewModel : BaseViewModel, IDocumentPackerViewModel
         set =>
             this.SetField(
                 ref this.icon,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets the title of the application window.
-    /// </summary>
-    public string Title
-    {
-        get => this.title;
-        set =>
-            this.SetField(
-                ref this.title,
                 value);
     }
 
