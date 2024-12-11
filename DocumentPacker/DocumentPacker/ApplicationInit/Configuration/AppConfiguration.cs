@@ -12,11 +12,6 @@ internal class AppConfiguration : IAppConfiguration
     public string Icon { get; set; } = "";
 
     /// <summary>
-    ///     Gets or sets the title.
-    /// </summary>
-    public string Title { get; set; } = "";
-
-    /// <summary>
     ///     Gets or sets the version.
     /// </summary>
     public string Version { get; set; } = "";

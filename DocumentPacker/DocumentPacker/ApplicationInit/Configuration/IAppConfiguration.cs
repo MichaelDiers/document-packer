@@ -11,11 +11,6 @@ public interface IAppConfiguration
     string Icon { get; }
 
     /// <summary>
-    ///     Gets the title.
-    /// </summary>
-    string Title { get; }
-
-    /// <summary>
     ///     Gets the version.
     /// </summary>
     string Version { get; }

@@ -5,6 +5,7 @@ using DocumentPacker.Parts.Contracts;
 using DocumentPacker.Parts.EncryptStartUpPart.Contracts;
 using DocumentPacker.Parts.EncryptStartUpPart.View;
 using DocumentPacker.Parts.EncryptStartUpPart.ViewModel;
+using DocumentPacker.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -21,25 +22,25 @@ public static class EncryptStartUpServiceCollectionExtensions
     public static IServiceCollection TryAddEncryptStartUpDependencies(this IServiceCollection services)
     {
         // view
-        services.TryAddKeyedSingleton<IPartView, EncryptStartUpView>(Part.EncryptStartUp);
+        services.TryAddKeyedTransient<IPartView, EncryptStartUpView>(Part.EncryptStartUp);
 
         // view model
-        services.AddSingleton<IEncryptStartUpLinkViewModel>(
+        services.AddTransient<IEncryptStartUpLinkViewModel>(
             _ => new EncryptStartUpLinkViewModel(
-                "Load a configuration",
-                "Load",
+                Translation.EncryptStartUpPartLoadConfiguration,
+                Translation.EncryptStartUpPartLoadConfigurationDescription,
                 new SyncCommand(
                     _ => true,
                     _ => { })));
-        services.AddSingleton<IEncryptStartUpLinkViewModel>(
+        services.AddTransient<IEncryptStartUpLinkViewModel>(
             _ => new EncryptStartUpLinkViewModel(
-                "Create a configuration",
-                "Create",
+                Translation.EncryptStartUpPartCreateConfiguration,
+                Translation.EncryptStartUpPartCreateConfigurationDescription,
                 new SyncCommand(
                     _ => true,
                     _ => { })));
 
-        services.TryAddKeyedSingleton<IPartViewModel, EncryptStartUpViewModel>(Part.EncryptStartUp);
+        services.TryAddKeyedTransient<IPartViewModel, EncryptStartUpViewModel>(Part.EncryptStartUp);
 
         return services;
     }

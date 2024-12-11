@@ -12,4 +12,7 @@ public interface IDocumentPackerWindow
 
     /// <inheritdoc cref="System.Windows.Window.Show" />
     void Show();
+
+    /// <inheritdoc cref="Window.ShowDialog" />
+    bool? ShowDialog();
 }

@@ -19,10 +19,10 @@ public static class DocumentPackerPartServiceCollectionExtensions
     public static IServiceCollection TryAddDocumentPackerPartDependencies(this IServiceCollection services)
     {
         // view
-        services.TryAddSingleton<IDocumentPackerWindow, DocumentPackerWindow>();
+        services.TryAddTransient<IDocumentPackerWindow, DocumentPackerWindow>();
 
         // view model
-        services.TryAddSingleton<IDocumentPackerViewModel, DocumentPackerViewModel>();
+        services.TryAddTransient<IDocumentPackerViewModel, DocumentPackerViewModel>();
 
         return services;
     }

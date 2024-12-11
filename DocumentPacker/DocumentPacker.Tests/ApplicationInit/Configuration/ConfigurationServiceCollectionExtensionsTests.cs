@@ -44,15 +44,11 @@ public class ConfigurationServiceCollectionExtensionsTests
     private static void AssertConfiguration(IAppConfiguration configuration)
     {
         const string expectedIcon = "Icon Test";
-        const string expectedTitle = "DocumentPacker Test";
         const string expectedVersion = "v0.0.1 Test";
 
         Assert.Equal(
             expectedIcon,
             configuration.Icon);
-        Assert.Equal(
-            expectedTitle,
-            configuration.Title);
         Assert.Equal(
             expectedVersion,
             configuration.Version);

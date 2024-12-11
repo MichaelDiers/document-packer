@@ -14,8 +14,8 @@
                     Margin="5"
                     Padding="5">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding Name, Mode=OneTime}" />
-                        <TextBlock Text="{Binding Description, Mode=OneTime}" />
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Description}" />
                     </StackPanel>
                 </Button>
             </DataTemplate>

@@ -14,11 +14,6 @@ internal interface IDocumentPackerViewModel : INotifyPropertyChanged
     public string Icon { get; }
 
     /// <summary>
-    ///     Gets the title of the application window.
-    /// </summary>
-    public string Title { get; }
-
-    /// <summary>
     ///     Gets the version of the application.
     /// </summary>
     public string Version { get; }

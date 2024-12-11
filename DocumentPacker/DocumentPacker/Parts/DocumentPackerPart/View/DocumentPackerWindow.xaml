@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:contracts="clr-namespace:DocumentPacker.Parts.DocumentPackerPart.Contracts"
         xmlns:converters="clr-namespace:DocumentPacker.Parts.DocumentPackerPart.Converters"
+        xmlns:resources="clr-namespace:DocumentPacker.Resources"
         mc:Ignorable="d"
         Icon="{Binding Icon}"
-        Title="{Binding Title}"
+        Title="{x:Static resources:Translation.DocumentPackerPartTitle}"
         d:DataContext="{d:DesignInstance Type=contracts:IDocumentPackerViewModel, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <converters:PartToViewConverter x:Key="PartToViewConverter" />
@@ -23,7 +24,9 @@
             DataContext="{Binding ViewModelPart}" />
         <TextBlock
             Grid.Row="1"
-            HorizontalAlignment="Right"
-            Text="{Binding Version}" />
+            HorizontalAlignment="Right">
+            <Run Text="{x:Static resources:Translation.DocumentPackerPartVersion}"/>
+            <Run Text="{Binding Version}" />
+        </TextBlock>
     </Grid>
 </Window>
