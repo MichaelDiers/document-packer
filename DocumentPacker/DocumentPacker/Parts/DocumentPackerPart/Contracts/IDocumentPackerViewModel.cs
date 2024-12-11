@@ -11,12 +11,12 @@ internal interface IDocumentPackerViewModel : INotifyPropertyChanged
     /// <summary>
     ///     Gets the icon of the application window.
     /// </summary>
-    public string Icon { get; }
+    string Icon { get; }
 
     /// <summary>
     ///     Gets the version of the application.
     /// </summary>
-    public string Version { get; }
+    string Version { get; }
 
     /// <summary>
     ///     Gets the view model part.
