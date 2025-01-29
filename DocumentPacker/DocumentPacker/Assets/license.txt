@@ -1,0 +1,26 @@
+﻿icon.png:
+	MIT
+
+Material Design by Google
+	https://github.com/google/material-design-icons/blob/master/LICENSE
+
+	- material_symbol_add.png
+	- material_symbol_arrow_back.png
+	- material_symbol_change_circle.png
+	- material_symbol_compress.png
+	- material_symbol_compress_96dp.png
+	- material_symbol_edit_square.png
+	- material_symbol_edit_square_96dp.png
+	- material_symbol_expand.png
+	- material_symbol_expand_96dp.png
+	- material_symbol_file_open.png
+	- material_symbol_home.png
+	- material_symbol_language.png
+	- material_symbol_save.png
+
+ICONFINDER
+	https://www.iconfinder.com
+	Free for commercial use
+	
+	- 92094_germany_icon.png by GoSquared
+	- 92402_kingdom_united_icon.png by GoSquared
