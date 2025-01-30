@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BackLinkPartBack" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="BackLinkPartChangeLanguage" xml:space="preserve">
+    <value>Ändere die Sprache der Anwendung.</value>
+  </data>
+  <data name="BackLinkPartRestartCaption" xml:space="preserve">
+    <value>Jetzt Neustarten?</value>
+  </data>
+  <data name="BackLinkPartRestartRequest" xml:space="preserve">
+    <value>Um die Sprache zu ändern, müssen Sie die Anwendung neu starten. Möchten Sie jetzt neu starten?</value>
+  </data>
+  <data name="ChangeLanguagePartDescription" xml:space="preserve">
+    <value>Ändere die Spracheinstellungen des Document Packers und wähle eine andere Sprache aus.</value>
+  </data>
+  <data name="ChangeLanguagePartHeadline" xml:space="preserve">
+    <value>Spracheinstellungen</value>
+  </data>
+  <data name="DocumentPacker" xml:space="preserve">
+    <value>Document Packer</value>
+  </data>
   <data name="DocumentPackerPartTitle" xml:space="preserve">
     <value>DocumentPacker (de)</value>
   </data>
@@ -135,6 +156,37 @@
   <data name="EncryptStartUpPartLoadConfigurationDescription" xml:space="preserve">
     <value>Lade eine DocumentPacker Konfiguration.</value>
   </data>
+  <data name="FeaturesPartCreateConfigDescription" xml:space="preserve">
+    <value>Erstelle eine Liste von benötigten Dateien und Informationen. Speichere die Liste als Konfiguration ab und teile diese mit anderen Document Packer Benutzern.</value>
+  </data>
+  <data name="FeaturesPartCreateConfigHeadline" xml:space="preserve">
+    <value>Konfiguration anlegen</value>
+  </data>
+  <data name="FeaturesPartDecryptDescription" xml:space="preserve">
+    <value>Du hast eine verschlüsselte Document Packer Datei zugesendet bekommen?
+Entschlüssele die Document Packer-Datei mit Deinem privaten Schlüssel. Sieh Dir die entschlüsselten Dateien an oder speichere diese ab.</value>
+  </data>
+  <data name="FeaturesPartDecryptHeadline" xml:space="preserve">
+    <value>Entschlüsseln</value>
+  </data>
+  <data name="FeaturesPartEncryptDescription" xml:space="preserve">
+    <value>Du möchstest Dateien und Informationen verschlüsseln? Generiere Deine persönlichen Keys zum Verschlüsseln. Erstelle eine verschlüsselte Document Packer Datei und versende diese an Deine Freunde.</value>
+  </data>
+  <data name="FeaturesPartEncryptHeadline" xml:space="preserve">
+    <value>Verschlüsseln</value>
+  </data>
+  <data name="FeaturesPartHeadline" xml:space="preserve">
+    <value>Willkommen zurück! Was können wir für Dich erledigen?</value>
+  </data>
+  <data name="FooterPartVersion" xml:space="preserve">
+    <value>{0} v{1}</value>
+  </data>
+  <data name="HeaderPartHeadline" xml:space="preserve">
+    <value>Document Packer</value>
+  </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
   <data name="StartUpPartDecrypt" xml:space="preserve">
     <value>Entschlüsseln</value>
   </data>
@@ -146,5 +198,8 @@
   </data>
   <data name="StartUpPartEncryptDescription" xml:space="preserve">
     <value>Verschlüssele Dokumente and Texte.</value>
+  </data>
+  <data name="WindowPartTitle" xml:space="preserve">
+    <value>Document Packer</value>
   </data>
 </root>

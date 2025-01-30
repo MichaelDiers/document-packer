@@ -117,6 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BackLinkPartBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="BackLinkPartChangeLanguage" xml:space="preserve">
+    <value>Change the language of the application.</value>
+  </data>
+  <data name="BackLinkPartRestartCaption" xml:space="preserve">
+    <value>Restart now?</value>
+  </data>
+  <data name="BackLinkPartRestartRequest" xml:space="preserve">
+    <value>To change the language you must restart the application. Would you like to restart now?</value>
+  </data>
+  <data name="ChangeLanguagePartDescription" xml:space="preserve">
+    <value>Change the Document Packer language settings and select a different language.</value>
+  </data>
+  <data name="ChangeLanguagePartHeadline" xml:space="preserve">
+    <value>Language Settings</value>
+  </data>
+  <data name="DocumentPacker" xml:space="preserve">
+    <value>Document Packer</value>
+  </data>
   <data name="DocumentPackerPartTitle" xml:space="preserve">
     <value>DocumentPacker (en)</value>
   </data>
@@ -135,6 +156,39 @@
   <data name="EncryptStartUpPartLoadConfigurationDescription" xml:space="preserve">
     <value>Load a DocumentPacker configuration file, pack and encrypt files.</value>
   </data>
+  <data name="FeaturesPartCreateConfigDescription" xml:space="preserve">
+    <value>Make a list of required files and information. Save the list as a configuration and share it with other Document Packer users.</value>
+  </data>
+  <data name="FeaturesPartCreateConfigHeadline" xml:space="preserve">
+    <value>Create Configuration</value>
+  </data>
+  <data name="FeaturesPartDecryptDescription" xml:space="preserve">
+    <value>Have you been sent an encrypted Document Packer file?
+Decrypt the Document Packer file with your private key. View or save the decrypted files.
+
+</value>
+  </data>
+  <data name="FeaturesPartDecryptHeadline" xml:space="preserve">
+    <value>Decrypt</value>
+  </data>
+  <data name="FeaturesPartEncryptDescription" xml:space="preserve">
+    <value>Do you want to encrypt files and information? Generate your personal keys for encryption. Create an encrypted Document Packer file and send it to your friends.</value>
+  </data>
+  <data name="FeaturesPartEncryptHeadline" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="FeaturesPartHeadline" xml:space="preserve">
+    <value>Welcome back! What can we do for you?</value>
+  </data>
+  <data name="FooterPartVersion" xml:space="preserve">
+    <value>{0} v{1}</value>
+  </data>
+  <data name="HeaderPartHeadline" xml:space="preserve">
+    <value>Document Packer</value>
+  </data>
+  <data name="LanguageName" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="StartUpPartDecrypt" xml:space="preserve">
     <value>Decrypt</value>
   </data>
@@ -146,5 +200,8 @@
   </data>
   <data name="StartUpPartEncryptDescription" xml:space="preserve">
     <value>Encrypt documents and text.</value>
+  </data>
+  <data name="WindowPartTitle" xml:space="preserve">
+    <value>Document Packer</value>
   </data>
 </root>
