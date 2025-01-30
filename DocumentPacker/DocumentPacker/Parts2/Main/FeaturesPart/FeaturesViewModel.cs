@@ -30,7 +30,7 @@ internal class FeaturesViewModel : ApplicationViewModel
         new FeatureElement(
             Translation.FeaturesPartCreateConfigHeadline,
             Translation.FeaturesPartCreateConfigDescription,
-            ApplicationElementPart.DecryptFeature,
+            ApplicationElementPart.CreateConfiguration,
             "../../../Assets/material_symbol_edit_square_96dp.png")
     ]);
 

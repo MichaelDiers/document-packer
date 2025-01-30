@@ -1,0 +1,13 @@
+﻿<mvvm:BaseUserControl x:Class="DocumentPacker.Parts2.Main.DecryptPart.DecryptView"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+    </Grid>
+</mvvm:BaseUserControl>
