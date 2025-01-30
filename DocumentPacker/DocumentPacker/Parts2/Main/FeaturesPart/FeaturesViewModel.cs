@@ -1,6 +1,7 @@
 ﻿namespace DocumentPacker.Parts2.Main.FeaturesPart;
 
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Resources;
@@ -61,4 +62,22 @@ internal class FeaturesViewModel : ApplicationViewModel
                 ref this.headline,
                 value);
     }
+
+    /// <summary>
+    ///     Gets the request feature command.
+    /// </summary>
+    public ICommand RequestFeatureCommand =>
+        new SyncCommand(
+            _ => true,
+            obj =>
+            {
+                if (obj is not FeatureElement featureElement)
+                {
+                    return;
+                }
+
+                this.InvokeShowViewRequested(
+                    this,
+                    new ShowViewRequestedEventArgs(featureElement.ApplicationPart));
+            });
 }

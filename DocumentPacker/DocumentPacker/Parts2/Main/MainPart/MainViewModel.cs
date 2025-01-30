@@ -13,7 +13,10 @@ internal class MainViewModel : ApplicationViewModel
     ///     The view model supports the specified list of <see cref="ApplicationElementPart" /> only.
     /// </summary>
     private readonly IEnumerable<ApplicationElementPart> allowedContent =
-        [ApplicationElementPart.ChangeLanguage, ApplicationElementPart.Features];
+    [
+        ApplicationElementPart.ChangeLanguage, ApplicationElementPart.Features, ApplicationElementPart.EncryptFeature,
+        ApplicationElementPart.DecryptFeature, ApplicationElementPart.CreateConfiguration
+    ];
 
     /// <summary>
     ///     The displayed content.
