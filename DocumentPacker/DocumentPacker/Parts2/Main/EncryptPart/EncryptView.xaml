@@ -1,13 +1,203 @@
 ﻿<mvvm:BaseUserControl x:Class="DocumentPacker.Parts2.Main.EncryptPart.EncryptView"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+                 xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+                 xmlns:controls="clr-namespace:DocumentPacker.Controls"
+                 xmlns:encryptPart="clr-namespace:DocumentPacker.Parts2.Main.EncryptPart"
+                 xmlns:dependencyProperties="clr-namespace:DocumentPacker.DependencyProperties"
+                 xmlns:resources="clr-namespace:DocumentPacker.Resources">
+    <mvvm:BaseUserControl.Resources>
+        <encryptPart:EncryptItemTypeToStringConverter x:Key="EncryptItemTypeToStringConverter"/>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                    <Image ToolTip="{Binding Path=/ErrorContent}" Height="25" Width="25" Source="../../../Assets/material_symbol_error.png"/>
+                    <TextBlock Foreground="Red" Text="{Binding Path=/ErrorContent}"/>
+                    <StackPanel.RenderTransform>
+                        <TranslateTransform X="12" Y="35"/>
+                    </StackPanel.RenderTransform>
+                </StackPanel>
+                <AdornedElementPlaceholder  />
+            </Grid>
+        </ControlTemplate>
+
+    </mvvm:BaseUserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
+            Text="{Binding Headline}"/>
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            Text="{Binding Description}"
+            TextWrapping="Wrap"/>
+
+        <StackPanel 
+            Grid.Row="2" 
+            Grid.Column="0" 
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+            <Button
+                Command="{Binding AddEncryptItemCommand}"
+                dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartAddLabel}"
+                dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png"
+                Style="{StaticResource SmallCommandButton}"/>
+        </StackPanel>
+
+        <ItemsControl 
+            Grid.Row="3" 
+            Grid.Column="0"
+            ItemsSource="{Binding EncryptItems}"
+            Width="800"
+            Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                        Background="DarkGray" 
+                        Padding="24">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- new row 0 -->
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="{x:Static resources:Translation.EncryptPartIsRequiredLabel}"/>
+                                <CheckBox
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    IsChecked="{Binding IsRequired}"/>
+
+                                <!-- new row 1 -->
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="{x:Static resources:Translation.EncryptPartDescriptionLabel}"/>
+                                <TextBox
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Text="{Binding Description}"
+                                    TextWrapping="Wrap"/>
+
+                                <!-- new row 2 -->
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Content="{x:Static resources:Translation.EncryptPartDataTypeLabel}"/>
+                                <ComboBox
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    x:Name="EncryptItemTypeComboBox"
+                                    ItemsSource="{Binding EncryptItemTypes}"
+                                    SelectedItem="{Binding EncryptItemType}"
+                                    Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding .,Converter={StaticResource EncryptItemTypeToStringConverter}}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+
+                                <!-- new row 3 -->
+                                <Label
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Content="{Binding ElementName=EncryptItemTypeComboBox, Path=SelectedValue, Converter={StaticResource EncryptItemTypeToStringConverter}, ConverterParameter={StaticResource True}}"/>
+                                <TextBox
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    AllowDrop="True"
+                                    Drop="OnDrop"
+                                    PreviewDragOver="OnPreviewDragOver"
+                                    Text="{Binding Value, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    TextWrapping="Wrap"
+                                    Validation.ErrorTemplate="{StaticResource ValidationTemplate}" />
+                                <Button
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.AttachFileCommand}"
+                                    CommandParameter="{Binding Path=., ValidatesOnNotifyDataErrors=False}"
+                                    dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartAttachFileLabel}"
+                                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_attach_file.png">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource SmallCommandButton}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding EncryptItemType}" Value="{x:Static encryptPart:EncryptItemType.File}">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </Grid>
+                           
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.DeleteEncryptItemCommand}"
+                                CommandParameter="{Binding Path=.,ValidatesOnNotifyDataErrors=False}" 
+                                dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartDeleteLabel}"
+                                dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_delete.png"
+                                VerticalAlignment="Top"
+                                Style="{StaticResource SmallCommandButton}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <StackPanel 
+            Grid.Row="4" 
+            Grid.Column="0" 
+            Orientation="Horizontal"
+            HorizontalAlignment="Center">
+            <Button
+                Command="{Binding AddEncryptItemCommand}"
+                dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartAddLabel}"
+                dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png"
+                Style="{StaticResource SmallCommandButton}"/>
+            <Button
+                Command="{Binding EncryptCommand}"
+                dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartEncrypt}"
+                dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_compress.png"
+                Style="{StaticResource SmallCommandButton}"/>
+        </StackPanel>
     </Grid>
 </mvvm:BaseUserControl>
