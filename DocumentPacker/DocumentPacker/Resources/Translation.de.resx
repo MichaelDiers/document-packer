@@ -144,6 +144,12 @@
   <data name="DocumentPackerPartVersion" xml:space="preserve">
     <value>v</value>
   </data>
+  <data name="EncryptItemTypeText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="EncryptItemTypeFile" xml:space="preserve">
+    <value>Datei</value>
+  </data>
   <data name="EncryptStartUpPartCreateConfiguration" xml:space="preserve">
     <value>Konfiguration anlegen</value>
   </data>
@@ -201,5 +207,38 @@ Entschlüssele die Document Packer-Datei mit Deinem privaten Schlüssel. Sieh Di
   </data>
   <data name="WindowPartTitle" xml:space="preserve">
     <value>Document Packer</value>
+  </data>
+  <data name="EncryptItemTypeNone" xml:space="preserve">
+    <value>Bitte auswählen</value>
+  </data>
+  <data name="EncryptPartFileIsRequired" xml:space="preserve">
+    <value>Bitte wählen Sie eine Datei aus.</value>
+  </data>
+  <data name="EncryptPartFileDoesNotExists" xml:space="preserve">
+    <value>Die Datei existiert nicht.</value>
+  </data>
+  <data name="EncryptPartIsRequiredLabel" xml:space="preserve">
+    <value>Pflichtangabe</value>
+  </data>
+  <data name="EncryptPartDescriptionLabel" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="EncryptPartDataTypeLabel" xml:space="preserve">
+    <value>Datentyp</value>
+  </data>
+  <data name="EncryptPartAttachFileLabel" xml:space="preserve">
+    <value>Datei hinzufügen.</value>
+  </data>
+  <data name="EncryptPartDeleteLabel" xml:space="preserve">
+    <value>Eintrag löschen.</value>
+  </data>
+  <data name="EncryptPartAddLabel" xml:space="preserve">
+    <value>Neuen Eintrag hinzufügen.</value>
+  </data>
+  <data name="EncryptPartTextIsRequired" xml:space="preserve">
+    <value>Bitte gebe einen Text ein.</value>
+  </data>
+  <data name="EncryptPartEncrypt" xml:space="preserve">
+    <value>Verschlüsseln</value>
   </data>
 </root>

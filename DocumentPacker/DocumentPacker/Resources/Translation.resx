@@ -144,6 +144,12 @@
   <data name="DocumentPackerPartVersion" xml:space="preserve">
     <value>v</value>
   </data>
+  <data name="EncryptItemTypeText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="EncryptItemTypeFile" xml:space="preserve">
+    <value>File</value>
+  </data>
   <data name="EncryptStartUpPartCreateConfiguration" xml:space="preserve">
     <value>Create configuration</value>
   </data>
@@ -203,5 +209,38 @@ Decrypt the Document Packer file with your private key. View or save the decrypt
   </data>
   <data name="WindowPartTitle" xml:space="preserve">
     <value>Document Packer</value>
+  </data>
+  <data name="EncryptItemTypeNone" xml:space="preserve">
+    <value>Please select</value>
+  </data>
+  <data name="EncryptPartFileIsRequired" xml:space="preserve">
+    <value>Please select a file.</value>
+  </data>
+  <data name="EncryptPartFileDoesNotExists" xml:space="preserve">
+    <value>The file does not exist.</value>
+  </data>
+  <data name="EncryptPartIsRequiredLabel" xml:space="preserve">
+    <value>Is Required</value>
+  </data>
+  <data name="EncryptPartDescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="EncryptPartDataTypeLabel" xml:space="preserve">
+    <value>Data Type</value>
+  </data>
+  <data name="EncryptPartAttachFileLabel" xml:space="preserve">
+    <value>Attach a file.</value>
+  </data>
+  <data name="EncryptPartDeleteLabel" xml:space="preserve">
+    <value>Delete the item.</value>
+  </data>
+  <data name="EncryptPartAddLabel" xml:space="preserve">
+    <value>Add a new item.</value>
+  </data>
+  <data name="EncryptPartTextIsRequired" xml:space="preserve">
+    <value>Please enter a custom text.</value>
+  </data>
+  <data name="EncryptPartEncrypt" xml:space="preserve">
+    <value>Encrypt &amp; Pack</value>
   </data>
 </root>

@@ -142,6 +142,123 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string EncryptItemTypeFile {
+            get {
+                return ResourceManager.GetString("EncryptItemTypeFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select.
+        /// </summary>
+        public static string EncryptItemTypeNone {
+            get {
+                return ResourceManager.GetString("EncryptItemTypeNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string EncryptItemTypeText {
+            get {
+                return ResourceManager.GetString("EncryptItemTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new item..
+        /// </summary>
+        public static string EncryptPartAddLabel {
+            get {
+                return ResourceManager.GetString("EncryptPartAddLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attach a file..
+        /// </summary>
+        public static string EncryptPartAttachFileLabel {
+            get {
+                return ResourceManager.GetString("EncryptPartAttachFileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Type.
+        /// </summary>
+        public static string EncryptPartDataTypeLabel {
+            get {
+                return ResourceManager.GetString("EncryptPartDataTypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the item..
+        /// </summary>
+        public static string EncryptPartDeleteLabel {
+            get {
+                return ResourceManager.GetString("EncryptPartDeleteLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string EncryptPartDescriptionLabel {
+            get {
+                return ResourceManager.GetString("EncryptPartDescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypt &amp; Pack.
+        /// </summary>
+        public static string EncryptPartEncrypt {
+            get {
+                return ResourceManager.GetString("EncryptPartEncrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file does not exist..
+        /// </summary>
+        public static string EncryptPartFileDoesNotExists {
+            get {
+                return ResourceManager.GetString("EncryptPartFileDoesNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a file..
+        /// </summary>
+        public static string EncryptPartFileIsRequired {
+            get {
+                return ResourceManager.GetString("EncryptPartFileIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Required.
+        /// </summary>
+        public static string EncryptPartIsRequiredLabel {
+            get {
+                return ResourceManager.GetString("EncryptPartIsRequiredLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a custom text..
+        /// </summary>
+        public static string EncryptPartTextIsRequired {
+            get {
+                return ResourceManager.GetString("EncryptPartTextIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create configuration.
         /// </summary>
         public static string EncryptStartUpPartCreateConfiguration {
