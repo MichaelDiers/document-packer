@@ -6,11 +6,14 @@ Material Design by Google
 
 	- material_symbol_add.png
 	- material_symbol_arrow_back.png
+	- material_symbol_attach_file.png
 	- material_symbol_change_circle.png
 	- material_symbol_compress.png
 	- material_symbol_compress_96dp.png
+	- material_symbol_delete.png
 	- material_symbol_edit_square.png
 	- material_symbol_edit_square_96dp.png
+	- material_symbol_error.png
 	- material_symbol_expand.png
 	- material_symbol_expand_96dp.png
 	- material_symbol_file_open.png
