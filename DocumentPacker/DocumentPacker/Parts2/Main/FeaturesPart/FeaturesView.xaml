@@ -14,20 +14,24 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock 
-            Style="{StaticResource HeadlineTextBlockStyle}"
+            Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
             Text="{Binding Headline}"/>
 
-        <controls:CustomItemsControl
+        <ItemsControl
             Grid.Row="1"
             Grid.Column="0"
+            HorizontalAlignment="Center"
             ItemsSource="{Binding FeatureElements}">
-            <controls:CustomItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button
                         Command="{Binding ElementName=Self,Path=  DataContext.RequestFeatureCommand}"
                         CommandParameter="{Binding}"
-                        Margin="16" 
-                        Padding="16" 
                         VerticalContentAlignment="Stretch">
                         <Grid >
                             <Grid.RowDefinitions>
@@ -43,11 +47,8 @@
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
-                                FontSize="24"
-                                FontWeight="Bold"
-                                Margin="8"
                                 Text="{Binding Headline}"
-                                TextAlignment="Center"/>
+                                Style="{StaticResource HeadlineTextBlockSecondaryStyle}"/>
                             <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="1"
@@ -61,7 +62,7 @@
                         </Grid>
                     </Button>
                 </DataTemplate>
-            </controls:CustomItemsControl.ItemTemplate>
-        </controls:CustomItemsControl>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </mvvm:BaseUserControl>
