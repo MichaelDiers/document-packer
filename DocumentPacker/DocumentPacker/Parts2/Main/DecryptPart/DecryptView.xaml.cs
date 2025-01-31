@@ -5,7 +5,7 @@ using DocumentPacker.EventHandling;
 /// <summary>
 ///     Interaction logic for DecryptView.xaml
 /// </summary>
-[DataContext(ApplicationElementPart.Main)]
+[DataContext(ApplicationElementPart.DecryptFeature)]
 public partial class DecryptView : IApplicationView
 {
     /// <summary>

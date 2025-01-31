@@ -5,7 +5,7 @@ using DocumentPacker.EventHandling;
 /// <summary>
 ///     Interaction logic for CreateConfigurationView.xaml
 /// </summary>
-[DataContext(ApplicationElementPart.Main)]
+[DataContext(ApplicationElementPart.CreateConfiguration)]
 public partial class CreateConfigurationView : IApplicationView
 {
     /// <summary>
