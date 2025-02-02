@@ -101,6 +101,26 @@ internal abstract class Crypto : ICrypto
         }
     }
 
+    /// <inheritdoc cref="ICrypto.DecryptAsync(Stream,Stream,CancellationToken)" />
+    public async Task DecryptAsync(Stream input, Stream output, CancellationToken cancellationToken)
+    {
+        switch (this.algorithmIdentifier)
+        {
+            case AlgorithmIdentifier.Aes:
+                await this.DecryptAsync(
+                    this.CreateSymmetricAlgorithm(),
+                    input,
+                    output,
+                    cancellationToken);
+                break;
+            default:
+                throw new ArgumentException(
+                    // ReSharper disable once LocalizableElement
+                    $"Undefined {nameof(AlgorithmIdentifier)}: {this.algorithmIdentifier}",
+                    nameof(Crypto.algorithmIdentifier));
+        }
+    }
+
     /// <inheritdoc cref="ICrypto.EncryptAsync(byte[],CancellationToken)" />
     public async Task<(byte[] header, byte[] data)> EncryptAsync(byte[] data, CancellationToken cancellationToken)
     {
@@ -162,6 +182,26 @@ internal abstract class Crypto : ICrypto
             cancellationToken);
     }
 
+    /// <inheritdoc cref="ICrypto.EncryptAsync(Stream,Stream,CancellationToken)" />
+    public async Task EncryptAsync(Stream input, Stream output, CancellationToken cancellationToken)
+    {
+        switch (this.algorithmIdentifier)
+        {
+            case AlgorithmIdentifier.Aes:
+                await this.EncryptAsync(
+                    this.CreateSymmetricAlgorithm(),
+                    input,
+                    output,
+                    cancellationToken);
+                break;
+            default:
+                throw new ArgumentException(
+                    // ReSharper disable once LocalizableElement
+                    $"Undefined {nameof(AlgorithmIdentifier)}: {this.algorithmIdentifier}",
+                    nameof(Crypto.algorithmIdentifier));
+        }
+    }
+
     /// <summary>
     ///     Creates the symmetric algorithm.
     /// </summary>
@@ -192,6 +232,34 @@ internal abstract class Crypto : ICrypto
         return header;
     }
 
+    private async Task DecryptAsync(
+        SymmetricAlgorithm symmetricAlgorithm,
+        Stream input,
+        Stream output,
+        CancellationToken cancellationToken
+    )
+    {
+        await this.ProcessHeaderAsync(
+            symmetricAlgorithm,
+            input,
+            cancellationToken);
+
+        var cryptoTransform = symmetricAlgorithm.CreateDecryptor(
+            symmetricAlgorithm.Key,
+            symmetricAlgorithm.IV);
+
+        await using var cryptoStream = new CryptoStream(
+            output,
+            cryptoTransform,
+            CryptoStreamMode.Write);
+
+        await input.CopyToAsync(
+            cryptoStream,
+            cancellationToken);
+
+        await cryptoStream.FlushFinalBlockAsync(cancellationToken);
+    }
+
     /// <summary>
     ///     Decrypts the given <paramref name="data" />.
     /// </summary>
@@ -219,6 +287,34 @@ internal abstract class Crypto : ICrypto
             data,
             cryptoTransform,
             cancellationToken);
+    }
+
+    private async Task EncryptAsync(
+        SymmetricAlgorithm symmetricAlgorithm,
+        Stream input,
+        Stream output,
+        CancellationToken cancellationToken
+    )
+    {
+        var header = this.CreateHeader(symmetricAlgorithm);
+        await output.WriteAsync(
+            header,
+            cancellationToken);
+
+        var cryptoTransform = symmetricAlgorithm.CreateEncryptor(
+            symmetricAlgorithm.Key,
+            symmetricAlgorithm.IV);
+
+        await using var cryptoStream = new CryptoStream(
+            output,
+            cryptoTransform,
+            CryptoStreamMode.Write);
+
+        await input.CopyToAsync(
+            cryptoStream,
+            cancellationToken);
+
+        await cryptoStream.FlushFinalBlockAsync(cancellationToken);
     }
 
     /// <summary>
@@ -262,6 +358,48 @@ internal abstract class Crypto : ICrypto
         }
 
         if (headerLength != header.Length)
+        {
+            throw new InvalidOperationException("Invalid header.");
+        }
+
+        var actualAlgorithmIdentifier = (AlgorithmIdentifier) header[0];
+        if (actualAlgorithmIdentifier != this.algorithmIdentifier)
+        {
+            throw new InvalidOperationException("Invalid header.");
+        }
+
+        var iv = new byte[symmetricAlgorithm.IV.Length];
+        header[1..(iv.Length + 1)]
+        .CopyTo(
+            iv,
+            0);
+        symmetricAlgorithm.IV = iv;
+    }
+
+    /// <summary>
+    ///     Reads the header of the encrypted data.
+    /// </summary>
+    /// <param name="symmetricAlgorithm">The symmetric algorithm.</param>
+    /// <param name="input">The input data stream.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    private async Task ProcessHeaderAsync(
+        SymmetricAlgorithm symmetricAlgorithm,
+        Stream input,
+        CancellationToken cancellationToken
+    )
+    {
+        var headerLength = symmetricAlgorithm.IV.Length + 1;
+        if (headerLength % 8 != 0)
+        {
+            headerLength++;
+        }
+
+        var header = new byte[headerLength];
+        var actualHeaderLength = await input.ReadAsync(
+            header,
+            cancellationToken);
+
+        if (headerLength != actualHeaderLength)
         {
             throw new InvalidOperationException("Invalid header.");
         }

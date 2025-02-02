@@ -35,6 +35,15 @@ public interface ICrypto
     Task DecryptAsync(FileInfo encrypted, FileInfo decrypted, CancellationToken cancellationToken);
 
     /// <summary>
+    ///     Decrypts the given <see cref="input" /> stream and writes the result to the <see cref="output" /> stream.
+    /// </summary>
+    /// <param name="input">The encrypted data stream.</param>
+    /// <param name="output">The decrypted output stream.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    /// <returns>A <see cref="Task" /> whose result indicates success.</returns>
+    Task DecryptAsync(Stream input, Stream output, CancellationToken cancellationToken);
+
+    /// <summary>
     ///     Encrypts the given <paramref name="data" />.
     /// </summary>
     /// <param name="data">The data to be encrypted.</param>
@@ -58,4 +67,13 @@ public interface ICrypto
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     /// <returns>A <see cref="Task" /> whose result indicates success.</returns>
     Task EncryptAsync(FileInfo input, FileInfo output, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     Encrypts the given <see cref="input" /> stream and writes the result to the <see cref="output" /> stream.
+    /// </summary>
+    /// <param name="input">The plain text data stream.</param>
+    /// <param name="output">The encrypted output stream.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    /// <returns>A <see cref="Task" /> whose result indicates success.</returns>
+    Task EncryptAsync(Stream input, Stream output, CancellationToken cancellationToken);
 }

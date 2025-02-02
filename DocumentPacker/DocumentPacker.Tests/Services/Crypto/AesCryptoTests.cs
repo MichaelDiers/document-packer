@@ -75,6 +75,37 @@ public class AesCryptoTests : IDisposable
 
     [Theory]
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
+    public async Task DecryptAsync_Stream(int aesBits, int contentBytes)
+    {
+        var key = this.CreateBytePassword(aesBits);
+        var data = this.CreateByteContent(contentBytes);
+
+        var aes = this.cryptoFactory.CreateAes(key);
+
+        await using var inputStream = new MemoryStream(data);
+        await using var outputStream = new MemoryStream();
+        await aes.EncryptAsync(
+            inputStream,
+            outputStream,
+            TestContext.Current.CancellationToken);
+
+        var encrypted = outputStream.ToArray();
+
+        await using var encryptedStream = new MemoryStream(encrypted);
+        await using var decryptedStream = new MemoryStream();
+        await aes.DecryptAsync(
+            encryptedStream,
+            decryptedStream,
+            TestContext.Current.CancellationToken);
+
+        var decrypted = decryptedStream.ToArray();
+        Assert.Equal(
+            data,
+            decrypted);
+    }
+
+    [Theory]
+    [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task DecryptAsync_String(int aesBits, int contentBytes)
     {
         var key = this.CreateStringPassword(aesBits);
@@ -141,6 +172,25 @@ public class AesCryptoTests : IDisposable
             TestContext.Current.CancellationToken);
 
         Assert.True(File.Exists(this.encryptedFile));
+    }
+
+    [Theory]
+    [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
+    public async Task EncryptAsync_Stream(int aesBits, int contentBytes)
+    {
+        var key = this.CreateBytePassword(aesBits);
+        var data = this.CreateByteContent(contentBytes);
+
+        var aes = this.cryptoFactory.CreateAes(key);
+
+        await using var input = new MemoryStream(data);
+        await using var output = new MemoryStream();
+        await aes.EncryptAsync(
+            input,
+            output,
+            TestContext.Current.CancellationToken);
+
+        var encrypted = output.ToArray();
     }
 
     [Theory]
