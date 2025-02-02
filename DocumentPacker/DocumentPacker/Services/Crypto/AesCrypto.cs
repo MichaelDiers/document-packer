@@ -37,6 +37,11 @@ internal class AesCrypto(SecureString secureString) : Crypto(AlgorithmIdentifier
         return aes;
     }
 
+    /// <summary>
+    ///     Converts to from <see cref="string" /> to <see cref="SecureString" />.
+    /// </summary>
+    /// <param name="key">The key.</param>
+    /// <returns>A <see cref="SecureString" />.</returns>
     private static SecureString ToSecureString(string key)
     {
         var secureString = new SecureString();
@@ -48,6 +53,11 @@ internal class AesCrypto(SecureString secureString) : Crypto(AlgorithmIdentifier
         return secureString;
     }
 
+    /// <summary>
+    ///     Converts to from <see cref="byte" /> array to <see cref="SecureString" />.
+    /// </summary>
+    /// <param name="key">The key.</param>
+    /// <returns>A <see cref="SecureString" />.</returns>
     private static SecureString ToSecureString(byte[] key)
     {
         return AesCrypto.ToSecureString(Convert.ToBase64String(key));
