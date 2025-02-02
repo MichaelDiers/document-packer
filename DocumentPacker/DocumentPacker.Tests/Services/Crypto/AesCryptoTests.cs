@@ -10,7 +10,7 @@ public class AesCryptoTests
 {
     public static TheoryData<int, int> AesBitLengthContentByteLengthTestData = new MatrixTheoryData<int, int>(
         [128, 192, 256],
-        [8 * 8 - 1, 8 * 8, 8 * 8 + 1]);
+        [8 * 8 - 1 + 200, 8 * 8 + 200, 8 * 8 + 1 + 200]);
 
     private readonly ICryptoFactory cryptoFactory;
 
@@ -24,10 +24,10 @@ public class AesCryptoTests
 
     [Theory]
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
-    public async Task DecryptAsync(int aesBits, int contentBytes)
+    public async Task DecryptAsync_Byte(int aesBits, int contentBytes)
     {
-        var key = this.CreatePassword(aesBits);
-        var data = this.CreateContent(contentBytes);
+        var key = this.CreateBytePassword(aesBits);
+        var data = this.CreateByteContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
 
@@ -47,10 +47,10 @@ public class AesCryptoTests
 
     [Theory]
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
-    public async Task EncryptAsync(int aesBits, int contentBytes)
+    public async Task EncryptAsync_Byte(int aesBits, int contentBytes)
     {
-        var key = this.CreatePassword(aesBits);
-        var data = this.CreateContent(contentBytes);
+        var key = this.CreateBytePassword(aesBits);
+        var data = this.CreateByteContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
         await aes.EncryptAsync(
@@ -58,18 +58,41 @@ public class AesCryptoTests
             CancellationToken.None);
     }
 
-    private byte[] CreateContent(int byteLength)
+    [Theory]
+    [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
+    public async Task EncryptAsync_String(int aesBits, int contentBytes)
+    {
+        var key = this.CreateStringPassword(aesBits);
+        var data = this.CreateStringContent(contentBytes);
+
+        var aes = this.cryptoFactory.CreateAes(key);
+        await aes.EncryptAsync(
+            data,
+            CancellationToken.None);
+    }
+
+    private byte[] CreateByteContent(int byteLength)
     {
         var content = new byte[byteLength];
         RandomNumberGenerator.Create().GetBytes(content);
         return content;
     }
 
-    private byte[] CreatePassword(int bits)
+    private byte[] CreateBytePassword(int bits)
     {
         var byteLength = bits / 8;
         var password = new byte[byteLength];
         RandomNumberGenerator.Create().GetBytes(password);
         return password;
+    }
+
+    private string CreateStringContent(int contentBytes)
+    {
+        return Convert.ToBase64String(this.CreateByteContent(contentBytes));
+    }
+
+    private string CreateStringPassword(int aesBits)
+    {
+        return Convert.ToBase64String(this.CreateBytePassword(aesBits));
     }
 }

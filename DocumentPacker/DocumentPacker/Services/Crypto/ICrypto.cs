@@ -15,10 +15,27 @@ public interface ICrypto
     Task<byte[]> DecryptAsync(byte[] header, byte[] data, CancellationToken cancellationToken);
 
     /// <summary>
+    ///     Decrypts the given <paramref name="data" />.
+    /// </summary>
+    /// <param name="header">The header information of the encrypted data.</param>
+    /// <param name="data">The data to be decrypted.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    /// <returns>A <see cref="Task{T}" /> whose result is the decrypted <paramref name="data" />.</returns>
+    Task<string> DecryptAsync(string header, string data, CancellationToken cancellationToken);
+
+    /// <summary>
     ///     Encrypts the given <paramref name="data" />.
     /// </summary>
     /// <param name="data">The data to be encrypted.</param>
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     /// <returns>A <see cref="Task{T}" /> whose result is the encrypted <paramref name="data" /> and a header.</returns>
     Task<(byte[] header, byte[] data)> EncryptAsync(byte[] data, CancellationToken cancellationToken);
+
+    /// <summary>
+    ///     Encrypts the given <paramref name="data" />.
+    /// </summary>
+    /// <param name="data">The data to be encrypted.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    /// <returns>A <see cref="Task{T}" /> whose result is the encrypted <paramref name="data" /> and a header.</returns>
+    Task<(string header, string data)> EncryptAsync(string data, CancellationToken cancellationToken);
 }

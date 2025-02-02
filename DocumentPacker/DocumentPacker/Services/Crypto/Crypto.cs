@@ -32,7 +32,7 @@ internal abstract class Crypto : ICrypto
         this.algorithmIdentifier = algorithmIdentifier;
     }
 
-    /// <inheritdoc cref="ICrypto.DecryptAsync" />
+    /// <inheritdoc cref="ICrypto.DecryptAsync(byte[],byte[],CancellationToken)" />
     public async Task<byte[]> DecryptAsync(byte[] header, byte[] data, CancellationToken cancellationToken)
     {
         if (this.algorithmIdentifier == AlgorithmIdentifier.Aes)
@@ -46,7 +46,18 @@ internal abstract class Crypto : ICrypto
         throw new NotSupportedException(this.algorithmIdentifier.ToString());
     }
 
-    /// <inheritdoc cref="ICrypto.EncryptAsync" />
+    /// <inheritdoc cref="ICrypto.DecryptAsync(string,string,CancellationToken)" />
+    public async Task<string> DecryptAsync(string header, string data, CancellationToken cancellationToken)
+    {
+        var decrypted = await this.DecryptAsync(
+            Convert.FromBase64String(header),
+            Convert.FromBase64String(data),
+            cancellationToken);
+
+        return Convert.ToBase64String(decrypted);
+    }
+
+    /// <inheritdoc cref="ICrypto.EncryptAsync(byte[],CancellationToken)" />
     public async Task<(byte[] header, byte[] data)> EncryptAsync(byte[] data, CancellationToken cancellationToken)
     {
         if (this.algorithmIdentifier == AlgorithmIdentifier.Aes)
@@ -57,6 +68,16 @@ internal abstract class Crypto : ICrypto
         }
 
         throw new NotSupportedException(this.algorithmIdentifier.ToString());
+    }
+
+    /// <inheritdoc cref="ICrypto.EncryptAsync(string,CancellationToken)" />
+    public async Task<(string header, string data)> EncryptAsync(string data, CancellationToken cancellationToken)
+    {
+        var (header, encrypted) = await this.EncryptAsync(
+            Convert.FromBase64String(data),
+            cancellationToken);
+
+        return (Convert.ToBase64String(header), Convert.ToBase64String(encrypted));
     }
 
     /// <summary>
@@ -102,7 +123,7 @@ internal abstract class Crypto : ICrypto
         CancellationToken cancellationToken
     )
     {
-        var symmetricAlgorithm = this.CreateSymmetricAlgorithm();
+        using var symmetricAlgorithm = this.CreateSymmetricAlgorithm();
 
         this.ProcessHeader(
             symmetricAlgorithm,
@@ -129,7 +150,7 @@ internal abstract class Crypto : ICrypto
         CancellationToken cancellationToken
     )
     {
-        var symmetricAlgorithm = this.CreateSymmetricAlgorithm();
+        using var symmetricAlgorithm = this.CreateSymmetricAlgorithm();
 
         var header = this.CreateHeader(symmetricAlgorithm);
 
