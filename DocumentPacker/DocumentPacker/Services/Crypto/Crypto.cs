@@ -70,6 +70,13 @@ internal abstract class Crypto : ICrypto
     /// <inheritdoc cref="ICrypto.DecryptAsync(byte[],CancellationToken)" />
     public async Task<byte[]> DecryptAsync(byte[] data, CancellationToken cancellationToken)
     {
+        if (this.algorithmIdentifier == AlgorithmIdentifier.Rsa)
+        {
+            return await this.DecryptAsymmetricAsync(
+                data,
+                cancellationToken);
+        }
+
         await using var input = new MemoryStream(data);
         await using var output = new MemoryStream();
         await this.DecryptAsync(
@@ -111,6 +118,20 @@ internal abstract class Crypto : ICrypto
                 nameof(decrypted));
         }
 
+        if (this.algorithmIdentifier == AlgorithmIdentifier.Rsa)
+        {
+            var decryptedData = await this.DecryptAsync(
+                await File.ReadAllBytesAsync(
+                    encrypted.FullName,
+                    cancellationToken),
+                cancellationToken);
+            await File.WriteAllBytesAsync(
+                decrypted.FullName,
+                decryptedData,
+                cancellationToken);
+            return;
+        }
+
         await using var input = new FileStream(
             encrypted.FullName,
             FileMode.Open);
@@ -135,6 +156,21 @@ internal abstract class Crypto : ICrypto
                     output,
                     cancellationToken);
                 break;
+            case AlgorithmIdentifier.Rsa:
+                await using (var memoryStream = new MemoryStream())
+                {
+                    await input.CopyToAsync(
+                        memoryStream,
+                        cancellationToken);
+                    var decrypted = await this.DecryptAsync(
+                        memoryStream.ToArray(),
+                        cancellationToken);
+                    await output.WriteAsync(
+                        decrypted,
+                        cancellationToken);
+                }
+
+                break;
             case AlgorithmIdentifier.None:
             default:
                 throw new ArgumentException(
@@ -147,6 +183,13 @@ internal abstract class Crypto : ICrypto
     /// <inheritdoc cref="ICrypto.EncryptAsync(byte[],CancellationToken)" />
     public async Task<byte[]> EncryptAsync(byte[] data, CancellationToken cancellationToken)
     {
+        if (this.algorithmIdentifier == AlgorithmIdentifier.Rsa)
+        {
+            return await this.EncryptAsymmetricAsync(
+                data,
+                cancellationToken);
+        }
+
         await using var input = new MemoryStream(data);
         await using var output = new MemoryStream();
         await this.EncryptAsync(
@@ -188,6 +231,20 @@ internal abstract class Crypto : ICrypto
                 nameof(output));
         }
 
+        if (this.algorithmIdentifier == AlgorithmIdentifier.Rsa)
+        {
+            var encrypted = await this.EncryptAsync(
+                await File.ReadAllBytesAsync(
+                    input.FullName,
+                    cancellationToken),
+                cancellationToken);
+            await File.WriteAllBytesAsync(
+                output.FullName,
+                encrypted,
+                cancellationToken);
+            return;
+        }
+
         await using var inputStream = new FileStream(
             input.FullName,
             FileMode.Open);
@@ -212,6 +269,21 @@ internal abstract class Crypto : ICrypto
                     output,
                     cancellationToken);
                 break;
+            case AlgorithmIdentifier.Rsa:
+                await using (var memoryStream = new MemoryStream())
+                {
+                    await input.CopyToAsync(
+                        memoryStream,
+                        cancellationToken);
+                    var encrypted = await this.EncryptAsync(
+                        memoryStream.ToArray(),
+                        cancellationToken);
+                    await output.WriteAsync(
+                        encrypted,
+                        cancellationToken);
+                }
+
+                break;
             case AlgorithmIdentifier.None:
             default:
                 throw new ArgumentException(
@@ -231,6 +303,28 @@ internal abstract class Crypto : ICrypto
     }
 
     /// <summary>
+    ///     Decrypts the given <paramref name="data" /> by using an asymmetric algorithm.
+    /// </summary>
+    /// <param name="data">The data to be decrypted.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    /// <returns>The decrypted <paramref name="data" />.</returns>
+    protected virtual Task<byte[]> DecryptAsymmetricAsync(byte[] data, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException(this.algorithmIdentifier.ToString());
+    }
+
+    /// <summary>
+    ///     Encrypts the given <paramref name="data" /> by using an asymmetric algorithm.
+    /// </summary>
+    /// <param name="data">The data to be encrypted.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    /// <returns>The encrypted <paramref name="data" />.</returns>
+    protected virtual Task<byte[]> EncryptAsymmetricAsync(byte[] data, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException(this.algorithmIdentifier.ToString());
+    }
+
+    /// <summary>
     ///     Create the header of the encrypted data.
     /// </summary>
     /// <param name="symmetricAlgorithm">The symmetric algorithm.</param>
@@ -242,7 +336,7 @@ internal abstract class Crypto : ICrypto
             throw new InvalidOperationException("Length of IV is not supported.");
         }
 
-        var headerLength = this.GetActualHeaderLength(
+        var headerLength = Crypto.GetActualHeaderLength(
             Crypto.CustomHeaderLength,
             ivLength);
 
@@ -336,7 +430,7 @@ internal abstract class Crypto : ICrypto
     /// <param name="customHeaderLength">Length of the custom header.</param>
     /// <param name="ivLength">Length of the iv header.</param>
     /// <returns>The actual length of the header.</returns>
-    private int GetActualHeaderLength(int customHeaderLength, int ivLength)
+    private static int GetActualHeaderLength(int customHeaderLength, int ivLength)
     {
         var total = customHeaderLength + ivLength;
         if (total % 8 == 0)
@@ -377,7 +471,7 @@ internal abstract class Crypto : ICrypto
             customHeader[Crypto.IvLengthHeaderIndex],
             cancellationToken);
 
-        var headerLength = this.GetActualHeaderLength(
+        var headerLength = Crypto.GetActualHeaderLength(
             customHeader.Length,
             iv.Length);
         var unusedHeaderLength = headerLength - customHeader.Length - iv.Length;

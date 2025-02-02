@@ -13,5 +13,10 @@ public enum AlgorithmIdentifier : byte
     /// <summary>
     ///     Use aes.
     /// </summary>
-    Aes
+    Aes,
+
+    /// <summary>
+    ///     Use rsa.
+    /// </summary>
+    Rsa
 }

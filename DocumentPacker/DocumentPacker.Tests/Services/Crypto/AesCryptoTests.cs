@@ -30,8 +30,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task DecryptAsync_Byte(int aesBits, int contentBytes)
     {
-        var key = this.CreateBytePassword(aesBits);
-        var data = this.CreateByteContent(contentBytes);
+        var key = AesCryptoTests.CreateBytePassword(aesBits);
+        var data = AesCryptoTests.CreateByteContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
 
@@ -52,8 +52,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task DecryptAsync_File(int aesBits, int contentBytes)
     {
-        var key = this.CreateStringPassword(aesBits);
-        var data = this.CreateStringContent(contentBytes);
+        var key = AesCryptoTests.CreateStringPassword(aesBits);
+        var data = AesCryptoTests.CreateStringContent(contentBytes);
         await File.WriteAllTextAsync(
             this.inputFile,
             data);
@@ -76,8 +76,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task DecryptAsync_Stream(int aesBits, int contentBytes)
     {
-        var key = this.CreateBytePassword(aesBits);
-        var data = this.CreateByteContent(contentBytes);
+        var key = AesCryptoTests.CreateBytePassword(aesBits);
+        var data = AesCryptoTests.CreateByteContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
 
@@ -107,8 +107,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task DecryptAsync_String(int aesBits, int contentBytes)
     {
-        var key = this.CreateStringPassword(aesBits);
-        var data = this.CreateStringContent(contentBytes);
+        var key = AesCryptoTests.CreateStringPassword(aesBits);
+        var data = AesCryptoTests.CreateStringContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
         var encrypted = await aes.EncryptAsync(
@@ -144,8 +144,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task EncryptAsync_Byte(int aesBits, int contentBytes)
     {
-        var key = this.CreateBytePassword(aesBits);
-        var data = this.CreateByteContent(contentBytes);
+        var key = AesCryptoTests.CreateBytePassword(aesBits);
+        var data = AesCryptoTests.CreateByteContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
         await aes.EncryptAsync(
@@ -157,8 +157,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task EncryptAsync_File(int aesBits, int contentBytes)
     {
-        var key = this.CreateStringPassword(aesBits);
-        var data = this.CreateStringContent(contentBytes);
+        var key = AesCryptoTests.CreateStringPassword(aesBits);
+        var data = AesCryptoTests.CreateStringContent(contentBytes);
         await File.WriteAllTextAsync(
             this.inputFile,
             data);
@@ -176,8 +176,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task EncryptAsync_Stream(int aesBits, int contentBytes)
     {
-        var key = this.CreateBytePassword(aesBits);
-        var data = this.CreateByteContent(contentBytes);
+        var key = AesCryptoTests.CreateBytePassword(aesBits);
+        var data = AesCryptoTests.CreateByteContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
 
@@ -196,8 +196,8 @@ public class AesCryptoTests : IDisposable
     [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
     public async Task EncryptAsync_String(int aesBits, int contentBytes)
     {
-        var key = this.CreateStringPassword(aesBits);
-        var data = this.CreateStringContent(contentBytes);
+        var key = AesCryptoTests.CreateStringPassword(aesBits);
+        var data = AesCryptoTests.CreateStringContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
         await aes.EncryptAsync(
@@ -205,14 +205,14 @@ public class AesCryptoTests : IDisposable
             TestContext.Current.CancellationToken);
     }
 
-    private byte[] CreateByteContent(int byteLength)
+    private static byte[] CreateByteContent(int byteLength)
     {
         var content = new byte[byteLength];
         RandomNumberGenerator.Create().GetBytes(content);
         return content;
     }
 
-    private byte[] CreateBytePassword(int bits)
+    private static byte[] CreateBytePassword(int bits)
     {
         var byteLength = bits / 8;
         var password = new byte[byteLength];
@@ -220,13 +220,13 @@ public class AesCryptoTests : IDisposable
         return password;
     }
 
-    private string CreateStringContent(int contentBytes)
+    private static string CreateStringContent(int contentBytes)
     {
-        return Convert.ToBase64String(this.CreateByteContent(contentBytes));
+        return Convert.ToBase64String(AesCryptoTests.CreateByteContent(contentBytes));
     }
 
-    private string CreateStringPassword(int aesBits)
+    private static string CreateStringPassword(int aesBits)
     {
-        return Convert.ToBase64String(this.CreateBytePassword(aesBits));
+        return Convert.ToBase64String(AesCryptoTests.CreateBytePassword(aesBits));
     }
 }
