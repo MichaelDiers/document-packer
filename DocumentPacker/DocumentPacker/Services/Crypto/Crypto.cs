@@ -7,6 +7,41 @@ using System.Security.Cryptography;
 internal abstract class Crypto : ICrypto
 {
     /// <summary>
+    ///     The index of the algorithm header
+    /// </summary>
+    private const int AlgorithmHeaderIndex = Crypto.ReleaseVersionHeaderIndex + 1;
+
+    /// <summary>
+    ///     The length of the header that prepend the IV header part.
+    /// </summary>
+    private const int CustomHeaderLength = Crypto.IvLengthHeaderIndex + 1;
+
+    /// <summary>
+    ///     The iv header starts at this index.
+    /// </summary>
+    private const int IvHeaderIndex = Crypto.CustomHeaderLength;
+
+    /// <summary>
+    ///     The index at which the iv header starts.
+    /// </summary>
+    private const int IvLengthHeaderIndex = Crypto.AlgorithmHeaderIndex + 1;
+
+    /// <summary>
+    ///     The index of the major version.
+    /// </summary>
+    private const int MajorVersionHeaderIndex = 0;
+
+    /// <summary>
+    ///     The index of the minor version.
+    /// </summary>
+    private const int MinorVersionHeaderIndex = Crypto.MajorVersionHeaderIndex + 1;
+
+    /// <summary>
+    ///     The index of the release version.
+    /// </summary>
+    private const int ReleaseVersionHeaderIndex = Crypto.MinorVersionHeaderIndex + 1;
+
+    /// <summary>
     ///     The algorithm identifier that is added to the header.
     /// </summary>
     private readonly AlgorithmIdentifier algorithmIdentifier;
@@ -100,6 +135,7 @@ internal abstract class Crypto : ICrypto
                     output,
                     cancellationToken);
                 break;
+            case AlgorithmIdentifier.None:
             default:
                 throw new ArgumentException(
                     // ReSharper disable once LocalizableElement
@@ -176,6 +212,7 @@ internal abstract class Crypto : ICrypto
                     output,
                     cancellationToken);
                 break;
+            case AlgorithmIdentifier.None:
             default:
                 throw new ArgumentException(
                     // ReSharper disable once LocalizableElement
@@ -199,17 +236,25 @@ internal abstract class Crypto : ICrypto
     /// <param name="symmetricAlgorithm">The symmetric algorithm.</param>
     private byte[] CreateHeader(SymmetricAlgorithm symmetricAlgorithm)
     {
-        var headerLength = symmetricAlgorithm.IV.Length + 1;
-        if (headerLength % 8 != 0)
+        var ivLength = symmetricAlgorithm.IV.Length;
+        if (ivLength > 255)
         {
-            headerLength++;
+            throw new InvalidOperationException("Length of IV is not supported.");
         }
 
+        var headerLength = this.GetActualHeaderLength(
+            Crypto.CustomHeaderLength,
+            ivLength);
+
         var header = new byte[headerLength];
-        header[0] = (byte) this.algorithmIdentifier;
+        header[Crypto.MajorVersionHeaderIndex] = (byte) MajorVersion.Alice;
+        header[Crypto.MinorVersionHeaderIndex] = (byte) MinorVersion.Alien;
+        header[Crypto.ReleaseVersionHeaderIndex] = (byte) ReleaseVersion.Amy;
+        header[Crypto.AlgorithmHeaderIndex] = (byte) this.algorithmIdentifier;
+        header[Crypto.IvLengthHeaderIndex] = (byte) ivLength;
         symmetricAlgorithm.IV.CopyTo(
             header,
-            1);
+            Crypto.IvHeaderIndex);
 
         return header;
     }
@@ -250,6 +295,13 @@ internal abstract class Crypto : ICrypto
         await cryptoStream.FlushFinalBlockAsync(cancellationToken);
     }
 
+    /// <summary>
+    ///     Encrypts the data from <paramref name="input" /> and writes the result to the <paramref name="output" />.
+    /// </summary>
+    /// <param name="symmetricAlgorithm">The symmetric algorithm used for encryption.</param>
+    /// <param name="input">The input data stream.</param>
+    /// <param name="output">The encrypted output data stream.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     private async Task EncryptAsync(
         SymmetricAlgorithm symmetricAlgorithm,
         Stream input,
@@ -279,6 +331,23 @@ internal abstract class Crypto : ICrypto
     }
 
     /// <summary>
+    ///     Gets the actual length of the header including the unused part of the header.
+    /// </summary>
+    /// <param name="customHeaderLength">Length of the custom header.</param>
+    /// <param name="ivLength">Length of the iv header.</param>
+    /// <returns>The actual length of the header.</returns>
+    private int GetActualHeaderLength(int customHeaderLength, int ivLength)
+    {
+        var total = customHeaderLength + ivLength;
+        if (total % 8 == 0)
+        {
+            return total;
+        }
+
+        return total + 8 - total % 8;
+    }
+
+    /// <summary>
     ///     Reads the header of the encrypted data.
     /// </summary>
     /// <param name="symmetricAlgorithm">The symmetric algorithm.</param>
@@ -290,33 +359,59 @@ internal abstract class Crypto : ICrypto
         CancellationToken cancellationToken
     )
     {
-        var headerLength = symmetricAlgorithm.IV.Length + 1;
-        if (headerLength % 8 != 0)
-        {
-            headerLength++;
-        }
-
-        var header = new byte[headerLength];
-        var actualHeaderLength = await input.ReadAsync(
-            header,
+        var customHeader = await Crypto.ReadAsync(
+            input,
+            Crypto.CustomHeaderLength,
             cancellationToken);
 
-        if (headerLength != actualHeaderLength)
+        if ((MajorVersion) customHeader[Crypto.MajorVersionHeaderIndex] != MajorVersion.Alice ||
+            (MinorVersion) customHeader[Crypto.MinorVersionHeaderIndex] != MinorVersion.Alien ||
+            (ReleaseVersion) customHeader[Crypto.ReleaseVersionHeaderIndex] != ReleaseVersion.Amy ||
+            (AlgorithmIdentifier) customHeader[Crypto.AlgorithmHeaderIndex] != this.algorithmIdentifier)
         {
             throw new InvalidOperationException("Invalid header.");
         }
 
-        var actualAlgorithmIdentifier = (AlgorithmIdentifier) header[0];
-        if (actualAlgorithmIdentifier != this.algorithmIdentifier)
-        {
-            throw new InvalidOperationException("Invalid header.");
-        }
+        var iv = await Crypto.ReadAsync(
+            input,
+            customHeader[Crypto.IvLengthHeaderIndex],
+            cancellationToken);
 
-        var iv = new byte[symmetricAlgorithm.IV.Length];
-        header[1..(iv.Length + 1)]
-        .CopyTo(
-            iv,
-            0);
+        var headerLength = this.GetActualHeaderLength(
+            customHeader.Length,
+            iv.Length);
+        var unusedHeaderLength = headerLength - customHeader.Length - iv.Length;
+        _ = await Crypto.ReadAsync(
+            input,
+            unusedHeaderLength,
+            cancellationToken);
+
         symmetricAlgorithm.IV = iv;
+    }
+
+    /// <summary>
+    ///     Reads <paramref name="length" /> bytes from the <paramref name="stream" />.
+    /// </summary>
+    /// <param name="stream">The bytes are read from this stream.</param>
+    /// <param name="length">The amount of bytes that are read.</param>
+    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
+    /// <returns>The requested amount of bytes.</returns>
+    private static async Task<byte[]> ReadAsync(Stream stream, int length, CancellationToken cancellationToken)
+    {
+        if (length == 0)
+        {
+            return [];
+        }
+
+        var data = new byte[length];
+        var actualLength = await stream.ReadAsync(
+            data,
+            cancellationToken);
+        if (actualLength != data.Length)
+        {
+            throw new InvalidOperationException("Invalid stream data.");
+        }
+
+        return data;
     }
 }
