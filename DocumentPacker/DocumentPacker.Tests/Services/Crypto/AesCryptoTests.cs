@@ -35,12 +35,11 @@ public class AesCryptoTests : IDisposable
 
         var aes = this.cryptoFactory.CreateAes(key);
 
-        var (header, encrypted) = await aes.EncryptAsync(
+        var encrypted = await aes.EncryptAsync(
             data,
             TestContext.Current.CancellationToken);
 
         var decrypted = await aes.DecryptAsync(
-            header,
             encrypted,
             TestContext.Current.CancellationToken);
 
@@ -112,11 +111,10 @@ public class AesCryptoTests : IDisposable
         var data = this.CreateStringContent(contentBytes);
 
         var aes = this.cryptoFactory.CreateAes(key);
-        var (header, encrypted) = await aes.EncryptAsync(
+        var encrypted = await aes.EncryptAsync(
             data,
             TestContext.Current.CancellationToken);
         var decrypted = await aes.DecryptAsync(
-            header,
             encrypted,
             TestContext.Current.CancellationToken);
 
@@ -191,6 +189,7 @@ public class AesCryptoTests : IDisposable
             TestContext.Current.CancellationToken);
 
         var encrypted = output.ToArray();
+        Assert.NotNull(encrypted);
     }
 
     [Theory]
