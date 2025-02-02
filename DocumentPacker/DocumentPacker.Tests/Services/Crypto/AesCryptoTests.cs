@@ -6,13 +6,17 @@ using DocumentPacker.Services.Crypto;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-public class AesCryptoTests
+public class AesCryptoTests : IDisposable
 {
     public static TheoryData<int, int> AesBitLengthContentByteLengthTestData = new MatrixTheoryData<int, int>(
         [128, 192, 256],
         [8 * 8 - 1 + 200, 8 * 8 + 200, 8 * 8 + 1 + 200]);
 
     private readonly ICryptoFactory cryptoFactory;
+    private readonly string decryptedFile = Guid.NewGuid().ToString();
+    private readonly string encryptedFile = Guid.NewGuid().ToString();
+
+    private readonly string inputFile = Guid.NewGuid().ToString();
 
     public AesCryptoTests()
     {
@@ -33,16 +37,78 @@ public class AesCryptoTests
 
         var (header, encrypted) = await aes.EncryptAsync(
             data,
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
 
         var decrypted = await aes.DecryptAsync(
             header,
             encrypted,
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
 
         Assert.Equal(
             data,
             decrypted);
+    }
+
+    [Theory]
+    [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
+    public async Task DecryptAsync_File(int aesBits, int contentBytes)
+    {
+        var key = this.CreateStringPassword(aesBits);
+        var data = this.CreateStringContent(contentBytes);
+        await File.WriteAllTextAsync(
+            this.inputFile,
+            data);
+
+        var aes = this.cryptoFactory.CreateAes(key);
+        await aes.EncryptAsync(
+            new FileInfo(this.inputFile),
+            new FileInfo(this.encryptedFile),
+            TestContext.Current.CancellationToken);
+
+        Assert.True(File.Exists(this.encryptedFile));
+
+        await aes.DecryptAsync(
+            new FileInfo(this.encryptedFile),
+            new FileInfo(this.decryptedFile),
+            TestContext.Current.CancellationToken);
+    }
+
+    [Theory]
+    [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
+    public async Task DecryptAsync_String(int aesBits, int contentBytes)
+    {
+        var key = this.CreateStringPassword(aesBits);
+        var data = this.CreateStringContent(contentBytes);
+
+        var aes = this.cryptoFactory.CreateAes(key);
+        var (header, encrypted) = await aes.EncryptAsync(
+            data,
+            TestContext.Current.CancellationToken);
+        var decrypted = await aes.DecryptAsync(
+            header,
+            encrypted,
+            TestContext.Current.CancellationToken);
+
+        Assert.Equal(
+            data,
+            decrypted);
+    }
+
+    /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+    public void Dispose()
+    {
+        foreach (var file in new[]
+                 {
+                     this.inputFile,
+                     this.encryptedFile,
+                     this.decryptedFile
+                 })
+        {
+            if (File.Exists(file))
+            {
+                File.Delete(file);
+            }
+        }
     }
 
     [Theory]
@@ -55,7 +121,26 @@ public class AesCryptoTests
         var aes = this.cryptoFactory.CreateAes(key);
         await aes.EncryptAsync(
             data,
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
+    }
+
+    [Theory]
+    [MemberData(nameof(AesCryptoTests.AesBitLengthContentByteLengthTestData))]
+    public async Task EncryptAsync_File(int aesBits, int contentBytes)
+    {
+        var key = this.CreateStringPassword(aesBits);
+        var data = this.CreateStringContent(contentBytes);
+        await File.WriteAllTextAsync(
+            this.inputFile,
+            data);
+
+        var aes = this.cryptoFactory.CreateAes(key);
+        await aes.EncryptAsync(
+            new FileInfo(this.inputFile),
+            new FileInfo(this.encryptedFile),
+            TestContext.Current.CancellationToken);
+
+        Assert.True(File.Exists(this.encryptedFile));
     }
 
     [Theory]
@@ -68,7 +153,7 @@ public class AesCryptoTests
         var aes = this.cryptoFactory.CreateAes(key);
         await aes.EncryptAsync(
             data,
-            CancellationToken.None);
+            TestContext.Current.CancellationToken);
     }
 
     private byte[] CreateByteContent(int byteLength)

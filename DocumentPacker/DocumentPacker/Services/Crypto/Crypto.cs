@@ -57,6 +57,50 @@ internal abstract class Crypto : ICrypto
         return Convert.ToBase64String(decrypted);
     }
 
+    /// <inheritdoc cref="ICrypto.DecryptAsync(FileInfo,FileInfo,CancellationToken)" />
+    public async Task DecryptAsync(FileInfo encrypted, FileInfo decrypted, CancellationToken cancellationToken)
+    {
+        if (!encrypted.Exists)
+        {
+            throw new ArgumentException(
+                $"File '{encrypted}' does not exist.",
+                nameof(encrypted));
+        }
+
+        if (decrypted.Exists)
+        {
+            throw new ArgumentException(
+                $"File '{decrypted}' already exist.",
+                nameof(decrypted));
+        }
+
+        var encryptedBytes = await File.ReadAllBytesAsync(
+            encrypted.FullName,
+            cancellationToken);
+
+        if (this.algorithmIdentifier == AlgorithmIdentifier.Aes)
+        {
+            using var aes = this.CreateSymmetricAlgorithm();
+            var headerLength = aes.IV.Length + 1;
+            if (headerLength % 8 != 0)
+            {
+                headerLength++;
+            }
+
+            var header = encryptedBytes[..headerLength];
+            var data = encryptedBytes[headerLength..];
+
+            var decryptedBytes = await this.DecryptAsync(
+                header,
+                data,
+                cancellationToken);
+            await File.WriteAllBytesAsync(
+                decrypted.FullName,
+                decryptedBytes,
+                cancellationToken);
+        }
+    }
+
     /// <inheritdoc cref="ICrypto.EncryptAsync(byte[],CancellationToken)" />
     public async Task<(byte[] header, byte[] data)> EncryptAsync(byte[] data, CancellationToken cancellationToken)
     {
@@ -78,6 +122,44 @@ internal abstract class Crypto : ICrypto
             cancellationToken);
 
         return (Convert.ToBase64String(header), Convert.ToBase64String(encrypted));
+    }
+
+    /// <inheritdoc cref="ICrypto.EncryptAsync(FileInfo,FileInfo,CancellationToken)" />
+    public async Task EncryptAsync(FileInfo input, FileInfo output, CancellationToken cancellationToken)
+    {
+        if (!input.Exists)
+        {
+            throw new ArgumentException(
+                $"File '{input}' does not exist.",
+                nameof(input));
+        }
+
+        if (output.Exists)
+        {
+            throw new ArgumentException(
+                $"File '{output}' already exist.",
+                nameof(output));
+        }
+
+        var (header, data) = await this.EncryptAsync(
+            await File.ReadAllBytesAsync(
+                input.FullName,
+                cancellationToken),
+            cancellationToken);
+
+        await using var stream = new FileStream(
+            output.FullName,
+            FileMode.CreateNew);
+        await stream.WriteAsync(
+            header,
+            0,
+            header.Length,
+            cancellationToken);
+        await stream.WriteAsync(
+            data,
+            0,
+            data.Length,
+            cancellationToken);
     }
 
     /// <summary>
