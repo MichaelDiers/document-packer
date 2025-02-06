@@ -11,7 +11,7 @@ public class DocumentUnpackerServiceTests : IDisposable
 {
     private readonly string archiveFileName;
     private readonly string destinationDirectory;
-    private readonly ICreateArchive documentPackerService;
+    private readonly IDocumentPackerService documentPackerService;
     private readonly IDocumentUnpackerService documentUnpackerService;
     private readonly string rsaPrivateKeyPem;
     private readonly string rsaPublicKeyPem;
@@ -26,7 +26,7 @@ public class DocumentUnpackerServiceTests : IDisposable
         builder.Services.TryAddDocumentPackerService();
         builder.Services.TryAddDocumentUnpackerService();
         var host = builder.Build();
-        this.documentPackerService = host.Services.GetRequiredService<ICreateArchive>();
+        this.documentPackerService = host.Services.GetRequiredService<IDocumentPackerService>();
         this.documentUnpackerService = host.Services.GetRequiredService<IDocumentUnpackerService>();
         this.archiveFileName = Guid.NewGuid().ToString();
         this.destinationDirectory = Guid.NewGuid().ToString();

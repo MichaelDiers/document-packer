@@ -13,7 +13,7 @@ using DocumentPacker.Services.PackerStream;
 /// <seealso cref="DocumentPacker.Services.DocumentPackerService.IRsaSetup" />
 /// <seealso cref="DocumentPacker.Services.DocumentPackerService.IAesSetup" />
 /// <seealso cref="DocumentPacker.Services.DocumentPackerService.IAddData" />
-internal class DocumentPackerService : ICreateArchive, IRsaSetup, IAesSetup, IAddData
+internal class DocumentPackerService : IRsaSetup, IAesSetup, IAddData, IDocumentPackerService
 {
     /// <summary>
     ///     The files that are included in the document packer file.

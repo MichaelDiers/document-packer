@@ -19,7 +19,7 @@ public class DocumentPackerServiceTests : IDisposable
         var builder = Host.CreateApplicationBuilder();
         builder.Services.TryAddDocumentPackerService();
         var host = builder.Build();
-        this.documentPackerService = host.Services.GetRequiredService<ICreateArchive>();
+        this.documentPackerService = host.Services.GetRequiredService<IDocumentPackerService>();
         this.archiveFileName = Guid.NewGuid().ToString();
 
         using var rsa = RSA.Create(4096);
