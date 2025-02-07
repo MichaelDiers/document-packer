@@ -1,8 +1,8 @@
 ﻿namespace DocumentPacker.Tests.ViewModels;
 
-using DocumentPacker.Contracts.ViewModels;
-using DocumentPacker.ViewModels;
+using DocumentPacker.Mvvm;
 using Moq;
+using IDispatcher = DocumentPacker.Mvvm.IDispatcher;
 
 /// <summary>
 ///     Tests for <see cref="TaskCommand" />.
@@ -18,16 +18,6 @@ public class TaskCommandTests : IDisposable
         this.dispatcherMock.Setup(dispatcher => dispatcher.CheckAccess()).Returns(true);
         this.dispatcherMock.Setup(dispatcher => dispatcher.Invoke(It.IsAny<Action>()))
             .Callback<Action>(callback => callback());
-
-        Assert.False(TaskCommand.IsExecutingCommands);
-    }
-
-    public void Dispose()
-    {
-        for (var i = 0; i < 10 && TaskCommand.IsExecutingCommands; ++i)
-        {
-            Thread.Sleep(TaskCommandTests.DefaultDelay);
-        }
 
         Assert.False(TaskCommand.IsExecutingCommands);
     }
@@ -130,6 +120,16 @@ public class TaskCommandTests : IDisposable
 
         Assert.False(requestingCommand.CanExecute(null));
         Assert.True(TaskCommand.IsExecutingCommands);
+    }
+
+    public void Dispose()
+    {
+        for (var i = 0; i < 10 && TaskCommand.IsExecutingCommands; ++i)
+        {
+            Thread.Sleep(TaskCommandTests.DefaultDelay);
+        }
+
+        Assert.False(TaskCommand.IsExecutingCommands);
     }
 
     [Fact]

@@ -8,6 +8,16 @@ using DocumentPacker.Resources;
 internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
 {
     /// <summary>
+    ///     The id of the archive entry.
+    /// </summary>
+    private string archiveId = string.Empty;
+
+    /// <summary>
+    ///     The archive id extension of the archive entry.
+    /// </summary>
+    private string archiveIdExtension = string.Empty;
+
+    /// <summary>
     ///     The description of the element.
     /// </summary>
     private string description = string.Empty;
@@ -23,6 +33,11 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
     private ObservableCollection<EncryptItemType> encryptItemTypes = new(Enum.GetValues<EncryptItemType>());
 
     /// <summary>
+    ///     A value that indicates weather the expander is expanded.
+    /// </summary>
+    private bool isExpanded = true;
+
+    /// <summary>
     ///     The value indicating whether the item is required or optional.
     /// </summary>
     private bool isRequired = true;
@@ -31,6 +46,30 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
     ///     The value of the encrypt item.
     /// </summary>
     private string value = string.Empty;
+
+    /// <summary>
+    ///     Gets or sets the id of the archive entry.
+    /// </summary>
+    public string ArchiveId
+    {
+        get => this.archiveId;
+        set =>
+            this.SetField(
+                ref this.archiveId,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the id extension of the archive entry.
+    /// </summary>
+    public string ArchiveIdExtension
+    {
+        get => this.archiveIdExtension;
+        set =>
+            this.SetField(
+                ref this.archiveIdExtension,
+                value);
+    }
 
     /// <summary>
     ///     Gets or sets the description of the element.
@@ -61,6 +100,26 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
                 ref this.encryptItemType,
                 value,
                 [() => this.ValidateValue(this.Value)]);
+
+            if (this.encryptItemType == EncryptItemType.Text)
+            {
+                this.ArchiveIdExtension = ".txt";
+            }
+            else if (this.encryptItemType == EncryptItemType.File)
+            {
+                if (File.Exists(this.Value))
+                {
+                    this.ArchiveIdExtension = Path.GetExtension(this.Value);
+                    if (string.IsNullOrWhiteSpace(this.Value))
+                    {
+                        this.ArchiveId = Path.GetFileNameWithoutExtension(this.Value);
+                    }
+                }
+                else
+                {
+                    this.ArchiveIdExtension = string.Empty;
+                }
+            }
         }
     }
 
@@ -73,6 +132,18 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
         set =>
             this.SetField(
                 ref this.encryptItemTypes,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets a value that indicates weather the expander is expanded.
+    /// </summary>
+    public bool IsExpanded
+    {
+        get => this.isExpanded;
+        set =>
+            this.SetField(
+                ref this.isExpanded,
                 value);
     }
 
@@ -95,11 +166,19 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
     public string Value
     {
         get => this.value;
-        set =>
+        set
+        {
             this.SetField(
                 ref this.value,
                 value,
                 [() => this.ValidateValue(value)]);
+
+            if (this.EncryptItemType == EncryptItemType.File && File.Exists(this.Value))
+            {
+                this.ArchiveIdExtension = Path.GetExtension(this.Value);
+                this.ArchiveId = Path.GetFileNameWithoutExtension(this.Value);
+            }
+        }
     }
 
     public bool CanHandleDragAndDrop(IEnumerable<string> files)

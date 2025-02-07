@@ -6,6 +6,5 @@
     <Button
         Command="{Binding RequestChangeLanguageViewCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_language.png"
-        dependencyProperties:TextDependencyProperty.Text="{Binding CommandText}"
-        Style="{StaticResource NavigationBarLinkStyle}"/>
+        dependencyProperties:TextDependencyProperty.Text="{Binding CommandText}"/>
 </mvvm:BaseUserControl>

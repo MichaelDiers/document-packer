@@ -6,6 +6,5 @@
    <Button
         Command="{Binding BackCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_arrow_back.png"
-        dependencyProperties:TextDependencyProperty.Text="{Binding CommandText}"
-        Style="{StaticResource NavigationBarLinkStyle}"/>
+        dependencyProperties:TextDependencyProperty.Text="{Binding CommandText}"/>
 </mvvm:BaseUserControl>

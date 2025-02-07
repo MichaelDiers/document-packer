@@ -263,9 +263,159 @@
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpPlaceEmbeddedOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002EMemberReordering_002EMigrations_002ECSharpFileLayoutPatternRemoveIsAttributeUpgrade/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAlwaysTreatStructAsNotReorderableMigration/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EPredefinedNamingRulesToUserRulesUpgrade/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/CustomProperties/=Extension/@EntryIndexedValue">cs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/CustomProperties/=FileName/@EntryIndexedValue">Class</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/CustomProperties/=ValidateFileName/@EntryIndexedValue">False</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Description/@EntryValue">WPF Part</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAME/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAME/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Field/=NAMESPACE/Order/@EntryValue">1</s:Int64>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Scope/=E8F0594528C33E45BBFEC6CFE851095D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Scope/=E8F0594528C33E45BBFEC6CFE851095D/Type/@EntryValue">InCSharpProjectFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3013E17D84A8904280298EAA46DA5265/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3013E17D84A8904280298EAA46DA5265/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Folder="$NAME$Part/ViewModel" File="$NAME$ViewModel.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3013E17D84A8904280298EAA46DA5265/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3013E17D84A8904280298EAA46DA5265/Order/@EntryValue">4</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3013E17D84A8904280298EAA46DA5265/SectionPlain/Text/@EntryValue">namespace $NAMESPACE$.$NAME$Part.ViewModel;&#xD;
+&#xD;
+using $NAMESPACE$.Contracts;&#xD;
+using $NAMESPACE$.$NAME$Part.Contracts;&#xD;
+using $NAMESPACE$.ViewModel;&#xD;
+&#xD;
+/// &lt;summary&gt;&#xD;
+///     The view model data.&#xD;
+/// &lt;/summary&gt;&#xD;
+/// &lt;seealso cref="I$NAME$ViewModel" /&gt;&#xD;
+internal class $NAME$ViewModel() : PartViewModel(Part.$NAME$),&#xD;
+    I$NAME$ViewModel&#xD;
+{&#xD;
+}&#xD;
+</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3DDD0B431A647B4EBB129B6354BAD52D/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3DDD0B431A647B4EBB129B6354BAD52D/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Folder="$NAME$Part/Contracts" File="I$NAME$ViewModel.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3DDD0B431A647B4EBB129B6354BAD52D/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3DDD0B431A647B4EBB129B6354BAD52D/Order/@EntryValue">0</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=3DDD0B431A647B4EBB129B6354BAD52D/SectionPlain/Text/@EntryValue">namespace $NAMESPACE$.$NAME$Part.Contracts;&#xD;
+&#xD;
+using $NAMESPACE$.Contracts;&#xD;
+&#xD;
+/// &lt;summary&gt;&#xD;
+///     The view model data.&#xD;
+/// &lt;/summary&gt;&#xD;
+public interface I$NAME$ViewModel : IPartViewModel&#xD;
+{&#xD;
+}&#xD;
+</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=F760E3CFF751744AB9FBF503290CDA13/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=F760E3CFF751744AB9FBF503290CDA13/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Folder="$NAME$Part/View" File="$NAME$View.xaml" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=F760E3CFF751744AB9FBF503290CDA13/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=F760E3CFF751744AB9FBF503290CDA13/Order/@EntryValue">2</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=F760E3CFF751744AB9FBF503290CDA13/SectionPlain/Text/@EntryValue">&lt;UserControl x:Class="$NAMESPACE$.$NAME$Part.View.$NAME$View"&#xD;
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"&#xD;
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&#xD;
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"&#xD;
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"&#xD;
+             xmlns:contracts="clr-namespace:$NAMESPACE$.$NAME$Part.Contracts"&#xD;
+             mc:Ignorable="d"&#xD;
+             d:DataContext="{d:DesignInstance Type=contracts:I$NAME$ViewModel, IsDesignTimeCreatable=False}"&gt;&#xD;
+    &lt;TextBlock Text="$NAME$"/&gt;&#xD;
+&lt;/UserControl&gt;</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FCFAA8167DB4494FA389600873E40C3F/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FCFAA8167DB4494FA389600873E40C3F/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Folder="$NAME$Part/View" File="$NAME$View.xaml.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FCFAA8167DB4494FA389600873E40C3F/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FCFAA8167DB4494FA389600873E40C3F/Order/@EntryValue">3</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FCFAA8167DB4494FA389600873E40C3F/SectionPlain/Text/@EntryValue">namespace $NAMESPACE$.$NAME$Part.View;&#xD;
+&#xD;
+using System.Windows.Controls;&#xD;
+using $NAMESPACE$.Contracts;&#xD;
+&#xD;
+/// &lt;summary&gt;&#xD;
+///     Interaction logic for $NAME$View.xaml&#xD;
+/// &lt;/summary&gt;&#xD;
+public partial class $NAME$View : UserControl, IPartView&#xD;
+{&#xD;
+    /// &lt;summary&gt;&#xD;
+    ///     Initializes a new instance of the &lt;see cref="$NAME$View" /&gt; class.&#xD;
+    /// &lt;/summary&gt;&#xD;
+    public $NAME$View()&#xD;
+    {&#xD;
+        this.InitializeComponent();&#xD;
+    }&#xD;
+}&#xD;
+</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FFC6169A6229854C96070ED1733442FC/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FFC6169A6229854C96070ED1733442FC/LocationSelectorConfig/@EntryValue">&lt;RelativeConfig Folder="$NAME$Part/Extensions" File="$NAME$ServiceCollectionExtensions.cs" /&gt;</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FFC6169A6229854C96070ED1733442FC/LocationSelectorName/@EntryValue">manual</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FFC6169A6229854C96070ED1733442FC/Order/@EntryValue">1</s:Int64>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Section/=FFC6169A6229854C96070ED1733442FC/SectionPlain/Text/@EntryValue">namespace $NAMESPACE$.$NAME$Part.Extensions;&#xD;
+&#xD;
+using $NAMESPACE$.Contracts;&#xD;
+using $NAMESPACE$.$NAME$Part.View;&#xD;
+using $NAMESPACE$.$NAME$Part.ViewModel;&#xD;
+using Microsoft.Extensions.DependencyInjection;&#xD;
+using Microsoft.Extensions.DependencyInjection.Extensions;&#xD;
+&#xD;
+/// &lt;summary&gt;&#xD;
+///     Extensions for &lt;seealso cref="IServiceCollection" /&gt;.&#xD;
+/// &lt;/summary&gt;&#xD;
+public static class $NAME$ServiceCollectionExtensions&#xD;
+{&#xD;
+    /// &lt;summary&gt;&#xD;
+    ///     Tries to add dependencies for this application part.&#xD;
+    /// &lt;/summary&gt;&#xD;
+    /// &lt;param name="services"&gt;The services collection to that the dependencies are added.&lt;/param&gt;&#xD;
+    /// &lt;returns&gt;The given &lt;paramref name="services" /&gt;.&lt;/returns&gt;&#xD;
+    public static IServiceCollection TryAdd$NAME$Dependencies(this IServiceCollection services)&#xD;
+    {&#xD;
+        // view&#xD;
+        services.TryAddKeyedTransient&lt;IPartView, $NAME$View&gt;(Part.$NAME$);&#xD;
+&#xD;
+        // view model&#xD;
+        services.TryAddKeyedTransient&lt;IPartViewModel, $NAME$ViewModel&gt;(Part.$NAME$);&#xD;
+&#xD;
+        return services;&#xD;
+    }&#xD;
+}&#xD;
+</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=0715BB35D824274F8F0DCA475C60CEAF/Text/@EntryValue">$NAME$&#xD;
+$NAMESPACE$</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19361E99FD31344399372720175C1CC4/Description/@EntryValue">add wpf mvvm property</s:String>
@@ -358,4 +508,5 @@ public $PROP_TYPE$ $PROP_NAME$ { get; set; } $PROP_INIT$;</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=firestore/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Firestore/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=localizer/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=mongo/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=mongo/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=unpacker/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

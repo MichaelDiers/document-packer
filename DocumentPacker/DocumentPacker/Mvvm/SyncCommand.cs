@@ -14,6 +14,8 @@ public class SyncCommand : ICommand
     /// </summary>
     private readonly Func<object?, bool> canExecute;
 
+    private readonly string? commandText;
+
     /// <summary>
     ///     A dispatcher for the ui thread.
     /// </summary>
@@ -30,10 +32,17 @@ public class SyncCommand : ICommand
     /// <param name="canExecute">Defines the method that determines whether the command can execute in its current state.</param>
     /// <param name="execute">Defines the method to be called when the command is invoked.</param>
     /// <param name="dispatcher">A dispatcher for the ui thread.</param>
-    public SyncCommand(Func<object?, bool> canExecute, Action<object?> execute, IDispatcher? dispatcher = null)
+    /// <param name="commandText">The displayed text of the command button.</param>
+    public SyncCommand(
+        Func<object?, bool> canExecute,
+        Action<object?> execute,
+        IDispatcher? dispatcher = null,
+        string? commandText = null
+    )
     {
         this.canExecute = canExecute;
         this.execute = execute;
+        this.commandText = commandText;
         this.dispatcher = dispatcher ?? App.ServiceProvider.GetRequiredService<IDispatcher>();
     }
 

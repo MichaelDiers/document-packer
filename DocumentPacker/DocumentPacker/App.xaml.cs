@@ -1,10 +1,11 @@
 ﻿namespace DocumentPacker;
 
+using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
 using DocumentPacker.ApplicationInit.DependencyInjection;
-using DocumentPacker.Parts.Contracts;
-using DocumentPacker.Parts.DocumentPackerPart.Contracts;
+using DocumentPacker.EventHandling;
+using DocumentPacker.Resources;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -24,22 +25,6 @@ public partial class App : Application
     /// <remarks>Name is initialized on first access.</remarks>
     public static IServiceProvider ServiceProvider =>
         App.provider ?? (App.provider = ServiceProviderInitializer.Init());
-
-    /// <summary>
-    ///     Requests the view specified by <paramref name="part" />.
-    /// </summary>
-    /// <param name="part">The requested application part.</param>
-    public static void RequestView(Part part)
-    {
-        App.RequestViewEvent?.Invoke(
-            null,
-            new RequestViewEventArgs(part));
-    }
-
-    /// <summary>
-    ///     Occurs when an application part is requested.
-    /// </summary>
-    public static event EventHandler<RequestViewEventArgs>? RequestViewEvent;
 
     /// <summary>
     ///     Called when an unhandled exception is raised.
@@ -65,8 +50,19 @@ public partial class App : Application
     /// <param name="e">The <see cref="StartupEventArgs" /> instance containing the event data.</param>
     private void OnStartup(object sender, StartupEventArgs e)
     {
-        var view = App.ServiceProvider.GetRequiredService<IDocumentPackerWindow>();
-        view.DataContext = App.ServiceProvider.GetRequiredService<IDocumentPackerViewModel>();
-        view.Show();
+        switch (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower())
+        {
+            case "de":
+                Translation.Culture = Thread.CurrentThread.CurrentUICulture;
+                break;
+            default:
+                Translation.Culture = CultureInfo.InvariantCulture;
+                break;
+        }
+
+        this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+        var eventHandlerCenter = App.ServiceProvider.GetRequiredService<IEventHandlerCenter>();
+        eventHandlerCenter.Closed += (_, _) => this.Shutdown();
+        eventHandlerCenter.Initialize(App.ServiceProvider);
     }
 }

@@ -1,14 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
-
-        <!--
-        <ResourceDictionary Source="BorderStyle.xaml"/>
-        <ResourceDictionary Source="ButtonStyle.xaml"/>
-        <ResourceDictionary Source="LabelStyle.xaml"/>
-        
-        -->
-        <ResourceDictionary Source="CommandButtonStyle.xaml" />
-        <ResourceDictionary Source="UserControlStyle.xaml" />
+        <ResourceDictionary Source="Basic.xaml"/>
+        <ResourceDictionary Source="WindowStyle.xaml"/>
+        <ResourceDictionary Source="SmallCommandButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

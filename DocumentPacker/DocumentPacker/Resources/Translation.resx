@@ -243,4 +243,55 @@ Decrypt the Document Packer file with your private key. View or save the decrypt
   <data name="EncryptPartEncrypt" xml:space="preserve">
     <value>Encrypt &amp; Pack</value>
   </data>
+  <data name="EncryptPartDocumentPackerFile" xml:space="preserve">
+    <value>Document Packer File</value>
+  </data>
+  <data name="SelectDocumentPackerOutputFolderCommand" xml:space="preserve">
+    <value>Select the output folder of the document packer file.</value>
+  </data>
+  <data name="DocumentPackerOutputFolderToolTip" xml:space="preserve">
+    <value>The output folder of the document packer file.</value>
+  </data>
+  <data name="DirectoryDoesNotExist" xml:space="preserve">
+    <value>Directory does not exist.</value>
+  </data>
+  <data name="DocumentPackerOutputFileToolTip" xml:space="preserve">
+    <value>The name of the Document Packer file.</value>
+  </data>
+  <data name="FileNameIsMissing" xml:space="preserve">
+    <value>Please enter a file name.</value>
+  </data>
+  <data name="EncryptPartRsaPublicKey" xml:space="preserve">
+    <value>RSA Public Key</value>
+  </data>
+  <data name="EncryptPartRsaPublicKeyToolTip" xml:space="preserve">
+    <value>RSA public key in PEM format.</value>
+  </data>
+  <data name="EncryptPartGenerateRsaKeys" xml:space="preserve">
+    <value>Generate a new RSA public and private key pair.</value>
+  </data>
+  <data name="EncryptPartRsaPrivateKey" xml:space="preserve">
+    <value>RSA Private Key</value>
+  </data>
+  <data name="EncryptPartRsaPrivateKeyToolTip" xml:space="preserve">
+    <value>RSA private key in PEM format.</value>
+  </data>
+  <data name="EncryptPartItemsHeadline" xml:space="preserve">
+    <value>Add Files and Plain-Text</value>
+  </data>
+  <data name="EncryptPartCollapseAll" xml:space="preserve">
+    <value>Collapse All</value>
+  </data>
+  <data name="EncryptPartExpandAll" xml:space="preserve">
+    <value>Expand All</value>
+  </data>
+  <data name="EncryptPartId" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="ArchiveIdToolTip" xml:space="preserve">
+    <value>The id of the archive entry.</value>
+  </data>
+  <data name="ArchiveIdExtensionToolTip" xml:space="preserve">
+    <value>The extension of the archive entry.</value>
+  </data>
 </root>

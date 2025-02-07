@@ -18,6 +18,12 @@ public partial class EncryptView : IApplicationView
         this.InitializeComponent();
     }
 
+    /// <summary>
+    ///     Handles drag and drop for files.
+    /// </summary>
+    /// <param name="sender">The sender that raised the event.</param>
+    /// <param name="e">The <see cref="DragEventArgs" /> instance containing the event data.</param>
+    /// <param name="isPreview">if set to <c>true</c> it is a preview only without changes.</param>
     private void HandleDragAndDrop(object sender, DragEventArgs e, bool isPreview)
     {
         if (!e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -48,6 +54,11 @@ public partial class EncryptView : IApplicationView
         }
     }
 
+    /// <summary>
+    ///     Handles the drop event.
+    /// </summary>
+    /// <param name="sender">The sender that raised the event.</param>
+    /// <param name="e">The <see cref="DragEventArgs" /> instance containing the event data.</param>
     private void OnDrop(object sender, DragEventArgs e)
     {
         this.HandleDragAndDrop(
@@ -56,6 +67,11 @@ public partial class EncryptView : IApplicationView
             false);
     }
 
+    /// <summary>
+    ///     Handles the preview drag over event.
+    /// </summary>
+    /// <param name="sender">The sender that raised the event.</param>
+    /// <param name="e">The <see cref="DragEventArgs" /> instance containing the event data.</param>
     private void OnPreviewDragOver(object sender, DragEventArgs e)
     {
         this.HandleDragAndDrop(

@@ -420,7 +420,6 @@ internal abstract class Crypto : ICrypto
         await input.CopyToAsync(
             cryptoStream,
             cancellationToken);
-
         await cryptoStream.FlushFinalBlockAsync(cancellationToken);
     }
 

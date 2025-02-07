@@ -11,6 +11,11 @@ using DocumentPacker.Resources;
 internal class WindowViewModel : ApplicationViewModel
 {
     /// <summary>
+    ///     The fatal error message text.
+    /// </summary>
+    private string? fatalErrorMessage;
+
+    /// <summary>
     ///     The view that is displayed in the window.
     /// </summary>
     private object? view;
@@ -19,6 +24,18 @@ internal class WindowViewModel : ApplicationViewModel
     ///     The title of the window.
     /// </summary>
     private string? windowTitle = Translation.WindowPartTitle;
+
+    /// <summary>
+    ///     Gets or sets the fatal error message text.
+    /// </summary>
+    public string? FatalErrorMessage
+    {
+        get => this.fatalErrorMessage;
+        set =>
+            this.SetField(
+                ref this.fatalErrorMessage,
+                value);
+    }
 
     /// <summary>
     ///     Gets or sets the view that is displayed in the window.

@@ -1,7 +1,9 @@
 ﻿namespace DocumentPacker.Parts2.Main.EncryptPart;
 
 using DocumentPacker.EventHandling;
+using DocumentPacker.Parts2.Main.EncryptPart.Service;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 /// <summary>
 ///     Extensions for <see cref="IServiceCollection" />
@@ -17,6 +19,8 @@ public static class EncryptPartServiceCollectionExtensions
     {
         services.AddKeyedTransient<IApplicationView, EncryptView>(ApplicationElementPart.EncryptFeature);
         services.AddKeyedTransient<IApplicationViewModel, EncryptViewModel>(ApplicationElementPart.EncryptFeature);
+
+        services.TryAddSingleton<IEncryptService, EncryptService>();
 
         return services;
     }
