@@ -1,4 +1,4 @@
-﻿namespace DocumentPacker.Views;
+﻿namespace DocumentPacker.Controls;
 
 using System.Windows.Controls;
 

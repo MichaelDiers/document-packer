@@ -2,19 +2,19 @@
 
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
-using DocumentPacker.Parts2.FooterPart;
-using DocumentPacker.Parts2.Header.HeaderPart;
-using DocumentPacker.Parts2.Header.Links.BackLinkPart;
-using DocumentPacker.Parts2.Header.Links.ChangeLanguageLinkPart;
-using DocumentPacker.Parts2.Header.NavigationBarPart;
-using DocumentPacker.Parts2.LayoutPart;
-using DocumentPacker.Parts2.Main.ChangeLanguagePart;
-using DocumentPacker.Parts2.Main.CreateConfigurationPart;
-using DocumentPacker.Parts2.Main.DecryptPart;
-using DocumentPacker.Parts2.Main.EncryptPart;
-using DocumentPacker.Parts2.Main.FeaturesPart;
-using DocumentPacker.Parts2.Main.MainPart;
-using DocumentPacker.Parts2.WindowPart;
+using DocumentPacker.Parts.FooterPart;
+using DocumentPacker.Parts.Header.HeaderPart;
+using DocumentPacker.Parts.Header.Links.BackLinkPart;
+using DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart;
+using DocumentPacker.Parts.Header.NavigationBarPart;
+using DocumentPacker.Parts.LayoutPart;
+using DocumentPacker.Parts.Main.ChangeLanguagePart;
+using DocumentPacker.Parts.Main.CreateConfigurationPart;
+using DocumentPacker.Parts.Main.DecryptPart;
+using DocumentPacker.Parts.Main.EncryptPart;
+using DocumentPacker.Parts.Main.FeaturesPart;
+using DocumentPacker.Parts.Main.MainPart;
+using DocumentPacker.Parts.WindowPart;
 using DocumentPacker.Services;
 using Microsoft.Extensions.DependencyInjection;
 

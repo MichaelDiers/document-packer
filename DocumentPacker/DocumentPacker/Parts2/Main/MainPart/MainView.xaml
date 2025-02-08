@@ -1,7 +1,0 @@
-﻿<mvvm:BaseUserControl x:Class="DocumentPacker.Parts2.Main.MainPart.MainView"
-                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
-    <ContentControl
-        Content="{Binding Content}"/>
-</mvvm:BaseUserControl>
