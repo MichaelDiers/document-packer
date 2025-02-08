@@ -292,4 +292,7 @@ Entschlüssele die Document Packer-Datei mit Deinem privaten Schlüssel. Sieh Di
   <data name="ArchiveIdExtensionToolTip" xml:space="preserve">
     <value>Die Dateierweiterung des Archiveintrages.</value>
   </data>
+  <data name="EncryptPartRsaKeys" xml:space="preserve">
+    <value>RSA Schlüssel</value>
+  </data>
 </root>

@@ -294,4 +294,7 @@ Decrypt the Document Packer file with your private key. View or save the decrypt
   <data name="ArchiveIdExtensionToolTip" xml:space="preserve">
     <value>The extension of the archive entry.</value>
   </data>
+  <data name="EncryptPartRsaKeys" xml:space="preserve">
+    <value>RSA Keys</value>
+  </data>
 </root>

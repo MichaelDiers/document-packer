@@ -7,6 +7,8 @@
     <system:Double x:Key="DefaultFontSize">18</system:Double>
     <FontWeight x:Key="DefaultFontWeight">Normal</FontWeight>
     <Thickness x:Key="DefaultMargin">8</Thickness>
+    <Thickness x:Key="DefaultNoTopMargin">8,0,8,8</Thickness>
+    <Thickness x:Key="DefaultNoBottomMargin">8,8,8,0</Thickness>
     <Thickness x:Key="DefaultPadding">8</Thickness>
     <system:Boolean x:Key="True">True</system:Boolean>
     <system:Boolean x:Key="False">False</system:Boolean>

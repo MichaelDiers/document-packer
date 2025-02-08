@@ -349,6 +349,15 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RSA Keys.
+        /// </summary>
+        public static string EncryptPartRsaKeys {
+            get {
+                return ResourceManager.GetString("EncryptPartRsaKeys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RSA Private Key.
         /// </summary>
         public static string EncryptPartRsaPrivateKey {

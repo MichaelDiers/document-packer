@@ -70,12 +70,14 @@
                     Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="0"
-                    Content="{x:Static resources:Translation.EncryptPartDocumentPackerFile}"/>
+                    Content="{x:Static resources:Translation.EncryptPartDocumentPackerFile}"
+                    Margin="{StaticResource DefaultNoBottomMargin}"/>
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="1"
                     IsEnabled="False"
                     IsReadOnly="True"
+                    Margin="{StaticResource DefaultNoBottomMargin}"
                     Text="{Binding DocumentPackerOutputFolder}"
                     ToolTip="{x:Static resources:Translation.DocumentPackerOutputFolderToolTip}"/>
                 <Button
@@ -84,54 +86,51 @@
                     Command="{Binding SelectDocumentPackerOutputFolderCommand}"
                     dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.SelectDocumentPackerOutputFolderCommand}"
                     dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_folder.png"
+                    Margin="{StaticResource DefaultNoBottomMargin}"
                     Style="{StaticResource SmallCommandButton}"/>
 
                 <!-- document packer file -->
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
+                    Margin="{StaticResource DefaultNoTopMargin}"
                     Text="{Binding DocumentPackerOutputFile}"
                     ToolTip="{x:Static resources:Translation.DocumentPackerOutputFileToolTip}"/>
 
                 <!-- rsa public key -->
                 <Label 
                     Grid.Row="2"
+                    Grid.RowSpan="2"
                     Grid.Column="0"
-                    Content="{x:Static resources:Translation.EncryptPartRsaPublicKey}"/>
+                    Content="{x:Static resources:Translation.EncryptPartRsaKeys}"
+                    Margin="0"/>
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="1"
                     MaxHeight="250"
+                    Margin="{StaticResource DefaultNoBottomMargin}"
                     VerticalScrollBarVisibility="Auto"
                     Text="{Binding RsaPublicKeyPem}"
                     ToolTip="{x:Static resources:Translation.EncryptPartRsaPublicKeyToolTip}"/>
                 <Button
                     Grid.Row="2"
+                    Grid.RowSpan="2"
                     Grid.Column="2"
                     Command="{Binding GenerateRsaKeysCommand}"
                     dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartGenerateRsaKeys}"
                     dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_key.png"
+                    Margin="{StaticResource DefaultNoBottomMargin}"
                     Style="{StaticResource SmallCommandButton}"/>
 
                 <!-- rsa private key -->
-                <Label 
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    Content="{x:Static resources:Translation.EncryptPartRsaPrivateKey}"/>
                 <TextBox
                     Grid.Row="3"
                     Grid.Column="1"
                     MaxHeight="250"
+                    Margin="{StaticResource DefaultNoTopMargin}"
                     VerticalScrollBarVisibility="Auto"
                     Text="{Binding RsaPrivateKeyPem}"
                     ToolTip="{x:Static resources:Translation.EncryptPartRsaPrivateKeyToolTip}"/>
-                <Button
-                    Grid.Row="3"
-                    Grid.Column="2"
-                    Command="{Binding GenerateRsaKeysCommand}"
-                    dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartGenerateRsaKeys}"
-                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_key.png"
-                    Style="{StaticResource SmallCommandButton}"/>
 
                 <!-- items section-->
                 <Grid
