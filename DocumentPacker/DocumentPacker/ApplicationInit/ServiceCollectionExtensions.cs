@@ -16,6 +16,7 @@ using DocumentPacker.Parts.Main.FeaturesPart;
 using DocumentPacker.Parts.Main.MainPart;
 using DocumentPacker.Parts.WindowPart;
 using DocumentPacker.Services;
+using Libs.Wpf.Commands;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -31,6 +32,8 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDependencies(this IServiceCollection services)
     {
         services.AddSingleton<IDispatcher, ThreadDispatcher>();
+        services.TryAddCommandFactory();
+
         services.TryAddEventHandling();
 
         services.AddWindowPart();

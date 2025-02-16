@@ -3,14 +3,14 @@
 using System.Windows.Input;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
-using DocumentPacker.Resources;
+using Libs.Wpf.Commands;
 
 /// <summary>
 ///     The view model of <see cref="BackLinkView" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
+/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
 /// <seealso cref="DocumentPacker.EventHandling.IHandleBackLink" />
-internal class BackLinkViewModel : ApplicationViewModel, IHandleBackLink
+internal class BackLinkViewModel(ICommandFactory commandFactory) : ApplicationBaseViewModel, IHandleBackLink
 {
     /// <summary>
     ///     A <see cref="Stack{T}" /> that stores the available back links.
@@ -18,15 +18,10 @@ internal class BackLinkViewModel : ApplicationViewModel, IHandleBackLink
     private readonly Stack<BackLinkEventArgs> backLinks = new();
 
     /// <summary>
-    ///     The text of the back command button.
-    /// </summary>
-    private string commandText = Translation.BackLinkPartBack;
-
-    /// <summary>
     ///     Gets the back command.
     /// </summary>
     public ICommand BackCommand =>
-        new SyncCommand(
+        commandFactory.CreateSyncCommand(
             _ => this.backLinks.Count != 0,
             _ =>
             {
@@ -43,18 +38,6 @@ internal class BackLinkViewModel : ApplicationViewModel, IHandleBackLink
                         });
                 }
             });
-
-    /// <summary>
-    ///     Gets or sets the command button text.
-    /// </summary>
-    public string CommandText
-    {
-        get => this.commandText;
-        set =>
-            this.SetField(
-                ref this.commandText,
-                value);
-    }
 
     /// <summary>
     ///     Handles raised back link events. If a view is replaced in an application part, it can raise the back link event.

@@ -57,7 +57,7 @@ internal class EventHandlerCenter : IEventHandlerCenter
                 this.suppressClosed = true;
                 this.applicationWindow.Close();
 
-                Translation.Culture = culture;
+                Translator.ChangeCultureInfo(culture);
 
                 this.applicationWindow =
                     this.serviceProvider.GetRequiredKeyedService<IApplicationWindow>(ApplicationElementPart.Window);

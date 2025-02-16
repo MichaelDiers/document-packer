@@ -3,10 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
-    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    xmlns:backLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.BackLinkPart">
     <Button
         Command="{Binding BackCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_arrow_back.png"
-        dependencyProperties:TextDependencyProperty.Text="{Binding CommandText}"
-        Style="{StaticResource SmallCommandButton}" />
+        ToolTip="{x:Static backLinkPart:BackLinkPartTranslation.Back}"/>
 </mvvm:BaseUserControl>

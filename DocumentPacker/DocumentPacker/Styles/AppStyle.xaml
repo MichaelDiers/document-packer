@@ -8,5 +8,10 @@
             Source="WindowStyle.xaml" />
         <ResourceDictionary
             Source="SmallCommandButton.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/Libs.Wpf;component/Styles/CommandButtonStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
+    <Style
+        TargetType="Button"
+        BasedOn="{StaticResource CommandButtonStyle}" />
 </ResourceDictionary>

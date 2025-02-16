@@ -3,10 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
-    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    xmlns:changeLanguageLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart">
     <Button
         Command="{Binding RequestChangeLanguageViewCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_language.png"
-        dependencyProperties:TextDependencyProperty.Text="{Binding CommandText}"
-        Style="{StaticResource SmallCommandButton}" />
+        ToolTip="{x:Static changeLanguageLinkPart:ChangeLanguagePartTranslation.ChangeLanguage}" />
 </mvvm:BaseUserControl>

@@ -7,8 +7,8 @@ using DocumentPacker.Mvvm;
 /// <summary>
 ///     The view model of the <see cref="NavigationBarView" />. Displays the navigation bar links.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class NavigationBarViewModel : ApplicationViewModel
+/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
+internal class NavigationBarViewModel : ApplicationBaseViewModel
 {
     /// <summary>
     ///     The menu items of the navigation bar.

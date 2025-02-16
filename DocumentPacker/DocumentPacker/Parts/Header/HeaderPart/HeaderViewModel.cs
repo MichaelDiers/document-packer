@@ -2,35 +2,17 @@
 
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
-using DocumentPacker.Resources;
 
 /// <summary>
 ///     View model of the <see cref="HeaderView" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class HeaderViewModel : ApplicationViewModel
+/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
+internal class HeaderViewModel : ApplicationBaseViewModel
 {
-    /// <summary>
-    ///     The headline.
-    /// </summary>
-    private string headline = Translation.HeaderPartHeadline;
-
     /// <summary>
     ///     The navigation bar.
     /// </summary>
     private object? navigationBar;
-
-    /// <summary>
-    ///     Gets or sets the headline.
-    /// </summary>
-    public string Headline
-    {
-        get => this.headline;
-        set =>
-            this.SetField(
-                ref this.headline,
-                value);
-    }
 
     /// <summary>
     ///     Gets or sets the navigation bar.

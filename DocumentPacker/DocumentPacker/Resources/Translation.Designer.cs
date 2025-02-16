@@ -79,15 +79,6 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back.
-        /// </summary>
-        public static string BackLinkPartBack {
-            get {
-                return ResourceManager.GetString("BackLinkPartBack", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Change the language of the application..
         /// </summary>
         public static string BackLinkPartChangeLanguage {
@@ -519,15 +510,6 @@ namespace DocumentPacker.Resources {
         public static string FooterPartVersion {
             get {
                 return ResourceManager.GetString("FooterPartVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Document Packer.
-        /// </summary>
-        public static string HeaderPartHeadline {
-            get {
-                return ResourceManager.GetString("HeaderPartHeadline", resourceCulture);
             }
         }
         

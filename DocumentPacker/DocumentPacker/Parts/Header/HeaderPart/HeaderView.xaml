@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    xmlns:headerPart="clr-namespace:DocumentPacker.Parts.Header.HeaderPart"
     Style="{StaticResource HeaderViewStyle}">
     <Grid>
         <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
         <TextBlock
             Grid.Column="1"
             Style="{StaticResource HeaderTextBlockStyle}"
-            Text="{Binding Headline}" />
+            Text="{x:Static headerPart:HeaderPartTranslation.Headline}" />
 
         <ContentControl
             Grid.Column="2"

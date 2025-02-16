@@ -7,7 +7,7 @@ using DocumentPacker.Resources;
 ///     View model of the <see cref="FooterView" />.
 /// </summary>
 /// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class FooterViewModel : ApplicationViewModel
+internal class FooterViewModel : ApplicationBaseViewModel
 {
     /// <summary>
     ///     The version information of the application.

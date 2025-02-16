@@ -106,7 +106,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Libs.Wpf" Version="1.0.7" />
+    <PackageReference Include="Libs.Wpf" Version="1.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
@@ -147,6 +147,21 @@
     <Compile Update="Parts2\Main\MainPart\MainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Parts\Header\HeaderPart\HeaderPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HeaderPartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\Header\Links\BackLinkPart\BackLinkPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BackLinkPartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\Header\Links\ChangeLanguageLinkPart\ChangeLanguagePartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ChangeLanguagePartTranslation.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Translation.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -155,6 +170,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Parts\Header\HeaderPart\HeaderPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HeaderPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\Header\Links\BackLinkPart\BackLinkPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BackLinkPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\Header\Links\ChangeLanguageLinkPart\ChangeLanguagePartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangeLanguagePartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Translation.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
