@@ -1,20 +1,24 @@
-﻿<mvvm:BaseUserControl x:Class="DocumentPacker.Parts.Main.FeaturesPart.FeaturesView"
-                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
-                 x:Name="Self">
+﻿<mvvm:BaseUserControl
+    x:Class="DocumentPacker.Parts.Main.FeaturesPart.FeaturesView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    x:Name="Self">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition
+                Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock 
+        <TextBlock
             Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
-            Text="{Binding Headline}"/>
+            Text="{Binding Headline}" />
 
         <ItemsControl
             Grid.Row="1"
@@ -23,7 +27,8 @@
             ItemsSource="{Binding FeatureElements}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True"/>
+                    <WrapPanel
+                        IsItemsHost="True" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
@@ -32,14 +37,18 @@
                         Command="{Binding ElementName=Self,Path=  DataContext.RequestFeatureCommand}"
                         CommandParameter="{Binding}"
                         VerticalContentAlignment="Stretch">
-                        <Grid >
+                        <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition
+                                    Height="Auto" />
+                                <RowDefinition
+                                    Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition
+                                    Width="200" />
+                                <ColumnDefinition
+                                    Width="200" />
                             </Grid.ColumnDefinitions>
 
                             <TextBlock
@@ -47,17 +56,17 @@
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
                                 Text="{Binding Headline}"
-                                Style="{StaticResource HeadlineTextBlockSecondaryStyle}"/>
+                                Style="{StaticResource HeadlineTextBlockSecondaryStyle}" />
                             <TextBlock
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 VerticalAlignment="Stretch"
                                 Text="{Binding Description}"
-                                TextWrapping="Wrap"/>
+                                TextWrapping="Wrap" />
                             <Image
                                 Grid.Row="1"
                                 Grid.Column="0"
-                                Source="{Binding IconPath}"/>
+                                Source="{Binding IconPath}" />
                         </Grid>
                     </Button>
                 </DataTemplate>
