@@ -2,18 +2,9 @@
     x:Class="DocumentPacker.Parts.WindowPart.WindowView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:viewModels="clr-namespace:DocumentPacker.Mvvm"
-    xmlns:converters="clr-namespace:Libs.Wpf.Converters;assembly=Libs.Wpf"
-    xmlns:controls="clr-namespace:DocumentPacker.Controls"
     Icon="/Assets/icon.png"
     Style="{StaticResource WindowStyle}"
     Title="{Binding WindowTitle}">
-    <Window.Resources>
-        <converters:BoolToVisibilityConverter
-            x:Key="BoolToVisibilityConverter" />
-        <converters:NullToVisibilityConverter
-            x:Key="NullToVisibilityConverter" />
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -23,13 +14,6 @@
             <ColumnDefinition
                 Width="*" />
         </Grid.ColumnDefinitions>
-
-        <controls:CancelCommandOverlay
-            Grid.Row="0"
-            Visibility="{Binding Path=(viewModels:TaskCommand.IsExecutingCommands), Converter={StaticResource BoolToVisibilityConverter}}" />
-        <controls:FatalErrorMessage
-            Grid.Row="0"
-            Visibility="{Binding Path=FatalErrorMessage, Converter={StaticResource NullToVisibilityConverter}}" />
         <ContentControl
             Grid.Row="0"
             Grid.Column="0"

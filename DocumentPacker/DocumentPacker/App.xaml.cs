@@ -3,9 +3,10 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Threading;
-using DocumentPacker.ApplicationInit.DependencyInjection;
+using DocumentPacker.ApplicationInit;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Resources;
+using Libs.Wpf.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -24,7 +25,8 @@ public partial class App : Application
     /// </summary>
     /// <remarks>Name is initialized on first access.</remarks>
     public static IServiceProvider ServiceProvider =>
-        App.provider ?? (App.provider = ServiceProviderInitializer.Init());
+        App.provider ??
+        (App.provider = CustomServiceProviderBuilder.Build(ServiceCollectionExtensions.AddDependencies));
 
     /// <summary>
     ///     Called when an unhandled exception is raised.

@@ -1,4 +1,4 @@
-﻿namespace DocumentPacker.ApplicationInit.DependencyInjection;
+﻿namespace DocumentPacker.ApplicationInit;
 
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
