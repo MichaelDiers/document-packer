@@ -6,8 +6,8 @@ using DocumentPacker.Mvvm;
 /// <summary>
 ///     View model of the <see cref="LayoutView" />. Defines the layout of the main window.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class LayoutViewModel : ApplicationViewModel
+/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
+internal class LayoutViewModel : ApplicationBaseViewModel
 {
     /// <summary>
     ///     The view that is displayed in the footer part.
