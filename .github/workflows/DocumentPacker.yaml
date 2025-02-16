@@ -5,6 +5,8 @@ on:
       - DocumentPacker
       - .github/workflows/DocumentPacker.yaml
   workflow_dispatch:
+permissions:
+  packages: read
 jobs:
   build-and-test:
     uses: MichaelDiers/github-workflows/.github/workflows/dotnet-build-and-test.yaml@main
