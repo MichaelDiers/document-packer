@@ -88,74 +88,11 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart now?.
-        /// </summary>
-        public static string BackLinkPartRestartCaption {
-            get {
-                return ResourceManager.GetString("BackLinkPartRestartCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To change the language you must restart the application. Would you like to restart now?.
-        /// </summary>
-        public static string BackLinkPartRestartRequest {
-            get {
-                return ResourceManager.GetString("BackLinkPartRestartRequest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Change the Document Packer language settings and select a different language..
-        /// </summary>
-        public static string ChangeLanguagePartDescription {
-            get {
-                return ResourceManager.GetString("ChangeLanguagePartDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language Settings.
-        /// </summary>
-        public static string ChangeLanguagePartHeadline {
-            get {
-                return ResourceManager.GetString("ChangeLanguagePartHeadline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Directory does not exist..
-        /// </summary>
-        public static string DirectoryDoesNotExist {
-            get {
-                return ResourceManager.GetString("DirectoryDoesNotExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Document Packer.
         /// </summary>
         public static string DocumentPacker {
             get {
                 return ResourceManager.GetString("DocumentPacker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The name of the Document Packer file..
-        /// </summary>
-        public static string DocumentPackerOutputFileToolTip {
-            get {
-                return ResourceManager.GetString("DocumentPackerOutputFileToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The output folder of the document packer file..
-        /// </summary>
-        public static string DocumentPackerOutputFolderToolTip {
-            get {
-                return ResourceManager.GetString("DocumentPackerOutputFolderToolTip", resourceCulture);
             }
         }
         
@@ -178,78 +115,6 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File.
-        /// </summary>
-        public static string EncryptItemTypeFile {
-            get {
-                return ResourceManager.GetString("EncryptItemTypeFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please select.
-        /// </summary>
-        public static string EncryptItemTypeNone {
-            get {
-                return ResourceManager.GetString("EncryptItemTypeNone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text.
-        /// </summary>
-        public static string EncryptItemTypeText {
-            get {
-                return ResourceManager.GetString("EncryptItemTypeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add a new item..
-        /// </summary>
-        public static string EncryptPartAddLabel {
-            get {
-                return ResourceManager.GetString("EncryptPartAddLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Attach a file..
-        /// </summary>
-        public static string EncryptPartAttachFileLabel {
-            get {
-                return ResourceManager.GetString("EncryptPartAttachFileLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Collapse All.
-        /// </summary>
-        public static string EncryptPartCollapseAll {
-            get {
-                return ResourceManager.GetString("EncryptPartCollapseAll", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Data Type.
-        /// </summary>
-        public static string EncryptPartDataTypeLabel {
-            get {
-                return ResourceManager.GetString("EncryptPartDataTypeLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete the item..
-        /// </summary>
-        public static string EncryptPartDeleteLabel {
-            get {
-                return ResourceManager.GetString("EncryptPartDeleteLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string EncryptPartDescriptionLabel {
@@ -259,29 +124,11 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Document Packer File.
-        /// </summary>
-        public static string EncryptPartDocumentPackerFile {
-            get {
-                return ResourceManager.GetString("EncryptPartDocumentPackerFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Encrypt &amp; Pack.
         /// </summary>
         public static string EncryptPartEncrypt {
             get {
                 return ResourceManager.GetString("EncryptPartEncrypt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Expand All.
-        /// </summary>
-        public static string EncryptPartExpandAll {
-            get {
-                return ResourceManager.GetString("EncryptPartExpandAll", resourceCulture);
             }
         }
         
@@ -304,15 +151,6 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate a new RSA public and private key pair..
-        /// </summary>
-        public static string EncryptPartGenerateRsaKeys {
-            get {
-                return ResourceManager.GetString("EncryptPartGenerateRsaKeys", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         public static string EncryptPartId {
@@ -331,24 +169,6 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Files and Plain-Text.
-        /// </summary>
-        public static string EncryptPartItemsHeadline {
-            get {
-                return ResourceManager.GetString("EncryptPartItemsHeadline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RSA Keys.
-        /// </summary>
-        public static string EncryptPartRsaKeys {
-            get {
-                return ResourceManager.GetString("EncryptPartRsaKeys", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to RSA Private Key.
         /// </summary>
         public static string EncryptPartRsaPrivateKey {
@@ -358,29 +178,11 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RSA private key in PEM format..
-        /// </summary>
-        public static string EncryptPartRsaPrivateKeyToolTip {
-            get {
-                return ResourceManager.GetString("EncryptPartRsaPrivateKeyToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to RSA Public Key.
         /// </summary>
         public static string EncryptPartRsaPublicKey {
             get {
                 return ResourceManager.GetString("EncryptPartRsaPublicKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RSA public key in PEM format..
-        /// </summary>
-        public static string EncryptPartRsaPublicKeyToolTip {
-            get {
-                return ResourceManager.GetString("EncryptPartRsaPublicKeyToolTip", resourceCulture);
             }
         }
         
@@ -430,104 +232,11 @@ namespace DocumentPacker.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Make a list of required files and information. Save the list as a configuration and share it with other Document Packer users..
-        /// </summary>
-        public static string FeaturesPartCreateConfigDescription {
-            get {
-                return ResourceManager.GetString("FeaturesPartCreateConfigDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create Configuration.
-        /// </summary>
-        public static string FeaturesPartCreateConfigHeadline {
-            get {
-                return ResourceManager.GetString("FeaturesPartCreateConfigHeadline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Have you been sent an encrypted Document Packer file?
-        ///Decrypt the Document Packer file with your private key. View or save the decrypted files.
-        ///
-        ///.
-        /// </summary>
-        public static string FeaturesPartDecryptDescription {
-            get {
-                return ResourceManager.GetString("FeaturesPartDecryptDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Decrypt.
-        /// </summary>
-        public static string FeaturesPartDecryptHeadline {
-            get {
-                return ResourceManager.GetString("FeaturesPartDecryptHeadline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Do you want to encrypt files and information? Generate your personal keys for encryption. Create an encrypted Document Packer file and send it to your friends..
-        /// </summary>
-        public static string FeaturesPartEncryptDescription {
-            get {
-                return ResourceManager.GetString("FeaturesPartEncryptDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Encrypt.
-        /// </summary>
-        public static string FeaturesPartEncryptHeadline {
-            get {
-                return ResourceManager.GetString("FeaturesPartEncryptHeadline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Welcome back! What can we do for you?.
-        /// </summary>
-        public static string FeaturesPartHeadline {
-            get {
-                return ResourceManager.GetString("FeaturesPartHeadline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a file name..
-        /// </summary>
-        public static string FileNameIsMissing {
-            get {
-                return ResourceManager.GetString("FileNameIsMissing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to {0} v{1}.
         /// </summary>
         public static string FooterPartVersion {
             get {
                 return ResourceManager.GetString("FooterPartVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to English.
-        /// </summary>
-        public static string LanguageName {
-            get {
-                return ResourceManager.GetString("LanguageName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the output folder of the document packer file..
-        /// </summary>
-        public static string SelectDocumentPackerOutputFolderCommand {
-            get {
-                return ResourceManager.GetString("SelectDocumentPackerOutputFolderCommand", resourceCulture);
             }
         }
         
@@ -564,15 +273,6 @@ namespace DocumentPacker.Resources {
         public static string StartUpPartEncryptDescription {
             get {
                 return ResourceManager.GetString("StartUpPartEncryptDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Document Packer.
-        /// </summary>
-        public static string WindowPartTitle {
-            get {
-                return ResourceManager.GetString("WindowPartTitle", resourceCulture);
             }
         }
     }

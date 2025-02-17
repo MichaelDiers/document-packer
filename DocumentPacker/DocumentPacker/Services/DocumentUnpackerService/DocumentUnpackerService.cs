@@ -56,7 +56,7 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
 
         var destination = this.HandleUnpackDestination();
 
-        await this.Unpack(
+        await DocumentUnpackerService.Unpack(
             zipArchive,
             aes,
             destination,
@@ -70,7 +70,7 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
     /// <returns>A reference to <see cref="IAesSetup" />.</returns>
     public IAesSetup SetupAes(PaddingMode paddingMode = PaddingMode.PKCS7)
     {
-        this.SetIfNull(
+        DocumentUnpackerService.SetIfNull(
             ref this.aesPaddingMode,
             paddingMode,
             nameof(paddingMode));
@@ -96,11 +96,11 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
             throw new InvalidOperationException($"Destination directory is not empty: {destination.FullName}");
         }
 
-        this.SetIfNull(
+        DocumentUnpackerService.SetIfNull(
             ref this.archiveFile,
             archive,
             nameof(archive));
-        this.SetIfNull(
+        DocumentUnpackerService.SetIfNull(
             ref this.unpackDestination,
             destination,
             nameof(destination));
@@ -118,11 +118,11 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(privateKeyPem);
 
-        this.SetIfNull(
+        DocumentUnpackerService.SetIfNull(
             ref this.rsaPrivateKeyPem,
             privateKeyPem,
             nameof(privateKeyPem));
-        this.SetIfNull(
+        DocumentUnpackerService.SetIfNull(
             ref this.rsaPadding,
             padding ?? RSAEncryptionPadding.OaepSHA512,
             nameof(padding));
@@ -238,7 +238,7 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
     /// <param name="newValue">The new value of <paramref name="current" />.</param>
     /// <param name="parameterName">Name of the parameter.</param>
     /// <exception cref="InvalidOperationException">Throw if <paramref name="current" /> is not <c>null</c>.</exception>
-    private void SetIfNull<T>(ref T? current, T? newValue, string parameterName)
+    private static void SetIfNull<T>(ref T? current, T? newValue, string parameterName)
     {
         if (current is not null)
         {
@@ -255,7 +255,7 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
     /// <param name="aes">The required aes information to decrypt data.</param>
     /// <param name="destination">The destination directory for unpacked data.</param>
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
-    private async Task Unpack(
+    private static async Task Unpack(
         ZipArchive zipArchive,
         Aes aes,
         string destination,

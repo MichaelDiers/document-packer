@@ -2,24 +2,20 @@
 
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 using DocumentPacker.Mvvm;
-using DocumentPacker.Parts.Main.EncryptPart.Model;
 using DocumentPacker.Parts.Main.EncryptPart.Service;
-using DocumentPacker.Resources;
+using Libs.Wpf.Commands;
 using Microsoft.Win32;
 
 /// <summary>
 ///     The view model of <see cref="EncryptView" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class EncryptViewModel(IEncryptService encryptService) : ApplicationViewModel
+/// <seealso cref="ApplicationBaseViewModel" />
+internal class EncryptViewModel(IEncryptService encryptService, ICommandFactory commandFactory)
+    : ApplicationBaseViewModel
 {
-    /// <summary>
-    ///     The description text.
-    /// </summary>
-    private string description = Translation.FeaturesPartEncryptDescription;
-
     /// <summary>
     ///     The document packer output file.
     /// </summary>
@@ -34,12 +30,7 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
     ///     The encrypt items.
     /// </summary>
     private ObservableCollection<EncryptItemViewModel> encryptItems = new(
-        [new EncryptItemViewModel {EncryptItemType = EncryptItemType.File}]);
-
-    /// <summary>
-    ///     The headline text.
-    /// </summary>
-    private string headline = Translation.FeaturesPartEncryptHeadline;
+        [new EncryptItemViewModel {SelectedEncryptItemType = EncryptItemType.File}]);
 
     /// <summary>
     ///     The rsa private key pem.
@@ -55,7 +46,7 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
     ///     Gets the add encrypt item command.
     /// </summary>
     public ICommand AddEncryptItemCommand =>
-        new SyncCommand(
+        commandFactory.CreateSyncCommand(
             _ => true,
             _ => this.EncryptItems.Add(new EncryptItemViewModel()));
 
@@ -63,7 +54,7 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
     ///     Gets the attach-file command.
     /// </summary>
     public ICommand AttachFileCommand =>
-        new SyncCommand(
+        commandFactory.CreateSyncCommand(
             obj => obj is EncryptItemViewModel,
             obj =>
             {
@@ -80,29 +71,10 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
             });
 
     /// <summary>
-    ///     Gets the collapse all command.
-    /// </summary>
-    public ICommand CollapseAllCommand =>
-        new SyncCommand(
-            _ => true,
-            collapse =>
-            {
-                if (collapse is not bool value)
-                {
-                    return;
-                }
-
-                foreach (var encryptItemViewModel in this.EncryptItems)
-                {
-                    encryptItemViewModel.IsExpanded = !value;
-                }
-            });
-
-    /// <summary>
     ///     Gets the delete-encrypt item command.
     /// </summary>
     public ICommand DeleteEncryptItemCommand =>
-        new SyncCommand(
+        commandFactory.CreateSyncCommand(
             _ => true,
             obj =>
             {
@@ -117,31 +89,26 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
             });
 
     /// <summary>
-    ///     Gets or sets the description text.
-    /// </summary>
-    public string Description
-    {
-        get => this.description;
-        set =>
-            this.SetField(
-                ref this.description,
-                value);
-    }
-
-    /// <summary>
     ///     Gets or sets the document packer output file.
     /// </summary>
     public string DocumentPackerOutputFile
     {
         get => this.documentPackerOutputFile;
-        set =>
+        set
+        {
             this.SetField(
                 ref this.documentPackerOutputFile,
-                value,
-                [
-                    () => (nameof(EncryptViewModel.DocumentPackerOutputFile),
-                        !string.IsNullOrWhiteSpace(value) ? [] : [Translation.FileNameIsMissing])
-                ]);
+                value);
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                this.SetError(EncryptPartTranslation.FileNameIsMissing);
+            }
+            else
+            {
+                this.ResetErrors();
+            }
+        }
     }
 
     /// <summary>
@@ -150,23 +117,39 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
     public string DocumentPackerOutputFolder
     {
         get => this.documentPackerOutputFolder;
-        set =>
+        set
+        {
             this.SetField(
                 ref this.documentPackerOutputFolder,
-                value,
-                [
-                    () => (nameof(EncryptViewModel.DocumentPackerOutputFolder),
-                        Directory.Exists(value) ? [] : [Translation.DirectoryDoesNotExist])
-                ]);
+                value);
+            if (!Directory.Exists(value))
+            {
+                this.SetError(EncryptPartTranslation.DirectoryDoesNotExist);
+            }
+            else
+            {
+                this.ResetErrors();
+            }
+        }
     }
 
     /// <summary>
     ///     Gets the encrypt command.
     /// </summary>
     public ICommand EncryptCommand =>
-        new TaskCommand(
+        commandFactory.CreateAsyncCommand<object, FileInfo>(
             _ => this.Validate(),
-            (_, cancellationToken) => this.EncryptAsync(cancellationToken));
+            null,
+            async (_, cancellationToken) => await this.EncryptAsync(cancellationToken),
+            task =>
+            {
+                // Todo
+                MessageBox.Show(
+                    "Created file " + task.Result,
+                    "caption",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            });
 
     /// <summary>
     ///     Gets or sets the encrypt items.
@@ -184,26 +167,16 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
     ///     Gets the generateRsaKeys command.
     /// </summary>
     public ICommand GenerateRsaKeysCommand =>
-        new TaskCommand(
+        commandFactory.CreateAsyncCommand<object, (string privateKey, string publicKey)>(
             _ => true,
-            async (_, cancellationToken) =>
+            null,
+            async (_, cancellationToken) => await encryptService.GenerateRsaKeysAsync(cancellationToken),
+            task =>
             {
-                var (privateKey, publicKey) = await encryptService.GenerateRsaKeysAsync(cancellationToken);
+                var (privateKey, publicKey) = task.Result;
                 this.RsaPrivateKeyPem = privateKey;
                 this.RsaPublicKeyPem = publicKey;
             });
-
-    /// <summary>
-    ///     Gets or sets the headline text.
-    /// </summary>
-    public string Headline
-    {
-        get => this.headline;
-        set =>
-            this.SetField(
-                ref this.headline,
-                value);
-    }
 
     /// <summary>
     ///     Gets or sets the rsa private key pem.
@@ -233,7 +206,7 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
     ///     Gets the selectDocumentPackerOutputFolder command.
     /// </summary>
     public ICommand SelectDocumentPackerOutputFolderCommand =>
-        new SyncCommand(
+        commandFactory.CreateSyncCommand(
             _ => true,
             _ =>
             {
@@ -250,8 +223,16 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
     /// </summary>
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     /// <returns>A <see cref="Task" /> whose result indicates success.</returns>
-    private async Task EncryptAsync(CancellationToken cancellationToken)
+    private async Task<FileInfo> EncryptAsync(CancellationToken cancellationToken)
     {
+        await Task.Delay(
+            3000,
+            cancellationToken);
+        return new FileInfo(
+            Path.Combine(
+                this.DocumentPackerOutputFolder,
+                this.documentPackerOutputFile));
+        /**
         var (_, publicKey) = await encryptService.GenerateRsaKeysAsync(cancellationToken);
         var documentPackerFile = new FileInfo("file.dp");
 
@@ -266,6 +247,7 @@ internal class EncryptViewModel(IEncryptService encryptService) : ApplicationVie
                         item.IsRequired)),
                 publicKey),
             cancellationToken);
+        **/
     }
 
     /// <summary>

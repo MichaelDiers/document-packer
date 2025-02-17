@@ -117,76 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLinkPartChangeLanguage" xml:space="preserve">
-    <value>Ändere die Sprache der Anwendung.</value>
+  <data name="Add" xml:space="preserve">
+    <value>Neuen Eintrag hinzufügen.</value>
   </data>
-  <data name="DocumentPacker" xml:space="preserve">
-    <value>Document Packer</value>
+  <data name="AttachFileToolTip" xml:space="preserve">
+    <value>Datei hinzufügen.</value>
   </data>
-  <data name="DocumentPackerPartTitle" xml:space="preserve">
-    <value>DocumentPacker (de)</value>
+  <data name="DataTypeLabel" xml:space="preserve">
+    <value>Datentyp</value>
   </data>
-  <data name="DocumentPackerPartVersion" xml:space="preserve">
-    <value>v</value>
+  <data name="DeleteToolTip" xml:space="preserve">
+    <value>Eintrag löschen.</value>
   </data>
-  <data name="EncryptStartUpPartCreateConfiguration" xml:space="preserve">
-    <value>Konfiguration anlegen</value>
+  <data name="Description" xml:space="preserve">
+    <value>Du möchstest Dateien und Informationen verschlüsseln? Generiere Deine persönlichen Keys zum Verschlüsseln. Erstelle eine verschlüsselte Document Packer Datei und versende diese an Deine Freunde.</value>
   </data>
-  <data name="EncryptStartUpPartCreateConfigurationDescription" xml:space="preserve">
-    <value>Erstelle eine neue DocumentPacker Konfiguration.</value>
+  <data name="DirectoryDoesNotExist" xml:space="preserve">
+    <value>Verzeichnis existiert nicht.</value>
   </data>
-  <data name="EncryptStartUpPartLoadConfiguration" xml:space="preserve">
-    <value>Konfiguration laden</value>
+  <data name="DocumentPackerFile" xml:space="preserve">
+    <value>Document Packer Datei</value>
   </data>
-  <data name="EncryptStartUpPartLoadConfigurationDescription" xml:space="preserve">
-    <value>Lade eine DocumentPacker Konfiguration.</value>
-  </data>
-  <data name="FooterPartVersion" xml:space="preserve">
-    <value>{0} v{1}</value>
-  </data>
-  <data name="StartUpPartDecrypt" xml:space="preserve">
-    <value>Entschlüsseln</value>
-  </data>
-  <data name="StartUpPartDecryptDescription" xml:space="preserve">
-    <value>Entschlüssele Dateien und Texte.</value>
-  </data>
-  <data name="StartUpPartEncrypt" xml:space="preserve">
+  <data name="Encrypt" xml:space="preserve">
     <value>Verschlüsseln</value>
   </data>
-  <data name="StartUpPartEncryptDescription" xml:space="preserve">
-    <value>Verschlüssele Dokumente and Texte.</value>
+  <data name="EncryptItemTypeFile" xml:space="preserve">
+    <value>Datei</value>
   </data>
-  <data name="EncryptPartFileIsRequired" xml:space="preserve">
-    <value>Bitte wählen Sie eine Datei aus.</value>
+  <data name="EncryptItemTypeText" xml:space="preserve">
+    <value>Text</value>
   </data>
-  <data name="EncryptPartFileDoesNotExists" xml:space="preserve">
-    <value>Die Datei existiert nicht.</value>
+  <data name="FileNameIsMissing" xml:space="preserve">
+    <value>Bitte gib einen Dateinamen an.</value>
   </data>
-  <data name="EncryptPartIsRequiredLabel" xml:space="preserve">
-    <value>Pflichtangabe</value>
+  <data name="GenerateRsaKeys" xml:space="preserve">
+    <value>Generiere ein neues öffentliches und privates RSA-Schlüsselpaar.</value>
   </data>
-  <data name="EncryptPartDescriptionLabel" xml:space="preserve">
-    <value>Beschreibung</value>
-  </data>
-  <data name="EncryptPartTextIsRequired" xml:space="preserve">
-    <value>Bitte gebe einen Text ein.</value>
-  </data>
-  <data name="EncryptPartEncrypt" xml:space="preserve">
+  <data name="Headline" xml:space="preserve">
     <value>Verschlüsseln</value>
   </data>
-  <data name="EncryptPartRsaPublicKey" xml:space="preserve">
-    <value>RSA Public Key</value>
+  <data name="ItemsHeadline" xml:space="preserve">
+    <value>Füge Dateien und Text hinzu</value>
   </data>
-  <data name="EncryptPartRsaPrivateKey" xml:space="preserve">
-    <value>RSA Private Key</value>
+  <data name="ItemTypeComboBoxWatermark" xml:space="preserve">
+    <value>Bitte auswählen</value>
   </data>
-  <data name="EncryptPartId" xml:space="preserve">
-    <value>Id</value>
+  <data name="OutputFolderToolTip" xml:space="preserve">
+    <value>Der Ausgabeordner der Dokument Packer-Datei.</value>
   </data>
-  <data name="ArchiveIdToolTip" xml:space="preserve">
-    <value>Die eindeutige Id des Archiv Eintrages.</value>
+  <data name="RsaKeys" xml:space="preserve">
+    <value>RSA Schlüssel</value>
   </data>
-  <data name="ArchiveIdExtensionToolTip" xml:space="preserve">
-    <value>Die Dateierweiterung des Archiveintrages.</value>
+  <data name="RsaPrivateKeyToolTip" xml:space="preserve">
+    <value>RSA Private Key im PEM Format.</value>
+  </data>
+  <data name="RsaPublicKeyToolTip" xml:space="preserve">
+    <value>RSA Public Key im PEM Format.</value>
+  </data>
+  <data name="SelectOutputFileToolTip" xml:space="preserve">
+    <value>Name der Document Packer Datei.</value>
+  </data>
+  <data name="SelectOutputFolderToolTip" xml:space="preserve">
+    <value>Wähle den Ausgabeordner der Dokument-Packer-Datei aus.</value>
   </data>
 </root>

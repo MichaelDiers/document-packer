@@ -1,7 +1,6 @@
 ﻿namespace DocumentPacker.ApplicationInit;
 
 using DocumentPacker.EventHandling;
-using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.FooterPart;
 using DocumentPacker.Parts.Header.HeaderPart;
 using DocumentPacker.Parts.Header.Links.BackLinkPart;
@@ -31,7 +30,6 @@ public static class ServiceCollectionExtensions
     /// <returns>The given <paramref name="services" />.</returns>
     public static IServiceCollection AddDependencies(this IServiceCollection services)
     {
-        services.AddSingleton<IDispatcher, ThreadDispatcher>();
         services.TryAddCommandFactory();
 
         services.TryAddEventHandling();

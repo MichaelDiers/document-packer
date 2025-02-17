@@ -1,7 +1,7 @@
 ﻿namespace DocumentPacker.Parts.Main.FeaturesPart;
 
 using DocumentPacker.EventHandling;
-using DocumentPacker.Mvvm;
+using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     Describes a feature of the application.
@@ -10,13 +10,13 @@ using DocumentPacker.Mvvm;
 /// <param name="description">A longer description of the feature.</param>
 /// <param name="applicationPart">The <see cref="ApplicationElementPart" /> that specifies the feature.</param>
 /// <param name="iconPath">A path to an image.</param>
-/// <seealso cref="DocumentPacker.Mvvm.BaseViewModel" />
+/// <seealso cref="ValidatorViewModelBase" />
 internal class FeatureElement(
     string headline,
     string description,
     ApplicationElementPart applicationPart,
     string iconPath
-) : BaseViewModel
+) : ValidatorViewModelBase
 {
     /// <summary>
     ///     The <see cref="ApplicationElementPart" /> that specifies the feature.

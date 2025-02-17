@@ -2,31 +2,10 @@
 
 using System.Collections.ObjectModel;
 using System.IO;
-using DocumentPacker.Mvvm;
-using DocumentPacker.Resources;
+using Libs.Wpf.ViewModels;
 
-internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
+internal class EncryptItemViewModel : ValidatorViewModelBase, IHandleDragAndDrop
 {
-    /// <summary>
-    ///     The id of the archive entry.
-    /// </summary>
-    private string archiveId = string.Empty;
-
-    /// <summary>
-    ///     The archive id extension of the archive entry.
-    /// </summary>
-    private string archiveIdExtension = string.Empty;
-
-    /// <summary>
-    ///     The description of the element.
-    /// </summary>
-    private string description = string.Empty;
-
-    /// <summary>
-    ///     The type of the encrypt item.
-    /// </summary>
-    private EncryptItemType encryptItemType = EncryptItemType.None;
-
     /// <summary>
     ///     The supported encrypt item types.
     /// </summary>
@@ -38,90 +17,14 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
     private bool isExpanded = true;
 
     /// <summary>
-    ///     The value indicating whether the item is required or optional.
+    ///     The type of the encrypt item.
     /// </summary>
-    private bool isRequired = true;
+    private EncryptItemType? selectedEncryptItemType;
 
     /// <summary>
     ///     The value of the encrypt item.
     /// </summary>
     private string value = string.Empty;
-
-    /// <summary>
-    ///     Gets or sets the id of the archive entry.
-    /// </summary>
-    public string ArchiveId
-    {
-        get => this.archiveId;
-        set =>
-            this.SetField(
-                ref this.archiveId,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets or sets the id extension of the archive entry.
-    /// </summary>
-    public string ArchiveIdExtension
-    {
-        get => this.archiveIdExtension;
-        set =>
-            this.SetField(
-                ref this.archiveIdExtension,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets or sets the description of the element.
-    /// </summary>
-    public string Description
-    {
-        get => this.description;
-        set =>
-            this.SetField(
-                ref this.description,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets or sets the type of the encrypt item.
-    /// </summary>
-    public EncryptItemType EncryptItemType
-    {
-        get => this.encryptItemType;
-        set
-        {
-            if (value != EncryptItemType.None && this.encryptItemType == EncryptItemType.None)
-            {
-                this.EncryptItemTypes.Remove(EncryptItemType.None);
-            }
-
-            this.SetField(
-                ref this.encryptItemType,
-                value,
-                [() => this.ValidateValue(this.Value)]);
-
-            if (this.encryptItemType == EncryptItemType.Text)
-            {
-                this.ArchiveIdExtension = ".txt";
-            }
-            else if (this.encryptItemType == EncryptItemType.File)
-            {
-                if (File.Exists(this.Value))
-                {
-                    this.ArchiveIdExtension = Path.GetExtension(this.Value);
-                    if (string.IsNullOrWhiteSpace(this.Value))
-                    {
-                        this.ArchiveId = Path.GetFileNameWithoutExtension(this.Value);
-                    }
-                }
-                else
-                {
-                    this.ArchiveIdExtension = string.Empty;
-                }
-            }
-        }
-    }
 
     /// <summary>
     ///     Gets or sets the supported encrypt item types.
@@ -148,16 +51,15 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
     }
 
     /// <summary>
-    ///     Gets or sets the value indicating whether the item is required or optional.
+    ///     Gets or sets the type of the encrypt item.
     /// </summary>
-    public bool IsRequired
+    public EncryptItemType? SelectedEncryptItemType
     {
-        get => this.isRequired;
+        get => this.selectedEncryptItemType;
         set =>
             this.SetField(
-                ref this.isRequired,
-                value,
-                [() => this.ValidateValue(this.Value)]);
+                ref this.selectedEncryptItemType,
+                value);
     }
 
     /// <summary>
@@ -166,19 +68,10 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
     public string Value
     {
         get => this.value;
-        set
-        {
+        set =>
             this.SetField(
                 ref this.value,
-                value,
-                [() => this.ValidateValue(value)]);
-
-            if (this.EncryptItemType == EncryptItemType.File && File.Exists(this.Value))
-            {
-                this.ArchiveIdExtension = Path.GetExtension(this.Value);
-                this.ArchiveId = Path.GetFileNameWithoutExtension(this.Value);
-            }
-        }
+                value);
     }
 
     public bool CanHandleDragAndDrop(IEnumerable<string> files)
@@ -190,33 +83,5 @@ internal class EncryptItemViewModel : BaseViewModel, IHandleDragAndDrop
     public void HandleDragAndDrop(IEnumerable<string> files)
     {
         this.Value = files.FirstOrDefault() ?? string.Empty;
-    }
-
-    private (string propertyName, IEnumerable<string> errors) ValidateValue(string newValue)
-    {
-        var propertyName = nameof(EncryptItemViewModel.Value);
-
-        if (string.IsNullOrWhiteSpace(newValue))
-        {
-            if (this.isRequired)
-            {
-                switch (this.EncryptItemType)
-                {
-                    case EncryptItemType.File:
-                        return (propertyName, [Translation.EncryptPartFileIsRequired]);
-                    case EncryptItemType.Text:
-                        return (propertyName, [Translation.EncryptPartTextIsRequired]);
-                    default:
-                        return (propertyName, []);
-                }
-            }
-        }
-
-        if (this.EncryptItemType == EncryptItemType.File && !File.Exists(newValue))
-        {
-            return (propertyName, [Translation.EncryptPartFileDoesNotExists]);
-        }
-
-        return (propertyName, []);
     }
 }

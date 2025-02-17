@@ -4,9 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
-    xmlns:backLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.BackLinkPart">
+    xmlns:backLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.BackLinkPart"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=backLinkPart:BackLinkViewModel, IsDesignTimeCreatable=False}">
     <Button
         Command="{Binding BackCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_arrow_back.png"
-        ToolTip="{x:Static backLinkPart:BackLinkPartTranslation.Back}"/>
+        ToolTip="{x:Static backLinkPart:BackLinkPartTranslation.Back}" />
 </mvvm:BaseUserControl>

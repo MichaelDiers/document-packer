@@ -2,7 +2,6 @@
 
 public enum EncryptItemType
 {
-    None = 0,
-    File,
+    File = 0,
     Text
 }

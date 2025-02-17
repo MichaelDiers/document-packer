@@ -2,7 +2,12 @@
     x:Class="DocumentPacker.Parts.Main.ChangeLanguagePart.ChangeLanguageView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    xmlns:changeLanguagePart="clr-namespace:DocumentPacker.Parts.Main.ChangeLanguagePart"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=changeLanguagePart:ChangeLanguageViewModel, IsDesignTimeCreatable=False}">
     <mvvm:BaseUserControl.Resources>
         <Style
             TargetType="ItemsControl">
@@ -70,12 +75,12 @@
         <TextBlock
             Grid.Row="0"
             Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
-            Text="{Binding Headline}" />
+            Text="{x:Static changeLanguagePart:ChangeLanguagePartTranslation.Headline}" />
 
         <TextBlock
             Grid.Row="1"
             HorizontalAlignment="Center"
-            Text="{Binding Description}"
+            Text="{x:Static changeLanguagePart:ChangeLanguagePartTranslation.Description}"
             TextWrapping="Wrap" />
 
         <ScrollViewer

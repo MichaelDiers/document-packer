@@ -6,24 +6,14 @@ using System.Windows;
 using System.Windows.Input;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
-using DocumentPacker.Resources;
+using Libs.Wpf.Commands;
 
 /// <summary>
 ///     The view model of <see cref="ChangeLanguageView" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class ChangeLanguageViewModel : ApplicationViewModel
+/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
+internal class ChangeLanguageViewModel(ICommandFactory commandFactory) : ApplicationBaseViewModel
 {
-    /// <summary>
-    ///     The description text.
-    /// </summary>
-    private string description = Translation.ChangeLanguagePartDescription;
-
-    /// <summary>
-    ///     The headline that is displayed in the view.
-    /// </summary>
-    private string headline = Translation.ChangeLanguagePartHeadline;
-
     /// <summary>
     ///     The supported languages.
     /// </summary>
@@ -31,26 +21,28 @@ internal class ChangeLanguageViewModel : ApplicationViewModel
         new[]
         {
             new ChangeLanguageElement(
-                Translation.ResourceManager.GetString(
-                    nameof(Translation.LanguageName),
+                ChangeLanguagePartTranslation.ResourceManager.GetString(
+                    nameof(ChangeLanguagePartTranslation.LanguageName),
                     CultureInfo.InvariantCulture)!,
                 CultureInfo.InvariantCulture,
                 "../../../Assets/92402_kingdom_united_icon.png",
-                Translation.Culture is not null && Translation.Culture.Equals(CultureInfo.InvariantCulture)),
+                ChangeLanguagePartTranslation.Culture is not null &&
+                ChangeLanguagePartTranslation.Culture.Equals(CultureInfo.InvariantCulture)),
             new ChangeLanguageElement(
-                Translation.ResourceManager.GetString(
-                    nameof(Translation.LanguageName),
+                ChangeLanguagePartTranslation.ResourceManager.GetString(
+                    nameof(ChangeLanguagePartTranslation.LanguageName),
                     new CultureInfo("de"))!,
                 new CultureInfo("de"),
                 "../../../Assets/92094_germany_icon.png",
-                Translation.Culture is not null && Translation.Culture.TwoLetterISOLanguageName == "de")
+                ChangeLanguagePartTranslation.Culture is not null &&
+                ChangeLanguagePartTranslation.Culture.TwoLetterISOLanguageName == "de")
         });
 
     /// <summary>
     ///     Gets the change language command.
     /// </summary>
     public ICommand ChangeLanguageCommand =>
-        new SyncCommand(
+        commandFactory.CreateSyncCommand(
             obj => obj is ChangeLanguageElement {IsCurrentLanguage: false},
             obj =>
             {
@@ -61,20 +53,20 @@ internal class ChangeLanguageViewModel : ApplicationViewModel
                 }
 
                 // store the current culture and set the text to the new culture
-                var current = Translation.Culture;
-                Translation.Culture = changeLanguageElement.CultureInfo;
+                var current = ChangeLanguagePartTranslation.Culture;
+                ChangeLanguagePartTranslation.Culture = changeLanguageElement.CultureInfo;
 
                 // in order to change the language an application restart is required.
                 // ask the user if the application should be restarted now
                 var messageBoxResult = MessageBox.Show(
-                    Translation.BackLinkPartRestartRequest,
-                    Translation.BackLinkPartRestartCaption,
+                    ChangeLanguagePartTranslation.RestartMessageBoxText,
+                    ChangeLanguagePartTranslation.RestartMessageBoxCaption,
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Question,
                     MessageBoxResult.No);
 
                 // reset the culture
-                Translation.Culture = current;
+                ChangeLanguagePartTranslation.Culture = current;
 
                 // request the restart of the application
                 if (messageBoxResult == MessageBoxResult.Yes)
@@ -87,30 +79,6 @@ internal class ChangeLanguageViewModel : ApplicationViewModel
                         });
                 }
             });
-
-    /// <summary>
-    ///     Gets or sets the description text.
-    /// </summary>
-    public string Description
-    {
-        get => this.description;
-        set =>
-            this.SetField(
-                ref this.description,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets or sets the headline that is displayed in the view.
-    /// </summary>
-    public string Headline
-    {
-        get => this.headline;
-        set =>
-            this.SetField(
-                ref this.headline,
-                value);
-    }
 
     /// <summary>
     ///     Gets or sets the supported languages.

@@ -18,12 +18,12 @@ internal class DocumentPackerService : IRsaSetup, IAesSetup, IAddData, IDocument
     /// <summary>
     ///     The files that are included in the document packer file.
     /// </summary>
-    private readonly List<(string entryName, FileInfo fileInfo)> files = new();
+    private readonly List<(string entryName, FileInfo fileInfo)> files = [];
 
     /// <summary>
     ///     The plain texts that are included in the document packer file.
     /// </summary>
-    private readonly List<(string entryName, string text)> texts = new();
+    private readonly List<(string entryName, string text)> texts = [];
 
     /// <summary>
     ///     The aes key size to encrypt <see cref="files" /> and <see cref="texts" />.

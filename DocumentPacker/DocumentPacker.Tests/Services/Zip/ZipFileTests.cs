@@ -135,7 +135,7 @@ public class ZipFileTests : IDisposable
     [Fact]
     public void Create_Fails_FilePathNull()
     {
-        Assert.Throws<ArgumentNullException>(() => this.zipFileCreator.Create(null));
+        Assert.Throws<ArgumentNullException>(() => this.zipFileCreator.Create(null!));
 
         Assert.False(File.Exists(this.zipFilePath));
     }

@@ -4,13 +4,16 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
-using DocumentPacker.Resources;
+using DocumentPacker.Parts.Main.CreateConfigurationPart;
+using DocumentPacker.Parts.Main.DecryptPart;
+using DocumentPacker.Parts.Main.EncryptPart;
+using Libs.Wpf.Commands;
 
 /// <summary>
 ///     View model of the <see cref="FeaturesView" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class FeaturesViewModel : ApplicationViewModel
+/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
+internal class FeaturesViewModel(ICommandFactory commandFactory) : ApplicationBaseViewModel
 {
     /// <summary>
     ///     The supported features of the application.
@@ -18,26 +21,21 @@ internal class FeaturesViewModel : ApplicationViewModel
     private ObservableCollection<FeatureElement> featureElements = new(
     [
         new FeatureElement(
-            Translation.FeaturesPartEncryptHeadline,
-            Translation.FeaturesPartEncryptDescription,
+            EncryptPartTranslation.Headline,
+            EncryptPartTranslation.Description,
             ApplicationElementPart.EncryptFeature,
             "../../../Assets/material_symbol_compress_96dp.png"),
         new FeatureElement(
-            Translation.FeaturesPartDecryptHeadline,
-            Translation.FeaturesPartDecryptDescription,
+            DecryptPartTranslation.Headline,
+            DecryptPartTranslation.Description,
             ApplicationElementPart.DecryptFeature,
             "../../../Assets/material_symbol_expand_96dp.png"),
         new FeatureElement(
-            Translation.FeaturesPartCreateConfigHeadline,
-            Translation.FeaturesPartCreateConfigDescription,
+            CreateConfigurationPartTranslation.Headline,
+            CreateConfigurationPartTranslation.Description,
             ApplicationElementPart.CreateConfiguration,
             "../../../Assets/material_symbol_edit_square_96dp.png")
     ]);
-
-    /// <summary>
-    ///     The headline that is displayed in the view.
-    /// </summary>
-    private string headline = Translation.FeaturesPartHeadline;
 
     /// <summary>
     ///     Gets or sets the supported features of the application.
@@ -52,22 +50,10 @@ internal class FeaturesViewModel : ApplicationViewModel
     }
 
     /// <summary>
-    ///     Gets or sets the headline that is displayed in the view.
-    /// </summary>
-    public string Headline
-    {
-        get => this.headline;
-        set =>
-            this.SetField(
-                ref this.headline,
-                value);
-    }
-
-    /// <summary>
     ///     Gets the request feature command.
     /// </summary>
     public ICommand RequestFeatureCommand =>
-        new SyncCommand(
+        commandFactory.CreateSyncCommand(
             _ => true,
             obj =>
             {

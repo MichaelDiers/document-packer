@@ -2,7 +2,12 @@
     x:Class="DocumentPacker.Parts.Main.MainPart.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mainPart="clr-namespace:DocumentPacker.Parts.Main.MainPart"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=mainPart:MainViewModel, IsDesignTimeCreatable=False}">
     <ContentControl
         Content="{Binding Content}" />
 </mvvm:BaseUserControl>

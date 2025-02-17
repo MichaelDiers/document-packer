@@ -117,76 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BackLinkPartChangeLanguage" xml:space="preserve">
-    <value>Ändere die Sprache der Anwendung.</value>
+  <data name="Description" xml:space="preserve">
+    <value>Erstelle eine Liste von benötigten Dateien und Informationen. Speichere die Liste als Konfiguration ab und teile diese mit anderen Document Packer Benutzern.</value>
   </data>
-  <data name="DocumentPacker" xml:space="preserve">
-    <value>Document Packer</value>
-  </data>
-  <data name="DocumentPackerPartTitle" xml:space="preserve">
-    <value>DocumentPacker (de)</value>
-  </data>
-  <data name="DocumentPackerPartVersion" xml:space="preserve">
-    <value>v</value>
-  </data>
-  <data name="EncryptStartUpPartCreateConfiguration" xml:space="preserve">
+  <data name="Headline" xml:space="preserve">
     <value>Konfiguration anlegen</value>
-  </data>
-  <data name="EncryptStartUpPartCreateConfigurationDescription" xml:space="preserve">
-    <value>Erstelle eine neue DocumentPacker Konfiguration.</value>
-  </data>
-  <data name="EncryptStartUpPartLoadConfiguration" xml:space="preserve">
-    <value>Konfiguration laden</value>
-  </data>
-  <data name="EncryptStartUpPartLoadConfigurationDescription" xml:space="preserve">
-    <value>Lade eine DocumentPacker Konfiguration.</value>
-  </data>
-  <data name="FooterPartVersion" xml:space="preserve">
-    <value>{0} v{1}</value>
-  </data>
-  <data name="StartUpPartDecrypt" xml:space="preserve">
-    <value>Entschlüsseln</value>
-  </data>
-  <data name="StartUpPartDecryptDescription" xml:space="preserve">
-    <value>Entschlüssele Dateien und Texte.</value>
-  </data>
-  <data name="StartUpPartEncrypt" xml:space="preserve">
-    <value>Verschlüsseln</value>
-  </data>
-  <data name="StartUpPartEncryptDescription" xml:space="preserve">
-    <value>Verschlüssele Dokumente and Texte.</value>
-  </data>
-  <data name="EncryptPartFileIsRequired" xml:space="preserve">
-    <value>Bitte wählen Sie eine Datei aus.</value>
-  </data>
-  <data name="EncryptPartFileDoesNotExists" xml:space="preserve">
-    <value>Die Datei existiert nicht.</value>
-  </data>
-  <data name="EncryptPartIsRequiredLabel" xml:space="preserve">
-    <value>Pflichtangabe</value>
-  </data>
-  <data name="EncryptPartDescriptionLabel" xml:space="preserve">
-    <value>Beschreibung</value>
-  </data>
-  <data name="EncryptPartTextIsRequired" xml:space="preserve">
-    <value>Bitte gebe einen Text ein.</value>
-  </data>
-  <data name="EncryptPartEncrypt" xml:space="preserve">
-    <value>Verschlüsseln</value>
-  </data>
-  <data name="EncryptPartRsaPublicKey" xml:space="preserve">
-    <value>RSA Public Key</value>
-  </data>
-  <data name="EncryptPartRsaPrivateKey" xml:space="preserve">
-    <value>RSA Private Key</value>
-  </data>
-  <data name="EncryptPartId" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="ArchiveIdToolTip" xml:space="preserve">
-    <value>Die eindeutige Id des Archiv Eintrages.</value>
-  </data>
-  <data name="ArchiveIdExtensionToolTip" xml:space="preserve">
-    <value>Die Dateierweiterung des Archiveintrages.</value>
   </data>
 </root>

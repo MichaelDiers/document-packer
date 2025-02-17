@@ -2,7 +2,6 @@
 
 using System.Globalization;
 using System.Windows.Data;
-using DocumentPacker.Resources;
 
 internal class EncryptItemTypeToStringConverter : IValueConverter
 {
@@ -12,20 +11,21 @@ internal class EncryptItemTypeToStringConverter : IValueConverter
     /// <param name="parameter">The converter parameter to use.</param>
     /// <param name="culture">The culture to use in the converter.</param>
     /// <returns>A converted value. If the method returns <see langword="null" />, the valid null value is used.</returns>
-    public object? Convert(
+    public object Convert(
         object? value,
         Type targetType,
         object? parameter,
         CultureInfo culture
     )
     {
-        var suppressNone = parameter as bool? ?? false;
+        if (value is null)
+        {
+            return string.Empty;
+        }
 
         if (value is EncryptItemType encryptItemType)
         {
-            return this.Convert(
-                encryptItemType,
-                suppressNone);
+            return EncryptItemTypeToStringConverter.Convert(encryptItemType);
         }
 
         throw new ArgumentException(
@@ -39,7 +39,7 @@ internal class EncryptItemTypeToStringConverter : IValueConverter
     /// <param name="parameter">The converter parameter to use.</param>
     /// <param name="culture">The culture to use in the converter.</param>
     /// <returns>A converted value. If the method returns <see langword="null" />, the valid null value is used.</returns>
-    public object? ConvertBack(
+    public object ConvertBack(
         object? value,
         Type targetType,
         object? parameter,
@@ -49,16 +49,11 @@ internal class EncryptItemTypeToStringConverter : IValueConverter
         throw new NotImplementedException();
     }
 
-    private string Convert(EncryptItemType encryptItemType, bool suppressNone)
+    private static string Convert(EncryptItemType encryptItemType)
     {
-        if (suppressNone && encryptItemType == EncryptItemType.None)
-        {
-            return string.Empty;
-        }
-
-        return Translation.ResourceManager.GetString(
+        return EncryptPartTranslation.ResourceManager.GetString(
                    $"{nameof(EncryptItemType)}{encryptItemType.ToString()}",
-                   Translation.Culture) ??
+                   EncryptPartTranslation.Culture) ??
                encryptItemType.ToString();
     }
 }

@@ -4,7 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
     xmlns:headerPart="clr-namespace:DocumentPacker.Parts.Header.HeaderPart"
-    Style="{StaticResource HeaderViewStyle}">
+    Style="{StaticResource HeaderViewStyle}"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:footerPart="clr-namespace:DocumentPacker.Parts.FooterPart"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=footerPart:FooterViewModel, IsDesignTimeCreatable=False}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -14,7 +19,7 @@
             <ColumnDefinition
                 Width="1*" />
             <ColumnDefinition
-                Width="2*" />
+                Width="3*" />
             <ColumnDefinition
                 Width="1*" />
         </Grid.ColumnDefinitions>
@@ -27,6 +32,5 @@
         <ContentControl
             Grid.Column="2"
             Content="{Binding NavigationBar}" />
-
     </Grid>
 </mvvm:BaseUserControl>

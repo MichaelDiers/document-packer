@@ -51,20 +51,22 @@ internal class EventHandlerCenter : IEventHandlerCenter
 
         if (showViewRequestedEventArgs.Part == ApplicationElementPart.Window)
         {
-            if (showViewRequestedEventArgs.Data is CultureInfo culture && this.applicationWindow is not null)
+            if (showViewRequestedEventArgs.Data is not CultureInfo culture || this.applicationWindow is null)
             {
-                this.applicationWindow.Dispose();
-                this.suppressClosed = true;
-                this.applicationWindow.Close();
-
-                Translator.ChangeCultureInfo(culture);
-
-                this.applicationWindow =
-                    this.serviceProvider.GetRequiredKeyedService<IApplicationWindow>(ApplicationElementPart.Window);
-                this.Inject(this.applicationWindow);
-                this.applicationWindow.Closed += this.HandleClosed;
-                this.applicationWindow.Show();
+                return;
             }
+
+            this.applicationWindow.Dispose();
+            this.suppressClosed = true;
+            this.applicationWindow.Close();
+
+            Translator.ChangeCultureInfo(culture);
+
+            this.applicationWindow =
+                this.serviceProvider.GetRequiredKeyedService<IApplicationWindow>(ApplicationElementPart.Window);
+            this.Inject(this.applicationWindow);
+            this.applicationWindow.Closed += this.HandleClosed;
+            this.applicationWindow.Show();
 
             return;
         }
@@ -136,23 +138,24 @@ internal class EventHandlerCenter : IEventHandlerCenter
         .GetCustomAttribute(
             typeof(DataContextAttribute),
             false);
-        if (attribute is DataContextAttribute dataContextAttribute)
+        if (attribute is not DataContextAttribute dataContextAttribute)
         {
-            var viewModel =
-                this.serviceProvider.GetRequiredKeyedService<IApplicationViewModel>(dataContextAttribute.Part);
-            this.ShowViewRequested += viewModel.HandleShowViewRequested;
-            viewModel.ShowViewRequested += this.HandleShowViewRequested;
-            viewModel.BackLinkCreated += (sender, eventArgs) => this.BackLinkCreated?.Invoke(
-                sender,
-                eventArgs);
-            if (viewModel is IHandleBackLink handleBackLink)
-            {
-                this.BackLinkCreated += handleBackLink.HandleBackLink;
-            }
-
-            view.DataContext = viewModel;
-            yield return viewModel;
+            yield break;
         }
+
+        var viewModel = this.serviceProvider.GetRequiredKeyedService<IApplicationViewModel>(dataContextAttribute.Part);
+        this.ShowViewRequested += viewModel.HandleShowViewRequested;
+        viewModel.ShowViewRequested += this.HandleShowViewRequested;
+        viewModel.BackLinkCreated += (sender, eventArgs) => this.BackLinkCreated?.Invoke(
+            sender,
+            eventArgs);
+        if (viewModel is IHandleBackLink handleBackLink)
+        {
+            this.BackLinkCreated += handleBackLink.HandleBackLink;
+        }
+
+        view.DataContext = viewModel;
+        yield return viewModel;
     }
 
     private event EventHandler<ShowViewRequestedEventArgs>? ShowViewRequested;

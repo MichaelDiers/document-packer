@@ -106,7 +106,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Libs.Wpf" Version="1.0.8" />
+    <PackageReference Include="Libs.Wpf" Version="1.0.9" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
@@ -157,10 +157,40 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>BackLinkPartTranslation.resx</DependentUpon>
     </Compile>
-    <Compile Update="Parts\Header\Links\ChangeLanguageLinkPart\ChangeLanguagePartTranslation.Designer.cs">
+    <Compile Update="Parts\Header\Links\ChangeLanguageLinkPart\ChangeLanguageLinkPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ChangeLanguageLinkPartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\Main\ChangeLanguagePart\ChangeLanguagePartTranslation.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ChangeLanguagePartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\Main\CreateConfigurationPart\CreateConfigurationPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CreateConfigurationPartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\Main\DecryptPart\DecryptPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DecryptPartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\Main\EncryptPart\EncryptPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EncryptPartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\Main\FeaturesPart\FeaturesPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FeaturesPartTranslation.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Parts\WindowPart\WindowPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WindowPartTranslation.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Translation.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -178,9 +208,33 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BackLinkPartTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Parts\Header\Links\ChangeLanguageLinkPart\ChangeLanguagePartTranslation.resx">
+    <EmbeddedResource Update="Parts\Header\Links\ChangeLanguageLinkPart\ChangeLanguageLinkPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangeLanguageLinkPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\Main\ChangeLanguagePart\ChangeLanguagePartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangeLanguagePartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\Main\CreateConfigurationPart\CreateConfigurationPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateConfigurationPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\Main\DecryptPart\DecryptPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecryptPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\Main\EncryptPart\EncryptPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EncryptPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\Main\FeaturesPart\FeaturesPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeaturesPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\WindowPart\WindowPartTranslation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WindowPartTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Translation.de.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

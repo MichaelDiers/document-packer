@@ -6,7 +6,7 @@
     Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
+    that is mostly human-readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
@@ -120,18 +120,6 @@
   <data name="BackLinkPartChangeLanguage" xml:space="preserve">
     <value>Change the language of the application.</value>
   </data>
-  <data name="BackLinkPartRestartCaption" xml:space="preserve">
-    <value>Restart now?</value>
-  </data>
-  <data name="BackLinkPartRestartRequest" xml:space="preserve">
-    <value>To change the language you must restart the application. Would you like to restart now?</value>
-  </data>
-  <data name="ChangeLanguagePartDescription" xml:space="preserve">
-    <value>Change the Document Packer language settings and select a different language.</value>
-  </data>
-  <data name="ChangeLanguagePartHeadline" xml:space="preserve">
-    <value>Language Settings</value>
-  </data>
   <data name="DocumentPacker" xml:space="preserve">
     <value>Document Packer</value>
   </data>
@@ -140,12 +128,6 @@
   </data>
   <data name="DocumentPackerPartVersion" xml:space="preserve">
     <value>v</value>
-  </data>
-  <data name="EncryptItemTypeText" xml:space="preserve">
-    <value>Text</value>
-  </data>
-  <data name="EncryptItemTypeFile" xml:space="preserve">
-    <value>File</value>
   </data>
   <data name="EncryptStartUpPartCreateConfiguration" xml:space="preserve">
     <value>Create configuration</value>
@@ -159,35 +141,8 @@
   <data name="EncryptStartUpPartLoadConfigurationDescription" xml:space="preserve">
     <value>Load a DocumentPacker configuration file, pack and encrypt files.</value>
   </data>
-  <data name="FeaturesPartCreateConfigDescription" xml:space="preserve">
-    <value>Make a list of required files and information. Save the list as a configuration and share it with other Document Packer users.</value>
-  </data>
-  <data name="FeaturesPartCreateConfigHeadline" xml:space="preserve">
-    <value>Create Configuration</value>
-  </data>
-  <data name="FeaturesPartDecryptDescription" xml:space="preserve">
-    <value>Have you been sent an encrypted Document Packer file?
-Decrypt the Document Packer file with your private key. View or save the decrypted files.
-
-</value>
-  </data>
-  <data name="FeaturesPartDecryptHeadline" xml:space="preserve">
-    <value>Decrypt</value>
-  </data>
-  <data name="FeaturesPartEncryptDescription" xml:space="preserve">
-    <value>Do you want to encrypt files and information? Generate your personal keys for encryption. Create an encrypted Document Packer file and send it to your friends.</value>
-  </data>
-  <data name="FeaturesPartEncryptHeadline" xml:space="preserve">
-    <value>Encrypt</value>
-  </data>
-  <data name="FeaturesPartHeadline" xml:space="preserve">
-    <value>Welcome back! What can we do for you?</value>
-  </data>
   <data name="FooterPartVersion" xml:space="preserve">
     <value>{0} v{1}</value>
-  </data>
-  <data name="LanguageName" xml:space="preserve">
-    <value>English</value>
   </data>
   <data name="StartUpPartDecrypt" xml:space="preserve">
     <value>Decrypt</value>
@@ -201,12 +156,6 @@ Decrypt the Document Packer file with your private key. View or save the decrypt
   <data name="StartUpPartEncryptDescription" xml:space="preserve">
     <value>Encrypt documents and text.</value>
   </data>
-  <data name="WindowPartTitle" xml:space="preserve">
-    <value>Document Packer</value>
-  </data>
-  <data name="EncryptItemTypeNone" xml:space="preserve">
-    <value>Please select</value>
-  </data>
   <data name="EncryptPartFileIsRequired" xml:space="preserve">
     <value>Please select a file.</value>
   </data>
@@ -219,65 +168,17 @@ Decrypt the Document Packer file with your private key. View or save the decrypt
   <data name="EncryptPartDescriptionLabel" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="EncryptPartDataTypeLabel" xml:space="preserve">
-    <value>Data Type</value>
-  </data>
-  <data name="EncryptPartAttachFileLabel" xml:space="preserve">
-    <value>Attach a file.</value>
-  </data>
-  <data name="EncryptPartDeleteLabel" xml:space="preserve">
-    <value>Delete the item.</value>
-  </data>
-  <data name="EncryptPartAddLabel" xml:space="preserve">
-    <value>Add a new item.</value>
-  </data>
   <data name="EncryptPartTextIsRequired" xml:space="preserve">
     <value>Please enter a custom text.</value>
   </data>
   <data name="EncryptPartEncrypt" xml:space="preserve">
     <value>Encrypt &amp; Pack</value>
   </data>
-  <data name="EncryptPartDocumentPackerFile" xml:space="preserve">
-    <value>Document Packer File</value>
-  </data>
-  <data name="SelectDocumentPackerOutputFolderCommand" xml:space="preserve">
-    <value>Select the output folder of the document packer file.</value>
-  </data>
-  <data name="DocumentPackerOutputFolderToolTip" xml:space="preserve">
-    <value>The output folder of the document packer file.</value>
-  </data>
-  <data name="DirectoryDoesNotExist" xml:space="preserve">
-    <value>Directory does not exist.</value>
-  </data>
-  <data name="DocumentPackerOutputFileToolTip" xml:space="preserve">
-    <value>The name of the Document Packer file.</value>
-  </data>
-  <data name="FileNameIsMissing" xml:space="preserve">
-    <value>Please enter a file name.</value>
-  </data>
   <data name="EncryptPartRsaPublicKey" xml:space="preserve">
     <value>RSA Public Key</value>
   </data>
-  <data name="EncryptPartRsaPublicKeyToolTip" xml:space="preserve">
-    <value>RSA public key in PEM format.</value>
-  </data>
-  <data name="EncryptPartGenerateRsaKeys" xml:space="preserve">
-    <value>Generate a new RSA public and private key pair.</value>
-  </data>
   <data name="EncryptPartRsaPrivateKey" xml:space="preserve">
     <value>RSA Private Key</value>
-  </data>
-  <data name="EncryptPartRsaPrivateKeyToolTip" xml:space="preserve">
-    <value>RSA private key in PEM format.</value>
-  </data>
-  <data name="EncryptPartItemsHeadline" xml:space="preserve">
-    <value>Add Files and Plain-Text</value>
-  </data>
-  <data name="EncryptPartCollapseAll" xml:space="preserve">
-    <value>Collapse All</value>
-  </data>
-  <data name="EncryptPartExpandAll" xml:space="preserve">
-    <value>Expand All</value>
   </data>
   <data name="EncryptPartId" xml:space="preserve">
     <value>Id</value>
@@ -287,8 +188,5 @@ Decrypt the Document Packer file with your private key. View or save the decrypt
   </data>
   <data name="ArchiveIdExtensionToolTip" xml:space="preserve">
     <value>The extension of the archive entry.</value>
-  </data>
-  <data name="EncryptPartRsaKeys" xml:space="preserve">
-    <value>RSA Keys</value>
   </data>
 </root>

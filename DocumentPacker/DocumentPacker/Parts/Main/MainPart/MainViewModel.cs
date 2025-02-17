@@ -6,8 +6,8 @@ using DocumentPacker.Mvvm;
 /// <summary>
 ///     The view model of the <see cref="MainView" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationViewModel" />
-internal class MainViewModel : ApplicationViewModel
+/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
+internal class MainViewModel : ApplicationBaseViewModel
 {
     /// <summary>
     ///     The view model supports the specified list of <see cref="ApplicationElementPart" /> only.
@@ -41,7 +41,7 @@ internal class MainViewModel : ApplicationViewModel
                 value);
     }
 
-    /// <inheritdoc cref="ApplicationViewModel.HandleShowViewRequested" />
+    /// <inheritdoc cref="ApplicationBaseViewModel.HandleShowViewRequested" />
     public override void HandleShowViewRequested(object? sender, ShowViewRequestedEventArgs eventArgs)
     {
         // reject if the requested view is not displayed in this component

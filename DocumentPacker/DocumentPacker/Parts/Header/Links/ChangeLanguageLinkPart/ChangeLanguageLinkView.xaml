@@ -4,9 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
-    xmlns:changeLanguageLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart">
+    xmlns:changeLanguageLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=changeLanguageLinkPart:ChangeLanguageLinkViewModel, IsDesignTimeCreatable=False}">
     <Button
         Command="{Binding RequestChangeLanguageViewCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_language.png"
-        ToolTip="{x:Static changeLanguageLinkPart:ChangeLanguagePartTranslation.ChangeLanguage}" />
+        ToolTip="{x:Static changeLanguageLinkPart:ChangeLanguageLinkPartTranslation.ChangeLanguage}" />
 </mvvm:BaseUserControl>

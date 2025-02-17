@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart {
+namespace DocumentPacker.Parts.Main.ChangeLanguagePart {
     using System;
     
     
@@ -39,8 +39,7 @@ namespace DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart.ChangeLanguagePartTransl" +
-                            "ation", typeof(ChangeLanguagePartTranslation).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DocumentPacker.Parts.Main.ChangeLanguagePart.ChangeLanguagePartTranslation", typeof(ChangeLanguagePartTranslation).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,11 +61,47 @@ namespace DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change the language of the application..
+        ///   Looks up a localized string similar to Change the Document Packer language settings and select a different language..
         /// </summary>
-        public static string ChangeLanguage {
+        public static string Description {
             get {
-                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language Settings.
+        /// </summary>
+        public static string Headline {
+            get {
+                return ResourceManager.GetString("Headline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string LanguageName {
+            get {
+                return ResourceManager.GetString("LanguageName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart now?.
+        /// </summary>
+        public static string RestartMessageBoxCaption {
+            get {
+                return ResourceManager.GetString("RestartMessageBoxCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To change the language you must restart the application. Would you like to restart now?.
+        /// </summary>
+        public static string RestartMessageBoxText {
+            get {
+                return ResourceManager.GetString("RestartMessageBoxText", resourceCulture);
             }
         }
     }

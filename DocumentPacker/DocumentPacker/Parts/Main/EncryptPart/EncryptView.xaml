@@ -4,8 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
-    xmlns:resources="clr-namespace:DocumentPacker.Resources"
-    xmlns:encryptPart="clr-namespace:DocumentPacker.Parts.Main.EncryptPart">
+    xmlns:encryptPart="clr-namespace:DocumentPacker.Parts.Main.EncryptPart"
+    xmlns:watermark="clr-namespace:Libs.Wpf.DependencyProperties.Watermark;assembly=Libs.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=encryptPart:EncryptViewModel, IsDesignTimeCreatable=False}">
     <mvvm:BaseUserControl.Resources>
         <encryptPart:EncryptItemTypeToStringConverter
             x:Key="EncryptItemTypeToStringConverter" />
@@ -42,12 +46,7 @@
             <RowDefinition
                 Height="Auto" />
             <RowDefinition
-                Height="Auto" />
-
-            <RowDefinition
                 Height="*" />
-            <RowDefinition
-                Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition
@@ -58,13 +57,13 @@
             Grid.Row="0"
             Grid.Column="0"
             Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
-            Text="{Binding Headline}" />
+            Text="{x:Static encryptPart:EncryptPartTranslation.Headline}" />
 
         <TextBlock
             Grid.Row="1"
             Grid.Column="0"
             HorizontalAlignment="Center"
-            Text="{Binding Description}"
+            Text="{x:Static encryptPart:EncryptPartTranslation.Description}"
             TextWrapping="Wrap" />
 
         <Border
@@ -95,71 +94,79 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- document packer file/folder -->
+                <Border
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Background="Red"
+                    CornerRadius="5"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
                 <Label
                     Grid.Row="0"
                     Grid.RowSpan="2"
                     Grid.Column="0"
-                    Content="{x:Static resources:Translation.EncryptPartDocumentPackerFile}"
-                    Margin="{StaticResource DefaultNoBottomMargin}" />
+                    Content="{x:Static encryptPart:EncryptPartTranslation.DocumentPackerFile}" />
                 <TextBox
                     Grid.Row="0"
                     Grid.Column="1"
                     IsEnabled="False"
                     IsReadOnly="True"
-                    Margin="{StaticResource DefaultNoBottomMargin}"
                     Text="{Binding DocumentPackerOutputFolder}"
-                    ToolTip="{x:Static resources:Translation.DocumentPackerOutputFolderToolTip}" />
+                    ToolTip="{x:Static encryptPart:EncryptPartTranslation.OutputFolderToolTip}" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"
                     Command="{Binding SelectDocumentPackerOutputFolderCommand}"
-                    dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.SelectDocumentPackerOutputFolderCommand}"
-                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_folder.png"
-                    Margin="{StaticResource DefaultNoBottomMargin}"
-                    Style="{StaticResource SmallCommandButton}" />
+                    ToolTip="{x:Static encryptPart:EncryptPartTranslation.SelectOutputFolderToolTip}"
+                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_folder.png" />
 
                 <!-- document packer file -->
                 <TextBox
                     Grid.Row="1"
                     Grid.Column="1"
-                    Margin="{StaticResource DefaultNoTopMargin}"
                     Text="{Binding DocumentPackerOutputFile}"
-                    ToolTip="{x:Static resources:Translation.DocumentPackerOutputFileToolTip}" />
+                    ToolTip="{x:Static encryptPart:EncryptPartTranslation.SelectOutputFileToolTip}" />
 
                 <!-- rsa public key -->
+                <Border
+                    Grid.Row="2"
+                    Grid.RowSpan="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Background="Green"
+                    CornerRadius="5"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
                 <Label
                     Grid.Row="2"
                     Grid.RowSpan="2"
                     Grid.Column="0"
-                    Content="{x:Static resources:Translation.EncryptPartRsaKeys}"
-                    Margin="0" />
+                    Content="{x:Static encryptPart:EncryptPartTranslation.RsaKeys}" />
                 <TextBox
                     Grid.Row="2"
                     Grid.Column="1"
                     MaxHeight="250"
-                    Margin="{StaticResource DefaultNoBottomMargin}"
                     VerticalScrollBarVisibility="Auto"
                     Text="{Binding RsaPublicKeyPem}"
-                    ToolTip="{x:Static resources:Translation.EncryptPartRsaPublicKeyToolTip}" />
+                    ToolTip="{x:Static encryptPart:EncryptPartTranslation.RsaPublicKeyToolTip}" />
                 <Button
                     Grid.Row="2"
                     Grid.RowSpan="2"
                     Grid.Column="2"
                     Command="{Binding GenerateRsaKeysCommand}"
-                    dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartGenerateRsaKeys}"
-                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_key.png"
-                    Margin="{StaticResource DefaultNoBottomMargin}"
-                    Style="{StaticResource SmallCommandButton}" />
+                    ToolTip="{x:Static encryptPart:EncryptPartTranslation.GenerateRsaKeys}"
+                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_key.png" />
 
                 <!-- rsa private key -->
                 <TextBox
                     Grid.Row="3"
                     Grid.Column="1"
                     MaxHeight="250"
-                    Margin="{StaticResource DefaultNoTopMargin}"
                     VerticalScrollBarVisibility="Auto"
                     Text="{Binding RsaPrivateKeyPem}"
-                    ToolTip="{x:Static resources:Translation.EncryptPartRsaPrivateKeyToolTip}" />
+                    ToolTip="{x:Static encryptPart:EncryptPartTranslation.RsaPrivateKeyToolTip}" />
 
                 <!-- items section-->
                 <Grid
@@ -173,8 +180,6 @@
                             Height="Auto" />
                         <RowDefinition
                             Height="*" />
-                        <RowDefinition
-                            Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition
@@ -188,7 +193,7 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
-                        Text="{x:Static resources:Translation.EncryptPartItemsHeadline}"
+                        Text="{x:Static encryptPart:EncryptPartTranslation.ItemsHeadline}"
                         HorizontalAlignment="Center" />
 
                     <!-- buttons -->
@@ -198,39 +203,22 @@
                         Orientation="Vertical">
                         <Button
                             Command="{Binding AddEncryptItemCommand}"
-                            dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartAddLabel}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png"
-                            Style="{StaticResource SmallCommandButton}" />
-                        <Button
-                            Command="{Binding CollapseAllCommand}"
-                            CommandParameter="{StaticResource True}"
-                            dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartCollapseAll}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_collapse_all.png"
-                            Style="{StaticResource SmallCommandButton}" />
-                        <Button
-                            Command="{Binding CollapseAllCommand}"
-                            CommandParameter="{StaticResource False}"
-                            dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartExpandAll}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_unfold_more.png"
-                            Style="{StaticResource SmallCommandButton}" />
+                            ToolTip="{x:Static encryptPart:EncryptPartTranslation.Add}"
+                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png" />
                     </StackPanel>
 
                     <!-- items -->
                     <ItemsControl
                         Grid.Row="1"
-                        Grid.RowSpan="3"
+                        Grid.RowSpan="2"
                         Grid.Column="1"
                         ItemsSource="{Binding EncryptItems}"
-                        HorizontalAlignment="Stretch"
-                        Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                        HorizontalAlignment="Stretch">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate
                                 DataType="encryptPart:EncryptItemViewModel">
-                                <Expander
-                                    Background="DarkGray"
-                                    Header="{Binding Description}"
-                                    IsExpanded="{Binding IsExpanded}"
-                                    Padding="24">
+                                <Border
+                                    Background="Aqua">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition
@@ -250,12 +238,6 @@
                                                     Height="Auto" />
                                                 <RowDefinition
                                                     Height="Auto" />
-                                                <RowDefinition
-                                                    Height="Auto" />
-                                                <RowDefinition
-                                                    Height="Auto" />
-                                                <RowDefinition
-                                                    Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition
@@ -266,42 +248,20 @@
                                                     Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <!-- is required -->
-                                            <Label
-                                                Grid.Row="0"
-                                                Grid.Column="0"
-                                                Content="{x:Static resources:Translation.EncryptPartIsRequiredLabel}" />
-                                            <CheckBox
-                                                Grid.Row="0"
-                                                Grid.Column="1"
-                                                Grid.ColumnSpan="2"
-                                                IsChecked="{Binding IsRequired}" />
-
-                                            <!-- description -->
-                                            <Label
-                                                Grid.Row="1"
-                                                Grid.Column="0"
-                                                Content="{x:Static resources:Translation.EncryptPartDescriptionLabel}" />
-                                            <TextBox
-                                                Grid.Row="1"
-                                                Grid.Column="1"
-                                                Grid.ColumnSpan="2"
-                                                Text="{Binding Description}"
-                                                TextWrapping="Wrap" />
-
                                             <!-- item type -->
                                             <Label
-                                                Grid.Row="2"
+                                                Grid.Row="0"
                                                 Grid.Column="0"
-                                                Content="{x:Static resources:Translation.EncryptPartDataTypeLabel}" />
+                                                Content="{x:Static encryptPart:EncryptPartTranslation.DataTypeLabel}" />
                                             <ComboBox
-                                                Grid.Row="2"
+                                                Grid.Row="0"
                                                 Grid.Column="1"
                                                 Grid.ColumnSpan="2"
                                                 x:Name="EncryptItemTypeComboBox"
                                                 ItemsSource="{Binding EncryptItemTypes}"
-                                                SelectedItem="{Binding EncryptItemType}"
-                                                Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                SelectedItem="{Binding SelectedEncryptItemType}"
+                                                Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                watermark:WatermarkDependencyProperty.Watermark="{x:Static encryptPart:EncryptPartTranslation.ItemTypeComboBoxWatermark}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock
@@ -312,11 +272,11 @@
 
                                             <!-- value -->
                                             <Label
-                                                Grid.Row="3"
+                                                Grid.Row="1"
                                                 Grid.Column="0"
-                                                Content="{Binding ElementName=EncryptItemTypeComboBox, Path=SelectedValue, Converter={StaticResource EncryptItemTypeToStringConverter}, ConverterParameter={StaticResource True}}" />
+                                                Content="{Binding ElementName=EncryptItemTypeComboBox, Path=SelectedValue, Converter={StaticResource EncryptItemTypeToStringConverter}}" />
                                             <TextBox
-                                                Grid.Row="3"
+                                                Grid.Row="1"
                                                 Grid.Column="1"
                                                 AllowDrop="True"
                                                 Drop="OnDrop"
@@ -331,7 +291,7 @@
                                                         <Style.Triggers>
                                                             <DataTrigger
                                                                 Binding="{Binding ElementName=EncryptItemTypeComboBox, Path=SelectedValue}"
-                                                                Value="{x:Static encryptPart:EncryptItemType.None}">
+                                                                Value="{x:Null}">
                                                                 <Setter
                                                                     Property="Visibility"
                                                                     Value="Collapsed" />
@@ -341,22 +301,22 @@
                                                 </TextBox.Style>
                                             </TextBox>
                                             <Button
-                                                Grid.Row="3"
+                                                Grid.Row="1"
                                                 Grid.Column="2"
                                                 Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.(encryptPart:EncryptViewModel.AttachFileCommand)}"
                                                 CommandParameter="{Binding Path=., ValidatesOnNotifyDataErrors=False}"
-                                                dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartAttachFileLabel}"
+                                                ToolTip="{x:Static encryptPart:EncryptPartTranslation.AttachFileToolTip}"
                                                 dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_attach_file.png">
                                                 <Button.Style>
                                                     <Style
                                                         TargetType="Button"
-                                                        BasedOn="{StaticResource SmallCommandButton}">
+                                                        BasedOn="{StaticResource CommandButtonStyle}">
                                                         <Setter
                                                             Property="Visibility"
                                                             Value="Collapsed" />
                                                         <Style.Triggers>
                                                             <DataTrigger
-                                                                Binding="{Binding EncryptItemType}"
+                                                                Binding="{Binding SelectedEncryptItemType}"
                                                                 Value="{x:Static encryptPart:EncryptItemType.File}">
                                                                 <Setter
                                                                     Property="Visibility"
@@ -366,33 +326,6 @@
                                                     </Style>
                                                 </Button.Style>
                                             </Button>
-
-                                            <!-- id and extensions -->
-                                            <Label
-                                                Grid.Row="4"
-                                                Grid.Column="0"
-                                                Content="{x:Static resources:Translation.EncryptPartId}" />
-                                            <Grid
-                                                Grid.Row="4"
-                                                Grid.Column="1"
-                                                Grid.ColumnSpan="2">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition
-                                                        Width="7*" />
-                                                    <ColumnDefinition
-                                                        Width="1*" />
-                                                </Grid.ColumnDefinitions>
-                                                <TextBox
-                                                    Grid.Column="0"
-                                                    Text="{Binding ArchiveId}"
-                                                    ToolTip="{x:Static resources:Translation.ArchiveIdToolTip}" />
-                                                <TextBox
-                                                    Grid.Column="1"
-                                                    IsReadOnly="True"
-                                                    IsEnabled="False"
-                                                    Text="{Binding ArchiveIdExtension}"
-                                                    ToolTip="{x:Static resources:Translation.ArchiveIdExtensionToolTip}" />
-                                            </Grid>
                                         </Grid>
 
                                         <!-- delete item -->
@@ -400,12 +333,11 @@
                                             Grid.Column="1"
                                             Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.(encryptPart:EncryptViewModel.DeleteEncryptItemCommand)}"
                                             CommandParameter="{Binding Path=.,ValidatesOnNotifyDataErrors=False}"
-                                            dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartDeleteLabel}"
+                                            ToolTip="{x:Static encryptPart:EncryptPartTranslation.DeleteToolTip}"
                                             dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_delete.png"
-                                            VerticalAlignment="Top"
-                                            Style="{StaticResource SmallCommandButton}" />
+                                            VerticalAlignment="Top" />
                                     </Grid>
-                                </Expander>
+                                </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
@@ -418,21 +350,8 @@
                         VerticalAlignment="Bottom">
                         <Button
                             Command="{Binding AddEncryptItemCommand}"
-                            dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartAddLabel}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png"
-                            Style="{StaticResource SmallCommandButton}" />
-                        <Button
-                            Command="{Binding CollapseAllCommand}"
-                            CommandParameter="{StaticResource True}"
-                            dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartCollapseAll}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_collapse_all.png"
-                            Style="{StaticResource SmallCommandButton}" />
-                        <Button
-                            Command="{Binding CollapseAllCommand}"
-                            CommandParameter="{StaticResource False}"
-                            dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartExpandAll}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_unfold_more.png"
-                            Style="{StaticResource SmallCommandButton}" />
+                            ToolTip="{x:Static encryptPart:EncryptPartTranslation.Add}"
+                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png" />
                     </StackPanel>
                 </Grid>
                 <!-- buttons -->
@@ -444,9 +363,8 @@
                     Orientation="Horizontal">
                     <Button
                         Command="{Binding EncryptCommand}"
-                        dependencyProperties:TextDependencyProperty.Text="{x:Static resources:Translation.EncryptPartEncrypt}"
-                        dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_compress.png"
-                        Style="{StaticResource SmallCommandButton}" />
+                        ToolTip="{x:Static encryptPart:EncryptPartTranslation.Encrypt}"
+                        dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_compress.png" />
                 </StackPanel>
             </Grid>
         </Border>
