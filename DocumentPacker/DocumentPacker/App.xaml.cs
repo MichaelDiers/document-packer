@@ -52,11 +52,12 @@ public partial class App : Application
     /// <param name="e">The <see cref="StartupEventArgs" /> instance containing the event data.</param>
     private void OnStartup(object sender, StartupEventArgs e)
     {
-        Translation.Culture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() switch
-        {
-            "de" => Thread.CurrentThread.CurrentUICulture,
-            _ => CultureInfo.InvariantCulture
-        };
+        Translator.ChangeCultureInfo(
+            Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() switch
+            {
+                "de" => Thread.CurrentThread.CurrentUICulture,
+                _ => CultureInfo.InvariantCulture
+            });
 
         this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
         var eventHandlerCenter = App.ServiceProvider.GetRequiredService<IEventHandlerCenter>();

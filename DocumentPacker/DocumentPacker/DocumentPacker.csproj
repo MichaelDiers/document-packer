@@ -147,6 +147,11 @@
     <Compile Update="Parts2\Main\MainPart\MainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Parts\FooterPart\FooterPartTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FooterPartTranslation.resx</DependentUpon>
+    </Compile>
     <Compile Update="Parts\Header\HeaderPart\HeaderPartTranslation.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -192,14 +197,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>WindowPartTranslation.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Translation.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Translation.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Parts\FooterPart\FooterPartTranslation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FooterPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Parts\Header\HeaderPart\HeaderPartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HeaderPartTranslation.Designer.cs</LastGenOutput>
@@ -235,13 +239,6 @@
     <EmbeddedResource Update="Parts\WindowPart\WindowPartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WindowPartTranslation.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Translation.de.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Translation.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Translation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
