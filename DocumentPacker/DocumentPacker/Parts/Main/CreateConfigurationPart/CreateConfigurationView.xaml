@@ -2,7 +2,10 @@
     x:Class="DocumentPacker.Parts.Main.CreateConfigurationPart.CreateConfigurationView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
+    xmlns:createConfigurationPart="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart"
+    localization:Translation.ResourceManager="{x:Static createConfigurationPart:CreateConfigurationPartTranslation.ResourceManager}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition

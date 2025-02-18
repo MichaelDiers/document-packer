@@ -6,8 +6,10 @@
     xmlns:changeLanguagePart="clr-namespace:DocumentPacker.Parts.Main.ChangeLanguagePart"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=changeLanguagePart:ChangeLanguageViewModel, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=changeLanguagePart:ChangeLanguageViewModel, IsDesignTimeCreatable=False}"
+    localization:Translation.ResourceManager="{x:Static changeLanguagePart:ChangeLanguagePartTranslation.ResourceManager}">
     <mvvm:BaseUserControl.Resources>
         <Style
             TargetType="ItemsControl">
@@ -75,12 +77,12 @@
         <TextBlock
             Grid.Row="0"
             Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
-            Text="{x:Static changeLanguagePart:ChangeLanguagePartTranslation.Headline}" />
+            Text="{localization:Loc Headline}" />
 
         <TextBlock
             Grid.Row="1"
             HorizontalAlignment="Center"
-            Text="{x:Static changeLanguagePart:ChangeLanguagePartTranslation.Description}"
+            Text="{localization:Loc Description}"
             TextWrapping="Wrap" />
 
         <ScrollViewer

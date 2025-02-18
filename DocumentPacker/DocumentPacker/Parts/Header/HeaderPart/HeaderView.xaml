@@ -7,8 +7,10 @@
     Style="{StaticResource HeaderViewStyle}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=headerPart:HeaderViewModel, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=headerPart:HeaderViewModel, IsDesignTimeCreatable=False}"
+    localization:Translation.ResourceManager="{x:Static headerPart:HeaderPartTranslation.ResourceManager}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -26,7 +28,7 @@
         <TextBlock
             Grid.Column="1"
             Style="{StaticResource HeaderTextBlockStyle}"
-            Text="{x:Static headerPart:HeaderPartTranslation.Headline}" />
+            Text="{localization:Loc Headline}" />
 
         <ContentControl
             Grid.Column="2"

@@ -6,8 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:footerPart="clr-namespace:DocumentPacker.Parts.FooterPart"
+    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=footerPart:FooterViewModel, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=footerPart:FooterViewModel, IsDesignTimeCreatable=False}"
+    localization:Translation.ResourceManager="{x:Static footerPart:FooterPartTranslation.ResourceManager}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -22,7 +24,11 @@
 
         <TextBlock
             Grid.Row="0"
-            Grid.Column="1"
-            Text="{Binding Version}" />
+            Grid.Column="1">
+            <Run
+                Text="{localization:Loc Version}" />
+            <Run
+                Text="{Binding Version}" />
+        </TextBlock>
     </Grid>
 </mvvm:BaseUserControl>

@@ -106,7 +106,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Libs.Wpf" Version="1.0.9" />
+    <PackageReference Include="Libs.Wpf" Version="1.0.16" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
@@ -201,7 +201,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Parts\FooterPart\FooterPartTranslation.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FooterPartTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Parts\Header\HeaderPart\HeaderPartTranslation.resx">

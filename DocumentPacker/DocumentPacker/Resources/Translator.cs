@@ -1,22 +1,15 @@
 ﻿namespace DocumentPacker.Resources;
 
 using System.Globalization;
-using DocumentPacker.Parts.FooterPart;
-using DocumentPacker.Parts.Header.HeaderPart;
-using DocumentPacker.Parts.Header.Links.BackLinkPart;
-using DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart;
-using DocumentPacker.Parts.Main.ChangeLanguagePart;
-using DocumentPacker.Parts.Main.CreateConfigurationPart;
-using DocumentPacker.Parts.Main.DecryptPart;
-using DocumentPacker.Parts.Main.EncryptPart;
-using DocumentPacker.Parts.Main.FeaturesPart;
-using DocumentPacker.Parts.WindowPart;
+using Libs.Wpf.Localization;
 
 internal static class Translator
 {
     public static void ChangeCultureInfo(CultureInfo cultureInfo)
     {
+        TranslationSource.Instance.CurrentCulture = cultureInfo;
         // Todo: simplify
+        /**
         HeaderPartTranslation.Culture = cultureInfo;
         BackLinkPartTranslation.Culture = cultureInfo;
         ChangeLanguageLinkPartTranslation.Culture = cultureInfo;
@@ -27,5 +20,6 @@ internal static class Translator
         FeaturesPartTranslation.Culture = cultureInfo;
         WindowPartTranslation.Culture = cultureInfo;
         FooterPartTranslation.Culture = cultureInfo;
+        **/
     }
 }

@@ -7,10 +7,12 @@
     xmlns:changeLanguageLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=changeLanguageLinkPart:ChangeLanguageLinkViewModel, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=changeLanguageLinkPart:ChangeLanguageLinkViewModel, IsDesignTimeCreatable=False}"
+    localization:Translation.ResourceManager="{x:Static changeLanguageLinkPart:ChangeLanguageLinkPartTranslation.ResourceManager}">
     <Button
         Command="{Binding RequestChangeLanguageViewCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_language.png"
-        ToolTip="{x:Static changeLanguageLinkPart:ChangeLanguageLinkPartTranslation.ChangeLanguage}" />
+        ToolTip="{localization:Loc ChangeLanguage}" />
 </mvvm:BaseUserControl>

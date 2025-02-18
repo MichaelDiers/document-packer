@@ -11,10 +11,7 @@ internal class FooterViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The version information of the application.
     /// </summary>
-    private string version = string.Format(
-        FooterPartTranslation.Version,
-        FooterPartTranslation.DocumentPacker,
-        "0.0.1");
+    private string version = "0.0.1";
 
     /// <summary>
     ///     Gets or sets the version information.

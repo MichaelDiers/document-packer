@@ -56,6 +56,14 @@ internal class EventHandlerCenter : IEventHandlerCenter
                 return;
             }
 
+            Translator.ChangeCultureInfo(culture);
+            return;
+            /*
+            if (showViewRequestedEventArgs.Data is not CultureInfo culture || this.applicationWindow is null)
+            {
+                return;
+            }
+
             this.applicationWindow.Dispose();
             this.suppressClosed = true;
             this.applicationWindow.Close();
@@ -69,6 +77,7 @@ internal class EventHandlerCenter : IEventHandlerCenter
             this.applicationWindow.Show();
 
             return;
+            */
         }
 
         if (showViewRequestedEventArgs.View is null)

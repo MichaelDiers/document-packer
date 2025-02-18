@@ -7,10 +7,12 @@
     xmlns:backLinkPart="clr-namespace:DocumentPacker.Parts.Header.Links.BackLinkPart"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=backLinkPart:BackLinkViewModel, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=backLinkPart:BackLinkViewModel, IsDesignTimeCreatable=False}"
+    localization:Translation.ResourceManager="{x:Static backLinkPart:BackLinkPartTranslation.ResourceManager}">
     <Button
         Command="{Binding BackCommand}"
         dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_arrow_back.png"
-        ToolTip="{x:Static backLinkPart:BackLinkPartTranslation.Back}" />
+        ToolTip="{localization:Loc Back}" />
 </mvvm:BaseUserControl>

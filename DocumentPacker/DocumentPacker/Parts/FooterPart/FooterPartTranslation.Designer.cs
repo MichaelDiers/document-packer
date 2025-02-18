@@ -22,7 +22,7 @@ namespace DocumentPacker.Parts.FooterPart {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class FooterPartTranslation {
+    public class FooterPartTranslation {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace DocumentPacker.Parts.FooterPart {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DocumentPacker.Parts.FooterPart.FooterPartTranslation", typeof(FooterPartTranslation).Assembly);
@@ -51,7 +51,7 @@ namespace DocumentPacker.Parts.FooterPart {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,18 +61,9 @@ namespace DocumentPacker.Parts.FooterPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Document Packer.
+        ///   Looks up a localized string similar to Document Packer (en) v.
         /// </summary>
-        internal static string DocumentPacker {
-            get {
-                return ResourceManager.GetString("DocumentPacker", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} v{1}.
-        /// </summary>
-        internal static string Version {
+        public static string Version {
             get {
                 return ResourceManager.GetString("Version", resourceCulture);
             }
