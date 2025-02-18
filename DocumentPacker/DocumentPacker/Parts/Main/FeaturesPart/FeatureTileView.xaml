@@ -11,17 +11,16 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
-                    Source="pack://application:,,,/Libs.Wpf;component/Styles/BaseCommandButtonStyle.xaml" />
+                    Source="pack://application:,,,/Libs.Wpf;component/Styles/BaseButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     <Button
         Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=featuresPart:FeatureTileView}, Path=Command}"
         CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=featuresPart:FeatureTileView}, Path=ApplicationElementPart}"
+        Style="{StaticResource BaseButtonStyle}"
         VerticalContentAlignment="Stretch"
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch"
-        Style="{StaticResource BaseCommandButtonStyle}">
+        VerticalAlignment="Stretch">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition
@@ -31,9 +30,9 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="200" />
+                    Width="1*" />
                 <ColumnDefinition
-                    Width="200" />
+                    Width="1*" />
             </Grid.ColumnDefinitions>
 
             <TextBlock

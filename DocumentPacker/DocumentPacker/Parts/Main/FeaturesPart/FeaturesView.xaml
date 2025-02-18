@@ -40,9 +40,9 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
-                    Width="Auto" />
+                    Width="1*" />
                 <ColumnDefinition
-                    Width="Auto" />
+                    Width="1*" />
             </Grid.ColumnDefinitions>
 
             <featuresPart:FeatureTileView
