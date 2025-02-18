@@ -2,11 +2,10 @@
 
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Input;
-using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Localization;
 
 /// <summary>
 ///     The view model of <see cref="ChangeLanguageView" />.
@@ -26,57 +25,36 @@ internal class ChangeLanguageViewModel(ICommandFactory commandFactory) : Applica
                     CultureInfo.InvariantCulture)!,
                 CultureInfo.InvariantCulture,
                 "../../../Assets/92402_kingdom_united_icon.png",
-                ChangeLanguagePartTranslation.Culture is not null &&
-                ChangeLanguagePartTranslation.Culture.Equals(CultureInfo.InvariantCulture)),
+                TranslationSource.Instance.CurrentCulture.Equals(CultureInfo.InvariantCulture)),
             new ChangeLanguageElement(
                 ChangeLanguagePartTranslation.ResourceManager.GetString(
                     nameof(ChangeLanguagePartTranslation.LanguageName),
                     new CultureInfo("de"))!,
                 new CultureInfo("de"),
                 "../../../Assets/92094_germany_icon.png",
-                ChangeLanguagePartTranslation.Culture is not null &&
-                ChangeLanguagePartTranslation.Culture.TwoLetterISOLanguageName == "de")
+                TranslationSource.Instance.CurrentCulture.TwoLetterISOLanguageName == "de")
         });
 
     /// <summary>
     ///     Gets the change language command.
     /// </summary>
     public ICommand ChangeLanguageCommand =>
-        commandFactory.CreateSyncCommand(
-            obj => obj is ChangeLanguageElement {IsCurrentLanguage: false},
-            obj =>
+        commandFactory.CreateSyncCommand<ChangeLanguageElement>(
+            changeLanguageElement => changeLanguageElement?.IsCurrentLanguage == false,
+            changeLanguageElement =>
             {
                 // obj is not of the expected type
-                if (obj is not ChangeLanguageElement changeLanguageElement)
+                if (changeLanguageElement is null)
                 {
                     return;
                 }
 
-                // store the current culture and set the text to the new culture
-                var current = ChangeLanguagePartTranslation.Culture;
-                ChangeLanguagePartTranslation.Culture = changeLanguageElement.CultureInfo;
-
-                // in order to change the language an application restart is required.
-                // ask the user if the application should be restarted now
-                var messageBoxResult = MessageBox.Show(
-                    ChangeLanguagePartTranslation.RestartMessageBoxText,
-                    ChangeLanguagePartTranslation.RestartMessageBoxCaption,
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question,
-                    MessageBoxResult.No);
-
-                // reset the culture
-                ChangeLanguagePartTranslation.Culture = current;
-
-                // request the restart of the application
-                if (messageBoxResult == MessageBoxResult.Yes)
+                TranslationSource.Instance.CurrentCulture = changeLanguageElement.CultureInfo;
+                foreach (var languageElement in this.Languages)
                 {
-                    this.InvokeShowViewRequested(
-                        this,
-                        new ShowViewRequestedEventArgs(ApplicationElementPart.Window)
-                        {
-                            Data = changeLanguageElement.CultureInfo
-                        });
+                    languageElement.IsCurrentLanguage =
+                        TranslationSource.Instance.CurrentCulture.TwoLetterISOLanguageName ==
+                        languageElement.CultureInfo.TwoLetterISOLanguageName;
                 }
             });
 

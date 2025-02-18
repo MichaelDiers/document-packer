@@ -86,23 +86,5 @@ namespace DocumentPacker.Parts.Main.ChangeLanguagePart {
                 return ResourceManager.GetString("LanguageName", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Restart now?.
-        /// </summary>
-        public static string RestartMessageBoxCaption {
-            get {
-                return ResourceManager.GetString("RestartMessageBoxCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To change the language you must restart the application. Would you like to restart now?.
-        /// </summary>
-        public static string RestartMessageBoxText {
-            get {
-                return ResourceManager.GetString("RestartMessageBoxText", resourceCulture);
-            }
-        }
     }
 }

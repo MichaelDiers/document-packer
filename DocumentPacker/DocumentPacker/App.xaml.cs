@@ -5,8 +5,8 @@ using System.Windows;
 using System.Windows.Threading;
 using DocumentPacker.ApplicationInit;
 using DocumentPacker.EventHandling;
-using DocumentPacker.Resources;
 using Libs.Wpf.DependencyInjection;
+using Libs.Wpf.Localization;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -52,12 +52,12 @@ public partial class App : Application
     /// <param name="e">The <see cref="StartupEventArgs" /> instance containing the event data.</param>
     private void OnStartup(object sender, StartupEventArgs e)
     {
-        Translator.ChangeCultureInfo(
+        TranslationSource.Instance.CurrentCulture =
             Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.ToLower() switch
             {
                 "de" => Thread.CurrentThread.CurrentUICulture,
                 _ => CultureInfo.InvariantCulture
-            });
+            };
 
         this.ShutdownMode = ShutdownMode.OnExplicitShutdown;
         var eventHandlerCenter = App.ServiceProvider.GetRequiredService<IEventHandlerCenter>();

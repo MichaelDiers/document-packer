@@ -6,7 +6,7 @@
     Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
-    that is mostly human-readable. The generation and parsing of the 
+    that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
@@ -125,11 +125,5 @@
   </data>
   <data name="LanguageName" xml:space="preserve">
     <value>Deutsch</value>
-  </data>
-  <data name="RestartMessageBoxCaption" xml:space="preserve">
-    <value>Jetzt Neustarten?</value>
-  </data>
-  <data name="RestartMessageBoxText" xml:space="preserve">
-    <value>Um die Sprache zu ändern, müssen Sie die Anwendung neu starten. Möchten Sie jetzt neu starten?</value>
   </data>
 </root>

@@ -25,9 +25,10 @@
             <Setter
                 Property="ItemTemplate">
                 <Setter.Value>
-                    <DataTemplate>
+                    <DataTemplate
+                        DataType="changeLanguagePart:ChangeLanguageElement">
                         <Button
-                            Command="{Binding   DataContext.ChangeLanguageCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                            Command="{Binding   DataContext.ChangeLanguageCommand, RelativeSource={RelativeSource AncestorType=mvvm:BaseUserControl}}"
                             CommandParameter="{Binding  }"
                             VerticalContentAlignment="Stretch">
                             <Grid>

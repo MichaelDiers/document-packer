@@ -1,9 +1,7 @@
 ﻿namespace DocumentPacker.EventHandling;
 
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Reflection;
-using DocumentPacker.Resources;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -48,37 +46,6 @@ internal class EventHandlerCenter : IEventHandlerCenter
     private void HandleShowViewRequested(object? sender, ShowViewRequestedEventArgs showViewRequestedEventArgs)
     {
         ArgumentNullException.ThrowIfNull(this.serviceProvider);
-
-        if (showViewRequestedEventArgs.Part == ApplicationElementPart.Window)
-        {
-            if (showViewRequestedEventArgs.Data is not CultureInfo culture || this.applicationWindow is null)
-            {
-                return;
-            }
-
-            Translator.ChangeCultureInfo(culture);
-            return;
-            /*
-            if (showViewRequestedEventArgs.Data is not CultureInfo culture || this.applicationWindow is null)
-            {
-                return;
-            }
-
-            this.applicationWindow.Dispose();
-            this.suppressClosed = true;
-            this.applicationWindow.Close();
-
-            Translator.ChangeCultureInfo(culture);
-
-            this.applicationWindow =
-                this.serviceProvider.GetRequiredKeyedService<IApplicationWindow>(ApplicationElementPart.Window);
-            this.Inject(this.applicationWindow);
-            this.applicationWindow.Closed += this.HandleClosed;
-            this.applicationWindow.Show();
-
-            return;
-            */
-        }
 
         if (showViewRequestedEventArgs.View is null)
         {
