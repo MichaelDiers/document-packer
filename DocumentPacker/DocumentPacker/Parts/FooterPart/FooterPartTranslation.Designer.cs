@@ -61,7 +61,7 @@ namespace DocumentPacker.Parts.FooterPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Document Packer (en) v.
+        ///   Looks up a localized string similar to Document Packer.
         /// </summary>
         public static string Version {
             get {
