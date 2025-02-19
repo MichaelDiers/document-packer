@@ -21,6 +21,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style
+            TargetType="Button"
+            BasedOn="{StaticResource BaseCommandButtonStyle}">
+            <Setter
+                Property="Height"
+                Value="64" />
+            <Setter
+                Property="Width"
+                Value="64" />
+        </Style>
     </mvvm:BaseUserControl.Resources>
     <ItemsControl
         ItemsSource="{Binding MenuItems, Mode=OneWay}" />
