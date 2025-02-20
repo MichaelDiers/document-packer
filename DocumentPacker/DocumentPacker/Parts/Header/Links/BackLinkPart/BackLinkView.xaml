@@ -13,6 +13,7 @@
     localization:Translation.ResourceManager="{x:Static backLinkPart:BackLinkPartTranslation.ResourceManager}">
     <Button
         Command="{Binding BackCommand}"
-        dependencyProperties:ImageDependencyProperty.Image="../../../../Assets/material_symbol_arrow_back.png"
+        dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../../Assets/material_symbol_arrow_back.png"
+        Style="{StaticResource SmallCommandButtonStyle}"
         ToolTip="{localization:Loc Back}" />
 </mvvm:BaseUserControl>

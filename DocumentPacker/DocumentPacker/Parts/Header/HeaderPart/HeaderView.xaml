@@ -24,12 +24,10 @@
             <ColumnDefinition
                 Width="1*" />
         </Grid.ColumnDefinitions>
-
         <TextBlock
             Grid.Column="1"
             Style="{StaticResource HeaderTextBlockStyle}"
             Text="{localization:Loc Headline}" />
-
         <ContentControl
             Grid.Column="2"
             Content="{Binding NavigationBar}" />
