@@ -1,7 +1,6 @@
 ﻿namespace DocumentPacker.Parts.Main.FeaturesPart;
 
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using DocumentPacker.EventHandling;
@@ -9,7 +8,7 @@ using DocumentPacker.EventHandling;
 /// <summary>
 ///     Interaction logic for FeatureTileView.xaml
 /// </summary>
-public partial class FeatureTileView : UserControl
+public partial class FeatureTileView
 {
     /// <summary>
     ///     Extends the <see cref="FeatureTileView" /> by a <see cref="DependencyProperty" /> wrapped by
