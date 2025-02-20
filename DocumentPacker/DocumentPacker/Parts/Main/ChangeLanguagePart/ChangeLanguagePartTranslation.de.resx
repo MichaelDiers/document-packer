@@ -6,7 +6,7 @@
     Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
+    that is mostly human-readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
@@ -118,10 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Description" xml:space="preserve">
+ <!-- ReSharper disable MarkupTextTypo -->
     <value>Ändere die Spracheinstellungen des Document Packers und wähle eine andere Sprache aus.</value>
+ <!-- ReSharper restore MarkupTextTypo -->
   </data>
   <data name="Headline" xml:space="preserve">
+ <!-- ReSharper disable MarkupTextTypo -->
     <value>Spracheinstellungen</value>
+ <!-- ReSharper restore MarkupTextTypo -->
   </data>
   <data name="LanguageName" xml:space="preserve">
     <value>Deutsch</value>
