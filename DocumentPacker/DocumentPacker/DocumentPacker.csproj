@@ -49,9 +49,9 @@
     <Content Include="Assets\material_symbol_collapse_all.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\material_symbol_delete.png">
+    <Resource Include="Assets\material_symbol_delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Content Include="Assets\material_symbol_edit_square.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -61,9 +61,9 @@
     <Content Include="Assets\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\material_symbol_add.png">
+    <Resource Include="Assets\material_symbol_add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Content Include="Assets\material_symbol_arrow_back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -106,7 +106,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Libs.Wpf" Version="1.0.16" />
+    <PackageReference Include="Libs.Wpf" Version="1.0.40" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
@@ -172,7 +172,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ChangeLanguagePartTranslation.resx</DependentUpon>
     </Compile>
-    <Compile Update="Parts\Main\CreateConfigurationPart\CreateConfigurationPartTranslation.Designer.cs">
+    <Compile Update="Parts\Main\CreateConfigurationPart\Translations\CreateConfigurationPartTranslation.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CreateConfigurationPartTranslation.resx</DependentUpon>
@@ -220,7 +220,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangeLanguagePartTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Parts\Main\CreateConfigurationPart\CreateConfigurationPartTranslation.resx">
+    <EmbeddedResource Update="Parts\Main\CreateConfigurationPart\Translations\CreateConfigurationPartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateConfigurationPartTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -253,9 +253,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\material_symbol_key.png">
+    <Resource Include="Assets\material_symbol_key.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
   </ItemGroup>
 
 </Project>
