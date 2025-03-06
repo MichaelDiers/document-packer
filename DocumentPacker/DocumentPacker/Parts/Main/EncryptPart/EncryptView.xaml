@@ -16,31 +16,6 @@
     <mvvm:BaseUserControl.Resources>
         <encryptPart:EncryptItemTypeToStringConverter
             x:Key="EncryptItemTypeToStringConverter" />
-        <ControlTemplate
-            x:Key="ValidationTemplate">
-            <Grid>
-                <StackPanel
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom">
-                    <Image
-                        ToolTip="{Binding Path=/ErrorContent}"
-                        Height="25"
-                        Width="25"
-                        Source="../../../Assets/material_symbol_error.png" />
-                    <TextBlock
-                        Foreground="Red"
-                        Text="{Binding Path=/ErrorContent}" />
-                    <StackPanel.RenderTransform>
-                        <TranslateTransform
-                            X="16"
-                            Y="20" />
-                    </StackPanel.RenderTransform>
-                </StackPanel>
-                <AdornedElementPlaceholder />
-            </Grid>
-        </ControlTemplate>
-
     </mvvm:BaseUserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -123,7 +98,7 @@
                     Grid.Column="2"
                     Command="{Binding SelectDocumentPackerOutputFolderCommand}"
                     ToolTip="{localization:Loc SelectOutputFolderToolTip}"
-                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_folder.png" />
+                    dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_folder.png"/>
 
                 <!-- document packer file -->
                 <TextBox
@@ -160,7 +135,7 @@
                     Grid.Column="2"
                     Command="{Binding GenerateRsaKeysCommand}"
                     ToolTip="{localization:Loc GenerateRsaKeys}"
-                    dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_key.png" />
+                    dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_key.png" />
 
                 <!-- rsa private key -->
                 <TextBox
@@ -207,7 +182,7 @@
                         <Button
                             Command="{Binding AddEncryptItemCommand}"
                             ToolTip="{localization:Loc Add}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png" />
+                            dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_add.png" />
                     </StackPanel>
 
                     <!-- items -->
@@ -263,7 +238,7 @@
                                                 x:Name="EncryptItemTypeComboBox"
                                                 ItemsSource="{Binding EncryptItemTypes}"
                                                 SelectedItem="{Binding SelectedEncryptItemType}"
-                                                Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                                                 watermark:WatermarkDependencyProperty.Watermark="{localization:Loc ItemTypeComboBoxWatermark}">
                                                 <ComboBox.ItemTemplate>
                                                     <DataTemplate>
@@ -283,7 +258,7 @@
                                                 Grid.Column="1"
                                                 Text="{Binding Value, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                                 TextWrapping="Wrap"
-                                                Validation.ErrorTemplate="{StaticResource ValidationTemplate}">
+                                                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
                                                 <TextBox.Style>
                                                     <Style
                                                         TargetType="controls:FilePathDragAndDropTextBox"
@@ -306,11 +281,10 @@
                                                 Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.(encryptPart:EncryptViewModel.AttachFileCommand)}"
                                                 CommandParameter="{Binding Path=., ValidatesOnNotifyDataErrors=False}"
                                                 ToolTip="{localization:Loc AttachFileToolTip}"
-                                                dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_attach_file.png">
+                                                dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_attach_file.png">
                                                 <Button.Style>
                                                     <Style
-                                                        TargetType="Button"
-                                                        BasedOn="{StaticResource CommandButtonStyle}">
+                                                        TargetType="Button">
                                                         <Setter
                                                             Property="Visibility"
                                                             Value="Collapsed" />
@@ -334,7 +308,7 @@
                                             Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}, Path=DataContext.(encryptPart:EncryptViewModel.DeleteEncryptItemCommand)}"
                                             CommandParameter="{Binding Path=.,ValidatesOnNotifyDataErrors=False}"
                                             ToolTip="{localization:Loc DeleteToolTip}"
-                                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_delete.png"
+                                            dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_delete.png"
                                             VerticalAlignment="Top" />
                                     </Grid>
                                 </Border>
@@ -351,7 +325,7 @@
                         <Button
                             Command="{Binding AddEncryptItemCommand}"
                             ToolTip="{localization:Loc Add}"
-                            dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_add.png" />
+                            dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_add.png" />
                     </StackPanel>
                 </Grid>
                 <!-- buttons -->
@@ -364,7 +338,7 @@
                     <Button
                         Command="{Binding EncryptCommand}"
                         ToolTip="{localization:Loc Encrypt}"
-                        dependencyProperties:ImageDependencyProperty.Image="../../../Assets/material_symbol_compress.png" />
+                        dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_compress.png" />
                 </StackPanel>
             </Grid>
         </Border>

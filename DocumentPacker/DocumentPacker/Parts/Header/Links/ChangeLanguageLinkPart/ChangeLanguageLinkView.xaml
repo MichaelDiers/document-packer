@@ -14,6 +14,5 @@
     <Button
         Command="{Binding RequestChangeLanguageViewCommand}"
         dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../../Assets/material_symbol_language.png"
-        Style="{StaticResource SmallCommandButtonStyle}"
         ToolTip="{localization:Loc ChangeLanguage}" />
 </mvvm:BaseUserControl>

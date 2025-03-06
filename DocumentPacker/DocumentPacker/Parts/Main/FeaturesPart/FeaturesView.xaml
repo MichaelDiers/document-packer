@@ -12,6 +12,7 @@
     xmlns:decryptPart="clr-namespace:DocumentPacker.Parts.Main.DecryptPart"
     xmlns:createConfigurationPart="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart"
     xmlns:eventHandling="clr-namespace:DocumentPacker.EventHandling"
+    xmlns:translations="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.Translations"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=featuresPart:FeaturesViewModel, IsDesignTimeCreatable=False}"
     localization:Translation.ResourceManager="{x:Static featuresPart:FeaturesPartTranslation.ResourceManager}">
@@ -63,7 +64,7 @@
                 ApplicationElementPart="{x:Static eventHandling:ApplicationElementPart.CreateConfiguration}"
                 Command="{Binding RequestFeatureCommand}"
                 ImageSource="../../../Assets/material_symbol_edit_square_96dp.png"
-                localization:Translation.ResourceManager="{x:Static createConfigurationPart:CreateConfigurationPartTranslation.ResourceManager}" />
+                localization:Translation.ResourceManager="{x:Static translations:CreateConfigurationPartTranslation.ResourceManager}" />
         </Grid>
     </Grid>
 </mvvm:BaseUserControl>

@@ -5,7 +5,10 @@
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
     xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
     xmlns:decryptPart="clr-namespace:DocumentPacker.Parts.Main.DecryptPart"
-    localization:Translation.ResourceManager="{x:Static decryptPart:DecryptPartTranslation.ResourceManager}">
+    xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
+    localization:Translation.ResourceManager="{x:Static decryptPart:DecryptPartTranslation.ResourceManager}"
+    Template="{StaticResource MainContentControlTemplate}"
+    dependencyProperties:ImageSourceDependencyProperty.ImageSource="../../../Assets/material_symbol_expand_96dp.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
