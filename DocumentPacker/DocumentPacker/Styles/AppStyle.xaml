@@ -1,36 +1,17 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
+    xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
-            Source="pack://application:,,,/Libs.Wpf;component/Styles/DefaultKeyedStyles.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/Libs.Wpf;component/Styles/DefaultStyles.xaml" />
-        <ResourceDictionary
-            Source="pack://application:,,,/Libs.Wpf;component/Styles/CommandButtonStyle.xaml" />
-        <!--
-        <ResourceDictionary
-            Source="Basic.xaml" />
-        <ResourceDictionary
-            Source="WindowStyle.xaml" />
-        <ResourceDictionary
-            Source="SmallCommandButton.xaml" />
-        
-        -->
+            Source="pack://application:,,,/Libs.Wpf;component/Styles/common/TranslatableStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <Style
-        TargetType="Button"
-        BasedOn="{StaticResource CommandButtonStyle}">
-        <Setter
-            Property="MaxHeight"
-            Value="56" />
-    </Style>
 
     <Style
         TargetType="TextBlock"
         x:Key="TextBlockBaseHeadlineStyle"
-        BasedOn="{StaticResource DefaultTextBlockStyle}">
+        BasedOn="{StaticResource TranslatableTextBlockStyle}">
         <Setter
             Property="FontWeight"
             Value="Bold" />
@@ -55,6 +36,7 @@
     </Style>
 
     <!-- primary headline TextBlock -->
+
     <Style
         TargetType="TextBlock"
         x:Key="HeadlineTextBlockPrimaryStyle"
@@ -84,27 +66,46 @@
             Property="Margin"
             Value="32" />
     </Style>
-    <Thickness
-        x:Key="DefaultMargin">
-        8
-    </Thickness>
-    <Thickness
-        x:Key="DefaultNoTopMargin">
-        8,0,8,8
-    </Thickness>
-    <Thickness
-        x:Key="DefaultNoBottomMargin">
-        8,8,8,0
-    </Thickness>
-    <Thickness
-        x:Key="DefaultPadding">
-        8
-    </Thickness>
+    <ControlTemplate
+        TargetType="UserControl"
+        x:Key="MainContentControlTemplate">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush
+                    ImageSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=(dependencyProperties:ImageSourceDependencyProperty.ImageSource)}" />
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="Auto" />
+                <RowDefinition
+                    Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
+                DataContext="{Binding ViewHeadline}" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                DataContext="{Binding ViewDescription}"
+                TextWrapping="Wrap" />
+            <Border
+                Grid.Row="2"
+                Grid.Column="0">
+                <ContentPresenter />
+            </Border>
+        </Grid>
+    </ControlTemplate>
     <Style
         TargetType="TextBox"
-        BasedOn="{StaticResource DefaultTextBoxStyle}">
-        <Setter
-            Property="MaxHeight"
-            Value="60" />
-    </Style>
+        BasedOn="{StaticResource TranslatableMultiLineTextBoxStyle}"
+        x:Key="DocumentPackerTranslatableMultiLineTextBoxStyle" />
 </ResourceDictionary>
