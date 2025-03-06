@@ -1,6 +1,7 @@
 ﻿namespace DocumentPacker.Parts.Main.CreateConfigurationPart;
 
 using DocumentPacker.EventHandling;
+using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -15,9 +16,9 @@ public static class CreateConfigurationServiceCollectionExtensions
     /// <returns>The given <paramref name="services" />.</returns>
     public static IServiceCollection AddCreateConfigurationPart(this IServiceCollection services)
     {
-        services.AddKeyedTransient<IApplicationView, CreateConfigurationView>(
+        services.AddKeyedSingleton<IApplicationView, CreateConfigurationView>(
             ApplicationElementPart.CreateConfiguration);
-        services.AddKeyedTransient<IApplicationViewModel, CreateConfigurationViewModel>(
+        services.AddKeyedSingleton<IApplicationViewModel, CreateConfigurationViewModel>(
             ApplicationElementPart.CreateConfiguration);
 
         return services;

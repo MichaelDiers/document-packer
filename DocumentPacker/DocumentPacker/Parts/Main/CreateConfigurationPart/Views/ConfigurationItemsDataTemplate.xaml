@@ -1,0 +1,66 @@
+﻿<!-- ReSharper disable Xaml.IndexOutOfGridDefinition -->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
+    xmlns:createConfigurationPart="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart"
+    xmlns:converters="clr-namespace:Libs.Wpf.Converters;assembly=Libs.Wpf"
+    xmlns:viewModels="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels">
+    <DataTemplate
+        x:Key="ConfigurationItemDataTemplate"
+        DataType="{x:Type viewModels:CreateConfigurationItemViewModel}">
+        <DataTemplate.Resources>
+            <converters:NullToVisibilityConverter
+                x:Key="NullToVisibilityConverter" />
+        </DataTemplate.Resources>
+        <Grid
+            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto"
+            x:Name="RootElement">
+            <!-- configuration item -->
+            <Border
+                Grid.Column="0"
+                Background="OrangeRed"
+                CornerRadius="16"
+                Margin="8">
+                <Grid
+                    dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto"
+                    dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
+                    <!-- item description -->
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        DataContext="{Binding ItemDescription}" />
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DataContext="{Binding ItemDescription}" />
+                    <!-- item type -->
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        DataContext="{Binding ConfigurationItemTypes}" />
+                    <ComboBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        DataContext="{Binding ConfigurationItemTypes}" />
+                    <!-- is required -->
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        DataContext="{Binding IsRequired}" />
+                    <CheckBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        DataContext="{Binding IsRequired}" />
+                </Grid>
+            </Border>
+            <!-- delete configuration item -->
+            <Button
+                Grid.Column="1"
+                DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=createConfigurationPart:CreateConfigurationView}, Path=DataContext.DeleteConfigurationItemCommand}"
+                CommandParameter="{Binding ElementName=RootElement,Path=DataContext}"
+                VerticalAlignment="Top" />
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>
+<!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->
