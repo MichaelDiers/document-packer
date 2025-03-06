@@ -20,6 +20,8 @@ public static class ServiceCollectionExtensionsForServices
     /// <returns>The given <paramref name="services" />.</returns>
     public static IServiceCollection TryAddAllServices(this IServiceCollection services)
     {
+        services.TryAddSingleton<IDocumentPackerConfigurationFileService, DocumentPackerConfigurationFileService>();
+        services.TryAddSingleton<IRsaService, RsaService>();
         return services.TryAddZipServices().TryAddCryptoServices().TryAddPackerServices();
     }
 
