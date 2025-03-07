@@ -10,12 +10,8 @@
     Template="{StaticResource MainContentControlTemplate}"
     dependencyProperties:ImageSourceDependencyProperty.ImageSource="pack://application:,,,/DocumentPacker;component/Assets/material_symbol_edit_square_96dp.png">
     <mvvm:BaseUserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="ConfigurationItemsDataTemplate.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <ResourceDictionary
+            Source="ConfigurationItemsDataTemplate.xaml" />
     </mvvm:BaseUserControl.Resources>
     <Grid
         dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto|Auto|Auto|Auto|Auto|Auto"
@@ -32,11 +28,11 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            DataContext="{Binding Description}" />
+            DataContext="{Binding DescriptionTranslation}" />
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            DataContext="{Binding Description}"
+            DataContext="{Binding DescriptionTranslation}"
             Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}" />
         <!-- RSA private key -->
         <Label
