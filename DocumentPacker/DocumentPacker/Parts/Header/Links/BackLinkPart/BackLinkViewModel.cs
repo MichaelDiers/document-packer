@@ -1,16 +1,18 @@
 ﻿namespace DocumentPacker.Parts.Header.Links.BackLinkPart;
 
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
+using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     The view model of <see cref="BackLinkView" />.
 /// </summary>
 /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
 /// <seealso cref="DocumentPacker.EventHandling.IHandleBackLink" />
-internal class BackLinkViewModel(ICommandFactory commandFactory) : ApplicationBaseViewModel, IHandleBackLink
+internal class BackLinkViewModel : ApplicationBaseViewModel, IHandleBackLink
 {
     /// <summary>
     ///     A <see cref="Stack{T}" /> that stores the available back links.
@@ -18,26 +20,54 @@ internal class BackLinkViewModel(ICommandFactory commandFactory) : ApplicationBa
     private readonly Stack<BackLinkEventArgs> backLinks = new();
 
     /// <summary>
-    ///     Gets the back command.
+    ///     The back command.
     /// </summary>
-    public ICommand BackCommand =>
-        commandFactory.CreateSyncCommand(
-            _ => this.backLinks.Count != 0,
-            _ =>
-            {
-                // check if a back link is available
-                if (this.backLinks.TryPop(out var backLink))
+    private TranslatableButton<ICommand> backCommand;
+
+    /// <summary>
+    ///     The view model of <see cref="BackLinkView" />.
+    /// </summary>
+    /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
+    /// <seealso cref="DocumentPacker.EventHandling.IHandleBackLink" />
+    public BackLinkViewModel(ICommandFactory commandFactory)
+    {
+        this.backCommand = new TranslatableButton<ICommand>(
+            commandFactory.CreateSyncCommand(
+                _ => this.backLinks.Count != 0,
+                _ =>
                 {
-                    // request to show the previous view 
-                    this.InvokeShowViewRequested(
-                        this,
-                        new ShowViewRequestedEventArgs(backLink.Part)
-                        {
-                            SuppressBackLink = true,
-                            View = backLink.View
-                        });
-                }
-            });
+                    // check if a back link is available
+                    if (this.backLinks.TryPop(out var backLink))
+                    {
+                        // request to show the previous view 
+                        this.InvokeShowViewRequested(
+                            this,
+                            new ShowViewRequestedEventArgs(backLink.Part)
+                            {
+                                SuppressBackLink = true,
+                                View = backLink.View
+                            });
+                    }
+                }),
+            new BitmapImage(
+                new Uri(
+                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_arrow_back.png",
+                    UriKind.Absolute)),
+            BackLinkPartTranslation.ResourceManager,
+            toolTipResourceKey: nameof(BackLinkPartTranslation.Back));
+    }
+
+    /// <summary>
+    ///     Gets or sets the back command.
+    /// </summary>
+    public TranslatableButton<ICommand> BackCommand
+    {
+        get => this.backCommand;
+        set =>
+            this.SetField(
+                ref this.backCommand,
+                value);
+    }
 
     /// <summary>
     ///     Handles raised back link events. If a view is replaced in an application part, it can raise the back link event.

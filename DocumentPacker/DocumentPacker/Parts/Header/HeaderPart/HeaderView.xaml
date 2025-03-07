@@ -1,4 +1,5 @@
-﻿<mvvm:BaseUserControl
+﻿<!-- ReSharper disable Xaml.IndexOutOfGridDefinition -->
+<mvvm:BaseUserControl
     x:Class="DocumentPacker.Parts.Header.HeaderPart.HeaderView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,29 +8,19 @@
     Style="{StaticResource HeaderViewStyle}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
+    xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=headerPart:HeaderViewModel, IsDesignTimeCreatable=False}"
-    localization:Translation.ResourceManager="{x:Static headerPart:HeaderPartTranslation.ResourceManager}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition
-                Width="1*" />
-            <ColumnDefinition
-                Width="3*" />
-            <ColumnDefinition
-                Width="1*" />
-        </Grid.ColumnDefinitions>
+    d:DataContext="{d:DesignInstance Type=headerPart:HeaderViewModel, IsDesignTimeCreatable=False}">
+    <Grid
+        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto"
+        dependencyProperties:GridColumnsDependencyProperty.GridColumns="1*|3*|1*">
         <TextBlock
             Grid.Column="1"
-            Style="{StaticResource HeaderTextBlockStyle}"
-            Text="{localization:Loc Headline}" />
+            DataContext="{Binding Headline}"
+            Style="{StaticResource HeaderTextBlockStyle}" />
         <ContentControl
             Grid.Column="2"
             Content="{Binding NavigationBar}" />
     </Grid>
 </mvvm:BaseUserControl>
+<!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->
