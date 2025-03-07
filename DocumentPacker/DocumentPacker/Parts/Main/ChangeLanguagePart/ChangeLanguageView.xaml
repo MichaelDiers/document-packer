@@ -9,35 +9,22 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=changeLanguagePart:ChangeLanguageViewModel, IsDesignTimeCreatable=False}"
     Template="{StaticResource MainContentControlTemplate}">
-    <mvvm:BaseUserControl.Resources>
-        <ResourceDictionary>
-            <Style
-                TargetType="ItemsControl">
-                <Setter
-                    Property="ItemsPanel">
-                    <Setter.Value>
-                        <ItemsPanelTemplate>
-                            <WrapPanel
-                                IsItemsHost="True" />
-                        </ItemsPanelTemplate>
-                    </Setter.Value>
-                </Setter>
-                <Setter
-                    Property="ItemTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <Button
-                                DataContext="{Binding}" />
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </mvvm:BaseUserControl.Resources>
     <ScrollViewer
         VerticalScrollBarVisibility="Auto">
         <ItemsControl
             ItemsSource="{Binding Languages}"
-            HorizontalAlignment="Center" />
+            HorizontalAlignment="Center">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button
+                        DataContext="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </ScrollViewer>
 </mvvm:BaseUserControl>
