@@ -1,70 +1,50 @@
-﻿<mvvm:BaseUserControl
+﻿<!-- ReSharper disable Xaml.IndexOutOfGridDefinition -->
+<mvvm:BaseUserControl
     x:Class="DocumentPacker.Parts.Main.FeaturesPart.FeaturesView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
     xmlns:featuresPart="clr-namespace:DocumentPacker.Parts.Main.FeaturesPart"
-    x:Name="Self"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
-    xmlns:encryptPart="clr-namespace:DocumentPacker.Parts.Main.EncryptPart"
-    xmlns:decryptPart="clr-namespace:DocumentPacker.Parts.Main.DecryptPart"
-    xmlns:createConfigurationPart="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart"
-    xmlns:eventHandling="clr-namespace:DocumentPacker.EventHandling"
-    xmlns:translations="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.Translations"
+    xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=featuresPart:FeaturesViewModel, IsDesignTimeCreatable=False}"
-    localization:Translation.ResourceManager="{x:Static featuresPart:FeaturesPartTranslation.ResourceManager}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto" />
-            <RowDefinition
-                Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition
-                Width="*" />
-        </Grid.ColumnDefinitions>
-        <TextBlock
-            Style="{StaticResource HeadlineTextBlockPrimaryStyle}"
-            Text="{localization:Loc Headline}" />
-        <Grid
-            Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="Auto" />
-                <RowDefinition
-                    Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="1*" />
-                <ColumnDefinition
-                    Width="1*" />
-            </Grid.ColumnDefinitions>
-            <featuresPart:FeatureTileView
-                Grid.Row="0"
-                Grid.Column="0"
-                ApplicationElementPart="{x:Static eventHandling:ApplicationElementPart.EncryptFeature}"
-                Command="{Binding RequestFeatureCommand}"
-                ImageSource="../../../Assets/material_symbol_compress_96dp.png"
-                localization:Translation.ResourceManager="{x:Static encryptPart:EncryptPartTranslation.ResourceManager}" />
-            <featuresPart:FeatureTileView
-                Grid.Row="0"
-                Grid.Column="1"
-                ApplicationElementPart="{x:Static eventHandling:ApplicationElementPart.DecryptFeature}"
-                Command="{Binding RequestFeatureCommand}"
-                ImageSource="../../../Assets/material_symbol_expand_96dp.png"
-                localization:Translation.ResourceManager="{x:Static decryptPart:DecryptPartTranslation.ResourceManager}" />
-            <featuresPart:FeatureTileView
-                Grid.Row="1"
-                Grid.Column="0"
-                ApplicationElementPart="{x:Static eventHandling:ApplicationElementPart.CreateConfiguration}"
-                Command="{Binding RequestFeatureCommand}"
-                ImageSource="../../../Assets/material_symbol_edit_square_96dp.png"
-                localization:Translation.ResourceManager="{x:Static translations:CreateConfigurationPartTranslation.ResourceManager}" />
-        </Grid>
-    </Grid>
+    Template="{StaticResource MainContentControlTemplate}">
+    <ItemsControl
+        HorizontalAlignment="Center"
+        ItemsSource="{Binding Features}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate
+                DataType="{x:Type featuresPart:TranslatableFeaturesButton}">
+                <Button
+                    Command="{Binding Command}"
+                    Style="{StaticResource ButtonStyle}">
+                    <Grid
+                        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|*"
+                        dependencyProperties:GridColumnsDependencyProperty.GridColumns="1*|1*">
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HorizontalAlignment="Center"
+                            FontWeight="Bold"
+                            Text="{Binding LabelTranslation}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalAlignment="Stretch"
+                            Text="{Binding DescriptionTranslation}"
+                            TextWrapping="Wrap" />
+                        <Image
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Width="96"
+                            Source="{Binding ImageSource}" />
+                    </Grid>
+                </Button>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </mvvm:BaseUserControl>
+<!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->

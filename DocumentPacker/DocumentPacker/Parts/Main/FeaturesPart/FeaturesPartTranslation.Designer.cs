@@ -61,6 +61,15 @@ namespace DocumentPacker.Parts.Main.FeaturesPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a feature!.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome back! What can we do for you?.
         /// </summary>
         public static string Headline {
