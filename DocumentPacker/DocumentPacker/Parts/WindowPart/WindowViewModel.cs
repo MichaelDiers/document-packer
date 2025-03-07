@@ -2,6 +2,7 @@
 
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
+using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     View model of the <see cref="WindowView" />.
@@ -13,6 +14,13 @@ internal class WindowViewModel : ApplicationBaseViewModel
     ///     The fatal error message text.
     /// </summary>
     private string? fatalErrorMessage;
+
+    /// <summary>
+    ///     The title.
+    /// </summary>
+    private Translatable title = new(
+        WindowPartTranslation.ResourceManager,
+        nameof(WindowPartTranslation.Title));
 
     /// <summary>
     ///     The view that is displayed in the window.
@@ -28,6 +36,18 @@ internal class WindowViewModel : ApplicationBaseViewModel
         set =>
             this.SetField(
                 ref this.fatalErrorMessage,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the title.
+    /// </summary>
+    public Translatable Title
+    {
+        get => this.title;
+        set =>
+            this.SetField(
+                ref this.title,
                 value);
     }
 
