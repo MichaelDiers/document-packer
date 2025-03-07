@@ -6,7 +6,7 @@
     Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
-    that is mostly human-readable. The generation and parsing of the 
+    that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
@@ -126,6 +126,14 @@
     <comment>ChangeLanguagePart</comment>
   </data>
   <data name="LanguageName" xml:space="preserve">
+    <value>English</value>
+    <comment>ChangeLanguagePart</comment>
+  </data>
+  <data name="LanguageNameDE" xml:space="preserve">
+    <value>Deutsch</value>
+    <comment>ChangeLanguagePart</comment>
+  </data>
+  <data name="LanguageNameUK" xml:space="preserve">
     <value>English</value>
     <comment>ChangeLanguagePart</comment>
   </data>

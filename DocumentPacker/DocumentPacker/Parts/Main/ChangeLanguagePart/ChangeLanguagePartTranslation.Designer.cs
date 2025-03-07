@@ -86,5 +86,23 @@ namespace DocumentPacker.Parts.Main.ChangeLanguagePart {
                 return ResourceManager.GetString("LanguageName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deutsch.
+        /// </summary>
+        public static string LanguageNameDE {
+            get {
+                return ResourceManager.GetString("LanguageNameDE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English.
+        /// </summary>
+        public static string LanguageNameUK {
+            get {
+                return ResourceManager.GetString("LanguageNameUK", resourceCulture);
+            }
+        }
     }
 }
