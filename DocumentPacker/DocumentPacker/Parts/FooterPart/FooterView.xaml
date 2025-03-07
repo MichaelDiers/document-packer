@@ -1,4 +1,5 @@
-﻿<mvvm:BaseUserControl
+﻿<!-- ReSharper disable Xaml.IndexOutOfGridDefinition -->
+<mvvm:BaseUserControl
     x:Class="DocumentPacker.Parts.FooterPart.FooterView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,29 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:footerPart="clr-namespace:DocumentPacker.Parts.FooterPart"
-    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
+    xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=footerPart:FooterViewModel, IsDesignTimeCreatable=False}"
-    localization:Translation.ResourceManager="{x:Static footerPart:FooterPartTranslation.ResourceManager}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition
-                Width="*" />
-            <ColumnDefinition
-                Width="Auto" />
-        </Grid.ColumnDefinitions>
-
+    d:DataContext="{d:DesignInstance Type=footerPart:FooterViewModel, IsDesignTimeCreatable=False}">
+    <Grid
+        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto"
+        dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
         <TextBlock
             Grid.Row="0"
-            Grid.Column="1">
-            <Run
-                Text="{localization:Loc Version}" />
-            <Run
-                Text="{Binding Version}" />
-        </TextBlock>
+            Grid.Column="1"
+            DataContext="{Binding Version}" />
     </Grid>
 </mvvm:BaseUserControl>
+<!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->

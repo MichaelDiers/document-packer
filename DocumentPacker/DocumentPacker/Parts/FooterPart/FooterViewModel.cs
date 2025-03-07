@@ -1,6 +1,7 @@
 ﻿namespace DocumentPacker.Parts.FooterPart;
 
 using DocumentPacker.Mvvm;
+using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     View model of the <see cref="FooterView" />.
@@ -11,12 +12,14 @@ internal class FooterViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The version information of the application.
     /// </summary>
-    private string version = "0.0.1";
+    private Translatable version = new(
+        FooterPartTranslation.ResourceManager,
+        nameof(FooterPartTranslation.Version));
 
     /// <summary>
     ///     Gets or sets the version information.
     /// </summary>
-    public string Version
+    public Translatable Version
     {
         get => this.version;
         set =>
