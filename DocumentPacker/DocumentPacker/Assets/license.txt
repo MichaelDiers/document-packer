@@ -22,6 +22,7 @@ Material Design by Google
 	- material_symbol_home.png
 	- material_symbol_key.png
 	- material_symbol_language.png
+	- material_symbol_refresh.png
 	- material_symbol_reset_settings.png
 	- material_symbol_save.png
 	- material_symbol_unfold_more.png
