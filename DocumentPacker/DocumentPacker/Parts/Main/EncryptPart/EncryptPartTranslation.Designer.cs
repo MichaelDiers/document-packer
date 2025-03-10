@@ -79,6 +79,96 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The configuration file does not exist..
+        /// </summary>
+        public static string ConfigurationFileDoesNotExist {
+            get {
+                return ResourceManager.GetString("ConfigurationFileDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konfigurationsdatei.
+        /// </summary>
+        public static string ConfigurationFileLabel {
+            get {
+                return ResourceManager.GetString("ConfigurationFileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Öffentliche Document Packer Konfigurationsdatei.
+        /// </summary>
+        public static string ConfigurationFileToolTip {
+            get {
+                return ResourceManager.GetString("ConfigurationFileToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Öffentliche Konfigurationsdatei.
+        /// </summary>
+        public static string ConfigurationFileWatermark {
+            get {
+                return ResourceManager.GetString("ConfigurationFileWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string ConfigurationItemModelFileLabel {
+            get {
+                return ResourceManager.GetString("ConfigurationItemModelFileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a file..
+        /// </summary>
+        public static string ConfigurationItemModelFileToolTip {
+            get {
+                return ResourceManager.GetString("ConfigurationItemModelFileToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a file..
+        /// </summary>
+        public static string ConfigurationItemModelFileWatermark {
+            get {
+                return ResourceManager.GetString("ConfigurationItemModelFileWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string ConfigurationItemModelTextLabel {
+            get {
+                return ResourceManager.GetString("ConfigurationItemModelTextLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specify the text..
+        /// </summary>
+        public static string ConfigurationItemModelTextToolTip {
+            get {
+                return ResourceManager.GetString("ConfigurationItemModelTextToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text.
+        /// </summary>
+        public static string ConfigurationItemModelTextWatermark {
+            get {
+                return ResourceManager.GetString("ConfigurationItemModelTextWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data Type.
         /// </summary>
         public static string DataTypeLabel {
@@ -102,6 +192,15 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beschreibung.
+        /// </summary>
+        public static string DescriptionLabel {
+            get {
+                return ResourceManager.GetString("DescriptionLabel", resourceCulture);
             }
         }
         
@@ -151,6 +250,24 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File does not exist.
+        /// </summary>
+        public static string FileDoesNotExist {
+            get {
+                return ResourceManager.GetString("FileDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File is required..
+        /// </summary>
+        public static string FileIsRequired {
+            get {
+                return ResourceManager.GetString("FileIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a file name..
         /// </summary>
         public static string FileNameIsMissing {
@@ -178,6 +295,15 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Required.
+        /// </summary>
+        public static string IsRequiredLabel {
+            get {
+                return ResourceManager.GetString("IsRequiredLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Files and Plain-Text.
         /// </summary>
         public static string ItemsHeadline {
@@ -196,11 +322,146 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string LoadConfigurationCommandLabel {
+            get {
+                return ResourceManager.GetString("LoadConfigurationCommandLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load configuration file.
+        /// </summary>
+        public static string LoadConfigurationCommandToolTip {
+            get {
+                return ResourceManager.GetString("LoadConfigurationCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output file exists.
+        /// </summary>
+        public static string OutputFileExists {
+            get {
+                return ResourceManager.GetString("OutputFileExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output File is required.
+        /// </summary>
+        public static string OutputFileIsRequired {
+            get {
+                return ResourceManager.GetString("OutputFileIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output File.
+        /// </summary>
+        public static string OutputFileLabel {
+            get {
+                return ResourceManager.GetString("OutputFileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The output file..
+        /// </summary>
+        public static string OutputFileToolTip {
+            get {
+                return ResourceManager.GetString("OutputFileToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output file.
+        /// </summary>
+        public static string OutputFileWatermark {
+            get {
+                return ResourceManager.GetString("OutputFileWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Folder does not exist..
+        /// </summary>
+        public static string OutputFolderDoesNotExist {
+            get {
+                return ResourceManager.GetString("OutputFolderDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Folder is required.
+        /// </summary>
+        public static string OutputFolderIsRequired {
+            get {
+                return ResourceManager.GetString("OutputFolderIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Folder.
+        /// </summary>
+        public static string OutputFolderLabel {
+            get {
+                return ResourceManager.GetString("OutputFolderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The output folder of the document packer file..
         /// </summary>
         public static string OutputFolderToolTip {
             get {
                 return ResourceManager.GetString("OutputFolderToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Folder.
+        /// </summary>
+        public static string OutputFolderWatermark {
+            get {
+                return ResourceManager.GetString("OutputFolderWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is required.
+        /// </summary>
+        public static string PasswordIsRequired {
+            get {
+                return ResourceManager.GetString("PasswordIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string PasswordLabel {
+            get {
+                return ResourceManager.GetString("PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password to encrypt the configuration file..
+        /// </summary>
+        public static string PasswordToolTip {
+            get {
+                return ResourceManager.GetString("PasswordToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string PasswordWatermark {
+            get {
+                return ResourceManager.GetString("PasswordWatermark", resourceCulture);
             }
         }
         
@@ -232,6 +493,42 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveCommandLabel {
+            get {
+                return ResourceManager.GetString("SaveCommandLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string SaveCommandToolTip {
+            get {
+                return ResourceManager.GetString("SaveCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wähle die öffentliche Document Packer Konfigurationsdatei aus.
+        /// </summary>
+        public static string SelectConfigurationFileCommandToolTip {
+            get {
+                return ResourceManager.GetString("SelectConfigurationFileCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select a file..
+        /// </summary>
+        public static string SelectFileCommandToolTip {
+            get {
+                return ResourceManager.GetString("SelectFileCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name of the Document Packer file..
         /// </summary>
         public static string SelectOutputFileToolTip {
@@ -246,6 +543,15 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         public static string SelectOutputFolderToolTip {
             get {
                 return ResourceManager.GetString("SelectOutputFolderToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text is required..
+        /// </summary>
+        public static string TextIsRequired {
+            get {
+                return ResourceManager.GetString("TextIsRequired", resourceCulture);
             }
         }
     }

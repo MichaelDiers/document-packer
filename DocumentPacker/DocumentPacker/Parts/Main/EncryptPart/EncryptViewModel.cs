@@ -1,261 +1,412 @@
 ﻿namespace DocumentPacker.Parts.Main.EncryptPart;
 
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using DocumentPacker.Commands;
+using DocumentPacker.Models;
 using DocumentPacker.Mvvm;
-using DocumentPacker.Parts.Main.EncryptPart.Service;
+using DocumentPacker.Services;
 using Libs.Wpf.Commands;
-using Microsoft.Win32;
+using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     The view model of <see cref="EncryptView" />.
 /// </summary>
 /// <seealso cref="ApplicationBaseViewModel" />
-internal class EncryptViewModel(IEncryptService encryptService, ICommandFactory commandFactory)
-    : ApplicationBaseViewModel
+internal class EncryptViewModel : ApplicationBaseViewModel
 {
-    /// <summary>
-    ///     The document packer output file.
-    /// </summary>
-    private string documentPackerOutputFile = $"{nameof(DocumentPacker)}.dp";
+    private readonly IDocumentPackerConfigurationFileService configurationFileService;
 
     /// <summary>
-    ///     The document packer output folder.
+    ///     The configuration file.
     /// </summary>
-    private string documentPackerOutputFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    private TranslatableAndValidable<string> configurationFile = new(
+        null,
+        data => File.Exists(data.Value) ? null : nameof(EncryptPartTranslation.ConfigurationFileDoesNotExist),
+        false,
+        EncryptPartTranslation.ResourceManager,
+        nameof(EncryptPartTranslation.ConfigurationFileLabel),
+        nameof(EncryptPartTranslation.ConfigurationFileToolTip),
+        nameof(EncryptPartTranslation.ConfigurationFileWatermark));
 
     /// <summary>
-    ///     The encrypt items.
+    ///     The encrypt data view model.
     /// </summary>
-    private ObservableCollection<EncryptItemViewModel> encryptItems = new(
-        [new EncryptItemViewModel {SelectedEncryptItemType = EncryptItemType.File}]);
+    private EncryptDataViewModel? encryptDataViewModel;
 
     /// <summary>
-    ///     The rsa private key pem.
+    ///     The command to load the configuration file.
     /// </summary>
-    private string rsaPrivateKeyPem = string.Empty;
+    private TranslatableButton<ICommand> loadConfigurationCommand;
 
     /// <summary>
-    ///     The rsa public key pem.
+    ///     The output file.
     /// </summary>
-    private string rsaPublicKeyPem = string.Empty;
+    private TranslatableAndValidable<string> outputFile;
 
     /// <summary>
-    ///     Gets the add encrypt item command.
+    ///     The output folder.
     /// </summary>
-    public ICommand AddEncryptItemCommand =>
-        commandFactory.CreateSyncCommand(
-            _ => true,
-            _ => this.EncryptItems.Add(new EncryptItemViewModel()));
+    private TranslatableAndValidable<string> outputFolder;
 
     /// <summary>
-    ///     Gets the attach-file command.
+    ///     The password.
     /// </summary>
-    public ICommand AttachFileCommand =>
-        commandFactory.CreateSyncCommand(
-            obj => obj is EncryptItemViewModel,
-            obj =>
-            {
-                if (obj is not EncryptItemViewModel encryptItemViewModel)
-                {
-                    return;
-                }
-
-                var dialog = new OpenFileDialog();
-                if (dialog.ShowDialog() == true)
-                {
-                    encryptItemViewModel.Value = dialog.FileName;
-                }
-            });
+    private Translatable password = new(
+        EncryptPartTranslation.ResourceManager,
+        nameof(EncryptPartTranslation.PasswordLabel),
+        nameof(EncryptPartTranslation.PasswordWatermark));
 
     /// <summary>
-    ///     Gets the delete-encrypt item command.
+    ///     The save command.
     /// </summary>
-    public ICommand DeleteEncryptItemCommand =>
-        commandFactory.CreateSyncCommand(
-            _ => true,
-            obj =>
-            {
-                if (obj is not EncryptItemViewModel encryptItem)
-                {
-                    throw new ArgumentException(
-                        nameof(EncryptItemViewModel),
-                        nameof(obj));
-                }
-
-                this.EncryptItems.Remove(encryptItem);
-            });
+    private TranslatableButton<ICommand> saveCommand;
 
     /// <summary>
-    ///     Gets or sets the document packer output file.
+    ///     The command to select the configuration file.
     /// </summary>
-    public string DocumentPackerOutputFile
+    private TranslatableButton<ICommand> selectConfigurationFileCommand;
+
+    /// <summary>
+    ///     The command to select the output folder.
+    /// </summary>
+    private TranslatableButton<ICommand> selectOutputFolderCommand;
+
+    /// <summary>
+    ///     The description of the view.
+    /// </summary>
+    private Translatable viewDescription = new(
+        EncryptPartTranslation.ResourceManager,
+        nameof(EncryptPartTranslation.Description));
+
+    /// <summary>
+    ///     The headline of the view.
+    /// </summary>
+    private Translatable viewHeadline = new(
+        EncryptPartTranslation.ResourceManager,
+        nameof(EncryptPartTranslation.Headline));
+
+    /// <summary>
+    ///     The view model of <see cref="EncryptView" />.
+    /// </summary>
+    /// <seealso cref="ApplicationBaseViewModel" />
+    public EncryptViewModel(
+        ICommandFactory commandFactory,
+        IDocumentPackerConfigurationFileService configurationFileService,
+        IEncryptService encryptService
+    )
     {
-        get => this.documentPackerOutputFile;
-        set
-        {
-            this.SetField(
-                ref this.documentPackerOutputFile,
-                value);
+        this.configurationFileService = configurationFileService;
 
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                this.SetError(EncryptPartTranslation.FileNameIsMissing);
-            }
-            else
-            {
-                this.ResetErrors();
-            }
-        }
-    }
+        this.loadConfigurationCommand = new TranslatableButton<ICommand>(
+            commandFactory.CreateAsyncCommand<PasswordBox, ConfigurationModel?>(
+                this.LoadConfigurationCommandCanExecute,
+                null,
+                this.LoadConfigurationCommandExecute,
+                task =>
+                {
+                    this.EncryptDataViewModel = task.Result is null
+                        ? null
+                        : new EncryptDataViewModel(
+                            task.Result,
+                            commandFactory);
+                }),
+            new BitmapImage(
+                new Uri(
+                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_refresh.png",
+                    UriKind.Absolute)),
+            EncryptPartTranslation.ResourceManager,
+            nameof(EncryptPartTranslation.LoadConfigurationCommandLabel),
+            nameof(EncryptPartTranslation.LoadConfigurationCommandToolTip));
 
-    /// <summary>
-    ///     Gets or sets the document packer output folder.
-    /// </summary>
-    public string DocumentPackerOutputFolder
-    {
-        get => this.documentPackerOutputFolder;
-        set
-        {
-            this.SetField(
-                ref this.documentPackerOutputFolder,
-                value);
-            if (!Directory.Exists(value))
-            {
-                this.SetError(EncryptPartTranslation.DirectoryDoesNotExist);
-            }
-            else
-            {
-                this.ResetErrors();
-            }
-        }
-    }
-
-    /// <summary>
-    ///     Gets the encrypt command.
-    /// </summary>
-    public ICommand EncryptCommand =>
-        commandFactory.CreateAsyncCommand<object, FileInfo>(
-            _ => this.Validate(),
+        this.outputFile = new TranslatableAndValidable<string>(
             null,
-            async (_, cancellationToken) => await this.EncryptAsync(cancellationToken),
-            task =>
+            data =>
             {
-                // Todo
-                MessageBox.Show(
-                    "Created file " + task.Result,
-                    "caption",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-            });
-
-    /// <summary>
-    ///     Gets or sets the encrypt items.
-    /// </summary>
-    public ObservableCollection<EncryptItemViewModel> EncryptItems
-    {
-        get => this.encryptItems;
-        set =>
-            this.SetField(
-                ref this.encryptItems,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets the generateRsaKeys command.
-    /// </summary>
-    public ICommand GenerateRsaKeysCommand =>
-        commandFactory.CreateAsyncCommand<object, (string privateKey, string publicKey)>(
-            _ => true,
-            null,
-            async (_, cancellationToken) => await encryptService.GenerateRsaKeysAsync(cancellationToken),
-            task =>
-            {
-                var (privateKey, publicKey) = task.Result;
-                this.RsaPrivateKeyPem = privateKey;
-                this.RsaPublicKeyPem = publicKey;
-            });
-
-    /// <summary>
-    ///     Gets or sets the rsa private key pem.
-    /// </summary>
-    public string RsaPrivateKeyPem
-    {
-        get => this.rsaPrivateKeyPem;
-        set =>
-            this.SetField(
-                ref this.rsaPrivateKeyPem,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets or sets the rsa public key pem.
-    /// </summary>
-    public string RsaPublicKeyPem
-    {
-        get => this.rsaPublicKeyPem;
-        set =>
-            this.SetField(
-                ref this.rsaPublicKeyPem,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets the selectDocumentPackerOutputFolder command.
-    /// </summary>
-    public ICommand SelectDocumentPackerOutputFolderCommand =>
-        commandFactory.CreateSyncCommand(
-            _ => true,
-            _ =>
-            {
-                var dialog = new OpenFolderDialog {FolderName = this.DocumentPackerOutputFolder};
-                var dialogResult = dialog.ShowDialog();
-                if (dialogResult == true)
+                if (string.IsNullOrWhiteSpace(data.Value))
                 {
-                    this.DocumentPackerOutputFolder = dialog.FolderName;
+                    return nameof(EncryptPartTranslation.OutputFileIsRequired);
                 }
-            });
+
+                if (!this.OutputFolder.HasError &&
+                    !string.IsNullOrWhiteSpace(this.OutputFolder.Value) &&
+                    Path.Exists(
+                        Path.Join(
+                            this.OutputFolder.Value,
+                            this.OutputFile.Value)))
+                {
+                    return nameof(EncryptPartTranslation.OutputFileExists);
+                }
+
+                return null;
+            },
+            false,
+            EncryptPartTranslation.ResourceManager,
+            nameof(EncryptPartTranslation.OutputFileLabel),
+            nameof(EncryptPartTranslation.OutputFileToolTip),
+            nameof(EncryptPartTranslation.OutputFileWatermark));
+
+        this.outputFolder = new TranslatableAndValidable<string>(
+            null,
+            data =>
+            {
+                if (string.IsNullOrWhiteSpace(data.Value))
+                {
+                    return nameof(EncryptPartTranslation.OutputFolderIsRequired);
+                }
+
+                if (!Directory.Exists(data.Value))
+                {
+                    return nameof(EncryptPartTranslation.OutputFolderDoesNotExist);
+                }
+
+                return null;
+            },
+            false,
+            EncryptPartTranslation.ResourceManager,
+            nameof(EncryptPartTranslation.OutputFolderLabel),
+            nameof(EncryptPartTranslation.OutputFolderToolTip),
+            nameof(EncryptPartTranslation.OutputFolderWatermark));
+
+        this.saveCommand = new TranslatableButton<ICommand>(
+            commandFactory.CreateAsyncCommand<object, string?>(
+                _ => this.Validate(),
+                null,
+                async (_, cancellationToken) => await this.SaveCommandExecuteAsync(
+                    encryptService,
+                    cancellationToken),
+                task =>
+                {
+                    if (task.Result is null)
+                    {
+                        return;
+                    }
+
+                    MessageBox.Show(task.Result);
+                }),
+            new BitmapImage(
+                new Uri(
+                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_save.png",
+                    UriKind.Absolute)),
+            EncryptPartTranslation.ResourceManager,
+            nameof(EncryptPartTranslation.SaveCommandLabel),
+            nameof(EncryptPartTranslation.SaveCommandToolTip));
+
+        this.selectConfigurationFileCommand = new SelectFileCommand<object>(
+            commandFactory,
+            (_, path) => this.ConfigurationFile.Value = path,
+            "Document Packer Configuration (*.public.dpc)|*.public.dpc");
+
+        this.selectOutputFolderCommand = new SelectFolderCommand(
+            commandFactory,
+            path => this.OutputFolder.Value = path);
+    }
 
     /// <summary>
-    ///     Encrypts the collected data.
+    ///     Gets or sets the configuration file.
     /// </summary>
-    /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
-    /// <returns>A <see cref="Task" /> whose result indicates success.</returns>
-    private async Task<FileInfo> EncryptAsync(CancellationToken cancellationToken)
+    public TranslatableAndValidable<string> ConfigurationFile
     {
-        await Task.Delay(
-            3000,
+        get => this.configurationFile;
+        set =>
+            this.SetField(
+                ref this.configurationFile,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the encrypt data view model.
+    /// </summary>
+    public EncryptDataViewModel? EncryptDataViewModel
+    {
+        get => this.encryptDataViewModel;
+        set =>
+            this.SetField(
+                ref this.encryptDataViewModel,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the command to load the configuration file.
+    /// </summary>
+    public TranslatableButton<ICommand> LoadConfigurationCommand
+    {
+        get => this.loadConfigurationCommand;
+        set =>
+            this.SetField(
+                ref this.loadConfigurationCommand,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the output file.
+    /// </summary>
+    public TranslatableAndValidable<string> OutputFile
+    {
+        get => this.outputFile;
+        set =>
+            this.SetField(
+                ref this.outputFile,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the output folder.
+    /// </summary>
+    public TranslatableAndValidable<string> OutputFolder
+    {
+        get => this.outputFolder;
+        set =>
+            this.SetField(
+                ref this.outputFolder,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the password.
+    /// </summary>
+    public Translatable Password
+    {
+        get => this.password;
+        set =>
+            this.SetField(
+                ref this.password,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the save command.
+    /// </summary>
+    public TranslatableButton<ICommand> SaveCommand
+    {
+        get => this.saveCommand;
+        set =>
+            this.SetField(
+                ref this.saveCommand,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the command to select the configuration file.
+    /// </summary>
+    public TranslatableButton<ICommand> SelectConfigurationFileCommand
+    {
+        get => this.selectConfigurationFileCommand;
+        set =>
+            this.SetField(
+                ref this.selectConfigurationFileCommand,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the command to select the output folder.
+    /// </summary>
+    public TranslatableButton<ICommand> SelectOutputFolderCommand
+    {
+        get => this.selectOutputFolderCommand;
+        set =>
+            this.SetField(
+                ref this.selectOutputFolderCommand,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the description of the view.
+    /// </summary>
+    public Translatable ViewDescription
+    {
+        get => this.viewDescription;
+        set =>
+            this.SetField(
+                ref this.viewDescription,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the headline of the view.
+    /// </summary>
+    public Translatable ViewHeadline
+    {
+        get => this.viewHeadline;
+        set =>
+            this.SetField(
+                ref this.viewHeadline,
+                value);
+    }
+
+    private bool LoadConfigurationCommandCanExecute(PasswordBox? passwordBox)
+    {
+        this.ConfigurationFile.Validate();
+
+        this.Password.ErrorResourceKey = string.IsNullOrWhiteSpace(passwordBox?.Password)
+            ? nameof(EncryptPartTranslation.PasswordIsRequired)
+            : null;
+
+        return string.IsNullOrWhiteSpace(this.ConfigurationFile.ErrorResourceKey) &&
+               string.IsNullOrWhiteSpace(this.Password.ErrorResourceKey);
+    }
+
+    private async Task<ConfigurationModel?> LoadConfigurationCommandExecute(
+        PasswordBox? passwordBox,
+        CancellationToken cancellationToken
+    )
+    {
+        if (!this.LoadConfigurationCommandCanExecute(passwordBox))
+        {
+            return null;
+        }
+
+        var configuration = await this.configurationFileService.FromFileAsync(
+            new FileInfo(this.ConfigurationFile.Value!),
+            passwordBox!.Password,
             cancellationToken);
-        return new FileInfo(
-            Path.Combine(
-                this.DocumentPackerOutputFolder,
-                this.documentPackerOutputFile));
-        /**
-        var (_, publicKey) = await encryptService.GenerateRsaKeysAsync(cancellationToken);
-        var documentPackerFile = new FileInfo("file.dp");
 
+        return configuration;
+    }
+
+    private async Task<string?> SaveCommandExecuteAsync(
+        IEncryptService encryptService,
+        CancellationToken cancellationToken
+    )
+    {
+        if (!this.Validate() ||
+            string.IsNullOrWhiteSpace(this.OutputFolder.Value) ||
+            string.IsNullOrWhiteSpace(this.OutputFile.Value) ||
+            this.EncryptDataViewModel?.Items?.Any() != true)
+        {
+            return null;
+        }
+
+        var model = new EncryptModel(
+            this.OutputFolder.Value,
+            this.OutputFile.Value,
+            this.EncryptDataViewModel.Items.Select(
+                item => new EncryptItemModel(
+                    item.ConfigurationItemType,
+                    item.IsRequired.Value,
+                    item.Value.Value,
+                    item.Id)));
         await encryptService.EncryptAsync(
-            new EncryptData(
-                documentPackerFile,
-                this.EncryptItems.Select(
-                    item => new EncryptDataElement(
-                        item.Description,
-                        item.EncryptItemType,
-                        item.Value,
-                        item.IsRequired)),
-                publicKey),
+            this.EncryptDataViewModel.RsaPublicKey,
+            model,
             cancellationToken);
-        **/
+        return "done";
     }
 
     /// <summary>
-    ///     Validates all <see cref="EncryptItems" />.
+    ///     Validates the view model.
     /// </summary>
-    /// <returns><c>True</c> if an item exists and all items are valid.</returns>
+    /// <returns><c>True</c> if the validation succeeds; <c>false</c> otherwise.</returns>
     private bool Validate()
     {
-        return this.EncryptItems.Any() && this.EncryptItems.All(item => !item.HasErrors);
+        this.OutputFolder.Validate();
+        this.OutputFile.Validate();
+
+        return string.IsNullOrWhiteSpace(this.OutputFolder.ErrorResourceKey) &&
+               string.IsNullOrWhiteSpace(this.OutputFile.ErrorResourceKey) &&
+               this.EncryptDataViewModel?.Validate() == true;
     }
 }

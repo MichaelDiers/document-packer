@@ -1,0 +1,138 @@
+﻿<!-- ReSharper disable Xaml.IndexOutOfGridDefinition -->
+<UserControl
+    x:Class="DocumentPacker.Parts.Main.EncryptPart.EncryptDataView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
+    xmlns:encryptPart="clr-namespace:DocumentPacker.Parts.Main.EncryptPart"
+    xmlns:viewModels="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
+    mc:Ignorable="d">
+    <Grid
+        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto"
+        dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
+        <!-- description -->
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Background="Aqua"
+            CornerRadius="8" />
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            DataContext="{Binding Description}" />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            DataContext="{Binding Description}"
+            IsReadOnly="True"
+            Style="{StaticResource TranslatableMultiLineTextBoxStyle}" />
+        <!-- items -->
+        <ItemsControl
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding Items}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate
+                    DataType="{x:Type encryptPart:EncryptDataItemViewModel}">
+                    <Border
+                        Background="Aqua"
+                        CornerRadius="8">
+                        <Grid
+                            x:Name="Grid"
+                            dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto"
+                            dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                DataContext="{Binding Description}" />
+                            <TextBox
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                DataContext="{Binding Description}"
+                                IsReadOnly="True"
+                                Style="{StaticResource TranslatableMultiLineTextBoxStyle}" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                DataContext="{Binding IsRequired}" />
+                            <CheckBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                DataContext="{Binding IsRequired}"
+                                IsEnabled="False" />
+                            <Label
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                DataContext="{Binding Value}" />
+                            <TextBox
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                DataContext="{Binding Value}">
+                                <b:Interaction.Behaviors>
+                                    <behaviours:FileContentDragAndDropTextBoxBehavior />
+                                </b:Interaction.Behaviors>
+                                <TextBox.Style>
+                                    <Style
+                                        TargetType="TextBox"
+                                        BasedOn="{StaticResource TranslatableTextBoxStyle}">
+                                        <Setter
+                                            Property="Visibility"
+                                            Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=DataContext.ConfigurationItemType}"
+                                                Value="{x:Static viewModels:ConfigurationItemType.Text}">
+                                                <Setter
+                                                    Property="Visibility"
+                                                    Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
+                            <Grid
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
+                                <Grid.Style>
+                                    <Style
+                                        TargetType="Grid">
+                                        <Setter
+                                            Property="Visibility"
+                                            Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}, Path=DataContext.ConfigurationItemType}"
+                                                Value="{x:Static viewModels:ConfigurationItemType.File}">
+                                                <Setter
+                                                    Property="Visibility"
+                                                    Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <TextBox
+                                    Grid.Column="0"
+                                    DataContext="{Binding Value}">
+                                    <b:Interaction.Behaviors>
+                                        <behaviours:FilePathDragAndDropTextBoxBehavior />
+                                    </b:Interaction.Behaviors>
+                                </TextBox>
+                                <Button
+                                    Grid.Column="1"
+                                    DataContext="{Binding SelectFileCommand}" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
+<!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->

@@ -6,7 +6,7 @@
     Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
-    that is mostly human-readable. The generation and parsing of the 
+    that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
@@ -123,6 +123,36 @@
   <data name="AttachFileToolTip" xml:space="preserve">
     <value>Datei hinzufügen.</value>
   </data>
+  <data name="ConfigurationFileDoesNotExist" xml:space="preserve">
+    <value>Konfigurationsdatei existiert nicht</value>
+  </data>
+  <data name="ConfigurationFileLabel" xml:space="preserve">
+    <value>Configuration File</value>
+  </data>
+  <data name="ConfigurationFileToolTip" xml:space="preserve">
+    <value>Public Document Packer Configuration File</value>
+  </data>
+  <data name="ConfigurationFileWatermark" xml:space="preserve">
+    <value>Public Configuration File</value>
+  </data>
+  <data name="ConfigurationItemModelFileLabel" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="ConfigurationItemModelFileToolTip" xml:space="preserve">
+    <value>Wähle eine Datei aus.</value>
+  </data>
+  <data name="ConfigurationItemModelFileWatermark" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="ConfigurationItemModelTextLabel" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ConfigurationItemModelTextToolTip" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ConfigurationItemModelTextWatermark" xml:space="preserve">
+    <value>Text</value>
+  </data>
   <data name="DataTypeLabel" xml:space="preserve">
     <value>Datentyp</value>
   </data>
@@ -131,6 +161,9 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Du möchstest Dateien und Informationen verschlüsseln? Generiere Deine persönlichen Keys zum Verschlüsseln. Erstelle eine verschlüsselte Document Packer Datei und versende diese an Deine Freunde.</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="DirectoryDoesNotExist" xml:space="preserve">
     <value>Verzeichnis existiert nicht.</value>
@@ -147,6 +180,12 @@
   <data name="EncryptItemTypeText" xml:space="preserve">
     <value>Text</value>
   </data>
+  <data name="FileDoesNotExist" xml:space="preserve">
+    <value>Datei existiert nicht</value>
+  </data>
+  <data name="FileIsRequired" xml:space="preserve">
+    <value>Bitte gebe eine Datei an-</value>
+  </data>
   <data name="FileNameIsMissing" xml:space="preserve">
     <value>Bitte gib einen Dateinamen an.</value>
   </data>
@@ -156,14 +195,62 @@
   <data name="Headline" xml:space="preserve">
     <value>Verschlüsseln</value>
   </data>
+  <data name="IsRequiredLabel" xml:space="preserve">
+    <value>Pflichtangabe</value>
+  </data>
   <data name="ItemsHeadline" xml:space="preserve">
     <value>Füge Dateien und Text hinzu</value>
   </data>
   <data name="ItemTypeComboBoxWatermark" xml:space="preserve">
     <value>Bitte auswählen</value>
   </data>
+  <data name="LoadConfigurationCommandLabel" xml:space="preserve">
+    <value>Laden</value>
+  </data>
+  <data name="LoadConfigurationCommandToolTip" xml:space="preserve">
+    <value>Lade Konfigurationsdatei</value>
+  </data>
+  <data name="OutputFileExists" xml:space="preserve">
+    <value>Ausgabedatei existiert bereits</value>
+  </data>
+  <data name="OutputFileIsRequired" xml:space="preserve">
+    <value>Ausgabedatei ist erfolderlich.</value>
+  </data>
+  <data name="OutputFileLabel" xml:space="preserve">
+    <value>Ausgabedatei</value>
+  </data>
+  <data name="OutputFileToolTip" xml:space="preserve">
+    <value>Ausgabedatei</value>
+  </data>
+  <data name="OutputFileWatermark" xml:space="preserve">
+    <value>Ausgabedatei</value>
+  </data>
+  <data name="OutputFolderDoesNotExist" xml:space="preserve">
+    <value>Ausgabeverzeichnis existiert nicht</value>
+  </data>
+  <data name="OutputFolderIsRequired" xml:space="preserve">
+    <value>Ausgabeverzeichnis ist benötigt</value>
+  </data>
+  <data name="OutputFolderLabel" xml:space="preserve">
+    <value>Ausgabeverzeichnis</value>
+  </data>
   <data name="OutputFolderToolTip" xml:space="preserve">
     <value>Der Ausgabeordner der Dokument Packer-Datei.</value>
+  </data>
+  <data name="OutputFolderWatermark" xml:space="preserve">
+    <value>Ausgabeverzeichnis</value>
+  </data>
+  <data name="PasswordIsRequired" xml:space="preserve">
+    <value>Bitte gebe das Passwort  ein</value>
+  </data>
+  <data name="PasswordLabel" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="PasswordToolTip" xml:space="preserve">
+    <value>Passwort für die Konfigurationsdatei</value>
+  </data>
+  <data name="PasswordWatermark" xml:space="preserve">
+    <value>Passwort</value>
   </data>
   <data name="RsaKeys" xml:space="preserve">
     <value>RSA Schlüssel</value>
@@ -174,10 +261,25 @@
   <data name="RsaPublicKeyToolTip" xml:space="preserve">
     <value>RSA Public Key im PEM Format.</value>
   </data>
+  <data name="SaveCommandLabel" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SaveCommandToolTip" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SelectConfigurationFileCommandToolTip" xml:space="preserve">
+    <value>Select the public Document Packer Configuration file.</value>
+  </data>
+  <data name="SelectFileCommandToolTip" xml:space="preserve">
+    <value>Wähle eine Datei aus.</value>
+  </data>
   <data name="SelectOutputFileToolTip" xml:space="preserve">
     <value>Name der Document Packer Datei.</value>
   </data>
   <data name="SelectOutputFolderToolTip" xml:space="preserve">
     <value>Wähle den Ausgabeordner der Dokument-Packer-Datei aus.</value>
+  </data>
+  <data name="TextIsRequired" xml:space="preserve">
+    <value>Bitte gebe einen Text ein.</value>
   </data>
 </root>
