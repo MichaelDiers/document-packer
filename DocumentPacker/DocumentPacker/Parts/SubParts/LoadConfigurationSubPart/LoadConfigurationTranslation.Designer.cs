@@ -71,16 +71,25 @@ namespace DocumentPacker.Parts.SubParts.LoadConfigurationSubPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configuration File.
+        ///   Looks up a localized string similar to Private Configuration File.
         /// </summary>
-        internal static string ConfigurationFileLabel {
+        internal static string ConfigurationFileLabelPrivate {
             get {
-                return ResourceManager.GetString("ConfigurationFileLabel", resourceCulture);
+                return ResourceManager.GetString("ConfigurationFileLabelPrivate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Public Document Packer configuration file..
+        ///   Looks up a localized string similar to Public Configuration File.
+        /// </summary>
+        internal static string ConfigurationFileLabelPublic {
+            get {
+                return ResourceManager.GetString("ConfigurationFileLabelPublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Packer configuration file..
         /// </summary>
         internal static string ConfigurationFileToolTip {
             get {
@@ -89,11 +98,20 @@ namespace DocumentPacker.Parts.SubParts.LoadConfigurationSubPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configuration file.
+        ///   Looks up a localized string similar to *.private.dpc.
         /// </summary>
-        internal static string ConfigurationFileWatermark {
+        internal static string ConfigurationFileWatermarkPrivate {
             get {
-                return ResourceManager.GetString("ConfigurationFileWatermark", resourceCulture);
+                return ResourceManager.GetString("ConfigurationFileWatermarkPrivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *.public.dpc.
+        /// </summary>
+        internal static string ConfigurationFileWatermarkPublic {
+            get {
+                return ResourceManager.GetString("ConfigurationFileWatermarkPublic", resourceCulture);
             }
         }
         

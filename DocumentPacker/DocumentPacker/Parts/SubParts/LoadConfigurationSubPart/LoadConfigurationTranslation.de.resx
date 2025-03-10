@@ -120,14 +120,20 @@
   <data name="ConfigurationFileDoesNotExist" xml:space="preserve">
     <value>Datei existiert nicht</value>
   </data>
-  <data name="ConfigurationFileLabel" xml:space="preserve">
-    <value>Konfigurationsdatei</value>
+  <data name="ConfigurationFileLabelPublic" xml:space="preserve">
+    <value>Öffentliche Konfigurationsdatei</value>
+  </data>
+  <data name="ConfigurationFileLabelPrivate" xml:space="preserve">
+    <value>Private Konfigurationsdatei</value>
   </data>
   <data name="ConfigurationFileToolTip" xml:space="preserve">
-    <value>Öffentliche Document Packer Konfigurationsdatei.</value>
+    <value>Document Packer Konfigurationsdatei.</value>
   </data>
-  <data name="ConfigurationFileWatermark" xml:space="preserve">
-    <value>Konfigurationsdatei</value>
+  <data name="ConfigurationFileWatermarkPrivate" xml:space="preserve">
+    <value>*.private.dpc</value>
+  </data>
+  <data name="ConfigurationFileWatermarkPublic" xml:space="preserve">
+    <value>*.public.dpc</value>
   </data>
   <data name="LoadConfigurationCommandLabel" xml:space="preserve">
     <value>Laden</value>

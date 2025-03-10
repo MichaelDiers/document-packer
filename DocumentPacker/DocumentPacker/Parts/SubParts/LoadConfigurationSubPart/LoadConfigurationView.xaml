@@ -30,7 +30,7 @@
                 DataContext="{Binding ConfigurationFile, UpdateSourceTrigger=PropertyChanged}">
                 <b:Interaction.Behaviors>
                     <behaviours:FilePathDragAndDropTextBoxBehavior
-                        FileEndsWithFilter=".public.dpc" />
+                        FileEndsWithFilter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=loadConfigurationSubPart:LoadConfigurationView},Path=DataContext.ConfigurationFileFilter}" />
                 </b:Interaction.Behaviors>
             </TextBox>
             <Button

@@ -121,16 +121,24 @@
     <value>File does not exist.</value>
     <comment>LoadConfiguration</comment>
   </data>
-  <data name="ConfigurationFileLabel" xml:space="preserve">
-    <value>Configuration File</value>
+  <data name="ConfigurationFileLabelPublic" xml:space="preserve">
+    <value>Public Configuration File</value>
+    <comment>LoadConfiguration</comment>
+  </data>
+  <data name="ConfigurationFileLabelPrivate" xml:space="preserve">
+    <value>Private Configuration File</value>
     <comment>LoadConfiguration</comment>
   </data>
   <data name="ConfigurationFileToolTip" xml:space="preserve">
-    <value>Public Document Packer configuration file.</value>
+    <value>Document Packer configuration file.</value>
     <comment>LoadConfiguration</comment>
   </data>
-  <data name="ConfigurationFileWatermark" xml:space="preserve">
-    <value>Configuration file</value>
+  <data name="ConfigurationFileWatermarkPrivate" xml:space="preserve">
+    <value>*.private.dpc</value>
+    <comment>LoadConfiguration</comment>
+  </data>
+  <data name="ConfigurationFileWatermarkPublic" xml:space="preserve">
+    <value>*.public.dpc</value>
     <comment>LoadConfiguration</comment>
   </data>
   <data name="LoadConfigurationCommandLabel" xml:space="preserve">

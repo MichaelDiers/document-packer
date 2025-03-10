@@ -27,6 +27,11 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     private TranslatableAndValidable<string> configurationFile;
 
     /// <summary>
+    ///     The configuration file filter.
+    /// </summary>
+    private string configurationFileFilter;
+
+    /// <summary>
     ///     The command to load the configuration file.
     /// </summary>
     private TranslatableButton<ICommand> loadConfigurationCommand;
@@ -50,9 +55,14 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     /// </summary>
     /// <param name="commandFactory">A factory for creating commands.</param>
     /// <param name="configurationFileService">A service to load the document packer configuration file.</param>
+    /// <param name="loadPrivateConfiguration">
+    ///     If <c>true</c> load a private configuration; load a public configuration
+    ///     otherwise.
+    /// </param>
     public LoadConfigurationViewModel(
         ICommandFactory commandFactory,
-        IDocumentPackerConfigurationFileService configurationFileService
+        IDocumentPackerConfigurationFileService configurationFileService,
+        bool loadPrivateConfiguration
     )
     {
         this.configurationFileService = configurationFileService;
@@ -62,9 +72,13 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
             data => File.Exists(data.Value) ? null : nameof(LoadConfigurationTranslation.ConfigurationFileDoesNotExist),
             false,
             LoadConfigurationTranslation.ResourceManager,
-            nameof(LoadConfigurationTranslation.ConfigurationFileLabel),
+            loadPrivateConfiguration
+                ? nameof(LoadConfigurationTranslation.ConfigurationFileLabelPrivate)
+                : nameof(LoadConfigurationTranslation.ConfigurationFileLabelPublic),
             nameof(LoadConfigurationTranslation.ConfigurationFileToolTip),
-            nameof(LoadConfigurationTranslation.ConfigurationFileWatermark));
+            loadPrivateConfiguration
+                ? nameof(LoadConfigurationTranslation.ConfigurationFileWatermarkPrivate)
+                : nameof(LoadConfigurationTranslation.ConfigurationFileWatermarkPublic));
         this.configurationFile.PropertyChanged += this.InvalidateConfiguration;
 
         this.loadConfigurationCommand = new TranslatableButton<ICommand>(
@@ -92,7 +106,10 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
         this.selectConfigurationFileCommand = new SelectFileCommand<object>(
             commandFactory,
             (_, path) => this.ConfigurationFile.Value = path,
-            "Document Packer Configuration (*.public.dpc)|*.public.dpc");
+            loadPrivateConfiguration
+                ? "Document Packer Configuration (*.private.dpc)|*.private.dpc"
+                : "Document Packer Configuration (*.public.dpc)|*.public.dpc");
+        this.configurationFileFilter = loadPrivateConfiguration ? ".private.dpc" : ".public.dpc";
     }
 
     /// <summary>
@@ -104,6 +121,18 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
         protected set =>
             this.SetField(
                 ref this.configurationFile,
+                value);
+    }
+
+    /// <summary>
+    ///     Gets or sets the configuration file filter.
+    /// </summary>
+    public string ConfigurationFileFilter
+    {
+        get => this.configurationFileFilter;
+        set =>
+            this.SetField(
+                ref this.configurationFileFilter,
                 value);
     }
 
