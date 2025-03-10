@@ -28,11 +28,11 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            DataContext="{Binding DescriptionTranslation}" />
+            DataContext="{Binding Description}" />
         <TextBox
             Grid.Row="0"
             Grid.Column="1"
-            DataContext="{Binding DescriptionTranslation}"
+            DataContext="{Binding Description}"
             Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}" />
         <!-- RSA private key -->
         <Label
