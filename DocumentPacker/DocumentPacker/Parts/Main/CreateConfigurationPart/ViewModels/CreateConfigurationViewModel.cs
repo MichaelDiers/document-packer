@@ -567,7 +567,8 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                 item => new ConfigurationItemModel(
                     item.ConfigurationItemTypes.SelectedValue.Value,
                     item.IsRequired.Value,
-                    item.ItemDescription.Value)),
+                    item.ItemDescription.Value,
+                    Guid.NewGuid().ToString())),
             this.Description.Value,
             this.RsaPrivateKey.Value,
             this.RsaPublicKey.Value);
