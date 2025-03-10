@@ -107,7 +107,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Libs.Wpf" Version="1.0.41" />
+    <PackageReference Include="Libs.Wpf" Version="1.0.43" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
@@ -198,6 +198,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>FeaturesPartTranslation.resx</DependentUpon>
     </Compile>
+    <Compile Update="Parts\SubParts\LoadConfigurationSubPart\LoadConfigurationTranslation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LoadConfigurationTranslation.resx</DependentUpon>
+    </Compile>
     <Compile Update="Parts\WindowPart\WindowPartTranslation.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -245,6 +250,10 @@
     <EmbeddedResource Update="Parts\Main\FeaturesPart\FeaturesPartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FeaturesPartTranslation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Parts\SubParts\LoadConfigurationSubPart\LoadConfigurationTranslation.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoadConfigurationTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Parts\WindowPart\WindowPartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

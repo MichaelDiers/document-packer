@@ -2,12 +2,12 @@
 
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
 using DocumentPacker.Models;
 using DocumentPacker.Mvvm;
+using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
 using Libs.Wpf.ViewModels;
@@ -18,19 +18,7 @@ using Libs.Wpf.ViewModels;
 /// <seealso cref="ApplicationBaseViewModel" />
 internal class EncryptViewModel : ApplicationBaseViewModel
 {
-    private readonly IDocumentPackerConfigurationFileService configurationFileService;
-
-    /// <summary>
-    ///     The configuration file.
-    /// </summary>
-    private TranslatableAndValidable<string> configurationFile = new(
-        null,
-        data => File.Exists(data.Value) ? null : nameof(EncryptPartTranslation.ConfigurationFileDoesNotExist),
-        false,
-        EncryptPartTranslation.ResourceManager,
-        nameof(EncryptPartTranslation.ConfigurationFileLabel),
-        nameof(EncryptPartTranslation.ConfigurationFileToolTip),
-        nameof(EncryptPartTranslation.ConfigurationFileWatermark));
+    private readonly ICommandFactory commandFactory;
 
     /// <summary>
     ///     The encrypt data view model.
@@ -38,9 +26,9 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     private EncryptDataViewModel? encryptDataViewModel;
 
     /// <summary>
-    ///     The command to load the configuration file.
+    ///     The load configuration view model.
     /// </summary>
-    private TranslatableButton<ICommand> loadConfigurationCommand;
+    private LoadConfigurationViewModel loadConfigurationViewModel;
 
     /// <summary>
     ///     The output file.
@@ -53,22 +41,9 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     private TranslatableAndValidable<string> outputFolder;
 
     /// <summary>
-    ///     The password.
-    /// </summary>
-    private Translatable password = new(
-        EncryptPartTranslation.ResourceManager,
-        nameof(EncryptPartTranslation.PasswordLabel),
-        nameof(EncryptPartTranslation.PasswordWatermark));
-
-    /// <summary>
     ///     The save command.
     /// </summary>
     private TranslatableButton<ICommand> saveCommand;
-
-    /// <summary>
-    ///     The command to select the configuration file.
-    /// </summary>
-    private TranslatableButton<ICommand> selectConfigurationFileCommand;
 
     /// <summary>
     ///     The command to select the output folder.
@@ -99,28 +74,13 @@ internal class EncryptViewModel : ApplicationBaseViewModel
         IEncryptService encryptService
     )
     {
-        this.configurationFileService = configurationFileService;
+        this.commandFactory = commandFactory;
 
-        this.loadConfigurationCommand = new TranslatableButton<ICommand>(
-            commandFactory.CreateAsyncCommand<PasswordBox, ConfigurationModel?>(
-                this.LoadConfigurationCommandCanExecute,
-                null,
-                this.LoadConfigurationCommandExecute,
-                task =>
-                {
-                    this.EncryptDataViewModel = task.Result is null
-                        ? null
-                        : new EncryptDataViewModel(
-                            task.Result,
-                            commandFactory);
-                }),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_refresh.png",
-                    UriKind.Absolute)),
-            EncryptPartTranslation.ResourceManager,
-            nameof(EncryptPartTranslation.LoadConfigurationCommandLabel),
-            nameof(EncryptPartTranslation.LoadConfigurationCommandToolTip));
+        this.loadConfigurationViewModel = new LoadConfigurationViewModel(
+            commandFactory,
+            configurationFileService);
+        this.loadConfigurationViewModel.ConfigurationLoaded += this.OnConfigurationLoaded;
+        this.loadConfigurationViewModel.ConfigurationInvalidated += this.OnConfigurationInvalidated;
 
         this.outputFile = new TranslatableAndValidable<string>(
             null,
@@ -195,26 +155,9 @@ internal class EncryptViewModel : ApplicationBaseViewModel
             nameof(EncryptPartTranslation.SaveCommandLabel),
             nameof(EncryptPartTranslation.SaveCommandToolTip));
 
-        this.selectConfigurationFileCommand = new SelectFileCommand<object>(
-            commandFactory,
-            (_, path) => this.ConfigurationFile.Value = path,
-            "Document Packer Configuration (*.public.dpc)|*.public.dpc");
-
         this.selectOutputFolderCommand = new SelectFolderCommand(
             commandFactory,
             path => this.OutputFolder.Value = path);
-    }
-
-    /// <summary>
-    ///     Gets or sets the configuration file.
-    /// </summary>
-    public TranslatableAndValidable<string> ConfigurationFile
-    {
-        get => this.configurationFile;
-        set =>
-            this.SetField(
-                ref this.configurationFile,
-                value);
     }
 
     /// <summary>
@@ -230,14 +173,14 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     }
 
     /// <summary>
-    ///     Gets or sets the command to load the configuration file.
+    ///     Gets or sets the load configuration view model.
     /// </summary>
-    public TranslatableButton<ICommand> LoadConfigurationCommand
+    public LoadConfigurationViewModel LoadConfigurationViewModel
     {
-        get => this.loadConfigurationCommand;
+        get => this.loadConfigurationViewModel;
         set =>
             this.SetField(
-                ref this.loadConfigurationCommand,
+                ref this.loadConfigurationViewModel,
                 value);
     }
 
@@ -266,18 +209,6 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     }
 
     /// <summary>
-    ///     Gets or sets the password.
-    /// </summary>
-    public Translatable Password
-    {
-        get => this.password;
-        set =>
-            this.SetField(
-                ref this.password,
-                value);
-    }
-
-    /// <summary>
     ///     Gets or sets the save command.
     /// </summary>
     public TranslatableButton<ICommand> SaveCommand
@@ -286,18 +217,6 @@ internal class EncryptViewModel : ApplicationBaseViewModel
         set =>
             this.SetField(
                 ref this.saveCommand,
-                value);
-    }
-
-    /// <summary>
-    ///     Gets or sets the command to select the configuration file.
-    /// </summary>
-    public TranslatableButton<ICommand> SelectConfigurationFileCommand
-    {
-        get => this.selectConfigurationFileCommand;
-        set =>
-            this.SetField(
-                ref this.selectConfigurationFileCommand,
                 value);
     }
 
@@ -337,34 +256,25 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                 value);
     }
 
-    private bool LoadConfigurationCommandCanExecute(PasswordBox? passwordBox)
+    /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+    public override void Dispose()
     {
-        this.ConfigurationFile.Validate();
+        this.LoadConfigurationViewModel.ConfigurationLoaded -= this.OnConfigurationLoaded;
+        this.LoadConfigurationViewModel.ConfigurationInvalidated -= this.OnConfigurationInvalidated;
 
-        this.Password.ErrorResourceKey = string.IsNullOrWhiteSpace(passwordBox?.Password)
-            ? nameof(EncryptPartTranslation.PasswordIsRequired)
-            : null;
-
-        return string.IsNullOrWhiteSpace(this.ConfigurationFile.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.Password.ErrorResourceKey);
+        base.Dispose();
     }
 
-    private async Task<ConfigurationModel?> LoadConfigurationCommandExecute(
-        PasswordBox? passwordBox,
-        CancellationToken cancellationToken
-    )
+    private void OnConfigurationInvalidated(object? sender, EventArgs e)
     {
-        if (!this.LoadConfigurationCommandCanExecute(passwordBox))
-        {
-            return null;
-        }
+        this.EncryptDataViewModel = null;
+    }
 
-        var configuration = await this.configurationFileService.FromFileAsync(
-            new FileInfo(this.ConfigurationFile.Value!),
-            passwordBox!.Password,
-            cancellationToken);
-
-        return configuration;
+    private void OnConfigurationLoaded(object? sender, LoadConfigurationEventArgs e)
+    {
+        this.EncryptDataViewModel = new EncryptDataViewModel(
+            e.ConfigurationModel,
+            this.commandFactory);
     }
 
     private async Task<string?> SaveCommandExecuteAsync(

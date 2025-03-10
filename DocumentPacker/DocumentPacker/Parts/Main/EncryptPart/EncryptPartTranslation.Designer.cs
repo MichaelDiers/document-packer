@@ -79,42 +79,6 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The configuration file does not exist..
-        /// </summary>
-        public static string ConfigurationFileDoesNotExist {
-            get {
-                return ResourceManager.GetString("ConfigurationFileDoesNotExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Konfigurationsdatei.
-        /// </summary>
-        public static string ConfigurationFileLabel {
-            get {
-                return ResourceManager.GetString("ConfigurationFileLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Öffentliche Document Packer Konfigurationsdatei.
-        /// </summary>
-        public static string ConfigurationFileToolTip {
-            get {
-                return ResourceManager.GetString("ConfigurationFileToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Öffentliche Konfigurationsdatei.
-        /// </summary>
-        public static string ConfigurationFileWatermark {
-            get {
-                return ResourceManager.GetString("ConfigurationFileWatermark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string ConfigurationItemModelFileLabel {
@@ -322,24 +286,6 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load.
-        /// </summary>
-        public static string LoadConfigurationCommandLabel {
-            get {
-                return ResourceManager.GetString("LoadConfigurationCommandLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Load configuration file.
-        /// </summary>
-        public static string LoadConfigurationCommandToolTip {
-            get {
-                return ResourceManager.GetString("LoadConfigurationCommandToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Output file exists.
         /// </summary>
         public static string OutputFileExists {
@@ -426,42 +372,6 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         public static string OutputFolderWatermark {
             get {
                 return ResourceManager.GetString("OutputFolderWatermark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password is required.
-        /// </summary>
-        public static string PasswordIsRequired {
-            get {
-                return ResourceManager.GetString("PasswordIsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password.
-        /// </summary>
-        public static string PasswordLabel {
-            get {
-                return ResourceManager.GetString("PasswordLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password to encrypt the configuration file..
-        /// </summary>
-        public static string PasswordToolTip {
-            get {
-                return ResourceManager.GetString("PasswordToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password.
-        /// </summary>
-        public static string PasswordWatermark {
-            get {
-                return ResourceManager.GetString("PasswordWatermark", resourceCulture);
             }
         }
         

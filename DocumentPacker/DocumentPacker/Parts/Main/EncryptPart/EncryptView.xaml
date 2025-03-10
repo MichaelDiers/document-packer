@@ -10,59 +10,23 @@
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
+    xmlns:loadConfigurationSubPart="clr-namespace:DocumentPacker.Parts.SubParts.LoadConfigurationSubPart"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=encryptPart:EncryptViewModel, IsDesignTimeCreatable=False}"
     Template="{StaticResource MainContentControlTemplate}">
-    <mvvm:BaseUserControl.Resources></mvvm:BaseUserControl.Resources>
     <Grid
-        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto|Auto|Auto|Auto|Auto"
+        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto|Auto"
         dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
         <!-- configuration file -->
-        <Border
+        <loadConfigurationSubPart:LoadConfigurationView
             Grid.Row="0"
-            Grid.RowSpan="3"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Background="Aqua"
-            CornerRadius="8" />
-        <Label
-            Grid.Row="0"
-            Grid.Column="0"
-            DataContext="{Binding ConfigurationFile}" />
-        <Grid
-            Grid.Row="0"
-            Grid.Column="1"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
-            <TextBox
-                Grid.Column="0"
-                DataContext="{Binding ConfigurationFile}">
-                <b:Interaction.Behaviors>
-                    <behaviours:FilePathDragAndDropTextBoxBehavior />
-                </b:Interaction.Behaviors>
-            </TextBox>
-            <Button
-                Grid.Column="1"
-                DataContext="{Binding SelectConfigurationFileCommand}" />
-        </Grid>
-        <!-- password -->
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            DataContext="{Binding Password}" />
-        <PasswordBox
-            Grid.Row="1"
-            Grid.Column="1"
-            x:Name="PasswordBox"
-            DataContext="{Binding Password}" />
-        <!-- load configuration -->
-        <Button
-            Grid.Row="2"
-            Grid.Column="1"
-            CommandParameter="{Binding ElementName=PasswordBox}"
-            DataContext="{Binding LoadConfigurationCommand}"
-            HorizontalAlignment="Right" />
+            GridBackground="Aqua"
+            DataContext="{Binding LoadConfigurationViewModel}" />
+        <!-- encrypt data -->
         <ContentControl
-            Grid.Row="4"
+            Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             DataContext="{Binding EncryptDataViewModel}">
@@ -89,11 +53,11 @@
         </ContentControl>
         <!-- output folder-->
         <Label
-            Grid.Row="5"
+            Grid.Row="2"
             Grid.Column="0"
             DataContext="{Binding OutputFolder}" />
         <Grid
-            Grid.Row="5"
+            Grid.Row="2"
             Grid.Column="1"
             dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
             <TextBox
@@ -109,16 +73,16 @@
         </Grid>
         <!-- output file-->
         <Label
-            Grid.Row="6"
+            Grid.Row="3"
             Grid.Column="0"
             DataContext="{Binding OutputFile}" />
         <TextBox
-            Grid.Row="6"
+            Grid.Row="3"
             Grid.Column="1"
             DataContext="{Binding OutputFile}" />
         <!-- save -->
         <Button
-            Grid.Row="7"
+            Grid.Row="4"
             Grid.Column="1"
             DataContext="{Binding SaveCommand}" />
     </Grid>

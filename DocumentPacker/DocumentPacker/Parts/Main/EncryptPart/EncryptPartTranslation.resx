@@ -125,22 +125,6 @@
     <value>Attach a file.</value>
     <comment>EncryptPart</comment>
   </data>
-  <data name="ConfigurationFileDoesNotExist" xml:space="preserve">
-    <value>The configuration file does not exist.</value>
-    <comment>EncryptPart</comment>
-  </data>
-  <data name="ConfigurationFileLabel" xml:space="preserve">
-    <value>Konfigurationsdatei</value>
-    <comment>EncryptPart</comment>
-  </data>
-  <data name="ConfigurationFileToolTip" xml:space="preserve">
-    <value>Öffentliche Document Packer Konfigurationsdatei</value>
-    <comment>EncryptPart</comment>
-  </data>
-  <data name="ConfigurationFileWatermark" xml:space="preserve">
-    <value>Öffentliche Konfigurationsdatei</value>
-    <comment>EncryptPart</comment>
-  </data>
   <data name="ConfigurationItemModelFileLabel" xml:space="preserve">
     <value>File</value>
     <comment>EncryptPart</comment>
@@ -230,14 +214,6 @@
     <value>Please select</value>
     <comment>EncryptPart</comment>
   </data>
-  <data name="LoadConfigurationCommandLabel" xml:space="preserve">
-    <value>Load</value>
-    <comment>EncryptPart</comment>
-  </data>
-  <data name="LoadConfigurationCommandToolTip" xml:space="preserve">
-    <value>Load configuration file</value>
-    <comment>EncryptPart</comment>
-  </data>
   <data name="OutputFileExists" xml:space="preserve">
     <value>Output file exists</value>
   </data>
@@ -268,22 +244,6 @@
   </data>
   <data name="OutputFolderWatermark" xml:space="preserve">
     <value>Output Folder</value>
-  </data>
-  <data name="PasswordIsRequired" xml:space="preserve">
-    <value>Password is required</value>
-    <comment>EncryptPart</comment>
-  </data>
-  <data name="PasswordLabel" xml:space="preserve">
-    <value>Password</value>
-    <comment>EncryptPart</comment>
-  </data>
-  <data name="PasswordToolTip" xml:space="preserve">
-    <value>Password to encrypt the configuration file.</value>
-    <comment>EncryptPart</comment>
-  </data>
-  <data name="PasswordWatermark" xml:space="preserve">
-    <value>Password</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="RsaKeys" xml:space="preserve">
     <value>RSA Keys</value>

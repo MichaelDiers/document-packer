@@ -123,18 +123,6 @@
   <data name="AttachFileToolTip" xml:space="preserve">
     <value>Datei hinzufügen.</value>
   </data>
-  <data name="ConfigurationFileDoesNotExist" xml:space="preserve">
-    <value>Konfigurationsdatei existiert nicht</value>
-  </data>
-  <data name="ConfigurationFileLabel" xml:space="preserve">
-    <value>Configuration File</value>
-  </data>
-  <data name="ConfigurationFileToolTip" xml:space="preserve">
-    <value>Public Document Packer Configuration File</value>
-  </data>
-  <data name="ConfigurationFileWatermark" xml:space="preserve">
-    <value>Public Configuration File</value>
-  </data>
   <data name="ConfigurationItemModelFileLabel" xml:space="preserve">
     <value>Datei</value>
   </data>
@@ -204,12 +192,6 @@
   <data name="ItemTypeComboBoxWatermark" xml:space="preserve">
     <value>Bitte auswählen</value>
   </data>
-  <data name="LoadConfigurationCommandLabel" xml:space="preserve">
-    <value>Laden</value>
-  </data>
-  <data name="LoadConfigurationCommandToolTip" xml:space="preserve">
-    <value>Lade Konfigurationsdatei</value>
-  </data>
   <data name="OutputFileExists" xml:space="preserve">
     <value>Ausgabedatei existiert bereits</value>
   </data>
@@ -239,18 +221,6 @@
   </data>
   <data name="OutputFolderWatermark" xml:space="preserve">
     <value>Ausgabeverzeichnis</value>
-  </data>
-  <data name="PasswordIsRequired" xml:space="preserve">
-    <value>Bitte gebe das Passwort  ein</value>
-  </data>
-  <data name="PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
-  </data>
-  <data name="PasswordToolTip" xml:space="preserve">
-    <value>Passwort für die Konfigurationsdatei</value>
-  </data>
-  <data name="PasswordWatermark" xml:space="preserve">
-    <value>Passwort</value>
   </data>
   <data name="RsaKeys" xml:space="preserve">
     <value>RSA Schlüssel</value>
