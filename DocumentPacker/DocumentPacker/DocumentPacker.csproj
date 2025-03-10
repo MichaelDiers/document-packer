@@ -29,6 +29,7 @@
     <None Remove="Assets\material_symbol_home.png" />
     <None Remove="Assets\material_symbol_key.png" />
     <None Remove="Assets\material_symbol_language.png" />
+    <None Remove="Assets\material_symbol_refresh.png" />
     <None Remove="Assets\material_symbol_save.png" />
     <None Remove="Assets\material_symbol_unfold_more.png" />
   </ItemGroup>
@@ -85,9 +86,9 @@
     <Content Include="Assets\material_symbol_expand_96dp.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\material_symbol_file_open.png">
+    <Resource Include="Assets\material_symbol_file_open.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Content Include="Assets\material_symbol_folder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -97,16 +98,16 @@
     <Content Include="Assets\material_symbol_language.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\material_symbol_save.png">
+    <Resource Include="Assets\material_symbol_save.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Resource>
     <Content Include="Assets\material_symbol_unfold_more.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Libs.Wpf" Version="1.0.40" />
+    <PackageReference Include="Libs.Wpf" Version="1.0.41" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
@@ -117,6 +118,11 @@
 	    
 	
   <ItemGroup>
+    <Compile Update="Commands\CommandTranslations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommandTranslations.resx</DependentUpon>
+    </Compile>
     <Compile Update="Parts2\Main\DecryptPart\DecryptView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -200,6 +206,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Commands\CommandTranslations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommandTranslations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Parts\FooterPart\FooterPartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FooterPartTranslation.Designer.cs</LastGenOutput>
@@ -254,6 +264,9 @@
 
   <ItemGroup>
     <Resource Include="Assets\material_symbol_key.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\material_symbol_refresh.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

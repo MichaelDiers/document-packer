@@ -13,10 +13,12 @@ public class DocumentPackerConfigurationFileServiceTests : IDisposable
             new ConfigurationItemModel(
                 ConfigurationItemType.File,
                 true,
+                Guid.NewGuid().ToString(),
                 Guid.NewGuid().ToString()),
             new ConfigurationItemModel(
                 ConfigurationItemType.Text,
                 false,
+                Guid.NewGuid().ToString(),
                 Guid.NewGuid().ToString())
         ],
         Guid.NewGuid().ToString(),
