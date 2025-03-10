@@ -78,7 +78,8 @@ internal class EncryptViewModel : ApplicationBaseViewModel
 
         this.loadConfigurationViewModel = new LoadConfigurationViewModel(
             commandFactory,
-            configurationFileService);
+            configurationFileService,
+            false);
         this.loadConfigurationViewModel.ConfigurationLoaded += this.OnConfigurationLoaded;
         this.loadConfigurationViewModel.ConfigurationInvalidated += this.OnConfigurationInvalidated;
 
