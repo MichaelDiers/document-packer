@@ -3,11 +3,13 @@
 using DocumentPacker.EventHandling;
 using Libs.Wpf.ViewModels;
 
-internal class ApplicationBaseViewModel : ValidatorViewModelBase, IApplicationViewModel
+internal class ApplicationBaseViewModel : ViewModelBase, IApplicationViewModel
 {
     public event EventHandler<BackLinkEventArgs>? BackLinkCreated;
 
-    /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+    /// <summary>
+    ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
     public virtual void Dispose()
     {
         this.BackLinkCreated = null;
