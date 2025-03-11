@@ -1,8 +1,8 @@
 ﻿namespace DocumentPacker.Parts.Main.FeaturesPart;
 
 using System.Collections.ObjectModel;
-using System.Windows.Media.Imaging;
 using DocumentPacker.EventHandling;
+using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
 using DocumentPacker.Parts.Main.DecryptPart;
@@ -17,33 +17,26 @@ using Libs.Wpf.ViewModels;
 internal class FeaturesViewModel : ApplicationBaseViewModel
 {
     /// <summary>
-    ///     The features.
-    /// </summary>
-    private ObservableCollection<TranslatableFeaturesButton> features;
-
-    /// <summary>
-    ///     The description of the view.
-    /// </summary>
-    private Translatable viewDescription = new(
-        FeaturesPartTranslation.ResourceManager,
-        nameof(FeaturesPartTranslation.Description));
-
-    /// <summary>
-    ///     The headline of the view.
-    /// </summary>
-    private Translatable viewHeadline = new(
-        FeaturesPartTranslation.ResourceManager,
-        nameof(FeaturesPartTranslation.Headline));
-
-    /// <summary>
     ///     View model of the <see cref="FeaturesView" />.
     /// </summary>
     /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
     public FeaturesViewModel(ICommandFactory commandFactory)
     {
-        this.features = new ObservableCollection<TranslatableFeaturesButton>(
+        this.Features = new ObservableCollection<TranslatableFeaturesButton>(
             new[]
             {
+                new TranslatableFeaturesButton(
+                    commandFactory.CreateSyncCommand(
+                        _ =>
+                        {
+                            this.InvokeShowViewRequested(
+                                this,
+                                new ShowViewRequestedEventArgs(ApplicationElementPart.CreateConfiguration));
+                        }),
+                    "material_symbol_edit_square_96dp.png".ToBitmapImage(),
+                    CreateConfigurationPartTranslation.ResourceManager,
+                    nameof(CreateConfigurationPartTranslation.Headline),
+                    descriptionResourceKey: nameof(CreateConfigurationPartTranslation.Description)),
                 new TranslatableFeaturesButton(
                     commandFactory.CreateSyncCommand(
                         _ => true,
@@ -53,10 +46,7 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                                 this,
                                 new ShowViewRequestedEventArgs(ApplicationElementPart.EncryptFeature));
                         }),
-                    new BitmapImage(
-                        new Uri(
-                            "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_compress_96dp.png",
-                            UriKind.Absolute)),
+                    "material_symbol_compress_96dp.png".ToBitmapImage(),
                     EncryptPartTranslation.ResourceManager,
                     nameof(EncryptPartTranslation.Headline),
                     descriptionResourceKey: nameof(EncryptPartTranslation.Description)),
@@ -69,65 +59,29 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                                 this,
                                 new ShowViewRequestedEventArgs(ApplicationElementPart.DecryptFeature));
                         }),
-                    new BitmapImage(
-                        new Uri(
-                            "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_expand_96dp.png",
-                            UriKind.Absolute)),
+                    "material_symbol_expand_96dp.png".ToBitmapImage(),
                     DecryptPartTranslation.ResourceManager,
                     nameof(DecryptPartTranslation.Headline),
-                    descriptionResourceKey: nameof(DecryptPartTranslation.Description)),
-                new TranslatableFeaturesButton(
-                    commandFactory.CreateSyncCommand(
-                        _ => true,
-                        _ =>
-                        {
-                            this.InvokeShowViewRequested(
-                                this,
-                                new ShowViewRequestedEventArgs(ApplicationElementPart.CreateConfiguration));
-                        }),
-                    new BitmapImage(
-                        new Uri(
-                            "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_edit_square_96dp.png",
-                            UriKind.Absolute)),
-                    CreateConfigurationPartTranslation.ResourceManager,
-                    nameof(CreateConfigurationPartTranslation.Headline),
-                    descriptionResourceKey: nameof(CreateConfigurationPartTranslation.Description))
+                    descriptionResourceKey: nameof(DecryptPartTranslation.Description))
             });
     }
 
     /// <summary>
-    ///     Gets or sets the features.
+    ///     Gets the list of features.
     /// </summary>
-    public ObservableCollection<TranslatableFeaturesButton> Features
-    {
-        get => this.features;
-        set =>
-            this.SetField(
-                ref this.features,
-                value);
-    }
+    public ObservableCollection<TranslatableFeaturesButton> Features { get; }
 
     /// <summary>
-    ///     Gets or sets the description of the view.
+    ///     Gets the description of the view.
     /// </summary>
-    public Translatable ViewDescription
-    {
-        get => this.viewDescription;
-        set =>
-            this.SetField(
-                ref this.viewDescription,
-                value);
-    }
+    public Translatable ViewDescription { get; } = new(
+        FeaturesPartTranslation.ResourceManager,
+        nameof(FeaturesPartTranslation.Description));
 
     /// <summary>
-    ///     Gets or sets the headline of the view.
+    ///     Gets the headline of the view.
     /// </summary>
-    public Translatable ViewHeadline
-    {
-        get => this.viewHeadline;
-        set =>
-            this.SetField(
-                ref this.viewHeadline,
-                value);
-    }
+    public Translatable ViewHeadline { get; } = new(
+        FeaturesPartTranslation.ResourceManager,
+        nameof(FeaturesPartTranslation.Headline));
 }

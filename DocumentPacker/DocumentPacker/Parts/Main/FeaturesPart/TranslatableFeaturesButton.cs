@@ -54,7 +54,7 @@ internal class TranslatableFeaturesButton : TranslatableButton<ICommand>
     public string? DescriptionTranslation
     {
         get => this.descriptionTranslation;
-        set =>
+        private set =>
             this.SetField(
                 ref this.descriptionTranslation,
                 value);
