@@ -75,7 +75,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The password.
     /// </summary>
-    private Translatable password = new(
+    private TranslatableAndValidablePasswordBox password = new(
+        null,
+        pwd => string.IsNullOrWhiteSpace(pwd) ? nameof(CreateConfigurationPartTranslation.PasswordIsRequired) : null,
         CreateConfigurationPartTranslation.ResourceManager,
         nameof(CreateConfigurationPartTranslation.PasswordLabel),
         nameof(CreateConfigurationPartTranslation.PasswordToolTip),
@@ -359,7 +361,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the password.
     /// </summary>
-    public Translatable Password
+    public TranslatableAndValidablePasswordBox Password
     {
         get => this.password;
         set =>
@@ -500,31 +502,15 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             isValid = isValid && createConfigurationItemViewModel.IsValid();
         }
 
-        if (passwordBox is not null)
-        {
-            this.Password.ErrorResourceKey = string.IsNullOrWhiteSpace(passwordBox.Password)
-                ? nameof(CreateConfigurationPartTranslation.PasswordIsRequired)
-                : null;
-        }
-
         this.Description.Validate();
         this.OutputFolder.Validate();
+        this.Password.Validate(passwordBox?.Password);
         this.PrivateOutputFile.Validate();
         this.PrivateOutputFileExtension.Validate();
         this.PublicOutputFile.Validate();
         this.PublicOutputFileExtension.Validate();
         this.RsaPrivateKey.Validate();
         this.RsaPublicKey.Validate();
-
-        if (string.IsNullOrWhiteSpace(this.RsaPublicKey.ErrorResourceKey) &&
-            string.IsNullOrWhiteSpace(this.RsaPrivateKey.ErrorResourceKey) &&
-            !this.rsaService.ValidateKeys(
-                this.RsaPrivateKey.Value,
-                this.RsaPublicKey.Value))
-        {
-            this.RsaPublicKey.ErrorResourceKey = nameof(CreateConfigurationPartTranslation.RsaKeysInvalid);
-            this.RsaPrivateKey.ErrorResourceKey = nameof(CreateConfigurationPartTranslation.RsaKeysInvalid);
-        }
 
         return isValid &&
                string.IsNullOrWhiteSpace(this.Description.ErrorResourceKey) &&

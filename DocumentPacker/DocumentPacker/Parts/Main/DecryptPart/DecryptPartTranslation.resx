@@ -6,7 +6,7 @@
     Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
-    that is mostly human-readable. The generation and parsing of the 
+    that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
@@ -117,11 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DecryptCommandLabel" xml:space="preserve">
+    <value>Decrypt</value>
+  </data>
+  <data name="DecryptCommandToolTip" xml:space="preserve">
+    <value>Decrypt and unpack the Document Packer file.</value>
+  </data>
   <data name="Description" xml:space="preserve">
-    <value>Have you been sent an encrypted Document Packer file?
-Decrypt the Document Packer file with your private key. View or save the decrypted files.</value>
+    <value>Have you been sent an encrypted Document Packer file? Decrypt the Document Packer file with your private key. View or save the decrypted files.</value>
+  </data>
+  <data name="EncryptedFileDoesNotExist" xml:space="preserve">
+    <value>The file does not exist.</value>
+  </data>
+  <data name="EncryptedFileIsRequired" xml:space="preserve">
+    <value>File is required.</value>
+  </data>
+  <data name="EncryptedFileLabel" xml:space="preserve">
+    <value>Encrypted Document Packer file</value>
+  </data>
+  <data name="EncryptedFileToolTip" xml:space="preserve">
+    <value>Please select the enrypted Document Packer file.</value>
+  </data>
+  <data name="EncryptedFileWatermark" xml:space="preserve">
+    <value>*.dp</value>
   </data>
   <data name="Headline" xml:space="preserve">
     <value>Decrypt</value>
+  </data>
+  <data name="OutputFolderDoesNotExist" xml:space="preserve">
+    <value>Folder does not exist.</value>
+  </data>
+  <data name="OutputFolderIsRequired" xml:space="preserve">
+    <value>Folder is required.</value>
+  </data>
+  <data name="OutputFolderLabel" xml:space="preserve">
+    <value>Output Folder</value>
+  </data>
+  <data name="OutputFolderToolTip" xml:space="preserve">
+    <value>The data of the encrypted file is extracted to this folder.</value>
+  </data>
+  <data name="OutputFolderWatermark" xml:space="preserve">
+    <value>output folder</value>
+  </data>
+  <data name="PrivateRsaKeyIsRequired" xml:space="preserve">
+    <value>Private RSA key is required.</value>
+  </data>
+  <data name="PrivateRsaKeyLabel" xml:space="preserve">
+    <value>Private RSA Key</value>
+  </data>
+  <data name="PrivateRsaKeyToolTip" xml:space="preserve">
+    <value>The private RSA key to decrypt the Document Packer file.</value>
+  </data>
+  <data name="PrivateRsaKeyWatermark" xml:space="preserve">
+    <value>private RSA key</value>
   </data>
 </root>

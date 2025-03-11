@@ -11,7 +11,7 @@ using DocumentPacker.Services.PackerStream;
 /// <seealso cref="DocumentPacker.Services.DocumentUnpackerService.IArchiveSetup" />
 /// <seealso cref="DocumentPacker.Services.DocumentUnpackerService.IRsaSetup" />
 /// <seealso cref="DocumentPacker.Services.DocumentUnpackerService.IAesSetup" />
-internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpackerService
+internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpackerService, IExecute
 {
     /// <summary>
     ///     The aes padding mode.
@@ -45,22 +45,33 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
     /// <returns>A <see cref="Task" /> whose result indicates success.</returns>
     public async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        using var zipArchive = this.OpenReadZipFile();
+        try
+        {
+            using var zipArchive = this.OpenReadZipFile();
 
-        var aesKey = await this.ReadAesKeyAsync(
-            zipArchive,
-            nameof(Aes),
-            cancellationToken);
+            var aesKey = await this.ReadAesKeyAsync(
+                zipArchive,
+                nameof(Aes),
+                cancellationToken);
 
-        using var aes = this.InitializeAes(aesKey);
+            using var aes = this.InitializeAes(aesKey);
 
-        var destination = this.HandleUnpackDestination();
+            var destination = this.HandleUnpackDestination();
 
-        await DocumentUnpackerService.Unpack(
-            zipArchive,
-            aes,
-            destination,
-            cancellationToken);
+            await DocumentUnpackerService.Unpack(
+                zipArchive,
+                aes,
+                destination,
+                cancellationToken);
+        }
+        finally
+        {
+            this.aesPaddingMode = null;
+            this.archiveFile = null;
+            this.rsaPadding = null;
+            this.rsaPrivateKeyPem = null;
+            this.unpackDestination = null;
+        }
     }
 
     /// <summary>
@@ -68,7 +79,7 @@ internal class DocumentUnpackerService : IRsaSetup, IAesSetup, IDocumentUnpacker
     /// </summary>
     /// <param name="paddingMode">The aes paddingMode mode.</param>
     /// <returns>A reference to <see cref="IAesSetup" />.</returns>
-    public IAesSetup SetupAes(PaddingMode paddingMode = PaddingMode.PKCS7)
+    public IExecute SetupAes(PaddingMode paddingMode = PaddingMode.PKCS7)
     {
         DocumentUnpackerService.SetIfNull(
             ref this.aesPaddingMode,

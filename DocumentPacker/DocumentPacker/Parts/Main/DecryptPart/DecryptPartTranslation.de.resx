@@ -6,7 +6,7 @@
     Version 2.0
     
     The primary goals of this format is to allow a simple XML format 
-    that is mostly human-readable. The generation and parsing of the 
+    that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
     
@@ -117,11 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DecryptCommandLabel" xml:space="preserve">
+    <value>Entpacken</value>
+  </data>
+  <data name="DecryptCommandToolTip" xml:space="preserve">
+    <value>Entschlüssle and Entpacke die Document Packer Datei.</value>
+  </data>
   <data name="Description" xml:space="preserve">
-    <value>Du hast eine verschlüsselte Document Packer Datei zugesendet bekommen?
-Entschlüssele die Document Packer-Datei mit Deinem privaten Schlüssel. Sieh Dir die entschlüsselten Dateien an oder speichere diese ab.</value>
+    <value>Du hast eine verschlüsselte Document Packer Datei zugesendet bekommen? Entschlüssele die Document Packer-Datei mit Deinem privaten Schlüssel. Sieh Dir die entschlüsselten Dateien an oder speichere diese ab.</value>
+  </data>
+  <data name="EncryptedFileDoesNotExist" xml:space="preserve">
+    <value>Die Datei existiert nicht.</value>
+  </data>
+  <data name="EncryptedFileIsRequired" xml:space="preserve">
+    <value>Bitte gebe eine Datei an.</value>
+  </data>
+  <data name="EncryptedFileLabel" xml:space="preserve">
+    <value>Verschlüsselte Document Packer Datei</value>
+  </data>
+  <data name="EncryptedFileToolTip" xml:space="preserve">
+    <value>Bitte wähle die verschlüsselte Document Packer Datei aus.</value>
+  </data>
+  <data name="EncryptedFileWatermark" xml:space="preserve">
+    <value>*.dp</value>
   </data>
   <data name="Headline" xml:space="preserve">
     <value>Entschlüsseln</value>
+  </data>
+  <data name="OutputFolderDoesNotExist" xml:space="preserve">
+    <value>Das Verzeichnis existiert nicht.</value>
+  </data>
+  <data name="OutputFolderIsRequired" xml:space="preserve">
+    <value>Bitte gebe ein Verzeichnis an.</value>
+  </data>
+  <data name="OutputFolderLabel" xml:space="preserve">
+    <value>Ausgabeverzeichnis</value>
+  </data>
+  <data name="OutputFolderToolTip" xml:space="preserve">
+    <value>Dateien werden in dieses Verzeichnis entpackt.</value>
+  </data>
+  <data name="OutputFolderWatermark" xml:space="preserve">
+    <value>Ausgabeverzeichnis</value>
+  </data>
+  <data name="PrivateRsaKeyIsRequired" xml:space="preserve">
+    <value>Privater RSA Schlüssel wird benötigt.</value>
+  </data>
+  <data name="PrivateRsaKeyLabel" xml:space="preserve">
+    <value>Privater RSA Schlüssel</value>
+  </data>
+  <data name="PrivateRsaKeyToolTip" xml:space="preserve">
+    <value>Der private RSA Schlüssel zur Entschlüsselung der Document Packer Datei.</value>
+  </data>
+  <data name="PrivateRsaKeyWatermark" xml:space="preserve">
+    <value>privater RSA Schlüssel</value>
   </data>
 </root>

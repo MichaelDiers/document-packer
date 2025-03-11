@@ -61,12 +61,74 @@ namespace DocumentPacker.Parts.Main.DecryptPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Have you been sent an encrypted Document Packer file?
-        ///Decrypt the Document Packer file with your private key. View or save the decrypted files..
+        ///   Looks up a localized string similar to Decrypt.
+        /// </summary>
+        public static string DecryptCommandLabel {
+            get {
+                return ResourceManager.GetString("DecryptCommandLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypt and unpack the Document Packer file..
+        /// </summary>
+        public static string DecryptCommandToolTip {
+            get {
+                return ResourceManager.GetString("DecryptCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Have you been sent an encrypted Document Packer file? Decrypt the Document Packer file with your private key. View or save the decrypted files..
         /// </summary>
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The file does not exist..
+        /// </summary>
+        public static string EncryptedFileDoesNotExist {
+            get {
+                return ResourceManager.GetString("EncryptedFileDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File is required..
+        /// </summary>
+        public static string EncryptedFileIsRequired {
+            get {
+                return ResourceManager.GetString("EncryptedFileIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypted Document Packer file.
+        /// </summary>
+        public static string EncryptedFileLabel {
+            get {
+                return ResourceManager.GetString("EncryptedFileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the enrypted Document Packer file..
+        /// </summary>
+        public static string EncryptedFileToolTip {
+            get {
+                return ResourceManager.GetString("EncryptedFileToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *.dp.
+        /// </summary>
+        public static string EncryptedFileWatermark {
+            get {
+                return ResourceManager.GetString("EncryptedFileWatermark", resourceCulture);
             }
         }
         
@@ -76,6 +138,87 @@ namespace DocumentPacker.Parts.Main.DecryptPart {
         public static string Headline {
             get {
                 return ResourceManager.GetString("Headline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder does not exist..
+        /// </summary>
+        public static string OutputFolderDoesNotExist {
+            get {
+                return ResourceManager.GetString("OutputFolderDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder is required..
+        /// </summary>
+        public static string OutputFolderIsRequired {
+            get {
+                return ResourceManager.GetString("OutputFolderIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Folder.
+        /// </summary>
+        public static string OutputFolderLabel {
+            get {
+                return ResourceManager.GetString("OutputFolderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data of the encrypted file is extracted to this folder..
+        /// </summary>
+        public static string OutputFolderToolTip {
+            get {
+                return ResourceManager.GetString("OutputFolderToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to output folder.
+        /// </summary>
+        public static string OutputFolderWatermark {
+            get {
+                return ResourceManager.GetString("OutputFolderWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private RSA key is required..
+        /// </summary>
+        public static string PrivateRsaKeyIsRequired {
+            get {
+                return ResourceManager.GetString("PrivateRsaKeyIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private RSA Key.
+        /// </summary>
+        public static string PrivateRsaKeyLabel {
+            get {
+                return ResourceManager.GetString("PrivateRsaKeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The private RSA key to decrypt the Document Packer file..
+        /// </summary>
+        public static string PrivateRsaKeyToolTip {
+            get {
+                return ResourceManager.GetString("PrivateRsaKeyToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to private RSA key.
+        /// </summary>
+        public static string PrivateRsaKeyWatermark {
+            get {
+                return ResourceManager.GetString("PrivateRsaKeyWatermark", resourceCulture);
             }
         }
     }

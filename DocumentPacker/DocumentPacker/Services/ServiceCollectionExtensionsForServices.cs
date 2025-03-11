@@ -24,6 +24,8 @@ public static class ServiceCollectionExtensionsForServices
         services.TryAddSingleton<IDocumentPackerService, DocumentPackerService.DocumentPackerService>();
         services.TryAddSingleton<IEncryptService, EncryptService>();
         services.TryAddSingleton<IRsaService, RsaService>();
+        services.TryAddSingleton<IDocumentUnpackerService, DocumentUnpackerService.DocumentUnpackerService>();
+        services.TryAddSingleton<IDecryptService, DecryptService>();
         return services.TryAddZipServices().TryAddCryptoServices().TryAddPackerServices();
     }
 
