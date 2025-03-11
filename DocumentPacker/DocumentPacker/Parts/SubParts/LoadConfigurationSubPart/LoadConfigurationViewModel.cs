@@ -39,7 +39,9 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     /// <summary>
     ///     The password to decrypt the document packer configuration file.
     /// </summary>
-    private Translatable password = new(
+    private TranslatableAndValidablePasswordBox password = new(
+        null,
+        pwd => string.IsNullOrWhiteSpace(pwd) ? nameof(LoadConfigurationTranslation.PasswordIsRequired) : null,
         LoadConfigurationTranslation.ResourceManager,
         nameof(LoadConfigurationTranslation.PasswordLabel),
         nameof(LoadConfigurationTranslation.PasswordToolTip),
@@ -151,7 +153,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     /// <summary>
     ///     Gets or sets the password.
     /// </summary>
-    public Translatable Password
+    public TranslatableAndValidablePasswordBox Password
     {
         get => this.password;
         set =>
@@ -211,13 +213,9 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     private bool LoadConfigurationCommandCanExecute(PasswordBox? passwordBox)
     {
         this.ConfigurationFile.Validate();
+        this.Password.Validate(passwordBox?.Password);
 
-        this.Password.ErrorResourceKey = string.IsNullOrWhiteSpace(passwordBox?.Password)
-            ? nameof(LoadConfigurationTranslation.PasswordIsRequired)
-            : null;
-
-        return string.IsNullOrWhiteSpace(this.ConfigurationFile.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.Password.ErrorResourceKey);
+        return !this.ConfigurationFile.HasError && !this.Password.HasError;
     }
 
     /// <summary>
