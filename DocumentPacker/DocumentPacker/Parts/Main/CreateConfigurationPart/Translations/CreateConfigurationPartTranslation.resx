@@ -119,218 +119,200 @@
   </resheader>
   <data name="Description" xml:space="preserve">
     <value>Make a list of required files and information. Save the list as a configuration and share it with other Document Packer users.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="Headline" xml:space="preserve">
     <value>Create Configuration</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Description</value>
-    <comment>CreateConfiguration</comment>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="DescriptionToolTip" xml:space="preserve">
-    <value>Describe the new Document Packer configuration.</value>
-    <comment>CreateConfiguration</comment>
+    <value>Describe the new Document Packer configuration. The description will be displayed when encrypting files.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="DescriptionWatermark" xml:space="preserve">
-    <value>short description of the configuration</value>
-    <comment>CreateConfiguration</comment>
+    <value>description of the configuration</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="RsaPrivateKeyLabel" xml:space="preserve">
     <value>RSA Private Key</value>
-    <comment>CreateConfiguration</comment>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="RsaPublicKeyLabel" xml:space="preserve">
     <value>RSA Public Key</value>
-    <comment>CreateConfiguration</comment>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="RsaPrivateKeyButtonToolTip" xml:space="preserve">
     <value>Add the private RSA key.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="RsaPublicKeyButtonToolTip" xml:space="preserve">
     <value>Add the RSA public key.</value>
-    <comment>CreateConfiguration</comment>
   </data>
-  <data name="RsaPrivateKeyTextBoxToolTip" xml:space="preserve">
-    <value>The pem formatted private RSA key.</value>
-    <comment>CreateConfiguration</comment>
+  <data name="RsaPrivateKeyToolTip" xml:space="preserve">
+    <value>The pem formatted private RSA key:
+
+-----BEGIN RSA PRIVATE KEY-----
+MIIJJwIBAAKCAgEAwYzNBVaGz1XT...
+-----END RSA PRIVATE KEY-----</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="RsaPublicKeyTextBoxToolTip" xml:space="preserve">
-    <value>The pem formatted public RSA key.</value>
-    <comment>CreateConfiguration</comment>
+  <data name="RsaPublicKeyToolTip" xml:space="preserve">
+    <value>The pem formatted public RSA key:
+
+-----BEGIN RSA PUBLIC KEY-----
+MIICCgKCAgEA...
+-----END RSA PUBLIC KEY-----</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="RsaPrivateKeyTextBoxWatermark" xml:space="preserve">
+  <data name="RsaPrivateKeyWatermark" xml:space="preserve">
     <value>PEM formatted private RSA key</value>
-    <comment>CreateConfiguration</comment>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="RsaPublicKeyTextBoxWatermark" xml:space="preserve">
+  <data name="RsaPublicKeyWatermark" xml:space="preserve">
     <value>PEM formatted public RSA key</value>
-    <comment>CreateConfiguration</comment>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="GenerateRsaKeysToolTip" xml:space="preserve">
+  <data name="GenerateRsaKeysCommandToolTip" xml:space="preserve">
     <value>Generate a new pair of RSA private and public keys.</value>
-    <comment>CreateConfiguration</comment>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ItemDescriptionErrorIsRequired" xml:space="preserve">
     <value>A description is required.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="ItemDescriptionLabel" xml:space="preserve">
     <value>Description</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="ItemDescriptionToolTip" xml:space="preserve">
     <value>A short description of the configuration item.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="ItemDescriptionWatermark" xml:space="preserve">
     <value>Description of the item</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="DeleteDescriptionItemToolTip" xml:space="preserve">
     <value>Delete the configuration item.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="DescriptionErrorIsRequired" xml:space="preserve">
     <value>A description is required.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="AddConfigurationItemToolTip" xml:space="preserve">
     <value>Add a new configuration item.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="ConfigurationItemTypeLabel" xml:space="preserve">
     <value>Type of the Item</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="ConfigurationItemTypeWatermark" xml:space="preserve">
     <value>Please select</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="ConfigurationItemTypeFile" xml:space="preserve">
     <value>File</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="ConfigurationItemTypeText" xml:space="preserve">
     <value>Text</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="OpenFileDialogToolTip" xml:space="preserve">
     <value>Select a file to add.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="IsRequiredLabel" xml:space="preserve">
     <value>Required</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
     <value>Password (optional)</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="SaveLabel" xml:space="preserve">
     <value>Save</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="SaveToolTip" xml:space="preserve">
     <value>Save the public and private configuration files.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="SelectedConfigurationItemTypeMissing" xml:space="preserve">
     <value>Please select.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="RsaPrivateKeyIsRequired" xml:space="preserve">
-    <value>RSA key is required.</value>
-    <comment>CreateConfiguration</comment>
+    <value>Private RSA key is required.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="RsaPublicKeyIsRequired" xml:space="preserve">
-    <value>RSA key is required.</value>
-    <comment>CreateConfiguration</comment>
+    <value>Public RSA key is required.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="OutputFolderLabel" xml:space="preserve">
     <value>Output Folder</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="OutputFolderTextBoxToolTip" xml:space="preserve">
     <value>The output folder of the Document Packer configuration file.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="OutputFolderTextBoxWatermark" xml:space="preserve">
     <value>Output folder</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="OutputFolderButtonToolTip" xml:space="preserve">
     <value>Select the output folder</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PrivateOutputFileLabel" xml:space="preserve">
     <value>Private Output File</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PrivateOutputFileIsRequired" xml:space="preserve">
     <value>File is required.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PrivateOutputFileToolTip" xml:space="preserve">
     <value>Please specify the name of the private Document Packer configuration file.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PrivateOutputFileWatermark" xml:space="preserve">
     <value>Private output configuration file</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PrivateOutputFileExtensionToolTip" xml:space="preserve">
     <value>The predefined file extension of the private Document Packer configuration file.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PublicOutputFileLabel" xml:space="preserve">
     <value>Public Output File</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PublicOutputFileToolTip" xml:space="preserve">
     <value>Please specify the name of the public Document Packer configuration file.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PublicOutputFileWatermark" xml:space="preserve">
     <value>Public output configuration file</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PublicOutputFileIsRequired" xml:space="preserve">
     <value>File is required.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PublicOutputFileExtensionToolTip" xml:space="preserve">
     <value>The predefined file extension of the public Document Packer configuration file.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="OutputFolderIsRequired" xml:space="preserve">
     <value>Please select the output folder.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PasswordToolTip" xml:space="preserve">
     <value>Specify a password to protect the configuration files.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PasswordWatermark" xml:space="preserve">
     <value>Password</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="PasswordIsRequired" xml:space="preserve">
     <value>A password is required.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="RsaKeysInvalid" xml:space="preserve">
     <value>Private and public keys do not match.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="SaveConfigurationSucceeds" xml:space="preserve">
     <value>Configuration files created.</value>
-    <comment>CreateConfiguration</comment>
   </data>
   <data name="SaveConfigurationFails" xml:space="preserve">
     <value>Cannot create configuration files.</value>
-    <comment>CreateConfiguration</comment>
+  </data>
+  <data name="GenerateRsaKeysCommandUnknownError" xml:space="preserve">
+    <value>Ooooops...an unexpected error occured: </value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="GenerateRsaKeysCommandCaption" xml:space="preserve">
+    <value>Error</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="RsaPrivateKeyFormatError" xml:space="preserve">
+    <value>Format of the private key is invalid.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="RsaPublicKeyFormatError" xml:space="preserve">
+    <value>Format of the public key is invalid.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
 </root>

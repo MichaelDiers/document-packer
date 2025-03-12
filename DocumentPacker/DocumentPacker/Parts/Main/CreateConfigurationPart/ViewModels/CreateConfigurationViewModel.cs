@@ -3,10 +3,12 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
+using DocumentPacker.Commands;
+using DocumentPacker.Extensions;
 using DocumentPacker.Models;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
@@ -21,23 +23,39 @@ using Libs.Wpf.ViewModels;
 /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
 internal class CreateConfigurationViewModel : ApplicationBaseViewModel
 {
-    private readonly IDocumentPackerConfigurationFileService documentPackerConfigurationFileService;
-    private readonly IRsaService rsaService;
+    /// <summary>
+    ///     A pattern to match the rsa private key format.
+    /// </summary>
+    private const string PrivatePemPattern = "^-----BEGIN RSA PRIVATE KEY-----.+?-----END RSA PRIVATE KEY-----$";
 
     /// <summary>
-    ///     The command to add a new configuration item.
+    ///     A pattern to match the rsa public key format.
     /// </summary>
-    private TranslatableButton<ICommand> addConfigurationItemCommand;
+    private const string PublicPemPattern = "^-----BEGIN RSA PUBLIC KEY-----.+?-----END RSA PUBLIC KEY-----$";
+
+    /// <summary>
+    ///     A regex to match the rsa private key format.
+    /// </summary>
+    private static readonly Regex PrivatePemRegex = new(
+        CreateConfigurationViewModel.PrivatePemPattern,
+        RegexOptions.Singleline);
+
+    /// <summary>
+    ///     A regex to match the rsa public key format.
+    /// </summary>
+    private static readonly Regex PublicPemRegex = new(
+        CreateConfigurationViewModel.PublicPemPattern,
+        RegexOptions.Singleline);
+
+    /// <summary>
+    ///     A service for creating a document packer configuration file.
+    /// </summary>
+    private readonly IDocumentPackerConfigurationFileService documentPackerConfigurationFileService;
 
     /// <summary>
     ///     The configuration items.
     /// </summary>
     private ObservableCollection<CreateConfigurationItemViewModel> configurationItems = new();
-
-    /// <summary>
-    ///     The command to delete a configuration item.
-    /// </summary>
-    private TranslatableButton<ICommand> deleteConfigurationItemCommand;
 
     /// <summary>
     ///     The description of the configuration.
@@ -52,11 +70,6 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
         nameof(CreateConfigurationPartTranslation.DescriptionLabel),
         nameof(CreateConfigurationPartTranslation.DescriptionToolTip),
         nameof(CreateConfigurationPartTranslation.DescriptionWatermark));
-
-    /// <summary>
-    ///     A command to generate RSA keys.
-    /// </summary>
-    private TranslatableButton<ICommand> generateRsaKeysCommand;
 
     /// <summary>
     ///     The output folder.
@@ -138,38 +151,50 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// </summary>
     private TranslatableAndValidable<string> rsaPrivateKey = new(
         null,
-        data => string.IsNullOrWhiteSpace(data.Value)
-            ? nameof(CreateConfigurationPartTranslation.RsaPrivateKeyIsRequired)
-            : null,
+        data =>
+        {
+            if (string.IsNullOrWhiteSpace(data.Value))
+            {
+                return nameof(CreateConfigurationPartTranslation.RsaPrivateKeyIsRequired);
+            }
+
+            if (!CreateConfigurationViewModel.PrivatePemRegex.IsMatch(data.Value))
+            {
+                return nameof(CreateConfigurationPartTranslation.RsaPrivateKeyFormatError);
+            }
+
+            return null;
+        },
         false,
         CreateConfigurationPartTranslation.ResourceManager,
         nameof(CreateConfigurationPartTranslation.RsaPrivateKeyLabel),
-        nameof(CreateConfigurationPartTranslation.RsaPrivateKeyTextBoxToolTip),
-        nameof(CreateConfigurationPartTranslation.RsaPrivateKeyTextBoxWatermark));
+        nameof(CreateConfigurationPartTranslation.RsaPrivateKeyToolTip),
+        nameof(CreateConfigurationPartTranslation.RsaPrivateKeyWatermark));
 
     /// <summary>
     ///     The public rsa key in pem format.
     /// </summary>
     private TranslatableAndValidable<string> rsaPublicKey = new(
         null,
-        data => string.IsNullOrWhiteSpace(data.Value)
-            ? nameof(CreateConfigurationPartTranslation.RsaPublicKeyIsRequired)
-            : null,
+        data =>
+        {
+            if (string.IsNullOrWhiteSpace(data.Value))
+            {
+                return nameof(CreateConfigurationPartTranslation.RsaPublicKeyIsRequired);
+            }
+
+            if (!CreateConfigurationViewModel.PublicPemRegex.IsMatch(data.Value))
+            {
+                return nameof(CreateConfigurationPartTranslation.RsaPublicKeyFormatError);
+            }
+
+            return null;
+        },
         false,
         CreateConfigurationPartTranslation.ResourceManager,
         nameof(CreateConfigurationPartTranslation.RsaPublicKeyLabel),
-        nameof(CreateConfigurationPartTranslation.RsaPublicKeyTextBoxToolTip),
-        nameof(CreateConfigurationPartTranslation.RsaPublicKeyTextBoxWatermark));
-
-    /// <summary>
-    ///     The save command.
-    /// </summary>
-    private TranslatableButton<ICancellableCommand> saveCommand;
-
-    /// <summary>
-    ///     The command to select the output folder.
-    /// </summary>
-    private TranslatableButton<ICommand> selectOutputFolderCommand;
+        nameof(CreateConfigurationPartTranslation.RsaPublicKeyToolTip),
+        nameof(CreateConfigurationPartTranslation.RsaPublicKeyWatermark));
 
     /// <summary>
     ///     The description of the view.
@@ -192,28 +217,25 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     public CreateConfigurationViewModel(
         ICommandFactory commandFactory,
         IRsaService rsaService,
-        IDocumentPackerConfigurationFileService documentPackerConfigurationFileService
+        IDocumentPackerConfigurationFileService documentPackerConfigurationFileService,
+        ICommandSync commandSync
     )
     {
-        this.rsaService = rsaService;
         this.documentPackerConfigurationFileService = documentPackerConfigurationFileService;
         this.ConfigurationItems.Add(new CreateConfigurationItemViewModel());
 
-        this.addConfigurationItemCommand = new TranslatableButton<ICommand>(
+        this.AddConfigurationItemCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateSyncCommand(
-                _ => true,
+                _ => !commandSync.IsCommandActive,
                 _ => this.ConfigurationItems.Add(new CreateConfigurationItemViewModel())),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_add.png",
-                    UriKind.Absolute)),
+            "material_symbol_add.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.AddConfigurationItemToolTip));
 
-        this.deleteConfigurationItemCommand = new TranslatableButton<ICommand>(
+        this.DeleteConfigurationItemCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateSyncCommand<CreateConfigurationItemViewModel>(
-                item => item is not null,
+                item => !commandSync.IsCommandActive && item is not null,
                 item =>
                 {
                     if (item is not null)
@@ -221,78 +243,82 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                         this.ConfigurationItems.Remove(item);
                     }
                 }),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_delete.png",
-                    UriKind.Absolute)),
+            "material_symbol_delete.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.DeleteDescriptionItemToolTip));
 
-        this.generateRsaKeysCommand = new TranslatableButton<ICommand>(
+        this.GenerateRsaKeysCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateAsyncCommand<object, (string privateKey, string publicKey)>(
+                _ => !commandSync.IsCommandActive,
                 null,
-                null,
-                (_, _) => Task.FromResult(rsaService.GenerateKeys()),
+                (_, _) =>
+                {
+                    if (!commandSync.Enter())
+                    {
+                        return Task.FromResult((string.Empty, string.Empty));
+                    }
+
+                    var keys = rsaService.GenerateKeys();
+                    return Task.FromResult((keys.privateKey, keys.publicKey));
+                },
                 task =>
                 {
                     try
                     {
                         var (privateKey, publicKey) = task.Result;
+                        if (string.IsNullOrWhiteSpace(privateKey) || string.IsNullOrWhiteSpace(publicKey))
+                        {
+                            return;
+                        }
+
                         this.RsaPrivateKey.Value = privateKey;
                         this.RsaPublicKey.Value = publicKey;
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        // Todo
+                        MessageBox.Show(
+                            $"{CreateConfigurationViewModel.GetTranslation(() => CreateConfigurationPartTranslation.GenerateRsaKeysCommandUnknownError)}{ex.Message}",
+                            CreateConfigurationViewModel.GetTranslation(
+                                () => CreateConfigurationPartTranslation.GenerateRsaKeysCommandCaption),
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    }
+                    finally
+                    {
+                        commandSync.Exit();
                     }
                 }),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_key.png",
-                    UriKind.Absolute)),
+            "material_symbol_key.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
-            nameof(CreateConfigurationPartTranslation.GenerateRsaKeysToolTip));
+            nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandToolTip));
 
-        this.saveCommand = new TranslatableButton<ICancellableCommand>(
+        this.SaveCommand = new TranslatableButton<ICancellableCommand>(
             commandFactory.CreateAsyncCommand<PasswordBox, (bool succeeds, string? message)>(
-                null,
-                passwordBox => this.IsValid(passwordBox),
+                _ => !commandSync.IsCommandActive,
+                passwordBox => this.Validate(passwordBox),
                 this.SaveCommandExecute,
                 this.SaveCommandPostExecute),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_save.png",
-                    UriKind.Absolute)),
+            "material_symbol_save.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.SaveLabel),
             nameof(CreateConfigurationPartTranslation.SaveToolTip));
 
-        this.selectOutputFolderCommand = new TranslatableButton<ICommand>(
+        this.SelectOutputFolderCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateOpenFolderDialogCommand(
                 new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)),
                 folder => this.OutputFolder.Value = folder),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_folder.png",
-                    UriKind.Absolute)),
+            "material_symbol_folder.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.OpenFileDialogToolTip));
     }
 
     /// <summary>
-    ///     Gets or sets the command to add a new configuration item.
+    ///     Gets the command to add a new configuration item.
     /// </summary>
-    public TranslatableButton<ICommand> AddConfigurationItemCommand
-    {
-        get => this.addConfigurationItemCommand;
-        set =>
-            this.SetField(
-                ref this.addConfigurationItemCommand,
-                value);
-    }
+    public TranslatableButton<ICommand> AddConfigurationItemCommand { get; }
 
     /// <summary>
     ///     Gets or sets the configuration items.
@@ -307,16 +333,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     }
 
     /// <summary>
-    ///     Gets or sets the command to delete a configuration item.
+    ///     Gets the command to delete a configuration item.
     /// </summary>
-    public TranslatableButton<ICommand> DeleteConfigurationItemCommand
-    {
-        get => this.deleteConfigurationItemCommand;
-        set =>
-            this.SetField(
-                ref this.deleteConfigurationItemCommand,
-                value);
-    }
+    public TranslatableButton<ICommand> DeleteConfigurationItemCommand { get; }
 
     /// <summary>
     ///     Gets or sets the description of the configuration.
@@ -330,21 +349,10 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                 value);
     }
 
-    /// <summary>Gets an error message indicating what is wrong with this object.</summary>
-    /// <returns>An error message indicating what is wrong with this object. The default is an empty string ("").</returns>
-    public string Error { get; } = "";
-
     /// <summary>
-    ///     Gets or sets a command to generate RSA keys.
+    ///     Gets a command to generate RSA keys.
     /// </summary>
-    public TranslatableButton<ICommand> GenerateRsaKeysCommand
-    {
-        get => this.generateRsaKeysCommand;
-        set =>
-            this.SetField(
-                ref this.generateRsaKeysCommand,
-                value);
-    }
+    public TranslatableButton<ICommand> GenerateRsaKeysCommand { get; }
 
     /// <summary>
     ///     Gets or sets the output folder.
@@ -443,28 +451,14 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     }
 
     /// <summary>
-    ///     Gets or sets the save command.
+    ///     Gets the save command.
     /// </summary>
-    public TranslatableButton<ICancellableCommand> SaveCommand
-    {
-        get => this.saveCommand;
-        set =>
-            this.SetField(
-                ref this.saveCommand,
-                value);
-    }
+    public TranslatableButton<ICancellableCommand> SaveCommand { get; }
 
     /// <summary>
-    ///     Gets or sets the command to select the output folder.
+    ///     Gets the command to select the output folder.
     /// </summary>
-    public TranslatableButton<ICommand> SelectOutputFolderCommand
-    {
-        get => this.selectOutputFolderCommand;
-        set =>
-            this.SetField(
-                ref this.selectOutputFolderCommand,
-                value);
-    }
+    public TranslatableButton<ICommand> SelectOutputFolderCommand { get; }
 
     /// <summary>
     ///     Gets or sets the description of the view.
@@ -494,12 +488,12 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     ///     Executes the view model validation.
     /// </summary>
     /// <returns><c>True</c> if the validation succeeds; <c>false</c> otherwise.</returns>
-    public bool IsValid(PasswordBox? passwordBox)
+    public bool Validate(PasswordBox? passwordBox)
     {
         var isValid = true;
         foreach (var createConfigurationItemViewModel in this.ConfigurationItems)
         {
-            isValid = isValid && createConfigurationItemViewModel.IsValid();
+            isValid = isValid && createConfigurationItemViewModel.Validate();
         }
 
         this.Description.Validate();
@@ -513,15 +507,15 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
         this.RsaPublicKey.Validate();
 
         return isValid &&
-               string.IsNullOrWhiteSpace(this.Description.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.OutputFolder.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.Password.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.PrivateOutputFile.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.PrivateOutputFileExtension.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.PublicOutputFile.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.PublicOutputFileExtension.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.RsaPrivateKey.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.RsaPublicKey.ErrorResourceKey);
+               !this.Description.HasError &&
+               !this.OutputFolder.HasError &&
+               !this.Password.HasError &&
+               !this.PrivateOutputFile.HasError &&
+               !this.PrivateOutputFileExtension.HasError &&
+               !this.PublicOutputFile.HasError &&
+               !this.PublicOutputFileExtension.HasError &&
+               !this.RsaPrivateKey.HasError &&
+               !this.RsaPublicKey.HasError;
     }
 
     /// <summary>
@@ -543,7 +537,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
         CancellationToken cancellationToken
     )
     {
-        if (!this.IsValid(passwordBox) || passwordBox is null)
+        if (!this.Validate(passwordBox) || passwordBox is null)
         {
             return (false, null);
         }

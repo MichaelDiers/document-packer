@@ -127,10 +127,10 @@
     <value>Beschreibung</value>
   </data>
   <data name="DescriptionToolTip" xml:space="preserve">
-    <value>Beschreibe die neue Document Packer Konfiguration.</value>
+    <value>Beschreibe die neue Document Packer Konfiguration. Die Beschreibung wird bei der Verschlüsselung von Dateien angezeigt.</value>
   </data>
   <data name="DescriptionWatermark" xml:space="preserve">
-    <value>Kurze Beschreibung der Konfiguration</value>
+    <value>Beschreibung der Konfiguration</value>
   </data>
   <data name="RsaPrivateKeyLabel" xml:space="preserve">
     <value>RSA: Privater Schlüssel</value>
@@ -144,19 +144,27 @@
   <data name="RsaPublicKeyButtonToolTip" xml:space="preserve">
     <value>Füge den öffentlichen RSA Schlüssel hinzu.</value>
   </data>
-  <data name="RsaPrivateKeyTextBoxToolTip" xml:space="preserve">
-    <value>Der private RSA Schlüssel im PEM Format.</value>
+  <data name="RsaPrivateKeyToolTip" xml:space="preserve">
+    <value>Der private RSA Schlüssel im PEM Format:
+
+-----BEGIN RSA PRIVATE KEY-----
+MIIJJwIBAAKCAgEAwYzNBVaGz1XT...
+-----END RSA PRIVATE KEY-----</value>
   </data>
-  <data name="RsaPublicKeyTextBoxToolTip" xml:space="preserve">
-    <value>Der öffentliche RSA Schlüssel im PEM Format.</value>
+  <data name="RsaPublicKeyToolTip" xml:space="preserve">
+    <value>Der öffentliche RSA Schlüssel im PEM Format:
+
+-----BEGIN RSA PUBLIC KEY-----
+MIICCgKCAgEA...
+-----END RSA PUBLIC KEY-----</value>
   </data>
-  <data name="RsaPrivateKeyTextBoxWatermark" xml:space="preserve">
-    <value>Privater RSA Schlüssel im PEM Format</value>
+  <data name="RsaPrivateKeyWatermark" xml:space="preserve">
+    <value>Privater RSA Schlüssel im PEM Format.</value>
   </data>
-  <data name="RsaPublicKeyTextBoxWatermark" xml:space="preserve">
+  <data name="RsaPublicKeyWatermark" xml:space="preserve">
     <value>Öffentlicher RSA Schlüssel im PEM Format</value>
   </data>
-  <data name="GenerateRsaKeysToolTip" xml:space="preserve">
+  <data name="GenerateRsaKeysCommandToolTip" xml:space="preserve">
     <value>Generiere ein neues Paar von privatem und öffentlichem RSA Schlüsseln.</value>
   </data>
   <data name="ItemDescriptionErrorIsRequired" xml:space="preserve">
@@ -211,10 +219,10 @@
     <value>Bitte auswählen.</value>
   </data>
   <data name="RsaPrivateKeyIsRequired" xml:space="preserve">
-    <value>RSA Schlüssel fehlt.</value>
+    <value>Bitte gebe einen privaten RSA Schlüssel an.</value>
   </data>
   <data name="RsaPublicKeyIsRequired" xml:space="preserve">
-    <value>RSA Schlüssel fehlt.</value>
+    <value>Bitte gebe einen öffentlichen RSA Schlüssel an.</value>
   </data>
   <data name="OutputFolderLabel" xml:space="preserve">
     <value>Ausgabeverzeichnis</value>
@@ -278,5 +286,17 @@
   </data>
   <data name="SaveConfigurationFails" xml:space="preserve">
     <value>Konfigurationsdateien konnten nicht erstellt werden.</value>
+  </data>
+  <data name="GenerateRsaKeysCommandUnknownError" xml:space="preserve">
+    <value>Ooooops...ein Fehler hat sich eingeschlichen: </value>
+  </data>
+  <data name="GenerateRsaKeysCommandCaption" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="RsaPrivateKeyFormatError" xml:space="preserve">
+    <value>Format des RSA Schlüssels ist ungültig.</value>
+  </data>
+  <data name="RsaPublicKeyFormatError" xml:space="preserve">
+    <value>Format des RSA Schlüssels ist ungültig.</value>
   </data>
 </root>

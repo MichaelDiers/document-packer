@@ -10,28 +10,6 @@ using Libs.Wpf.ViewModels;
 public class CreateConfigurationItemViewModel : ViewModelBase
 {
     /// <summary>
-    ///     The configuration item types.
-    /// </summary>
-    private TranslatableAndValidableComboBox<ConfigurationItemType> configurationItemTypes = new(
-        Enum.GetValues<ConfigurationItemType>()
-            .Select(
-                itemType => new TranslatableAndValidable<ConfigurationItemType>(
-                    itemType,
-                    null,
-                    false,
-                    CreateConfigurationPartTranslation.ResourceManager,
-                    $"{nameof(ConfigurationItemType)}{itemType}")),
-        data => data is TranslatableAndValidableComboBox<ConfigurationItemType> comboBoxData &&
-                comboBoxData.SelectedValue is not null
-            ? null
-            : nameof(CreateConfigurationPartTranslation.SelectedConfigurationItemTypeMissing),
-        false,
-        CreateConfigurationPartTranslation.ResourceManager,
-        nameof(CreateConfigurationPartTranslation.ConfigurationItemTypeLabel),
-        null,
-        nameof(CreateConfigurationPartTranslation.ConfigurationItemTypeWatermark));
-
-    /// <summary>
     ///     A value that specifies if the value is required.
     /// </summary>
     private TranslatableAndValidable<bool> isRequired = new(
@@ -56,16 +34,34 @@ public class CreateConfigurationItemViewModel : ViewModelBase
         nameof(CreateConfigurationPartTranslation.ItemDescriptionWatermark));
 
     /// <summary>
-    ///     Gets or sets the configuration item types.
+    ///     Initializes a new instance of the <see cref="CreateConfigurationItemViewModel" /> class.
     /// </summary>
-    public TranslatableAndValidableComboBox<ConfigurationItemType> ConfigurationItemTypes
+    public CreateConfigurationItemViewModel()
     {
-        get => this.configurationItemTypes;
-        set =>
-            this.SetField(
-                ref this.configurationItemTypes,
-                value);
+        this.ConfigurationItemTypes = new TranslatableAndValidableComboBox<ConfigurationItemType>(
+            Enum.GetValues<ConfigurationItemType>()
+                .Select(
+                    itemType => new TranslatableAndValidable<ConfigurationItemType>(
+                        itemType,
+                        null,
+                        false,
+                        CreateConfigurationPartTranslation.ResourceManager,
+                        $"{nameof(ConfigurationItemType)}{itemType}")),
+            data => data is TranslatableAndValidableComboBox<ConfigurationItemType> comboBoxData &&
+                    comboBoxData.SelectedValue is not null
+                ? null
+                : nameof(CreateConfigurationPartTranslation.SelectedConfigurationItemTypeMissing),
+            false,
+            CreateConfigurationPartTranslation.ResourceManager,
+            nameof(CreateConfigurationPartTranslation.ConfigurationItemTypeLabel),
+            null,
+            nameof(CreateConfigurationPartTranslation.ConfigurationItemTypeWatermark));
     }
+
+    /// <summary>
+    ///     Gets the configuration item types.
+    /// </summary>
+    public TranslatableAndValidableComboBox<ConfigurationItemType> ConfigurationItemTypes { get; }
 
     /// <summary>
     ///     Gets or sets a value that specifies if the value is required.
@@ -95,14 +91,12 @@ public class CreateConfigurationItemViewModel : ViewModelBase
     ///     Executes the view model validation.
     /// </summary>
     /// <returns><c>True</c> if the validation succeeds; <c>false</c> otherwise.</returns>
-    public bool IsValid()
+    public bool Validate()
     {
         this.ConfigurationItemTypes.Validate();
         this.IsRequired.Validate();
         this.ItemDescription.Validate();
 
-        return string.IsNullOrWhiteSpace(this.ConfigurationItemTypes.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.IsRequired.ErrorResourceKey) &&
-               string.IsNullOrWhiteSpace(this.ItemDescription.ErrorResourceKey);
+        return !this.ConfigurationItemTypes.HasError && !this.IsRequired.HasError && !this.ItemDescription.HasError;
     }
 }

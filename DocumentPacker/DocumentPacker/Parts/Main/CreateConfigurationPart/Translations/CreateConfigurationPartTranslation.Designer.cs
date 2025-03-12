@@ -143,7 +143,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Describe the new Document Packer configuration..
+        ///   Looks up a localized string similar to Describe the new Document Packer configuration. The description will be displayed when encrypting files..
         /// </summary>
         public static string DescriptionToolTip {
             get {
@@ -152,7 +152,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to short description of the configuration.
+        ///   Looks up a localized string similar to description of the configuration.
         /// </summary>
         public static string DescriptionWatermark {
             get {
@@ -161,11 +161,29 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string GenerateRsaKeysCommandCaption {
+            get {
+                return ResourceManager.GetString("GenerateRsaKeysCommandCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate a new pair of RSA private and public keys..
         /// </summary>
-        public static string GenerateRsaKeysToolTip {
+        public static string GenerateRsaKeysCommandToolTip {
             get {
-                return ResourceManager.GetString("GenerateRsaKeysToolTip", resourceCulture);
+                return ResourceManager.GetString("GenerateRsaKeysCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ooooops...an unexpected error occured: .
+        /// </summary>
+        public static string GenerateRsaKeysCommandUnknownError {
+            get {
+                return ResourceManager.GetString("GenerateRsaKeysCommandUnknownError", resourceCulture);
             }
         }
         
@@ -422,7 +440,16 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RSA key is required..
+        ///   Looks up a localized string similar to Format of the private key is invalid..
+        /// </summary>
+        public static string RsaPrivateKeyFormatError {
+            get {
+                return ResourceManager.GetString("RsaPrivateKeyFormatError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private RSA key is required..
         /// </summary>
         public static string RsaPrivateKeyIsRequired {
             get {
@@ -440,20 +467,24 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pem formatted private RSA key..
+        ///   Looks up a localized string similar to The pem formatted private RSA key:
+        ///
+        ///-----BEGIN RSA PRIVATE KEY-----
+        ///MIIJJwIBAAKCAgEAwYzNBVaGz1XT...
+        ///-----END RSA PRIVATE KEY-----.
         /// </summary>
-        public static string RsaPrivateKeyTextBoxToolTip {
+        public static string RsaPrivateKeyToolTip {
             get {
-                return ResourceManager.GetString("RsaPrivateKeyTextBoxToolTip", resourceCulture);
+                return ResourceManager.GetString("RsaPrivateKeyToolTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to PEM formatted private RSA key.
         /// </summary>
-        public static string RsaPrivateKeyTextBoxWatermark {
+        public static string RsaPrivateKeyWatermark {
             get {
-                return ResourceManager.GetString("RsaPrivateKeyTextBoxWatermark", resourceCulture);
+                return ResourceManager.GetString("RsaPrivateKeyWatermark", resourceCulture);
             }
         }
         
@@ -467,7 +498,16 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RSA key is required..
+        ///   Looks up a localized string similar to Format of the public key is invalid..
+        /// </summary>
+        public static string RsaPublicKeyFormatError {
+            get {
+                return ResourceManager.GetString("RsaPublicKeyFormatError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public RSA key is required..
         /// </summary>
         public static string RsaPublicKeyIsRequired {
             get {
@@ -485,20 +525,24 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The pem formatted public RSA key..
+        ///   Looks up a localized string similar to The pem formatted public RSA key:
+        ///
+        ///-----BEGIN RSA PUBLIC KEY-----
+        ///MIICCgKCAgEA...
+        ///-----END RSA PUBLIC KEY-----.
         /// </summary>
-        public static string RsaPublicKeyTextBoxToolTip {
+        public static string RsaPublicKeyToolTip {
             get {
-                return ResourceManager.GetString("RsaPublicKeyTextBoxToolTip", resourceCulture);
+                return ResourceManager.GetString("RsaPublicKeyToolTip", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to PEM formatted public RSA key.
         /// </summary>
-        public static string RsaPublicKeyTextBoxWatermark {
+        public static string RsaPublicKeyWatermark {
             get {
-                return ResourceManager.GetString("RsaPublicKeyTextBoxWatermark", resourceCulture);
+                return ResourceManager.GetString("RsaPublicKeyWatermark", resourceCulture);
             }
         }
         
