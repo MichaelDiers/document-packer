@@ -1,5 +1,6 @@
 ﻿namespace DocumentPacker.ApplicationInit;
 
+using DocumentPacker.Commands;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Parts.FooterPart;
 using DocumentPacker.Parts.Header.HeaderPart;
@@ -52,6 +53,8 @@ public static class ServiceCollectionExtensions
         services.AddCreateConfigurationPart();
 
         services.TryAddAllServices();
+
+        services.TryAddCommands();
 
         return services;
     }
