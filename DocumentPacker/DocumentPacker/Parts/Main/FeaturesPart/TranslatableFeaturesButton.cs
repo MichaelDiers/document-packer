@@ -18,6 +18,11 @@ internal class TranslatableFeaturesButton : TranslatableButton<ICommand>
     private readonly string? descriptionResourceKey;
 
     /// <summary>
+    ///     The background.
+    /// </summary>
+    private Brush? background;
+
+    /// <summary>
     ///     The translation of the <see cref="descriptionResourceKey" />.
     /// </summary>
     private string? descriptionTranslation;
@@ -31,7 +36,8 @@ internal class TranslatableFeaturesButton : TranslatableButton<ICommand>
         ResourceManager resourceManager,
         string? labelResourceKey = null,
         string? toolTipResourceKey = null,
-        string? descriptionResourceKey = null
+        string? descriptionResourceKey = null,
+        Brush? background = null
     )
         : base(
             command,
@@ -40,12 +46,26 @@ internal class TranslatableFeaturesButton : TranslatableButton<ICommand>
             labelResourceKey,
             toolTipResourceKey)
     {
+        this.background = background;
+
         this.descriptionResourceKey = descriptionResourceKey;
 
         TranslationSource.Instance.PropertyChanged += this.OnCurrentCultureChanged;
         this.OnCurrentCultureChanged(
             this,
             new PropertyChangedEventArgs(string.Empty));
+    }
+
+    /// <summary>
+    ///     Gets or sets the background.
+    /// </summary>
+    public Brush? Background
+    {
+        get => this.background;
+        set =>
+            this.SetField(
+                ref this.background,
+                value);
     }
 
     /// <summary>

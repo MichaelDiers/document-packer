@@ -105,7 +105,92 @@
         </Grid>
     </ControlTemplate>
     <Style
+        TargetType="CheckBox"
+        BasedOn="{StaticResource TranslatableCheckBoxStyle}">
+        <Setter
+            Property="Margin"
+            Value="24" />
+    </Style>
+    <Style
+        TargetType="ComboBox"
+        BasedOn="{StaticResource TranslatableComboBoxStyle}">
+        <Setter
+            Property="Margin"
+            Value="24" />
+    </Style>
+    <Style
+        TargetType="PasswordBox"
+        BasedOn="{StaticResource TranslatablePasswordBoxStyle}">
+        <Setter
+            Property="Margin"
+            Value="24" />
+    </Style>
+    <Style
         TargetType="TextBox"
         BasedOn="{StaticResource TranslatableMultiLineTextBoxStyle}"
-        x:Key="DocumentPackerTranslatableMultiLineTextBoxStyle" />
+        x:Key="DocumentPackerTranslatableMultiLineTextBoxStyle">
+        <Setter
+            Property="Margin"
+            Value="24" />
+    </Style>
+    <Style
+        TargetType="TextBox"
+        BasedOn="{StaticResource TranslatableTextBoxStyle}">
+        <Setter
+            Property="Margin"
+            Value="24" />
+    </Style>
+    <Style
+        TargetType="Border"
+        x:Key="BaseBorder">
+        <Setter
+            Property="CornerRadius"
+            Value="8" />
+        <Setter
+            Property="Margin"
+            Value="16" />
+        <Setter
+            Property="Padding"
+            Value="16" />
+    </Style>
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="CreateConfigurationPrimaryBorder">
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="0,0"
+                    EndPoint="1,1">
+                    <GradientStop
+                        Color="#ccdaff"
+                        Offset="0.0" />
+                    <GradientStop
+                        Color="#644dcb"
+                        Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="CreateConfigurationSecondaryBorder">
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="0,0"
+                    EndPoint="1,1">
+                    <GradientStop
+                        Color="#f0f4ff"
+                        Offset="0.0" />
+                    <GradientStop
+                        Color="#a99ce2"
+                        Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -10,177 +10,171 @@
     Template="{StaticResource MainContentControlTemplate}"
     dependencyProperties:ImageSourceDependencyProperty.ImageSource="pack://application:,,,/DocumentPacker;component/Assets/material_symbol_edit_square_96dp.png">
     <mvvm:BaseUserControl.Resources>
-        <ResourceDictionary
-            Source="ConfigurationItemsDataTemplate.xaml" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="ConfigurationItemsDataTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </mvvm:BaseUserControl.Resources>
-    <Grid
-        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto|Auto|Auto|Auto|Auto|Auto"
-        dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*|Auto">
-        <!-- background -->
-        <Border
-            Grid.Row="0"
-            Grid.RowSpan="3"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Background="OrangeRed"
-            CornerRadius="8" />
-        <!-- descriptions -->
-        <Label
-            Grid.Row="0"
-            Grid.Column="0"
-            DataContext="{Binding Description}" />
-        <TextBox
-            Grid.Row="0"
-            Grid.Column="1"
-            DataContext="{Binding Description}"
-            Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}" />
-        <!-- RSA private key -->
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            DataContext="{Binding RsaPrivateKey}" />
-        <TextBox
-            Grid.Row="1"
-            Grid.Column="1"
-            DataContext="{Binding RsaPrivateKey}"
-            MaxHeight="300"
-            Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}">
-            <b:Interaction.Behaviors>
-                <behaviours:FileContentDragAndDropTextBoxBehavior />
-            </b:Interaction.Behaviors>
-        </TextBox>
-        <Button
-            Grid.Row="1"
-            Grid.RowSpan="2"
-            Grid.Column="2"
-            DataContext="{Binding GenerateRsaKeysCommand}" />
-        <!-- RSA public key -->
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            DataContext="{Binding RsaPublicKey}" />
-        <TextBox
-            Grid.Row="2"
-            Grid.Column="1"
-            DataContext="{Binding RsaPublicKey}"
-            MaxHeight="300"
-            Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}">
-            <b:Interaction.Behaviors>
-                <behaviours:FileContentDragAndDropTextBoxBehavior />
-            </b:Interaction.Behaviors>
-        </TextBox>
-        <!-- configuration items -->
-        <Border
-            Grid.Row="3"
-            Grid.Column="0"
-            Grid.ColumnSpan="3">
-            <Grid
-                dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
-                <Grid
-                    Grid.Column="0"
-                    dependencyProperties:GridRowsDependencyProperty.GridRows="1*|1*">
-                    <Button
-                        Grid.Row="0"
-                        DataContext="{Binding AddConfigurationItemCommand}"
-                        VerticalAlignment="Top" />
-                    <Button
-                        Grid.Row="1"
-                        DataContext="{Binding AddConfigurationItemCommand}"
-                        VerticalAlignment="Bottom" />
-                </Grid>
-                <ItemsControl
-                    Grid.Column="1"
-                    ItemsSource="{Binding ConfigurationItems}"
-                    ItemTemplate="{StaticResource ConfigurationItemDataTemplate}" />
-            </Grid>
-        </Border>
-        <!-- background -->
-        <Border
-            Grid.Row="4"
-            Grid.RowSpan="4"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Background="OrangeRed"
-            CornerRadius="8" />
-        <!-- password -->
-        <Label
-            Grid.Row="4"
-            Grid.Column="0"
-            DataContext="{Binding Password}" />
-        <PasswordBox
-            Grid.Row="4"
-            Grid.Column="1"
-            x:Name="PasswordBox"
-            DataContext="{Binding Password}" />
-        <!-- output folder -->
-        <Label
-            Grid.Row="5"
-            Grid.Column="0"
-            DataContext="{Binding OutputFolder}" />
+    <Border
+        Style="{StaticResource CreateConfigurationPrimaryBorder}">
         <Grid
-            Grid.Row="5"
-            Grid.Column="1"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
-            <TextBox
+            dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto|Auto|Auto|Auto|Auto|Auto"
+            dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*|Auto">
+            <!-- descriptions -->
+            <Label
+                Grid.Row="0"
                 Grid.Column="0"
-                DataContext="{Binding OutputFolder}">
+                DataContext="{Binding Description}" />
+            <TextBox
+                Grid.Row="0"
+                Grid.Column="1"
+                DataContext="{Binding Description}"
+                Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}" />
+            <!-- RSA private key -->
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                DataContext="{Binding RsaPrivateKey}" />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="1"
+                DataContext="{Binding RsaPrivateKey}"
+                MaxHeight="300"
+                Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}">
                 <b:Interaction.Behaviors>
-                    <behaviours:FolderPathDragAndDropTextBoxBehavior />
+                    <behaviours:FileContentDragAndDropTextBoxBehavior />
                 </b:Interaction.Behaviors>
             </TextBox>
             <Button
-                Grid.Column="1"
-                DataContext="{Binding SelectOutputFolderCommand}"
-                CommandParameter="{Binding OutputFolder.Value}" />
-        </Grid>
-        <!-- private output file -->
-        <Label
-            Grid.Row="6"
-            Grid.Column="0"
-            DataContext="{Binding PrivateOutputFile}" />
-        <Grid
-            Grid.Row="6"
-            Grid.Column="1"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                DataContext="{Binding GenerateRsaKeysCommand}" />
+            <!-- RSA public key -->
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                DataContext="{Binding RsaPublicKey}" />
             <TextBox
+                Grid.Row="2"
+                Grid.Column="1"
+                DataContext="{Binding RsaPublicKey}"
+                MaxHeight="300"
+                Style="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}">
+                <b:Interaction.Behaviors>
+                    <behaviours:FileContentDragAndDropTextBoxBehavior />
+                </b:Interaction.Behaviors>
+            </TextBox>
+            <!-- configuration items -->
+            <Border
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="3">
+                <Grid
+                    dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
+                    <Grid
+                        Grid.Column="0"
+                        dependencyProperties:GridRowsDependencyProperty.GridRows="1*|1*">
+                        <Button
+                            Grid.Row="0"
+                            DataContext="{Binding AddConfigurationItemCommand}"
+                            VerticalAlignment="Top" />
+                        <Button
+                            Grid.Row="1"
+                            DataContext="{Binding AddConfigurationItemCommand}"
+                            VerticalAlignment="Bottom" />
+                    </Grid>
+                    <ItemsControl
+                        Grid.Column="1"
+                        ItemsSource="{Binding ConfigurationItems}"
+                        ItemTemplate="{StaticResource ConfigurationItemDataTemplate}" />
+                </Grid>
+            </Border>
+            <!-- password -->
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                DataContext="{Binding Password}" />
+            <PasswordBox
+                Grid.Row="4"
+                Grid.Column="1"
+                x:Name="PasswordBox"
+                DataContext="{Binding Password}" />
+            <!-- output folder -->
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                DataContext="{Binding OutputFolder}" />
+            <Grid
+                Grid.Row="5"
+                Grid.Column="1"
+                dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
+                <TextBox
+                    Grid.Column="0"
+                    DataContext="{Binding OutputFolder}">
+                    <b:Interaction.Behaviors>
+                        <behaviours:FolderPathDragAndDropTextBoxBehavior />
+                    </b:Interaction.Behaviors>
+                </TextBox>
+                <Button
+                    Grid.Column="1"
+                    DataContext="{Binding SelectOutputFolderCommand}"
+                    CommandParameter="{Binding OutputFolder.Value}" />
+            </Grid>
+            <!-- private output file -->
+            <Label
+                Grid.Row="6"
                 Grid.Column="0"
                 DataContext="{Binding PrivateOutputFile}" />
-            <TextBox
+            <Grid
+                Grid.Row="6"
                 Grid.Column="1"
-                IsEnabled="False"
-                IsReadOnly="True"
-                DataContext="{Binding PrivateOutputFileExtension}" />
-        </Grid>
-        <!-- public output file -->
-        <Label
-            Grid.Row="7"
-            Grid.Column="0"
-            DataContext="{Binding PublicOutputFile}" />
-        <Grid
-            Grid.Row="7"
-            Grid.Column="1"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
-            <TextBox
+                dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
+                <TextBox
+                    Grid.Column="0"
+                    DataContext="{Binding PrivateOutputFile}" />
+                <TextBox
+                    Grid.Column="1"
+                    DataContext="{Binding PrivateOutputFileExtension}"
+                    IsEnabled="False"
+                    IsReadOnly="True"
+                    ToolTipService.ShowOnDisabled="True" />
+            </Grid>
+            <!-- public output file -->
+            <Label
+                Grid.Row="7"
                 Grid.Column="0"
                 DataContext="{Binding PublicOutputFile}" />
-            <TextBox
+            <Grid
+                Grid.Row="7"
                 Grid.Column="1"
-                IsEnabled="False"
-                IsReadOnly="True"
-                DataContext="{Binding PublicOutputFileExtension}" />
-        </Grid>
-        <!-- save -->
-        <Grid
-            Grid.Row="8"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto"
-            HorizontalAlignment="Center">
-            <Button
+                dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
+                <TextBox
+                    Grid.Column="0"
+                    DataContext="{Binding PublicOutputFile}" />
+                <TextBox
+                    Grid.Column="1"
+                    DataContext="{Binding PublicOutputFileExtension}"
+                    IsEnabled="False"
+                    IsReadOnly="True"
+                    ToolTipService.ShowOnDisabled="True" />
+            </Grid>
+            <!-- save -->
+            <Grid
+                Grid.Row="8"
                 Grid.Column="0"
-                CommandParameter="{Binding ElementName=PasswordBox}"
-                DataContext="{Binding SaveCommand}" />
+                Grid.ColumnSpan="2"
+                dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto"
+                HorizontalAlignment="Center"
+                Margin="32">
+                <Button
+                    Grid.Column="0"
+                    CommandParameter="{Binding ElementName=PasswordBox}"
+                    DataContext="{Binding SaveCommand}" />
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </mvvm:BaseUserControl>
 <!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->

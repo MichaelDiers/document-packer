@@ -76,14 +76,25 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// </summary>
     private TranslatableAndValidable<string> outputFolder = new(
         null,
-        data => string.IsNullOrWhiteSpace(data.Value) || !Directory.Exists(data.Value)
-            ? nameof(CreateConfigurationPartTranslation.OutputFolderIsRequired)
-            : null,
+        data =>
+        {
+            if (string.IsNullOrWhiteSpace(data.Value))
+            {
+                return nameof(CreateConfigurationPartTranslation.OutputFolderIsRequired);
+            }
+
+            if (!Directory.Exists(data.Value))
+            {
+                return nameof(CreateConfigurationPartTranslation.OutputFolderDoesNotExist);
+            }
+
+            return null;
+        },
         false,
         CreateConfigurationPartTranslation.ResourceManager,
         nameof(CreateConfigurationPartTranslation.OutputFolderLabel),
-        nameof(CreateConfigurationPartTranslation.OutputFolderTextBoxToolTip),
-        nameof(CreateConfigurationPartTranslation.OutputFolderTextBoxWatermark));
+        nameof(CreateConfigurationPartTranslation.OutputFolderToolTip),
+        nameof(CreateConfigurationPartTranslation.OutputFolderWatermark));
 
     /// <summary>
     ///     The password.
@@ -99,16 +110,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The private configuration output file.
     /// </summary>
-    private TranslatableAndValidable<string> privateOutputFile = new(
-        null,
-        data => string.IsNullOrWhiteSpace(data.Value)
-            ? nameof(CreateConfigurationPartTranslation.PrivateOutputFileIsRequired)
-            : null,
-        false,
-        CreateConfigurationPartTranslation.ResourceManager,
-        nameof(CreateConfigurationPartTranslation.PrivateOutputFileLabel),
-        nameof(CreateConfigurationPartTranslation.PrivateOutputFileToolTip),
-        nameof(CreateConfigurationPartTranslation.PrivateOutputFileToolTip));
+    private TranslatableAndValidable<string> privateOutputFile;
 
     /// <summary>
     ///     The private output file extension.
@@ -124,16 +126,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The public configuration output file.
     /// </summary>
-    private TranslatableAndValidable<string> publicOutputFile = new(
-        null,
-        data => string.IsNullOrWhiteSpace(data.Value)
-            ? nameof(CreateConfigurationPartTranslation.PublicOutputFileIsRequired)
-            : null,
-        false,
-        CreateConfigurationPartTranslation.ResourceManager,
-        nameof(CreateConfigurationPartTranslation.PublicOutputFileLabel),
-        nameof(CreateConfigurationPartTranslation.PublicOutputFileToolTip),
-        nameof(CreateConfigurationPartTranslation.PublicOutputFileToolTip));
+    private TranslatableAndValidable<string> publicOutputFile;
 
     /// <summary>
     ///     The public output file extension.
@@ -246,7 +239,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             "material_symbol_delete.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
-            nameof(CreateConfigurationPartTranslation.DeleteDescriptionItemToolTip));
+            nameof(CreateConfigurationPartTranslation.DeleteConfigurationItemCommandToolTip));
 
         this.GenerateRsaKeysCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateAsyncCommand<object, (string privateKey, string publicKey)>(
@@ -298,7 +291,10 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             commandFactory.CreateAsyncCommand<PasswordBox, (bool succeeds, string? message)>(
                 _ => !commandSync.IsCommandActive,
                 passwordBox => this.Validate(passwordBox),
-                this.SaveCommandExecute,
+                (passwordBox, cancellationToken) => this.SaveCommandExecute(
+                    passwordBox,
+                    commandSync,
+                    cancellationToken),
                 this.SaveCommandPostExecute),
             "material_symbol_save.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
@@ -313,6 +309,60 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.OpenFileDialogToolTip));
+
+        this.privateOutputFile = new TranslatableAndValidable<string>(
+            null,
+            data =>
+            {
+                if (string.IsNullOrWhiteSpace(data.Value))
+                {
+                    return nameof(CreateConfigurationPartTranslation.PrivateOutputFileIsRequired);
+                }
+
+                if (!this.OutputFolder.HasError &&
+                    !this.PrivateOutputFileExtension.HasError &&
+                    File.Exists(
+                        Path.Join(
+                            this.OutputFolder.Value,
+                            $"{data.Value}{this.PrivateOutputFileExtension.Value}")))
+                {
+                    return nameof(CreateConfigurationPartTranslation.PrivateOutputFileDoesExist);
+                }
+
+                return null;
+            },
+            false,
+            CreateConfigurationPartTranslation.ResourceManager,
+            nameof(CreateConfigurationPartTranslation.PrivateOutputFileLabel),
+            nameof(CreateConfigurationPartTranslation.PrivateOutputFileToolTip),
+            nameof(CreateConfigurationPartTranslation.PrivateOutputFileWatermark));
+
+        this.publicOutputFile = new TranslatableAndValidable<string>(
+            null,
+            data =>
+            {
+                if (string.IsNullOrWhiteSpace(data.Value))
+                {
+                    return nameof(CreateConfigurationPartTranslation.PublicOutputFileIsRequired);
+                }
+
+                if (!this.OutputFolder.HasError &&
+                    !this.PublicOutputFileExtension.HasError &&
+                    File.Exists(
+                        Path.Join(
+                            this.OutputFolder.Value,
+                            $"{data.Value}{this.PublicOutputFileExtension.Value}")))
+                {
+                    return nameof(CreateConfigurationPartTranslation.PublicOutputFileDoesExist);
+                }
+
+                return null;
+            },
+            false,
+            CreateConfigurationPartTranslation.ResourceManager,
+            nameof(CreateConfigurationPartTranslation.PublicOutputFileLabel),
+            nameof(CreateConfigurationPartTranslation.PublicOutputFileToolTip),
+            nameof(CreateConfigurationPartTranslation.PublicOutputFileWatermark));
     }
 
     /// <summary>
@@ -493,7 +543,26 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
         var isValid = true;
         foreach (var createConfigurationItemViewModel in this.ConfigurationItems)
         {
-            isValid = isValid && createConfigurationItemViewModel.Validate();
+            if (!createConfigurationItemViewModel.Validate())
+            {
+                isValid = false;
+                continue;
+            }
+
+            var items = this.ConfigurationItems.Where(
+                    item => string.Equals(
+                        item.Id.Value,
+                        createConfigurationItemViewModel.Id.Value,
+                        StringComparison.OrdinalIgnoreCase))
+                .ToArray();
+            if (items.Length > 1)
+            {
+                isValid = false;
+                foreach (var item in items)
+                {
+                    item.Id.ErrorResourceKey = nameof(CreateConfigurationPartTranslation.IdDuplicate);
+                }
+            }
         }
 
         this.Description.Validate();
@@ -534,6 +603,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
 
     private async Task<(bool succeeds, string? message)> SaveCommandExecute(
         PasswordBox? passwordBox,
+        ICommandSync commandSync,
         CancellationToken cancellationToken
     )
     {
@@ -542,16 +612,21 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             return (false, null);
         }
 
+        if (!commandSync.Enter())
+        {
+            return (false, nameof(CreateConfigurationPartTranslation.SaveCommandUnknownError));
+        }
+
         var configuration = new ConfigurationModel(
             this.ConfigurationItems.Select(
                 item => new ConfigurationItemModel(
-                    item.ConfigurationItemTypes.SelectedValue.Value,
+                    item.ConfigurationItemTypes.SelectedValue!.Value,
                     item.IsRequired.Value,
-                    item.ItemDescription.Value,
-                    Guid.NewGuid().ToString())),
-            this.Description.Value,
-            this.RsaPrivateKey.Value,
-            this.RsaPublicKey.Value);
+                    item.ItemDescription.Value!,
+                    item.Id.Value!)),
+            this.Description.Value!,
+            this.RsaPrivateKey.Value!,
+            this.RsaPublicKey.Value!);
 
         var privateConfigurationFile = new FileInfo(
             Path.Join(

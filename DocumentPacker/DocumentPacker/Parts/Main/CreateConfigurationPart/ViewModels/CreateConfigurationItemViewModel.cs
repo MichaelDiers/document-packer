@@ -1,5 +1,6 @@
 ﻿namespace DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
 
+using System.IO;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
 using Libs.Wpf.ViewModels;
 
@@ -10,6 +11,32 @@ using Libs.Wpf.ViewModels;
 public class CreateConfigurationItemViewModel : ViewModelBase
 {
     /// <summary>
+    ///     The id.
+    /// </summary>
+    private TranslatableAndValidable<string> id = new(
+        string.Empty,
+        data =>
+        {
+            if (string.IsNullOrWhiteSpace(data.Value))
+            {
+                return nameof(CreateConfigurationPartTranslation.IdIsRequired);
+            }
+
+            var invalidCharacters = Path.GetInvalidFileNameChars();
+            if (data.Value.Any(c => invalidCharacters.Contains(c)))
+            {
+                return nameof(CreateConfigurationPartTranslation.IdConatainsInvalidCharacters);
+            }
+
+            return null;
+        },
+        false,
+        CreateConfigurationPartTranslation.ResourceManager,
+        nameof(CreateConfigurationPartTranslation.IdLabel),
+        nameof(CreateConfigurationPartTranslation.IdToolTip),
+        nameof(CreateConfigurationPartTranslation.IdWatermark));
+
+    /// <summary>
     ///     A value that specifies if the value is required.
     /// </summary>
     private TranslatableAndValidable<bool> isRequired = new(
@@ -17,7 +44,8 @@ public class CreateConfigurationItemViewModel : ViewModelBase
         null,
         false,
         CreateConfigurationPartTranslation.ResourceManager,
-        nameof(CreateConfigurationPartTranslation.IsRequiredLabel));
+        nameof(CreateConfigurationPartTranslation.IsRequiredLabel),
+        nameof(CreateConfigurationPartTranslation.IsRequiredToolTip));
 
     /// <summary>
     ///     The item description.
@@ -25,7 +53,7 @@ public class CreateConfigurationItemViewModel : ViewModelBase
     private TranslatableAndValidable<string> itemDescription = new(
         null,
         data => string.IsNullOrWhiteSpace(data.Value)
-            ? nameof(CreateConfigurationPartTranslation.ItemDescriptionErrorIsRequired)
+            ? nameof(CreateConfigurationPartTranslation.ItemDescriptionIsRequired)
             : null,
         false,
         CreateConfigurationPartTranslation.ResourceManager,
@@ -54,7 +82,7 @@ public class CreateConfigurationItemViewModel : ViewModelBase
             false,
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.ConfigurationItemTypeLabel),
-            null,
+            nameof(CreateConfigurationPartTranslation.ConfigurationItemTypeToolTip),
             nameof(CreateConfigurationPartTranslation.ConfigurationItemTypeWatermark));
     }
 
@@ -62,6 +90,18 @@ public class CreateConfigurationItemViewModel : ViewModelBase
     ///     Gets the configuration item types.
     /// </summary>
     public TranslatableAndValidableComboBox<ConfigurationItemType> ConfigurationItemTypes { get; }
+
+    /// <summary>
+    ///     Gets or sets the id.
+    /// </summary>
+    public TranslatableAndValidable<string> Id
+    {
+        get => this.id;
+        set =>
+            this.SetField(
+                ref this.id,
+                value);
+    }
 
     /// <summary>
     ///     Gets or sets a value that specifies if the value is required.
@@ -96,7 +136,11 @@ public class CreateConfigurationItemViewModel : ViewModelBase
         this.ConfigurationItemTypes.Validate();
         this.IsRequired.Validate();
         this.ItemDescription.Validate();
+        this.Id.Validate();
 
-        return !this.ConfigurationItemTypes.HasError && !this.IsRequired.HasError && !this.ItemDescription.HasError;
+        return !this.ConfigurationItemTypes.HasError &&
+               !this.IsRequired.HasError &&
+               !this.ItemDescription.HasError &&
+               !this.Id.HasError;
     }
 }

@@ -132,7 +132,7 @@
     <comment>CreateConfigurationPart</comment>
   </data>
   <data name="DescriptionWatermark" xml:space="preserve">
-    <value>description of the configuration</value>
+    <value>my secret data collection</value>
     <comment>CreateConfigurationPart</comment>
   </data>
   <data name="RsaPrivateKeyLabel" xml:space="preserve">
@@ -177,19 +177,23 @@ MIICCgKCAgEA...
     <value>Generate a new pair of RSA private and public keys.</value>
     <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="ItemDescriptionErrorIsRequired" xml:space="preserve">
+  <data name="ItemDescriptionIsRequired" xml:space="preserve">
     <value>A description is required.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ItemDescriptionLabel" xml:space="preserve">
     <value>Description</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ItemDescriptionToolTip" xml:space="preserve">
     <value>A short description of the configuration item.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ItemDescriptionWatermark" xml:space="preserve">
-    <value>Description of the item</value>
+    <value>The file contains the secrets of the world.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="DeleteDescriptionItemToolTip" xml:space="preserve">
+  <data name="DeleteConfigurationItemCommandToolTip" xml:space="preserve">
     <value>Delete the configuration item.</value>
   </data>
   <data name="DescriptionErrorIsRequired" xml:space="preserve">
@@ -197,33 +201,42 @@ MIICCgKCAgEA...
   </data>
   <data name="AddConfigurationItemToolTip" xml:space="preserve">
     <value>Add a new configuration item.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ConfigurationItemTypeLabel" xml:space="preserve">
     <value>Type of the Item</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ConfigurationItemTypeWatermark" xml:space="preserve">
     <value>Please select</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ConfigurationItemTypeFile" xml:space="preserve">
     <value>File</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="ConfigurationItemTypeText" xml:space="preserve">
     <value>Text</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="OpenFileDialogToolTip" xml:space="preserve">
     <value>Select a file to add.</value>
   </data>
   <data name="IsRequiredLabel" xml:space="preserve">
     <value>Required</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
-    <value>Password (optional)</value>
+    <value>Password</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="SaveLabel" xml:space="preserve">
     <value>Save</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="SaveToolTip" xml:space="preserve">
     <value>Save the public and private configuration files.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="SelectedConfigurationItemTypeMissing" xml:space="preserve">
     <value>Please select.</value>
@@ -238,57 +251,73 @@ MIICCgKCAgEA...
   </data>
   <data name="OutputFolderLabel" xml:space="preserve">
     <value>Output Folder</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="OutputFolderTextBoxToolTip" xml:space="preserve">
+  <data name="OutputFolderToolTip" xml:space="preserve">
     <value>The output folder of the Document Packer configuration file.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="OutputFolderTextBoxWatermark" xml:space="preserve">
-    <value>Output folder</value>
+  <data name="OutputFolderWatermark" xml:space="preserve">
+    <value>c:\data\secret_data</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="OutputFolderButtonToolTip" xml:space="preserve">
     <value>Select the output folder</value>
   </data>
   <data name="PrivateOutputFileLabel" xml:space="preserve">
     <value>Private Output File</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PrivateOutputFileIsRequired" xml:space="preserve">
     <value>File is required.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PrivateOutputFileToolTip" xml:space="preserve">
     <value>Please specify the name of the private Document Packer configuration file.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PrivateOutputFileWatermark" xml:space="preserve">
-    <value>Private output configuration file</value>
+    <value>PrivateConfigurationFile</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PrivateOutputFileExtensionToolTip" xml:space="preserve">
     <value>The predefined file extension of the private Document Packer configuration file.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PublicOutputFileLabel" xml:space="preserve">
     <value>Public Output File</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PublicOutputFileToolTip" xml:space="preserve">
     <value>Please specify the name of the public Document Packer configuration file.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PublicOutputFileWatermark" xml:space="preserve">
-    <value>Public output configuration file</value>
+    <value>PrivateConfigurationFile</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PublicOutputFileIsRequired" xml:space="preserve">
     <value>File is required.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PublicOutputFileExtensionToolTip" xml:space="preserve">
     <value>The predefined file extension of the public Document Packer configuration file.</value>
   </data>
   <data name="OutputFolderIsRequired" xml:space="preserve">
     <value>Please select the output folder.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PasswordToolTip" xml:space="preserve">
     <value>Specify a password to protect the configuration files.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PasswordWatermark" xml:space="preserve">
-    <value>Password</value>
+    <value>Yt70?5*DLFS2</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PasswordIsRequired" xml:space="preserve">
     <value>A password is required.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="RsaKeysInvalid" xml:space="preserve">
     <value>Private and public keys do not match.</value>
@@ -313,6 +342,54 @@ MIICCgKCAgEA...
   </data>
   <data name="RsaPublicKeyFormatError" xml:space="preserve">
     <value>Format of the public key is invalid.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="IdLabel" xml:space="preserve">
+    <value>Name</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="IdWatermark" xml:space="preserve">
+    <value>SecretFile</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="IdToolTip" xml:space="preserve">
+    <value>Enter a unique name or ID for the entry. This name will be used as the file name when decrypting the Document Packer entry. These characters must not be used: ", &lt;, &gt;, |, :, *, ?, \, /</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="IdIsRequired" xml:space="preserve">
+    <value>id is required</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="IdConatainsInvalidCharacters" xml:space="preserve">
+    <value>id contains invalid characters</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="ConfigurationItemTypeToolTip" xml:space="preserve">
+    <value>Specify whether the secret data is a file or plaintext.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="IsRequiredToolTip" xml:space="preserve">
+    <value>Indicates wheather the entry is required or optional.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="OutputFolderDoesNotExist" xml:space="preserve">
+    <value>Folder does not exist.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="PrivateOutputFileDoesExist" xml:space="preserve">
+    <value>File already exists.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="PublicOutputFileDoesExist" xml:space="preserve">
+    <value>File already exists.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="SaveCommandUnknownError" xml:space="preserve">
+    <value>An unknown error occured.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="IdDuplicate" xml:space="preserve">
+    <value>Name used multiple times.</value>
     <comment>CreateConfigurationPart</comment>
   </data>
 </root>

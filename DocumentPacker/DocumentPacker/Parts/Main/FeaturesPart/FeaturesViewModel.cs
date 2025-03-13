@@ -1,6 +1,8 @@
 ﻿namespace DocumentPacker.Parts.Main.FeaturesPart;
 
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Media;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
@@ -36,7 +38,16 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                     "material_symbol_edit_square_96dp.png".ToBitmapImage(),
                     CreateConfigurationPartTranslation.ResourceManager,
                     nameof(CreateConfigurationPartTranslation.Headline),
-                    descriptionResourceKey: nameof(CreateConfigurationPartTranslation.Description)),
+                    descriptionResourceKey: nameof(CreateConfigurationPartTranslation.Description),
+                    background: new LinearGradientBrush(
+                        (Color) ColorConverter.ConvertFromString("#ccdaff"),
+                        (Color) ColorConverter.ConvertFromString("#644dcb"),
+                        new Point(
+                            0,
+                            0),
+                        new Point(
+                            1,
+                            1))),
                 new TranslatableFeaturesButton(
                     commandFactory.CreateSyncCommand(
                         _ => true,

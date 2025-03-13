@@ -6,6 +6,30 @@
     xmlns:createConfigurationPart="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart"
     xmlns:converters="clr-namespace:Libs.Wpf.Converters;assembly=Libs.Wpf"
     xmlns:viewModels="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels">
+    <Style
+        TargetType="ToolTip">
+        <Setter
+            Property="MaxWidth"
+            Value="300" />
+        <Setter
+            Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentPresenter
+                        Content="{TemplateBinding Content}">
+                        <ContentPresenter.Resources>
+                            <Style
+                                TargetType="{x:Type TextBlock}">
+                                <Setter
+                                    Property="TextWrapping"
+                                    Value="Wrap" />
+                            </Style>
+                        </ContentPresenter.Resources>
+                    </ContentPresenter>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <DataTemplate
         x:Key="ConfigurationItemDataTemplate"
         DataType="{x:Type viewModels:CreateConfigurationItemViewModel}">
@@ -13,54 +37,64 @@
             <converters:NullToVisibilityConverter
                 x:Key="NullToVisibilityConverter" />
         </DataTemplate.Resources>
-        <Grid
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto"
-            x:Name="RootElement">
-            <!-- configuration item -->
-            <Border
-                Grid.Column="0"
-                Background="OrangeRed"
-                CornerRadius="16"
+        <Border
+            Style="{StaticResource CreateConfigurationSecondaryBorder}">
+            <Grid
+                dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto"
+                x:Name="RootElement"
                 Margin="8">
-                <Grid
-                    dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto"
-                    dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
-                    <!-- item description -->
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        DataContext="{Binding ItemDescription}" />
-                    <TextBox
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        DataContext="{Binding ItemDescription}" />
-                    <!-- item type -->
-                    <Label
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        DataContext="{Binding ConfigurationItemTypes}" />
-                    <ComboBox
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        DataContext="{Binding ConfigurationItemTypes}" />
-                    <!-- is required -->
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="0"
-                        DataContext="{Binding IsRequired}" />
-                    <CheckBox
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        DataContext="{Binding IsRequired}" />
-                </Grid>
-            </Border>
-            <!-- delete configuration item -->
-            <Button
-                Grid.Column="1"
-                DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=createConfigurationPart:CreateConfigurationView}, Path=DataContext.DeleteConfigurationItemCommand}"
-                CommandParameter="{Binding ElementName=RootElement,Path=DataContext}"
-                VerticalAlignment="Top" />
-        </Grid>
+                <!-- configuration item -->
+                <Border
+                    Grid.Column="0">
+                    <Grid
+                        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto"
+                        dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
+                        <!-- item id -->
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            DataContext="{Binding Id}" />
+                        <TextBox
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            DataContext="{Binding Id}" />
+                        <!-- item description -->
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            DataContext="{Binding ItemDescription}" />
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            DataContext="{Binding ItemDescription}" />
+                        <!-- item type -->
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            DataContext="{Binding ConfigurationItemTypes}" />
+                        <ComboBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            DataContext="{Binding ConfigurationItemTypes}" />
+                        <!-- is required -->
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            DataContext="{Binding IsRequired}" />
+                        <CheckBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            DataContext="{Binding IsRequired}" />
+                    </Grid>
+                </Border>
+                <!-- delete configuration item -->
+                <Button
+                    Grid.Column="1"
+                    DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=createConfigurationPart:CreateConfigurationView}, Path=DataContext.DeleteConfigurationItemCommand}"
+                    CommandParameter="{Binding ElementName=RootElement,Path=DataContext}"
+                    VerticalAlignment="Top" />
+            </Grid>
+        </Border>
     </DataTemplate>
 </ResourceDictionary>
 <!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->

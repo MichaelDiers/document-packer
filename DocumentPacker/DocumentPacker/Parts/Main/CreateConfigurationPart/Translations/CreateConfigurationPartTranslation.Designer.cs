@@ -98,6 +98,15 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specify whether the secret data is a file or plaintext..
+        /// </summary>
+        public static string ConfigurationItemTypeToolTip {
+            get {
+                return ResourceManager.GetString("ConfigurationItemTypeToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select.
         /// </summary>
         public static string ConfigurationItemTypeWatermark {
@@ -109,9 +118,9 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         /// <summary>
         ///   Looks up a localized string similar to Delete the configuration item..
         /// </summary>
-        public static string DeleteDescriptionItemToolTip {
+        public static string DeleteConfigurationItemCommandToolTip {
             get {
-                return ResourceManager.GetString("DeleteDescriptionItemToolTip", resourceCulture);
+                return ResourceManager.GetString("DeleteConfigurationItemCommandToolTip", resourceCulture);
             }
         }
         
@@ -152,7 +161,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to description of the configuration.
+        ///   Looks up a localized string similar to my secret data collection.
         /// </summary>
         public static string DescriptionWatermark {
             get {
@@ -197,6 +206,60 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to id contains invalid characters.
+        /// </summary>
+        public static string IdConatainsInvalidCharacters {
+            get {
+                return ResourceManager.GetString("IdConatainsInvalidCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name used multiple times..
+        /// </summary>
+        public static string IdDuplicate {
+            get {
+                return ResourceManager.GetString("IdDuplicate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to id is required.
+        /// </summary>
+        public static string IdIsRequired {
+            get {
+                return ResourceManager.GetString("IdIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string IdLabel {
+            get {
+                return ResourceManager.GetString("IdLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a unique name or ID for the entry. This name will be used as the file name when decrypting the Document Packer entry. These characters must not be used: &quot;, &lt;, &gt;, |, :, *, ?, \, /.
+        /// </summary>
+        public static string IdToolTip {
+            get {
+                return ResourceManager.GetString("IdToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SecretFile.
+        /// </summary>
+        public static string IdWatermark {
+            get {
+                return ResourceManager.GetString("IdWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Required.
         /// </summary>
         public static string IsRequiredLabel {
@@ -206,11 +269,20 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Indicates wheather the entry is required or optional..
+        /// </summary>
+        public static string IsRequiredToolTip {
+            get {
+                return ResourceManager.GetString("IsRequiredToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A description is required..
         /// </summary>
-        public static string ItemDescriptionErrorIsRequired {
+        public static string ItemDescriptionIsRequired {
             get {
-                return ResourceManager.GetString("ItemDescriptionErrorIsRequired", resourceCulture);
+                return ResourceManager.GetString("ItemDescriptionIsRequired", resourceCulture);
             }
         }
         
@@ -233,7 +305,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Description of the item.
+        ///   Looks up a localized string similar to The file contains the secrets of the world..
         /// </summary>
         public static string ItemDescriptionWatermark {
             get {
@@ -260,6 +332,15 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folder does not exist..
+        /// </summary>
+        public static string OutputFolderDoesNotExist {
+            get {
+                return ResourceManager.GetString("OutputFolderDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the output folder..
         /// </summary>
         public static string OutputFolderIsRequired {
@@ -280,18 +361,18 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         /// <summary>
         ///   Looks up a localized string similar to The output folder of the Document Packer configuration file..
         /// </summary>
-        public static string OutputFolderTextBoxToolTip {
+        public static string OutputFolderToolTip {
             get {
-                return ResourceManager.GetString("OutputFolderTextBoxToolTip", resourceCulture);
+                return ResourceManager.GetString("OutputFolderToolTip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Output folder.
+        ///   Looks up a localized string similar to c:\data\secret_data.
         /// </summary>
-        public static string OutputFolderTextBoxWatermark {
+        public static string OutputFolderWatermark {
             get {
-                return ResourceManager.GetString("OutputFolderTextBoxWatermark", resourceCulture);
+                return ResourceManager.GetString("OutputFolderWatermark", resourceCulture);
             }
         }
         
@@ -305,7 +386,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password (optional).
+        ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string PasswordLabel {
             get {
@@ -323,11 +404,20 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to Yt70?5*DLFS2.
         /// </summary>
         public static string PasswordWatermark {
             get {
                 return ResourceManager.GetString("PasswordWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File already exists..
+        /// </summary>
+        public static string PrivateOutputFileDoesExist {
+            get {
+                return ResourceManager.GetString("PrivateOutputFileDoesExist", resourceCulture);
             }
         }
         
@@ -368,11 +458,20 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Private output configuration file.
+        ///   Looks up a localized string similar to PrivateConfigurationFile.
         /// </summary>
         public static string PrivateOutputFileWatermark {
             get {
                 return ResourceManager.GetString("PrivateOutputFileWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File already exists..
+        /// </summary>
+        public static string PublicOutputFileDoesExist {
+            get {
+                return ResourceManager.GetString("PublicOutputFileDoesExist", resourceCulture);
             }
         }
         
@@ -413,7 +512,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Public output configuration file.
+        ///   Looks up a localized string similar to PrivateConfigurationFile.
         /// </summary>
         public static string PublicOutputFileWatermark {
             get {
@@ -543,6 +642,15 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         public static string RsaPublicKeyWatermark {
             get {
                 return ResourceManager.GetString("RsaPublicKeyWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown error occured..
+        /// </summary>
+        public static string SaveCommandUnknownError {
+            get {
+                return ResourceManager.GetString("SaveCommandUnknownError", resourceCulture);
             }
         }
         

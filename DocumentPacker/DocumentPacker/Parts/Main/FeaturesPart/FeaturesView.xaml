@@ -18,6 +18,7 @@
             <DataTemplate
                 DataType="{x:Type featuresPart:TranslatableFeaturesButton}">
                 <Button
+                    Background="{Binding Background}"
                     Command="{Binding Command}"
                     Style="{StaticResource ButtonStyle}">
                     <Grid

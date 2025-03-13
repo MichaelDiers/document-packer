@@ -130,7 +130,7 @@
     <value>Beschreibe die neue Document Packer Konfiguration. Die Beschreibung wird bei der Verschlüsselung von Dateien angezeigt.</value>
   </data>
   <data name="DescriptionWatermark" xml:space="preserve">
-    <value>Beschreibung der Konfiguration</value>
+    <value>meine geheimen Daten</value>
   </data>
   <data name="RsaPrivateKeyLabel" xml:space="preserve">
     <value>RSA: Privater Schlüssel</value>
@@ -167,7 +167,7 @@ MIICCgKCAgEA...
   <data name="GenerateRsaKeysCommandToolTip" xml:space="preserve">
     <value>Generiere ein neues Paar von privatem und öffentlichem RSA Schlüsseln.</value>
   </data>
-  <data name="ItemDescriptionErrorIsRequired" xml:space="preserve">
+  <data name="ItemDescriptionIsRequired" xml:space="preserve">
     <value>Bitte gebe eine Beschreibung an.</value>
   </data>
   <data name="ItemDescriptionLabel" xml:space="preserve">
@@ -177,9 +177,9 @@ MIICCgKCAgEA...
     <value>Eine kurze Beschreibung des Konfigurationseintrages.</value>
   </data>
   <data name="ItemDescriptionWatermark" xml:space="preserve">
-    <value>Beschreibung des Eintrages</value>
+    <value>Die Datei enthält die Geheimnisse der Welt.</value>
   </data>
-  <data name="DeleteDescriptionItemToolTip" xml:space="preserve">
+  <data name="DeleteConfigurationItemCommandToolTip" xml:space="preserve">
     <value>Lösche den Konfigurationseintrag</value>
   </data>
   <data name="DescriptionErrorIsRequired" xml:space="preserve">
@@ -189,7 +189,7 @@ MIICCgKCAgEA...
     <value>Füge ein neues Konfigurationseintrag hinzu.</value>
   </data>
   <data name="ConfigurationItemTypeLabel" xml:space="preserve">
-    <value>Art des Eintrages</value>
+    <value>Typ</value>
   </data>
   <data name="ConfigurationItemTypeWatermark" xml:space="preserve">
     <value>Bitte auswählen</value>
@@ -207,7 +207,7 @@ MIICCgKCAgEA...
     <value>Pflichtangabe</value>
   </data>
   <data name="PasswordLabel" xml:space="preserve">
-    <value>Passwort (optional)</value>
+    <value>Passwort</value>
   </data>
   <data name="SaveLabel" xml:space="preserve">
     <value>Speichern</value>
@@ -227,11 +227,11 @@ MIICCgKCAgEA...
   <data name="OutputFolderLabel" xml:space="preserve">
     <value>Ausgabeverzeichnis</value>
   </data>
-  <data name="OutputFolderTextBoxToolTip" xml:space="preserve">
+  <data name="OutputFolderToolTip" xml:space="preserve">
     <value>Das Ausgabeverzeichnis der Document Packer Konfigurationsdatei</value>
   </data>
-  <data name="OutputFolderTextBoxWatermark" xml:space="preserve">
-    <value>Ausgabeverzeichnis</value>
+  <data name="OutputFolderWatermark" xml:space="preserve">
+    <value>c:\daten\streng_geheim</value>
   </data>
   <data name="OutputFolderButtonToolTip" xml:space="preserve">
     <value>Wähle das Ausgabeverzeichnis aus.</value>
@@ -246,7 +246,7 @@ MIICCgKCAgEA...
     <value>Bitte gebe den Namen der privaten Document Packer Konfigurationsdatei an.</value>
   </data>
   <data name="PrivateOutputFileWatermark" xml:space="preserve">
-    <value>Private Konfigurationsdatei</value>
+    <value>PivateKonfiguration</value>
   </data>
   <data name="PrivateOutputFileExtensionToolTip" xml:space="preserve">
     <value>Die Dateiendung der privaten Document Packer Konfigurationsdatei.</value>
@@ -258,7 +258,7 @@ MIICCgKCAgEA...
     <value>Bitte gebe den Namen der öffentlichen Document Packer Konfigurationsdatei an.</value>
   </data>
   <data name="PublicOutputFileWatermark" xml:space="preserve">
-    <value>Öffentliche Konfigurationsdatei</value>
+    <value>ÖffentlicheKonfiguration</value>
   </data>
   <data name="PublicOutputFileIsRequired" xml:space="preserve">
     <value>Bitte gebe einen Dateinamen an.</value>
@@ -273,7 +273,7 @@ MIICCgKCAgEA...
     <value>Die Konfigurationsdateien werden mit diesem Passwort geschützt.</value>
   </data>
   <data name="PasswordWatermark" xml:space="preserve">
-    <value>Passwort</value>
+    <value>Yt70?5*DLFS2</value>
   </data>
   <data name="PasswordIsRequired" xml:space="preserve">
     <value>Bitte gebe ein Passwort an.</value>
@@ -298,5 +298,41 @@ MIICCgKCAgEA...
   </data>
   <data name="RsaPublicKeyFormatError" xml:space="preserve">
     <value>Format des RSA Schlüssels ist ungültig.</value>
+  </data>
+  <data name="IdLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="IdWatermark" xml:space="preserve">
+    <value>Geheimakte</value>
+  </data>
+  <data name="IdToolTip" xml:space="preserve">
+    <value>Hinterlege einen eindeutigen Namen oder eine Id für den Eintrag. Bei der Entschlüsselung des Document Packer Eintrages wird dieser Name als Dateiname verwendet. Diese Zeichen dürfen nicht verwendet werden: ", &lt;, &gt;, |, :, *, ?, \, /</value>
+  </data>
+  <data name="IdIsRequired" xml:space="preserve">
+    <value>Bitte gebe einen Namen an</value>
+  </data>
+  <data name="IdConatainsInvalidCharacters" xml:space="preserve">
+    <value>Name enthält ungültige Zeichen</value>
+  </data>
+  <data name="ConfigurationItemTypeToolTip" xml:space="preserve">
+    <value>Gebe an, ob es sich bei den geheimen Daten um eine Datei oder einen Text handelt.</value>
+  </data>
+  <data name="IsRequiredToolTip" xml:space="preserve">
+    <value>Gibt an, ob die Eingabe erforderlich oder optional ist.</value>
+  </data>
+  <data name="OutputFolderDoesNotExist" xml:space="preserve">
+    <value>Verzeichnis existiert nicht.</value>
+  </data>
+  <data name="PrivateOutputFileDoesExist" xml:space="preserve">
+    <value>Datei existiert bereits.</value>
+  </data>
+  <data name="PublicOutputFileDoesExist" xml:space="preserve">
+    <value>Datei existiert bereits.</value>
+  </data>
+  <data name="SaveCommandUnknownError" xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten.</value>
+  </data>
+  <data name="IdDuplicate" xml:space="preserve">
+    <value>Name mehrfach verwendet.</value>
   </data>
 </root>
