@@ -125,20 +125,11 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Make a list of required files and information. Save the list as a configuration and share it with other Document Packer users..
-        /// </summary>
-        public static string Description {
-            get {
-                return ResourceManager.GetString("Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A description is required..
         /// </summary>
-        public static string DescriptionErrorIsRequired {
+        public static string DescriptionIsRequired {
             get {
-                return ResourceManager.GetString("DescriptionErrorIsRequired", resourceCulture);
+                return ResourceManager.GetString("DescriptionIsRequired", resourceCulture);
             }
         }
         
@@ -193,15 +184,6 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         public static string GenerateRsaKeysCommandUnknownError {
             get {
                 return ResourceManager.GetString("GenerateRsaKeysCommandUnknownError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create Configuration.
-        /// </summary>
-        public static string Headline {
-            get {
-                return ResourceManager.GetString("Headline", resourceCulture);
             }
         }
         
@@ -319,15 +301,6 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         public static string OpenFileDialogToolTip {
             get {
                 return ResourceManager.GetString("OpenFileDialogToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select the output folder.
-        /// </summary>
-        public static string OutputFolderButtonToolTip {
-            get {
-                return ResourceManager.GetString("OutputFolderButtonToolTip", resourceCulture);
             }
         }
         
@@ -521,24 +494,6 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Private and public keys do not match..
-        /// </summary>
-        public static string RsaKeysInvalid {
-            get {
-                return ResourceManager.GetString("RsaKeysInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add the private RSA key..
-        /// </summary>
-        public static string RsaPrivateKeyButtonToolTip {
-            get {
-                return ResourceManager.GetString("RsaPrivateKeyButtonToolTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Format of the private key is invalid..
         /// </summary>
         public static string RsaPrivateKeyFormatError {
@@ -696,6 +651,24 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         public static string SelectedConfigurationItemTypeMissing {
             get {
                 return ResourceManager.GetString("SelectedConfigurationItemTypeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make a list of required files and information. Save the list as a configuration and share it with other Document Packer users..
+        /// </summary>
+        public static string ViewDescription {
+            get {
+                return ResourceManager.GetString("ViewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Configuration.
+        /// </summary>
+        public static string ViewHeadline {
+            get {
+                return ResourceManager.GetString("ViewHeadline", resourceCulture);
             }
         }
     }

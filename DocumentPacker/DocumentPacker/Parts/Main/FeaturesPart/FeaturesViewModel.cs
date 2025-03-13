@@ -37,8 +37,8 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                         }),
                     "material_symbol_edit_square_96dp.png".ToBitmapImage(),
                     CreateConfigurationPartTranslation.ResourceManager,
-                    nameof(CreateConfigurationPartTranslation.Headline),
-                    descriptionResourceKey: nameof(CreateConfigurationPartTranslation.Description),
+                    nameof(CreateConfigurationPartTranslation.ViewHeadline),
+                    descriptionResourceKey: nameof(CreateConfigurationPartTranslation.ViewDescription),
                     background: new LinearGradientBrush(
                         (Color) ColorConverter.ConvertFromString("#ccdaff"),
                         (Color) ColorConverter.ConvertFromString("#644dcb"),

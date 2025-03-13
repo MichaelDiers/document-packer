@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description" xml:space="preserve">
+  <data name="ViewDescription" xml:space="preserve">
     <value>Erstelle eine Liste von benötigten Dateien und Informationen. Speichere die Liste als Konfiguration ab und teile diese mit anderen Document Packer Benutzern.</value>
   </data>
-  <data name="Headline" xml:space="preserve">
+  <data name="ViewHeadline" xml:space="preserve">
     <value>Konfiguration anlegen</value>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
@@ -137,9 +137,6 @@
   </data>
   <data name="RsaPublicKeyLabel" xml:space="preserve">
     <value>RSA: Öffentlicher Schlüssel</value>
-  </data>
-  <data name="RsaPrivateKeyButtonToolTip" xml:space="preserve">
-    <value>Füge den privaten RSA Schlüssel hinzu.</value>
   </data>
   <data name="RsaPublicKeyButtonToolTip" xml:space="preserve">
     <value>Füge den öffentlichen RSA Schlüssel hinzu.</value>
@@ -182,7 +179,7 @@ MIICCgKCAgEA...
   <data name="DeleteConfigurationItemCommandToolTip" xml:space="preserve">
     <value>Lösche den Konfigurationseintrag</value>
   </data>
-  <data name="DescriptionErrorIsRequired" xml:space="preserve">
+  <data name="DescriptionIsRequired" xml:space="preserve">
     <value>Bitte gebe eine Beschreibung an.</value>
   </data>
   <data name="AddConfigurationItemToolTip" xml:space="preserve">
@@ -233,9 +230,6 @@ MIICCgKCAgEA...
   <data name="OutputFolderWatermark" xml:space="preserve">
     <value>c:\daten\streng_geheim</value>
   </data>
-  <data name="OutputFolderButtonToolTip" xml:space="preserve">
-    <value>Wähle das Ausgabeverzeichnis aus.</value>
-  </data>
   <data name="PrivateOutputFileLabel" xml:space="preserve">
     <value>Private Konfigurationsdatei</value>
   </data>
@@ -277,9 +271,6 @@ MIICCgKCAgEA...
   </data>
   <data name="PasswordIsRequired" xml:space="preserve">
     <value>Bitte gebe ein Passwort an.</value>
-  </data>
-  <data name="RsaKeysInvalid" xml:space="preserve">
-    <value>Privater und öffentlicher Schlüssel sind ungültig.</value>
   </data>
   <data name="SaveConfigurationSucceeds" xml:space="preserve">
     <value>Konfigurationsdateien erstellt.</value>

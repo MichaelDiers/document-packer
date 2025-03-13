@@ -7,8 +7,12 @@
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
+    xmlns:createConfigurationPart="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart"
     Template="{StaticResource MainContentControlTemplate}"
-    dependencyProperties:ImageSourceDependencyProperty.ImageSource="pack://application:,,,/DocumentPacker;component/Assets/material_symbol_edit_square_96dp.png">
+    dependencyProperties:ImageSourceDependencyProperty.ImageSource="pack://application:,,,/DocumentPacker;component/Assets/material_symbol_edit_square_96dp.png"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ignore="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="ignore">
     <mvvm:BaseUserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -121,7 +125,7 @@
                 <Button
                     Grid.Column="1"
                     DataContext="{Binding SelectOutputFolderCommand}"
-                    CommandParameter="{Binding OutputFolder.Value}" />
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=createConfigurationPart:CreateConfigurationView}, Path=DataContext.OutputFolder.Value}" />
             </Grid>
             <!-- private output file -->
             <Label

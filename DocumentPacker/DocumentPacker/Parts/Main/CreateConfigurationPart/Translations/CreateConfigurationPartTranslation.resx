@@ -117,11 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Description" xml:space="preserve">
+  <data name="ViewDescription" xml:space="preserve">
     <value>Make a list of required files and information. Save the list as a configuration and share it with other Document Packer users.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="Headline" xml:space="preserve">
+  <data name="ViewHeadline" xml:space="preserve">
     <value>Create Configuration</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Description</value>
@@ -142,9 +144,6 @@
   <data name="RsaPublicKeyLabel" xml:space="preserve">
     <value>RSA Public Key</value>
     <comment>CreateConfigurationPart</comment>
-  </data>
-  <data name="RsaPrivateKeyButtonToolTip" xml:space="preserve">
-    <value>Add the private RSA key.</value>
   </data>
   <data name="RsaPublicKeyButtonToolTip" xml:space="preserve">
     <value>Add the RSA public key.</value>
@@ -195,9 +194,11 @@ MIICCgKCAgEA...
   </data>
   <data name="DeleteConfigurationItemCommandToolTip" xml:space="preserve">
     <value>Delete the configuration item.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="DescriptionErrorIsRequired" xml:space="preserve">
+  <data name="DescriptionIsRequired" xml:space="preserve">
     <value>A description is required.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="AddConfigurationItemToolTip" xml:space="preserve">
     <value>Add a new configuration item.</value>
@@ -221,6 +222,7 @@ MIICCgKCAgEA...
   </data>
   <data name="OpenFileDialogToolTip" xml:space="preserve">
     <value>Select a file to add.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="IsRequiredLabel" xml:space="preserve">
     <value>Required</value>
@@ -240,6 +242,7 @@ MIICCgKCAgEA...
   </data>
   <data name="SelectedConfigurationItemTypeMissing" xml:space="preserve">
     <value>Please select.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="RsaPrivateKeyIsRequired" xml:space="preserve">
     <value>Private RSA key is required.</value>
@@ -260,9 +263,6 @@ MIICCgKCAgEA...
   <data name="OutputFolderWatermark" xml:space="preserve">
     <value>c:\data\secret_data</value>
     <comment>CreateConfigurationPart</comment>
-  </data>
-  <data name="OutputFolderButtonToolTip" xml:space="preserve">
-    <value>Select the output folder</value>
   </data>
   <data name="PrivateOutputFileLabel" xml:space="preserve">
     <value>Private Output File</value>
@@ -302,6 +302,7 @@ MIICCgKCAgEA...
   </data>
   <data name="PublicOutputFileExtensionToolTip" xml:space="preserve">
     <value>The predefined file extension of the public Document Packer configuration file.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="OutputFolderIsRequired" xml:space="preserve">
     <value>Please select the output folder.</value>
@@ -319,14 +320,13 @@ MIICCgKCAgEA...
     <value>A password is required.</value>
     <comment>CreateConfigurationPart</comment>
   </data>
-  <data name="RsaKeysInvalid" xml:space="preserve">
-    <value>Private and public keys do not match.</value>
-  </data>
   <data name="SaveConfigurationSucceeds" xml:space="preserve">
     <value>Configuration files created.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="SaveConfigurationFails" xml:space="preserve">
     <value>Cannot create configuration files.</value>
+    <comment>CreateConfigurationPart</comment>
   </data>
   <data name="GenerateRsaKeysCommandUnknownError" xml:space="preserve">
     <value>Ooooops...an unexpected error occured: </value>

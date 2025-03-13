@@ -61,9 +61,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     ///     The description of the configuration.
     /// </summary>
     private TranslatableAndValidable<string> description = new(
-        null,
+        string.Empty,
         data => string.IsNullOrWhiteSpace(data.Value)
-            ? nameof(CreateConfigurationPartTranslation.DescriptionErrorIsRequired)
+            ? nameof(CreateConfigurationPartTranslation.DescriptionIsRequired)
             : null,
         false,
         CreateConfigurationPartTranslation.ResourceManager,
@@ -194,14 +194,14 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// </summary>
     private Translatable viewDescription = new(
         CreateConfigurationPartTranslation.ResourceManager,
-        nameof(CreateConfigurationPartTranslation.Description));
+        nameof(CreateConfigurationPartTranslation.ViewDescription));
 
     /// <summary>
     ///     The headline of the view.
     /// </summary>
     private Translatable viewHeadline = new(
         CreateConfigurationPartTranslation.ResourceManager,
-        nameof(CreateConfigurationPartTranslation.Headline));
+        nameof(CreateConfigurationPartTranslation.ViewHeadline));
 
     /// <summary>
     ///     The view model of <see cref="CreateConfigurationView" />.
