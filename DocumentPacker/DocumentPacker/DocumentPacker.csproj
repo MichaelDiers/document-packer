@@ -188,7 +188,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DecryptPartTranslation.resx</DependentUpon>
     </Compile>
-    <Compile Update="Parts\Main\EncryptPart\EncryptPartTranslation.Designer.cs">
+    <Compile Update="Parts\Main\EncryptPart\Translations\EncryptPartTranslation.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>EncryptPartTranslation.resx</DependentUpon>
@@ -243,7 +243,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecryptPartTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Parts\Main\EncryptPart\EncryptPartTranslation.resx">
+    <EmbeddedResource Update="Parts\Main\EncryptPart\Translations\EncryptPartTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EncryptPartTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>

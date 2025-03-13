@@ -1,4 +1,4 @@
-﻿namespace DocumentPacker.Parts.Main.EncryptPart;
+﻿namespace DocumentPacker.Parts.Main.EncryptPart.Views;
 
 using DocumentPacker.EventHandling;
 

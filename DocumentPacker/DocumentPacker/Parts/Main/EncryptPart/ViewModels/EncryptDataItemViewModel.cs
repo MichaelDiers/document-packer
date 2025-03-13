@@ -1,10 +1,11 @@
-﻿namespace DocumentPacker.Parts.Main.EncryptPart;
+﻿namespace DocumentPacker.Parts.Main.EncryptPart.ViewModels;
 
 using System.IO;
 using System.Windows.Input;
 using DocumentPacker.Commands;
 using DocumentPacker.Models;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
+using DocumentPacker.Parts.Main.EncryptPart.Translations;
 using Libs.Wpf.Commands;
 using Libs.Wpf.ViewModels;
 

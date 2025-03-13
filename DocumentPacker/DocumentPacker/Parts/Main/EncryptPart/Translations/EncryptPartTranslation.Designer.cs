@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DocumentPacker.Parts.Main.EncryptPart {
+namespace DocumentPacker.Parts.Main.EncryptPart.Translations {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DocumentPacker.Parts.Main.EncryptPart {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DocumentPacker.Parts.Main.EncryptPart.EncryptPartTranslation", typeof(EncryptPartTranslation).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DocumentPacker.Parts.Main.EncryptPart.Translations.EncryptPartTranslation", typeof(EncryptPartTranslation).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

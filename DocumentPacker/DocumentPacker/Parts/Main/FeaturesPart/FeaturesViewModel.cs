@@ -8,7 +8,7 @@ using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
 using DocumentPacker.Parts.Main.DecryptPart;
-using DocumentPacker.Parts.Main.EncryptPart;
+using DocumentPacker.Parts.Main.EncryptPart.Translations;
 using Libs.Wpf.Commands;
 using Libs.Wpf.ViewModels;
 

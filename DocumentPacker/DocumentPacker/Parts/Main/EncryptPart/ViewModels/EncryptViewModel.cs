@@ -1,4 +1,4 @@
-﻿namespace DocumentPacker.Parts.Main.EncryptPart;
+﻿namespace DocumentPacker.Parts.Main.EncryptPart.ViewModels;
 
 using System.IO;
 using System.Windows;
@@ -7,6 +7,8 @@ using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
 using DocumentPacker.Models;
 using DocumentPacker.Mvvm;
+using DocumentPacker.Parts.Main.EncryptPart.Translations;
+using DocumentPacker.Parts.Main.EncryptPart.Views;
 using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;

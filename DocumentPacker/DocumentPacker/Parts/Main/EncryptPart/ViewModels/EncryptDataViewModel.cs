@@ -1,7 +1,8 @@
-﻿namespace DocumentPacker.Parts.Main.EncryptPart;
+﻿namespace DocumentPacker.Parts.Main.EncryptPart.ViewModels;
 
 using System.Collections.ObjectModel;
 using DocumentPacker.Models;
+using DocumentPacker.Parts.Main.EncryptPart.Translations;
 using Libs.Wpf.Commands;
 using Libs.Wpf.ViewModels;
 
