@@ -86,7 +86,7 @@
                                     <TextBox.Style>
                                         <Style
                                             TargetType="TextBox"
-                                            BasedOn="{StaticResource TranslatableTextBoxStyle}">
+                                            BasedOn="{StaticResource DocumentPackerTranslatableMultiLineTextBoxStyle}">
                                             <Setter
                                                 Property="Visibility"
                                                 Value="Collapsed" />
