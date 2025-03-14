@@ -1,10 +1,7 @@
 ﻿namespace DocumentPacker.Services;
 
-using DocumentPacker.Services.Crypto;
 using DocumentPacker.Services.DocumentPackerService;
 using DocumentPacker.Services.DocumentUnpackerService;
-using DocumentPacker.Services.Packer;
-using DocumentPacker.Services.Zip;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -26,18 +23,6 @@ public static class ServiceCollectionExtensionsForServices
         services.TryAddSingleton<IRsaService, RsaService>();
         services.TryAddSingleton<IDocumentUnpackerService, DocumentUnpackerService.DocumentUnpackerService>();
         services.TryAddSingleton<IDecryptService, DecryptService>();
-        return services.TryAddZipServices().TryAddCryptoServices().TryAddPackerServices();
-    }
-
-    /// <summary>
-    ///     Tries to add all services that handle crypto data as a dependency.
-    /// </summary>
-    /// <param name="services">Dependencies are added to this <see cref="IServiceCollection" />.</param>
-    /// <returns>The given <paramref name="services" />.</returns>
-    public static IServiceCollection TryAddCryptoServices(this IServiceCollection services)
-    {
-        services.TryAddSingleton<ICryptoFactory, CryptoFactory>();
-
         return services;
     }
 
@@ -61,30 +46,6 @@ public static class ServiceCollectionExtensionsForServices
     public static IServiceCollection TryAddDocumentUnpackerService(this IServiceCollection services)
     {
         services.TryAddSingleton<IDocumentUnpackerService, DocumentUnpackerService.DocumentUnpackerService>();
-
-        return services;
-    }
-
-    /// <summary>
-    ///     Tries to add all services that handle package files as a dependency.
-    /// </summary>
-    /// <param name="services">Dependencies are added to this <see cref="IServiceCollection" />.</param>
-    /// <returns>The given <paramref name="services" />.</returns>
-    public static IServiceCollection TryAddPackerServices(this IServiceCollection services)
-    {
-        services.TryAddSingleton<IPackerFactory, Packer.Packer>();
-
-        return services;
-    }
-
-    /// <summary>
-    ///     Tries to add all services that handle zip files as a dependency.
-    /// </summary>
-    /// <param name="services">Dependencies are added to this <see cref="IServiceCollection" />.</param>
-    /// <returns>The given <paramref name="services" />.</returns>
-    public static IServiceCollection TryAddZipServices(this IServiceCollection services)
-    {
-        services.TryAddSingleton<IZipFileCreator, ZipFileCreator>();
 
         return services;
     }
