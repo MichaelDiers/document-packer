@@ -82,7 +82,16 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                     "material_symbol_expand_96dp.png".ToBitmapImage(),
                     DecryptPartTranslation.ResourceManager,
                     nameof(DecryptPartTranslation.Headline),
-                    descriptionResourceKey: nameof(DecryptPartTranslation.Description))
+                    descriptionResourceKey: nameof(DecryptPartTranslation.Description),
+                    background: new LinearGradientBrush(
+                        (Color) ColorConverter.ConvertFromString("#80ff00"),
+                        (Color) ColorConverter.ConvertFromString("#99ff33"),
+                        new Point(
+                            0,
+                            0),
+                        new Point(
+                            1,
+                            1)))
             });
     }
 

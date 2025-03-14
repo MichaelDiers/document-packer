@@ -7,7 +7,6 @@
         <ResourceDictionary
             Source="pack://application:,,,/Libs.Wpf;component/Styles/common/TranslatableStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
     <Style
         TargetType="TextBlock"
         x:Key="TextBlockBaseHeadlineStyle"
@@ -248,6 +247,46 @@
                         Offset="0.0" />
                     <GradientStop
                         Color="#fff0f3"
+                        Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="DecryptPrimaryBorder">
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="0,0"
+                    EndPoint="1,1">
+                    <GradientStop
+                        Color="#80ff00"
+                        Offset="0.0" />
+                    <GradientStop
+                        Color="#99ff33"
+                        Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="DecryptSecondaryBorder">
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="0,0"
+                    EndPoint="1,1">
+                    <GradientStop
+                        Color="#a6ff4d"
+                        Offset="0.0" />
+                    <GradientStop
+                        Color="#bfff80"
                         Offset="1.0" />
                 </LinearGradientBrush>
             </Setter.Value>

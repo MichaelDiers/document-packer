@@ -12,73 +12,88 @@
         <converters:NullOrEmptyToVisibilityConverter
             x:Key="NullOrEmptyToVisibilityConverter" />
     </UserControl.Resources>
-    <Grid
-        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto|Auto"
-        dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
-        <!-- load configuration -->
-        <loadConfigurationSubPart:LoadConfigurationView
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            DataContext="{Binding LoadConfigurationViewModel}" />
-        <!-- rsa key -->
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            DataContext="{Binding PrivateRsaKey}"
-            Visibility="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.Value, Converter={StaticResource NullOrEmptyToVisibilityConverter}}" />
-        <TextBox
-            Grid.Row="1"
-            Grid.Column="1"
-            DataContext="{Binding PrivateRsaKey}"
-            IsEnabled="False"
-            IsReadOnly="True"
-            MaxHeight="300"
-            x:Name="PrivateRsaKeyTextBox"
-            Visibility="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.Value, Converter={StaticResource NullOrEmptyToVisibilityConverter}}" />
-        <!-- load encrypted file -->
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            DataContext="{Binding EncryptedFile}"
-            Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}" />
+    <Border
+        Style="{StaticResource DecryptPrimaryBorder}">
         <Grid
-            Grid.Row="2"
-            Grid.Column="1"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto"
-            Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
-            <TextBox
-                Grid.Column="0"
-                DataContext="{Binding EncryptedFile}" />
-            <Button
-                Grid.Column="1"
-                DataContext="{Binding SelectEncryptedFileCommand}" />
+            dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto"
+            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*">
+            <!-- load configuration -->
+            <Border
+                Grid.Row="0"
+                Style="{StaticResource DecryptSecondaryBorder}">
+                <loadConfigurationSubPart:LoadConfigurationView
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    DataContext="{Binding LoadConfigurationViewModel}" />
+            </Border>
+            <Border
+                Grid.Row="1"
+                Style="{StaticResource DecryptSecondaryBorder}">
+                <Grid
+                    dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto"
+                    dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
+                    <!-- rsa key -->
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        DataContext="{Binding PrivateRsaKey}"
+                        Visibility="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.Value, Converter={StaticResource NullOrEmptyToVisibilityConverter}}" />
+                    <TextBox
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        DataContext="{Binding PrivateRsaKey}"
+                        IsEnabled="False"
+                        IsReadOnly="True"
+                        MaxHeight="300"
+                        x:Name="PrivateRsaKeyTextBox"
+                        Visibility="{Binding RelativeSource={RelativeSource Self}, Path=DataContext.Value, Converter={StaticResource NullOrEmptyToVisibilityConverter}}" />
+                    <!-- load encrypted file -->
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        DataContext="{Binding EncryptedFile}"
+                        Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}" />
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto"
+                        Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
+                        <TextBox
+                            Grid.Column="0"
+                            DataContext="{Binding EncryptedFile}" />
+                        <Button
+                            Grid.Column="1"
+                            DataContext="{Binding SelectEncryptedFileCommand}" />
+                    </Grid>
+                    <!-- output folder -->
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        DataContext="{Binding OutputFolder}"
+                        Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}" />
+                    <Grid
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto"
+                        Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
+                        <TextBox
+                            Grid.Column="0"
+                            DataContext="{Binding OutputFolder}" />
+                        <Button
+                            Grid.Column="1"
+                            DataContext="{Binding SelectOutputFolderCommand}" />
+                    </Grid>
+                    <Button
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        DataContext="{Binding DecryptCommand}"
+                        HorizontalAlignment="Right"
+                        ToolTipService.ShowOnDisabled="True"
+                        Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}" />
+                </Grid>
+            </Border>
         </Grid>
-        <!-- output folder -->
-        <Label
-            Grid.Row="3"
-            Grid.Column="0"
-            DataContext="{Binding OutputFolder}"
-            Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}" />
-        <Grid
-            Grid.Row="3"
-            Grid.Column="1"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto"
-            Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
-            <TextBox
-                Grid.Column="0"
-                DataContext="{Binding OutputFolder}" />
-            <Button
-                Grid.Column="1"
-                DataContext="{Binding SelectOutputFolderCommand}" />
-        </Grid>
-        <Button
-            Grid.Row="4"
-            Grid.Column="1"
-            DataContext="{Binding DecryptCommand}"
-            HorizontalAlignment="Right"
-            ToolTipService.ShowOnDisabled="True"
-            Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}" />
-    </Grid>
+    </Border>
 </mvvm:BaseUserControl>
 <!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->
