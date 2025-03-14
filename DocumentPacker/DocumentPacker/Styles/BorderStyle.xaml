@@ -1,0 +1,87 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary
+            Source="Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style
+        TargetType="Border"
+        x:Key="BaseBorder">
+        <Setter
+            Property="CornerRadius"
+            Value="8" />
+        <Setter
+            Property="Margin"
+            Value="16" />
+        <Setter
+            Property="Padding"
+            Value="16" />
+    </Style>
+
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="CreateConfigurationPrimaryBorder">
+        <Setter
+            Property="Background"
+            Value="{StaticResource CreateConfigurationPrimaryBrush}" />
+    </Style>
+
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="CreateConfigurationSecondaryBorder">
+        <Setter
+            Property="Background"
+            Value="{StaticResource CreateConfigurationSecondaryBrush}" />
+    </Style>
+
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="EncryptPrimaryBorder">
+        <Setter
+            Property="Background"
+            Value="{StaticResource EncryptPrimaryBrush}" />
+    </Style>
+
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="EncryptSecondaryBorder">
+        <Setter
+            Property="Background"
+            Value="{StaticResource EncryptSecondaryBrush}" />
+    </Style>
+
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="EncryptTernaryBorder">
+        <Setter
+            Property="Background"
+            Value="{StaticResource EncryptTernaryBrush}" />
+    </Style>
+
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="DecryptPrimaryBorder">
+        <Setter
+            Property="Background"
+            Value="{StaticResource DecryptPrimaryBrush}" />
+    </Style>
+
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="DecryptSecondaryBorder">
+        <Setter
+            Property="Background"
+            Value="{StaticResource DecryptSecondaryBrush}" />
+    </Style>
+
+</ResourceDictionary>

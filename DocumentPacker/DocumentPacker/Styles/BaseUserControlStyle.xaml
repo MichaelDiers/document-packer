@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm">
+
+    <Style
+        x:Key="HeaderViewStyle"
+        TargetType="mvvm:BaseUserControl">
+        <Setter
+            Property="Margin"
+            Value="32" />
+    </Style>
+
+</ResourceDictionary>

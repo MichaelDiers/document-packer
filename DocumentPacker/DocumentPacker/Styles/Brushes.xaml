@@ -1,0 +1,89 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <LinearGradientBrush
+        x:Key="CreateConfigurationPrimaryBrush"
+        StartPoint="0,0"
+        EndPoint="1,1">
+        <GradientStop
+            Color="#ccdaff"
+            Offset="0.0" />
+        <GradientStop
+            Color="#644dcb"
+            Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="CreateConfigurationSecondaryBrush"
+        StartPoint="0,0"
+        EndPoint="1,1">
+        <GradientStop
+            Color="#f0f4ff"
+            Offset="0.0" />
+        <GradientStop
+            Color="#a99ce2"
+            Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="EncryptPrimaryBrush"
+        StartPoint="0,0"
+        EndPoint="1,1">
+        <GradientStop
+            Color="#ff4d6d"
+            Offset="0.0" />
+        <GradientStop
+            Color="#ff758f"
+            Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="EncryptSecondaryBrush"
+        StartPoint="0,0"
+        EndPoint="1,1">
+        <GradientStop
+            Color="#ff8fa3"
+            Offset="0.0" />
+        <GradientStop
+            Color="#ffb3c1"
+            Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="EncryptTernaryBrush"
+        StartPoint="0,0"
+        EndPoint="1,1">
+        <GradientStop
+            Color="#ffccd5"
+            Offset="0.0" />
+        <GradientStop
+            Color="#fff0f3"
+            Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="DecryptPrimaryBrush"
+        StartPoint="0,0"
+        EndPoint="1,1">
+        <GradientStop
+            Color="#80ff00"
+            Offset="0.0" />
+        <GradientStop
+            Color="#99ff33"
+            Offset="1.0" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush
+        x:Key="DecryptSecondaryBrush"
+        StartPoint="0,0"
+        EndPoint="1,1">
+        <GradientStop
+            Color="#a6ff4d"
+            Offset="0.0" />
+        <GradientStop
+            Color="#bfff80"
+            Offset="1.0" />
+    </LinearGradientBrush>
+
+</ResourceDictionary>
