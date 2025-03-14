@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
 using DocumentPacker.Models;
 using DocumentPacker.Mvvm;
+using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
 using DocumentPacker.Parts.Main.EncryptPart.Translations;
 using DocumentPacker.Parts.Main.EncryptPart.Views;
 using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
@@ -95,11 +96,12 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                 }
 
                 if (!this.OutputFolder.HasError &&
+                    !this.OutputFileExtension.HasError &&
                     !string.IsNullOrWhiteSpace(this.OutputFolder.Value) &&
                     Path.Exists(
                         Path.Join(
                             this.OutputFolder.Value,
-                            this.OutputFile.Value)))
+                            $"{this.OutputFile.Value}{this.OutputFileExtension.Value}")))
                 {
                     return nameof(EncryptPartTranslation.OutputFileExists);
                 }
@@ -200,6 +202,16 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     }
 
     /// <summary>
+    ///     Gets or sets the output file.
+    /// </summary>
+    public TranslatableAndValidable<string> OutputFileExtension { get; } = new(
+        ".dp",
+        null,
+        false,
+        EncryptPartTranslation.ResourceManager,
+        toolTipResourceKey: nameof(EncryptPartTranslation.OutputFileExtensionToolTip));
+
+    /// <summary>
     ///     Gets or sets the output folder.
     /// </summary>
     public TranslatableAndValidable<string> OutputFolder
@@ -295,13 +307,32 @@ internal class EncryptViewModel : ApplicationBaseViewModel
 
         var model = new EncryptModel(
             this.OutputFolder.Value,
-            this.OutputFile.Value,
+            $"{this.OutputFile.Value}{this.OutputFileExtension.Value}",
             this.EncryptDataViewModel.Items.Select(
-                item => new EncryptItemModel(
-                    item.ConfigurationItemType,
-                    item.IsRequired.Value,
-                    item.Value.Value,
-                    item.Id)));
+                item =>
+                {
+                    var id = item.Id.Value;
+                    var value = item.Value.Value;
+
+                    switch (item.ConfigurationItemType)
+                    {
+                        case ConfigurationItemType.File:
+                            id = $"{id}{Path.GetExtension(value)}";
+                            break;
+                        case ConfigurationItemType.Text:
+                            id = $"{id}.txt";
+                            value = $"{item.Description.Value}{Environment.NewLine}{Environment.NewLine}{value}";
+                            break;
+                        default:
+                            throw new ArgumentException($"Unsupported value: {item.ConfigurationItemType}");
+                    }
+
+                    return new EncryptItemModel(
+                        item.ConfigurationItemType,
+                        item.IsRequired.Value,
+                        value,
+                        id);
+                }));
         await encryptService.EncryptAsync(
             this.EncryptDataViewModel.RsaPublicKey,
             model,

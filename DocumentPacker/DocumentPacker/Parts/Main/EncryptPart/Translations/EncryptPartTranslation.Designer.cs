@@ -259,6 +259,24 @@ namespace DocumentPacker.Parts.Main.EncryptPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string IdLabel {
+            get {
+                return ResourceManager.GetString("IdLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data is stored using this name..
+        /// </summary>
+        public static string IdToolTip {
+            get {
+                return ResourceManager.GetString("IdToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is Required.
         /// </summary>
         public static string IsRequiredLabel {
@@ -291,6 +309,15 @@ namespace DocumentPacker.Parts.Main.EncryptPart.Translations {
         public static string OutputFileExists {
             get {
                 return ResourceManager.GetString("OutputFileExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The default file extensions of Document Packer files..
+        /// </summary>
+        public static string OutputFileExtensionToolTip {
+            get {
+                return ResourceManager.GetString("OutputFileExtensionToolTip", resourceCulture);
             }
         }
         

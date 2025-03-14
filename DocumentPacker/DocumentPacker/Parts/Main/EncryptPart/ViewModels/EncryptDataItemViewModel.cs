@@ -22,11 +22,6 @@ public class EncryptDataItemViewModel : ViewModelBase
     private TranslatableAndValidable<string> description;
 
     /// <summary>
-    ///     The id.
-    /// </summary>
-    private string id;
-
-    /// <summary>
     ///     The value that specifies if the value is required.
     /// </summary>
     private TranslatableAndValidable<bool> isRequired;
@@ -55,7 +50,13 @@ public class EncryptDataItemViewModel : ViewModelBase
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.DescriptionLabel));
 
-        this.id = configurationItemModel.Id;
+        this.Id = new TranslatableAndValidable<string>(
+            configurationItemModel.Id,
+            null,
+            false,
+            EncryptPartTranslation.ResourceManager,
+            nameof(EncryptPartTranslation.IdLabel),
+            nameof(EncryptPartTranslation.IdToolTip));
 
         this.isRequired = new TranslatableAndValidable<bool>(
             configurationItemModel.IsRequired,
@@ -123,14 +124,7 @@ public class EncryptDataItemViewModel : ViewModelBase
     /// <summary>
     ///     Gets or sets the id.
     /// </summary>
-    public string Id
-    {
-        get => this.id;
-        set =>
-            this.SetField(
-                ref this.id,
-                value);
-    }
+    public TranslatableAndValidable<string> Id { get; }
 
     /// <summary>
     ///     Gets or sets the value that specifies if the value is required.

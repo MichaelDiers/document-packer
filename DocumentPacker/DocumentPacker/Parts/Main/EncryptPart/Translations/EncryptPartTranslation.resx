@@ -119,71 +119,54 @@
   </resheader>
   <data name="Add" xml:space="preserve">
     <value>Add a new item.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="AttachFileToolTip" xml:space="preserve">
     <value>Attach a file.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="ConfigurationItemModelFileLabel" xml:space="preserve">
     <value>File</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="ConfigurationItemModelFileToolTip" xml:space="preserve">
     <value>Select a file.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="ConfigurationItemModelFileWatermark" xml:space="preserve">
     <value>Select a file.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="ConfigurationItemModelTextLabel" xml:space="preserve">
     <value>Text</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="ConfigurationItemModelTextToolTip" xml:space="preserve">
     <value>Specify the text.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="ConfigurationItemModelTextWatermark" xml:space="preserve">
     <value>Text</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="DataTypeLabel" xml:space="preserve">
     <value>Data Type</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="DeleteToolTip" xml:space="preserve">
     <value>Delete the item.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Do you want to encrypt files and information? Generate your personal keys for encryption. Create an encrypted Document Packer file and send it to your friends.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Beschreibung</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="DirectoryDoesNotExist" xml:space="preserve">
     <value>Directory does not exist.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="DocumentPackerFile" xml:space="preserve">
     <value>Document Packer File</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="Encrypt" xml:space="preserve">
     <value>Encrypt</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="EncryptItemTypeFile" xml:space="preserve">
     <value>File</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="EncryptItemTypeText" xml:space="preserve">
     <value>Text</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>File does not exist</value>
@@ -193,29 +176,33 @@
   </data>
   <data name="FileNameIsMissing" xml:space="preserve">
     <value>Please enter a file name.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="GenerateRsaKeys" xml:space="preserve">
     <value>Generate a new RSA public and private key pair.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="Headline" xml:space="preserve">
     <value>Encrypt</value>
-    <comment>EncryptPart</comment>
+  </data>
+  <data name="IdLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="IdToolTip" xml:space="preserve">
+    <value>The data is stored using this name.</value>
   </data>
   <data name="IsRequiredLabel" xml:space="preserve">
     <value>Is Required</value>
   </data>
   <data name="ItemsHeadline" xml:space="preserve">
     <value>Add Files and Plain-Text</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="ItemTypeComboBoxWatermark" xml:space="preserve">
     <value>Please select</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="OutputFileExists" xml:space="preserve">
     <value>Output file exists</value>
+  </data>
+  <data name="OutputFileExtensionToolTip" xml:space="preserve">
+    <value>The default file extensions of Document Packer files.</value>
   </data>
   <data name="OutputFileIsRequired" xml:space="preserve">
     <value>Output File is required</value>
@@ -240,22 +227,18 @@
   </data>
   <data name="OutputFolderToolTip" xml:space="preserve">
     <value>The output folder of the document packer file.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="OutputFolderWatermark" xml:space="preserve">
     <value>Output Folder</value>
   </data>
   <data name="RsaKeys" xml:space="preserve">
     <value>RSA Keys</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="RsaPrivateKeyToolTip" xml:space="preserve">
     <value>RSA private key in PEM format.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="RsaPublicKeyToolTip" xml:space="preserve">
     <value>RSA public key in PEM format.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="SaveCommandLabel" xml:space="preserve">
     <value>Save</value>
@@ -265,19 +248,15 @@
   </data>
   <data name="SelectConfigurationFileCommandToolTip" xml:space="preserve">
     <value>Wähle die öffentliche Document Packer Konfigurationsdatei aus</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="SelectFileCommandToolTip" xml:space="preserve">
     <value>Select a file.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="SelectOutputFileToolTip" xml:space="preserve">
     <value>The name of the Document Packer file.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="SelectOutputFolderToolTip" xml:space="preserve">
     <value>Select the output folder of the document packer file.</value>
-    <comment>EncryptPart</comment>
   </data>
   <data name="TextIsRequired" xml:space="preserve">
     <value>Text is required.</value>

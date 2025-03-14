@@ -193,4 +193,64 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="EncryptPrimaryBorder">
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="0,0"
+                    EndPoint="1,1">
+                    <GradientStop
+                        Color="#ff4d6d"
+                        Offset="0.0" />
+                    <GradientStop
+                        Color="#ff758f"
+                        Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="EncryptSecondaryBorder">
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="0,0"
+                    EndPoint="1,1">
+                    <GradientStop
+                        Color="#ff8fa3"
+                        Offset="0.0" />
+                    <GradientStop
+                        Color="#ffb3c1"
+                        Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style
+        TargetType="Border"
+        BasedOn="{StaticResource BaseBorder}"
+        x:Key="EncryptTernaryBorder">
+        <Setter
+            Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush
+                    StartPoint="0,0"
+                    EndPoint="1,1">
+                    <GradientStop
+                        Color="#ffccd5"
+                        Offset="0.0" />
+                    <GradientStop
+                        Color="#fff0f3"
+                        Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

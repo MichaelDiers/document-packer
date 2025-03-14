@@ -60,7 +60,16 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                     "material_symbol_compress_96dp.png".ToBitmapImage(),
                     EncryptPartTranslation.ResourceManager,
                     nameof(EncryptPartTranslation.Headline),
-                    descriptionResourceKey: nameof(EncryptPartTranslation.Description)),
+                    descriptionResourceKey: nameof(EncryptPartTranslation.Description),
+                    background: new LinearGradientBrush(
+                        (Color) ColorConverter.ConvertFromString("#ff4d6d"),
+                        (Color) ColorConverter.ConvertFromString("#ff758f"),
+                        new Point(
+                            0,
+                            0),
+                        new Point(
+                            1,
+                            1))),
                 new TranslatableFeaturesButton(
                     commandFactory.CreateSyncCommand(
                         _ => true,

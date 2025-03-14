@@ -183,6 +183,12 @@
   <data name="Headline" xml:space="preserve">
     <value>Verschlüsseln</value>
   </data>
+  <data name="IdLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="IdToolTip" xml:space="preserve">
+    <value>Die Daten werden unter diesem Namen verschlüsselt.</value>
+  </data>
   <data name="IsRequiredLabel" xml:space="preserve">
     <value>Pflichtangabe</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="OutputFileExists" xml:space="preserve">
     <value>Ausgabedatei existiert bereits</value>
+  </data>
+  <data name="OutputFileExtensionToolTip" xml:space="preserve">
+    <value>Die Dateiendung für Document Packer Dateien.</value>
   </data>
   <data name="OutputFileIsRequired" xml:space="preserve">
     <value>Ausgabedatei ist erfolderlich.</value>

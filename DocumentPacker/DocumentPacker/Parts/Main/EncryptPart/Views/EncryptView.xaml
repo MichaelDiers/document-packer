@@ -4,88 +4,107 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mvvm="clr-namespace:DocumentPacker.Mvvm"
-    xmlns:encryptPart="clr-namespace:DocumentPacker.Parts.Main.EncryptPart"
+    xmlns:viewModels="clr-namespace:DocumentPacker.Parts.Main.EncryptPart.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ignore="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
     xmlns:loadConfigurationSubPart="clr-namespace:DocumentPacker.Parts.SubParts.LoadConfigurationSubPart"
     xmlns:views="clr-namespace:DocumentPacker.Parts.Main.EncryptPart.Views"
-    mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=encryptPart:EncryptViewModel, IsDesignTimeCreatable=False}"
+    mc:Ignorable="d ignore"
+    d:DataContext="{d:DesignInstance Type=viewModels:EncryptViewModel, IsDesignTimeCreatable=False}"
     Template="{StaticResource MainContentControlTemplate}">
-    <Grid
-        dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto|Auto"
-        dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
-        <!-- configuration file -->
-        <loadConfigurationSubPart:LoadConfigurationView
-            Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            GridBackground="Aqua"
-            DataContext="{Binding LoadConfigurationViewModel}" />
-        <!-- encrypt data -->
-        <ContentControl
-            Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            DataContext="{Binding EncryptDataViewModel}">
-            <ContentControl.Style>
-                <Style
-                    TargetType="ContentControl">
-                    <Setter
-                        Property="Content">
-                        <Setter.Value>
-                            <views:EncryptDataView />
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <DataTrigger
-                            Binding="{Binding }"
-                            Value="{x:Null}">
-                            <Setter
-                                Property="Content"
-                                Value="{x:Null}" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ContentControl.Style>
-        </ContentControl>
-        <!-- output folder-->
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            DataContext="{Binding OutputFolder}" />
+    <Border
+        Style="{StaticResource EncryptPrimaryBorder}">
         <Grid
-            Grid.Row="2"
-            Grid.Column="1"
-            dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
-            <TextBox
-                Grid.Column="0"
-                DataContext="{Binding OutputFolder}">
-                <b:Interaction.Behaviors>
-                    <behaviours:FolderPathDragAndDropTextBoxBehavior />
-                </b:Interaction.Behaviors>
-            </TextBox>
-            <Button
-                Grid.Column="1"
-                DataContext="{Binding SelectOutputFolderCommand}" />
+            dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto">
+            <!-- configuration file -->
+            <Border
+                Grid.Row="0"
+                Style="{StaticResource EncryptSecondaryBorder}">
+                <loadConfigurationSubPart:LoadConfigurationView
+                    DataContext="{Binding LoadConfigurationViewModel}" />
+            </Border>
+            <!-- encrypt data -->
+            <Border
+                Grid.Row="1"
+                Style="{StaticResource EncryptSecondaryBorder}">
+                <Grid
+                    dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto|Auto"
+                    dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">
+                    <ContentControl
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        DataContext="{Binding EncryptDataViewModel}">
+                        <ContentControl.Style>
+                            <Style
+                                TargetType="ContentControl">
+                                <Setter
+                                    Property="Content">
+                                    <Setter.Value>
+                                        <views:EncryptDataView />
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding }"
+                                        Value="{x:Null}">
+                                        <Setter
+                                            Property="Content"
+                                            Value="{x:Null}" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContentControl.Style>
+                    </ContentControl>
+                    <!-- output folder-->
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        DataContext="{Binding OutputFolder}" />
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
+                        <TextBox
+                            Grid.Column="0"
+                            DataContext="{Binding OutputFolder}">
+                            <b:Interaction.Behaviors>
+                                <behaviours:FolderPathDragAndDropTextBoxBehavior />
+                            </b:Interaction.Behaviors>
+                        </TextBox>
+                        <Button
+                            Grid.Column="1"
+                            DataContext="{Binding SelectOutputFolderCommand}" />
+                    </Grid>
+                    <!-- output file-->
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        DataContext="{Binding OutputFile}" />
+                    <Grid
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
+                        <TextBox
+                            Grid.Column="0"
+                            DataContext="{Binding OutputFile}" />
+                        <TextBox
+                            Grid.Column="1"
+                            DataContext="{Binding OutputFileExtension}" />
+                    </Grid>
+                    <!-- save -->
+                    <Button
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        DataContext="{Binding SaveCommand}"
+                        HorizontalAlignment="Center" />
+                </Grid>
+            </Border>
         </Grid>
-        <!-- output file-->
-        <Label
-            Grid.Row="3"
-            Grid.Column="0"
-            DataContext="{Binding OutputFile}" />
-        <TextBox
-            Grid.Row="3"
-            Grid.Column="1"
-            DataContext="{Binding OutputFile}" />
-        <!-- save -->
-        <Button
-            Grid.Row="4"
-            Grid.Column="1"
-            DataContext="{Binding SaveCommand}" />
-    </Grid>
+    </Border>
 </mvvm:BaseUserControl>
 <!-- ReSharper restore Xaml.IndexOutOfGridDefinition -->
