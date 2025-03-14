@@ -100,6 +100,11 @@ internal class DocumentPackerService : IRsaSetup, IAesSetup, IAddData, IDocument
     /// <returns>The <see cref="IRsaSetup" />.</returns>
     public IRsaSetup CreateArchive(string filePath)
     {
+        if (this.archiveFileName is not null)
+        {
+            throw new InvalidOperationException($"{nameof(this.CreateArchive)} called more than once.");
+        }
+
         if (File.Exists(filePath))
         {
             throw new InvalidOperationException("File already exists.");
@@ -117,21 +122,9 @@ internal class DocumentPackerService : IRsaSetup, IAesSetup, IAddData, IDocument
     /// <returns>A <see cref="Task" /> whose result indicates success.</returns>
     public async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        if (this.closed)
-        {
-            throw new InvalidOperationException("Already executed.");
-        }
-
-        this.closed = true;
-
         if (this.archiveFileName is null)
         {
             throw new InvalidOperationException("Missing archive file name.");
-        }
-
-        if (this.aesKeySize is null)
-        {
-            throw new InvalidOperationException("Missing aes setup.");
         }
 
         if (this.rsaEncryptionPadding is null)
@@ -139,62 +132,92 @@ internal class DocumentPackerService : IRsaSetup, IAesSetup, IAddData, IDocument
             throw new InvalidOperationException("Missing rsa encryption padding.");
         }
 
-        using var zipArchive = ZipFile.Open(
-            this.archiveFileName,
-            ZipArchiveMode.Create);
-
-        using var aes = Aes.Create();
-        aes.Padding = this.aesPaddingMode;
-        aes.KeySize = this.aesKeySize.Value;
-        aes.GenerateKey();
-        aes.GenerateIV();
-
-        using (var rsa = RSA.Create())
+        if (this.rsaPublicKeyPem is null)
         {
-            rsa.ImportFromPem(this.rsaPublicKeyPem);
-            var encryptedAesKey = rsa.Encrypt(
-                aes.Key,
-                this.rsaEncryptionPadding);
-            var zipArchiveEntry = zipArchive.CreateEntry(
-                nameof(Aes),
-                CompressionLevel.NoCompression);
-            await using var zipArchiveEntryStream = zipArchiveEntry.Open();
-            await zipArchiveEntryStream.WriteAsync(
-                encryptedAesKey,
-                cancellationToken);
+            throw new InvalidOperationException("Missing rsa public key.");
         }
 
-        foreach (var (entryName, text) in this.texts)
+        if (this.aesKeySize is null)
         {
-            var zipArchiveEntry = zipArchive.CreateEntry(
-                entryName,
-                CompressionLevel.NoCompression);
-            await using var zipArchiveEntryStream = zipArchiveEntry.Open();
-            await using var packerStream = new PackerStream(
-                zipArchiveEntryStream,
-                PackerStreamMode.Pack,
-                aes.Key,
-                aes.Padding);
-            await packerStream.WriteAsync(
-                Encoding.UTF8.GetBytes(text),
-                cancellationToken);
+            throw new InvalidOperationException("Missing aes setup.");
         }
 
-        foreach (var (entryName, fileInfo) in this.files)
+        if (!this.files.Any() && !this.texts.Any())
         {
-            var zipArchiveEntry = zipArchive.CreateEntry(
-                entryName,
-                CompressionLevel.NoCompression);
-            await using var zipArchiveEntryStream = zipArchiveEntry.Open();
-            await using var packerStream = new PackerStream(
-                zipArchiveEntryStream,
-                PackerStreamMode.Pack,
-                aes.Key,
-                aes.Padding);
-            await using var fileStream = fileInfo.OpenRead();
-            await fileStream.CopyToAsync(
-                packerStream,
-                cancellationToken);
+            throw new InvalidOperationException("No data to pack.");
+        }
+
+        try
+        {
+            using var zipArchive = ZipFile.Open(
+                this.archiveFileName,
+                ZipArchiveMode.Create);
+
+            using var aes = Aes.Create();
+            aes.Padding = this.aesPaddingMode;
+            aes.KeySize = this.aesKeySize.Value;
+            aes.GenerateKey();
+            aes.GenerateIV();
+
+            using (var rsa = RSA.Create())
+            {
+                rsa.ImportFromPem(this.rsaPublicKeyPem);
+                var encryptedAesKey = rsa.Encrypt(
+                    aes.Key,
+                    this.rsaEncryptionPadding);
+                var zipArchiveEntry = zipArchive.CreateEntry(
+                    nameof(Aes),
+                    CompressionLevel.NoCompression);
+                await using var zipArchiveEntryStream = zipArchiveEntry.Open();
+                await zipArchiveEntryStream.WriteAsync(
+                    encryptedAesKey,
+                    cancellationToken);
+            }
+
+            foreach (var (entryName, text) in this.texts)
+            {
+                var zipArchiveEntry = zipArchive.CreateEntry(
+                    entryName,
+                    CompressionLevel.NoCompression);
+                await using var zipArchiveEntryStream = zipArchiveEntry.Open();
+                await using var packerStream = new PackerStream(
+                    zipArchiveEntryStream,
+                    PackerStreamMode.Pack,
+                    aes.Key,
+                    aes.Padding);
+                await packerStream.WriteAsync(
+                    Encoding.UTF8.GetBytes(text),
+                    cancellationToken);
+            }
+
+            foreach (var (entryName, fileInfo) in this.files)
+            {
+                var zipArchiveEntry = zipArchive.CreateEntry(
+                    entryName,
+                    CompressionLevel.NoCompression);
+                await using var zipArchiveEntryStream = zipArchiveEntry.Open();
+                await using var packerStream = new PackerStream(
+                    zipArchiveEntryStream,
+                    PackerStreamMode.Pack,
+                    aes.Key,
+                    aes.Padding);
+                await using var fileStream = fileInfo.OpenRead();
+                await fileStream.CopyToAsync(
+                    packerStream,
+                    cancellationToken);
+            }
+        }
+        finally
+        {
+            this.archiveFileName = null;
+
+            this.rsaEncryptionPadding = null;
+            this.rsaPublicKeyPem = null;
+
+            this.aesKeySize = null;
+
+            this.files.Clear();
+            this.texts.Clear();
         }
     }
 
@@ -224,7 +247,7 @@ internal class DocumentPackerService : IRsaSetup, IAesSetup, IAddData, IDocument
     /// <returns>The <see cref="IAesSetup" />.</returns>
     public IAesSetup SetupRsa(string publicKeyPem, RSAEncryptionPadding? padding = null)
     {
-        if (this.rsaPublicKeyPem is not null)
+        if (this.rsaPublicKeyPem is not null || this.rsaEncryptionPadding is not null)
         {
             throw new InvalidOperationException("Rsa setup already done.");
         }
