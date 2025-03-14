@@ -132,7 +132,8 @@
                                     </TextBox>
                                     <Button
                                         Grid.Column="1"
-                                        DataContext="{Binding SelectFileCommand}" />
+                                        DataContext="{Binding SelectFileCommand}" 
+                                        Style="{StaticResource ImageOnlyButtonStyle}"/>
                                 </Grid>
                             </Grid>
                         </Border>

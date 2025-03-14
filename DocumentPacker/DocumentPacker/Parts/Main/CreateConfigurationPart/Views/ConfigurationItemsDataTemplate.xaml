@@ -92,6 +92,7 @@
                     Grid.Column="1"
                     DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=createConfigurationPart:CreateConfigurationView}, Path=DataContext.DeleteConfigurationItemCommand}"
                     CommandParameter="{Binding ElementName=RootElement,Path=DataContext}"
+                    Style="{StaticResource ImageOnlyButtonStyle}"
                     VerticalAlignment="Top" />
             </Grid>
         </Border>

@@ -292,4 +292,12 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style
+        TargetType="Button"
+        BasedOn="{StaticResource TranslatableButtonStyle}"
+        x:Key="ImageOnlyButtonStyle">
+        <Setter
+            Property="MaxHeight"
+            Value="72" />
+    </Style>
 </ResourceDictionary>

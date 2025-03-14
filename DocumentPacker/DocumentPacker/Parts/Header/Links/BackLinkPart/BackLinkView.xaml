@@ -9,5 +9,6 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=backLinkPart:BackLinkViewModel, IsDesignTimeCreatable=False}">
     <Button
-        DataContext="{Binding BackCommand}" />
+        DataContext="{Binding BackCommand}"
+        Style="{StaticResource ImageOnlyButtonStyle}" />
 </mvvm:BaseUserControl>

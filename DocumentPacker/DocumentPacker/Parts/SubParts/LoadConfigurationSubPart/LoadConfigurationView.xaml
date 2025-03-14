@@ -35,7 +35,8 @@
             </TextBox>
             <Button
                 Grid.Column="1"
-                DataContext="{Binding SelectConfigurationFileCommand}" />
+                DataContext="{Binding SelectConfigurationFileCommand}" 
+                Style="{StaticResource ImageOnlyButtonStyle}"/>
         </Grid>
         <!-- password -->
         <Label

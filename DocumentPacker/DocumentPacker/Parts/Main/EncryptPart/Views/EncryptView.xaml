@@ -78,7 +78,8 @@
                         </TextBox>
                         <Button
                             Grid.Column="1"
-                            DataContext="{Binding SelectOutputFolderCommand}" />
+                            DataContext="{Binding SelectOutputFolderCommand}"
+                            Style="{StaticResource ImageOnlyButtonStyle}"/>
                     </Grid>
                     <!-- output file-->
                     <Label

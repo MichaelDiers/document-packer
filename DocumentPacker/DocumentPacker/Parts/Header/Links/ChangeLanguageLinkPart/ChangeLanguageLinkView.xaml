@@ -9,5 +9,6 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=changeLanguageLinkPart:ChangeLanguageLinkViewModel, IsDesignTimeCreatable=False}">
     <Button
-        DataContext="{Binding RequestChangeLanguageViewCommand }" />
+        DataContext="{Binding RequestChangeLanguageViewCommand }"
+        Style="{StaticResource ImageOnlyButtonStyle}" />
 </mvvm:BaseUserControl>
