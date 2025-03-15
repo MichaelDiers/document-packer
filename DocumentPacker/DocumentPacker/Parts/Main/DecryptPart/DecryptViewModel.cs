@@ -1,7 +1,6 @@
 ﻿namespace DocumentPacker.Parts.Main.DecryptPart;
 
 using System.IO;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
@@ -9,6 +8,7 @@ using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
 /// <summary>
@@ -119,28 +119,46 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     public DecryptViewModel(
         ICommandFactory commandFactory,
         IDocumentPackerConfigurationFileService configurationFileService,
-        IDecryptService decryptService
+        IDecryptService decryptService,
+        ICommandSync commandSync
     )
     {
         this.decryptCommand = new TranslatableButton<ICommand>(
-            commandFactory.CreateAsyncCommand<object, string>(
-                _ =>
-                {
-                    this.EncryptedFile.Validate();
-                    this.PrivateRsaKey.Validate();
-                    this.OutputFolder.Validate();
-
-                    return !this.EncryptedFile.HasError &&
-                           !this.PrivateRsaKey.HasError &&
-                           !this.OutputFolder.Validate();
-                },
-                null,
-                async (_, cancellationToken) => await decryptService.DecryptAsync(
-                    this.PrivateRsaKey.Value!,
-                    new FileInfo(this.EncryptedFile.Value!),
-                    new DirectoryInfo(this.OutputFolder.Value!),
-                    cancellationToken),
-                task => MessageBox.Show(task.Result)),
+            commandFactory.CreateAsyncCommand<object, (bool success, string? error)>(
+                _ => true,
+                _ => this.Validate(),
+                async (_, cancellationToken) => await CommandExecutor.Execute(
+                    this.Validate,
+                    commandSync,
+                    async () =>
+                    {
+                        try
+                        {
+                            await decryptService.DecryptAsync(
+                                this.PrivateRsaKey.Value!,
+                                new FileInfo(this.EncryptedFile.Value!),
+                                new DirectoryInfo(this.OutputFolder.Value!),
+                                cancellationToken);
+                            var message = DecryptPartTranslation.ResourceManager.GetString(
+                                              nameof(DecryptPartTranslation.DecryptCommandSucceeds),
+                                              TranslationSource.Instance.CurrentCulture) ??
+                                          "{0}";
+                            return (true, string.Format(
+                                message,
+                                this.OutputFolder.Value));
+                        }
+                        catch (Exception ex)
+                        {
+                            var message = DecryptPartTranslation.ResourceManager.GetString(
+                                              nameof(DecryptPartTranslation.DecryptCommandFails),
+                                              TranslationSource.Instance.CurrentCulture) ??
+                                          "{0}";
+                            return (true, string.Format(
+                                message,
+                                ex.Message));
+                        }
+                    }),
+                CommandExecutor.PostExecute),
             new BitmapImage(
                 new Uri(
                     "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_expand.png",
@@ -293,5 +311,14 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     private void OnConfigurationLoaded(object? sender, LoadConfigurationEventArgs e)
     {
         this.PrivateRsaKey.Value = e.ConfigurationModel.RsaPrivateKey;
+    }
+
+    private bool Validate()
+    {
+        this.EncryptedFile.Validate();
+        this.PrivateRsaKey.Validate();
+        this.OutputFolder.Validate();
+
+        return !this.EncryptedFile.HasError && !this.PrivateRsaKey.HasError && !this.OutputFolder.HasError;
     }
 }

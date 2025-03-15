@@ -1,7 +1,6 @@
 ﻿namespace DocumentPacker.Parts.Main.EncryptPart.ViewModels;
 
 using System.IO;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
@@ -13,6 +12,7 @@ using DocumentPacker.Parts.Main.EncryptPart.Views;
 using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
 /// <summary>
@@ -74,7 +74,8 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     public EncryptViewModel(
         ICommandFactory commandFactory,
         IDocumentPackerConfigurationFileService configurationFileService,
-        IEncryptService encryptService
+        IEncryptService encryptService,
+        ICommandSync commandSync
     )
     {
         this.commandFactory = commandFactory;
@@ -137,21 +138,16 @@ internal class EncryptViewModel : ApplicationBaseViewModel
             nameof(EncryptPartTranslation.OutputFolderWatermark));
 
         this.saveCommand = new TranslatableButton<ICommand>(
-            commandFactory.CreateAsyncCommand<object, string?>(
-                _ => this.Validate(),
+            commandFactory.CreateAsyncCommand<object, (bool success, string? message)>(
+                _ => !commandSync.IsCommandActive && this.Validate(),
                 null,
-                async (_, cancellationToken) => await this.SaveCommandExecuteAsync(
-                    encryptService,
-                    cancellationToken),
-                task =>
-                {
-                    if (task.Result is null)
-                    {
-                        return;
-                    }
-
-                    MessageBox.Show(task.Result);
-                }),
+                async (_, cancellationToken) => await CommandExecutor.Execute(
+                    this.Validate,
+                    commandSync,
+                    () => this.SaveCommandExecuteAsync(
+                        encryptService,
+                        cancellationToken)),
+                CommandExecutor.PostExecute),
             new BitmapImage(
                 new Uri(
                     "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_save.png",
@@ -292,52 +288,64 @@ internal class EncryptViewModel : ApplicationBaseViewModel
             this.commandFactory);
     }
 
-    private async Task<string?> SaveCommandExecuteAsync(
+    private async Task<(bool success, string? message)> SaveCommandExecuteAsync(
         IEncryptService encryptService,
         CancellationToken cancellationToken
     )
     {
-        if (!this.Validate() ||
-            string.IsNullOrWhiteSpace(this.OutputFolder.Value) ||
-            string.IsNullOrWhiteSpace(this.OutputFile.Value) ||
-            this.EncryptDataViewModel?.Items?.Any() != true)
+        try
         {
-            return null;
-        }
-
-        var model = new EncryptModel(
-            this.OutputFolder.Value,
-            $"{this.OutputFile.Value}{this.OutputFileExtension.Value}",
-            this.EncryptDataViewModel.Items.Select(
-                item =>
-                {
-                    var id = item.Id.Value;
-                    var value = item.Value.Value;
-
-                    switch (item.ConfigurationItemType)
+            var model = new EncryptModel(
+                this.OutputFolder.Value!,
+                $"{this.OutputFile.Value}{this.OutputFileExtension.Value}",
+                this.EncryptDataViewModel!.Items!.Select(
+                    item =>
                     {
-                        case ConfigurationItemType.File:
-                            id = $"{id}{Path.GetExtension(value)}";
-                            break;
-                        case ConfigurationItemType.Text:
-                            id = $"{id}.txt";
-                            value = $"{item.Description.Value}{Environment.NewLine}{Environment.NewLine}{value}";
-                            break;
-                        default:
-                            throw new ArgumentException($"Unsupported value: {item.ConfigurationItemType}");
-                    }
+                        var id = item.Id.Value;
+                        var value = item.Value.Value;
 
-                    return new EncryptItemModel(
-                        item.ConfigurationItemType,
-                        item.IsRequired.Value,
-                        value,
-                        id);
-                }));
-        await encryptService.EncryptAsync(
-            this.EncryptDataViewModel.RsaPublicKey,
-            model,
-            cancellationToken);
-        return "done";
+                        switch (item.ConfigurationItemType)
+                        {
+                            case ConfigurationItemType.File:
+                                id = $"{id}{Path.GetExtension(value)}";
+                                break;
+                            case ConfigurationItemType.Text:
+                                id = $"{id}.txt";
+                                value = $"{item.Description.Value}{Environment.NewLine}{Environment.NewLine}{value}";
+                                break;
+                            default:
+                                throw new ArgumentException($"Unsupported value: {item.ConfigurationItemType}");
+                        }
+
+                        return new EncryptItemModel(
+                            item.ConfigurationItemType,
+                            item.IsRequired.Value,
+                            value,
+                            id);
+                    }));
+
+            await encryptService.EncryptAsync(
+                this.EncryptDataViewModel.RsaPublicKey,
+                model,
+                cancellationToken);
+            var message = EncryptPartTranslation.ResourceManager.GetString(
+                              nameof(EncryptPartTranslation.EncryptSucceeds),
+                              TranslationSource.Instance.CurrentCulture) ??
+                          "{0}";
+            return (true, string.Format(
+                message,
+                model.OutputFile));
+        }
+        catch (Exception ex)
+        {
+            var message = EncryptPartTranslation.ResourceManager.GetString(
+                              nameof(EncryptPartTranslation.EncryptFails),
+                              TranslationSource.Instance.CurrentCulture) ??
+                          "{0}";
+            return (false, string.Format(
+                message,
+                ex.Message));
+        }
     }
 
     /// <summary>

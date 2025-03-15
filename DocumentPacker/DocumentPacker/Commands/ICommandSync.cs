@@ -11,6 +11,11 @@ public interface ICommandSync
     bool IsCommandActive { get; }
 
     /// <summary>
+    ///     Raised if <see cref="IsCommandActive" /> changed.
+    /// </summary>
+    event EventHandler<CommandSyncChangedEventArgs>? CommandSyncChanged;
+
+    /// <summary>
     ///     Requests to start a new command.
     /// </summary>
     /// <param name="force">Indicates that <see cref="Enter" /> should succeed even if a command is active.</param>

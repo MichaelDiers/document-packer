@@ -117,10 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MessageBoxCaptionError" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
   <data name="SelectFileCommandToolTip" xml:space="preserve">
     <value>Öffnet einen Dialog, um die Datei auszuwählen.</value>
   </data>
   <data name="SelectFolderCommandToolTip" xml:space="preserve">
     <value>Öffnet einen Dialog, um das Verzeichnis auszuwählen.</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Ooooops...ein unerwarteter Fehler ist aufgetreten.</value>
+  </data>
+  <data name="UnknownException" xml:space="preserve">
+    <value>Ooooops...ein unerwarteter Fehler ist aufgetreten.
+
+{0}</value>
   </data>
 </root>

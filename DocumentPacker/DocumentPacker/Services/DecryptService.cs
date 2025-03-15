@@ -5,7 +5,7 @@ using DocumentPacker.Services.DocumentUnpackerService;
 
 public class DecryptService(IDocumentUnpackerService documentUnpackerService) : IDecryptService
 {
-    public async Task<string> DecryptAsync(
+    public async Task DecryptAsync(
         string privateRsaKey,
         FileInfo encryptedFile,
         DirectoryInfo outputFolder,
@@ -18,6 +18,5 @@ public class DecryptService(IDocumentUnpackerService documentUnpackerService) : 
             .SetupRsa(privateRsaKey)
             .SetupAes()
             .ExecuteAsync(cancellationToken);
-        return "goo";
     }
 }

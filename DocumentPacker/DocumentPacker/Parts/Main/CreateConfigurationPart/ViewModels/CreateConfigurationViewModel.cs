@@ -289,13 +289,15 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
 
         this.SaveCommand = new TranslatableButton<ICancellableCommand>(
             commandFactory.CreateAsyncCommand<PasswordBox, (bool succeeds, string? message)>(
-                _ => !commandSync.IsCommandActive,
+                passwordBox => !commandSync.IsCommandActive && this.Password.Validate(passwordBox?.Password),
                 passwordBox => this.Validate(passwordBox),
-                (passwordBox, cancellationToken) => this.SaveCommandExecute(
-                    passwordBox,
+                (passwordBox, cancellationToken) => CommandExecutor.Execute(
+                    () => this.Validate(passwordBox),
                     commandSync,
-                    cancellationToken),
-                this.SaveCommandPostExecute),
+                    () => this.SaveCommandExecute(
+                        passwordBox,
+                        cancellationToken)),
+                CommandExecutor.PostExecute),
             "material_symbol_save.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.SaveLabel),
@@ -603,20 +605,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
 
     private async Task<(bool succeeds, string? message)> SaveCommandExecute(
         PasswordBox? passwordBox,
-        ICommandSync commandSync,
         CancellationToken cancellationToken
     )
     {
-        if (!this.Validate(passwordBox) || passwordBox is null)
-        {
-            return (false, null);
-        }
-
-        if (!commandSync.Enter())
-        {
-            return (false, nameof(CreateConfigurationPartTranslation.SaveCommandUnknownError));
-        }
-
         var configuration = new ConfigurationModel(
             this.ConfigurationItems.Select(
                 item => new ConfigurationItemModel(
@@ -642,7 +633,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             await this.documentPackerConfigurationFileService.ToFileAsync(
                 privateConfigurationFile,
                 publicConfigurationFile,
-                passwordBox.Password,
+                passwordBox!.Password,
                 configuration,
                 cancellationToken);
             return (true,
@@ -655,21 +646,5 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                 CreateConfigurationViewModel.GetTranslation(
                     () => CreateConfigurationPartTranslation.SaveConfigurationFails));
         }
-    }
-
-    private void SaveCommandPostExecute(Task<(bool succeeds, string? message)> task)
-    {
-        var (succeeds, message) = task.Result;
-        if (!succeeds && message is null)
-        {
-            return;
-        }
-
-        MessageBox.Show(
-            message,
-            string.Empty,
-            MessageBoxButton.OK,
-            !succeeds ? MessageBoxImage.Error : MessageBoxImage.Information,
-            MessageBoxResult.OK);
     }
 }

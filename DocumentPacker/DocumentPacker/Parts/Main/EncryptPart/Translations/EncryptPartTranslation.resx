@@ -162,11 +162,19 @@
   <data name="Encrypt" xml:space="preserve">
     <value>Encrypt</value>
   </data>
+  <data name="EncryptFails" xml:space="preserve">
+    <value>Data enryption fails:
+
+{0}</value>
+  </data>
   <data name="EncryptItemTypeFile" xml:space="preserve">
     <value>File</value>
   </data>
   <data name="EncryptItemTypeText" xml:space="preserve">
     <value>Text</value>
+  </data>
+  <data name="EncryptSucceeds" xml:space="preserve">
+    <value>Created encrypted file {0}.</value>
   </data>
   <data name="FileDoesNotExist" xml:space="preserve">
     <value>File does not exist</value>

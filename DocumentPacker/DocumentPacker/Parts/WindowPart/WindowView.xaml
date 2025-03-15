@@ -6,6 +6,7 @@
     Icon="/Assets/icon.png"
     Style="{StaticResource WindowStyle}"
     Title="{Binding Title.LabelTranslation}"
+    IsEnabled="{Binding IsWindowEnabled}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -24,6 +25,42 @@
                 <ColumnDefinition
                     Width="*" />
             </Grid.ColumnDefinitions>
+            <Border
+                Grid.Row="0"
+                Grid.Column="0">
+                <Border.Style>
+                    <Style
+                        TargetType="Border">
+                        <Setter
+                            Property="HorizontalAlignment"
+                            Value="Stretch" />
+                        <Setter
+                            Property="VerticalAlignment"
+                            Value="Stretch" />
+                        <Setter
+                            Property="Panel.ZIndex"
+                            Value="1000" />
+                        <Setter
+                            Property="Background"
+                            Value="#80000000" />
+                        <Setter
+                            Property="BorderBrush"
+                            Value="Black" />
+                        <Setter
+                            Property="BorderThickness"
+                            Value="1" />
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsCommandActive}"
+                                Value="False">
+                                <Setter
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+            </Border>
             <ContentControl
                 Grid.Row="0"
                 Grid.Column="0"

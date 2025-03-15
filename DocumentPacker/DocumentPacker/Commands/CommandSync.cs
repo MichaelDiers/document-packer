@@ -21,6 +21,11 @@ internal class CommandSync : ICommandSync
     public bool IsCommandActive => this.numberOfActiveCommands != 0;
 
     /// <summary>
+    ///     Raised if <see cref="ICommandSync.IsCommandActive" /> changed.
+    /// </summary>
+    public event EventHandler<CommandSyncChangedEventArgs>? CommandSyncChanged;
+
+    /// <summary>
     ///     Requests to start a new command.
     /// </summary>
     /// <param name="force">Indicates that <see cref="Enter" /> should succeed even if a command is active.</param>
@@ -37,6 +42,13 @@ internal class CommandSync : ICommandSync
             if (this.numberOfActiveCommands == 0 || force)
             {
                 this.numberOfActiveCommands++;
+                if (this.numberOfActiveCommands == 1)
+                {
+                    this.CommandSyncChanged?.Invoke(
+                        this,
+                        new CommandSyncChangedEventArgs(true));
+                }
+
                 return true;
             }
 
@@ -52,6 +64,12 @@ internal class CommandSync : ICommandSync
         lock (this.lockObject)
         {
             this.numberOfActiveCommands--;
+            if (this.numberOfActiveCommands == 0)
+            {
+                this.CommandSyncChanged?.Invoke(
+                    this,
+                    new CommandSyncChangedEventArgs(false));
+            }
         }
     }
 }

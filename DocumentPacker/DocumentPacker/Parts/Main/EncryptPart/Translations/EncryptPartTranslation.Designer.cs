@@ -196,6 +196,17 @@ namespace DocumentPacker.Parts.Main.EncryptPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data enryption fails:
+        ///
+        ///{0}.
+        /// </summary>
+        public static string EncryptFails {
+            get {
+                return ResourceManager.GetString("EncryptFails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string EncryptItemTypeFile {
@@ -210,6 +221,15 @@ namespace DocumentPacker.Parts.Main.EncryptPart.Translations {
         public static string EncryptItemTypeText {
             get {
                 return ResourceManager.GetString("EncryptItemTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created encrypted file {0}..
+        /// </summary>
+        public static string EncryptSucceeds {
+            get {
+                return ResourceManager.GetString("EncryptSucceeds", resourceCulture);
             }
         }
         

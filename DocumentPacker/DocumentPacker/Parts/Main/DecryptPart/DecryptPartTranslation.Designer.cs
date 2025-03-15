@@ -61,11 +61,31 @@ namespace DocumentPacker.Parts.Main.DecryptPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot decrypt the file.
+        ///
+        ///{0}.
+        /// </summary>
+        public static string DecryptCommandFails {
+            get {
+                return ResourceManager.GetString("DecryptCommandFails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decrypt.
         /// </summary>
         public static string DecryptCommandLabel {
             get {
                 return ResourceManager.GetString("DecryptCommandLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrypted files to folder {0}..
+        /// </summary>
+        public static string DecryptCommandSucceeds {
+            get {
+                return ResourceManager.GetString("DecryptCommandSucceeds", resourceCulture);
             }
         }
         

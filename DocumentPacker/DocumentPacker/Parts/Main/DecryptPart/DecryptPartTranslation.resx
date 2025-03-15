@@ -117,8 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DecryptCommandFails" xml:space="preserve">
+    <value>Cannot decrypt the file.
+
+{0}</value>
+  </data>
   <data name="DecryptCommandLabel" xml:space="preserve">
     <value>Decrypt</value>
+  </data>
+  <data name="DecryptCommandSucceeds" xml:space="preserve">
+    <value>Decrypted files to folder {0}.</value>
   </data>
   <data name="DecryptCommandToolTip" xml:space="preserve">
     <value>Decrypt and unpack the Document Packer file.</value>

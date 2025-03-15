@@ -61,6 +61,15 @@ namespace DocumentPacker.Commands {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string MessageBoxCaptionError {
+            get {
+                return ResourceManager.GetString("MessageBoxCaptionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opens a dialog to select the file..
         /// </summary>
         internal static string SelectFileCommandToolTip {
@@ -75,6 +84,26 @@ namespace DocumentPacker.Commands {
         internal static string SelectFolderCommandToolTip {
             get {
                 return ResourceManager.GetString("SelectFolderCommandToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ooooops...an unknown error occured..
+        /// </summary>
+        internal static string UnknownError {
+            get {
+                return ResourceManager.GetString("UnknownError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ooooops...an unknown error occured.
+        ///
+        ///{0}.
+        /// </summary>
+        internal static string UnknownException {
+            get {
+                return ResourceManager.GetString("UnknownException", resourceCulture);
             }
         }
     }
