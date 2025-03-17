@@ -13,7 +13,7 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=windowPart:WindowViewModel, IsDesignTimeCreatable=False}">
     <b:Interaction.Behaviors>
-        <windowPart:CancelWindowBehavior />
+        <windowPart:CancelCommandBehavior />
     </b:Interaction.Behaviors>
     <Window.Resources>
         <ResourceDictionary

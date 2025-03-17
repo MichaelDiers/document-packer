@@ -10,22 +10,20 @@ using Libs.Wpf.ViewModels;
 ///     View model of the <see cref="WindowView" />.
 /// </summary>
 /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
-internal class WindowViewModel : ApplicationBaseViewModel, ITranslatableCancellableButton
+internal class WindowViewModel : ApplicationBaseViewModel, ICancelCommandViewModel
 {
-    private readonly ICommandSync commandSync;
-
     /// <summary>
-    ///     The is command active.
+    ///     A value that indicates if a command is active.
     /// </summary>
     private bool isCommandActive;
 
     /// <summary>
-    ///     The is window enabled.
+    ///     A value that indicates if the <see cref="Window.IsEnabled" />.
     /// </summary>
     private bool isWindowEnabled;
 
     /// <summary>
-    ///     The title.
+    ///     The title of the <see cref="Window" />.
     /// </summary>
     private Translatable title = new(
         WindowPartTranslation.ResourceManager,
@@ -46,15 +44,16 @@ internal class WindowViewModel : ApplicationBaseViewModel, ITranslatableCancella
     /// </summary>
     public WindowViewModel(ICommandSync commandSync)
     {
-        this.commandSync = commandSync;
-
-        commandSync.CommandSyncChanged += this.OnCommandSyncChanged;
-        this.IsCommandActive = false;
-        this.IsWindowEnabled = !this.IsCommandActive;
+        this.CommandSync = commandSync;
     }
 
     /// <summary>
-    ///     Gets or sets the is command active.
+    ///     Gets the <see cref="ICommandSync" />.
+    /// </summary>
+    public ICommandSync CommandSync { get; }
+
+    /// <summary>
+    ///     Gets or sets a value that indicates if a command is active.
     /// </summary>
     public bool IsCommandActive
     {
@@ -66,7 +65,7 @@ internal class WindowViewModel : ApplicationBaseViewModel, ITranslatableCancella
     }
 
     /// <summary>
-    ///     Gets or sets the is window enabled.
+    ///     Gets or sets a value that indicates if the <see cref="Window.IsEnabled" />.
     /// </summary>
     public bool IsWindowEnabled
     {
@@ -78,7 +77,7 @@ internal class WindowViewModel : ApplicationBaseViewModel, ITranslatableCancella
     }
 
     /// <summary>
-    ///     Gets or sets the title.
+    ///     Gets or sets the title of the <see cref="Window" />.
     /// </summary>
     public Translatable Title
     {
@@ -112,32 +111,5 @@ internal class WindowViewModel : ApplicationBaseViewModel, ITranslatableCancella
             this.SetField(
                 ref this.view,
                 value);
-    }
-
-    /// <summary>
-    ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-    /// </summary>
-    public override void Dispose()
-    {
-        this.commandSync.CommandSyncChanged -= this.OnCommandSyncChanged;
-        base.Dispose();
-    }
-
-    private void OnCommandSyncChanged(object? sender, CommandSyncChangedEventArgs e)
-    {
-        if (Application.Current.Dispatcher.Thread != Thread.CurrentThread)
-        {
-            Application.Current.Dispatcher.Invoke(
-                () => this.OnCommandSyncChanged(
-                    sender,
-                    e));
-        }
-
-        this.IsCommandActive = e.IsCommandActive;
-        this.isWindowEnabled = !this.IsCommandActive;
-
-        this.TranslatableCancellableButton = e is {IsCommandActive: true, TranslatableCancellableButton: not null}
-            ? e.TranslatableCancellableButton
-            : null;
     }
 }
