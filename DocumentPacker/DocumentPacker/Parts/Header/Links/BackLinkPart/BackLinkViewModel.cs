@@ -1,8 +1,8 @@
 ﻿namespace DocumentPacker.Parts.Header.Links.BackLinkPart;
 
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using DocumentPacker.EventHandling;
+using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
 using Libs.Wpf.ViewModels;
@@ -49,10 +49,7 @@ internal class BackLinkViewModel : ApplicationBaseViewModel, IHandleBackLink
                             });
                     }
                 }),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_arrow_back.png",
-                    UriKind.Absolute)),
+            "material_symbol_arrow_back.png".ToBitmapImage(),
             BackLinkPartTranslation.ResourceManager,
             toolTipResourceKey: nameof(BackLinkPartTranslation.Back));
     }

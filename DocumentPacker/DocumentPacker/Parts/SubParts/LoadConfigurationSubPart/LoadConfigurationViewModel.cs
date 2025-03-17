@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
+using DocumentPacker.Extensions;
 using DocumentPacker.Models;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
@@ -97,10 +97,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
                             new LoadConfigurationEventArgs(task.Result));
                     }
                 }),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_refresh.png",
-                    UriKind.Absolute)),
+            "material_symbol_refresh.png".ToBitmapImage(),
             LoadConfigurationTranslation.ResourceManager,
             nameof(LoadConfigurationTranslation.LoadConfigurationCommandLabel),
             nameof(LoadConfigurationTranslation.LoadConfigurationCommandToolTip));

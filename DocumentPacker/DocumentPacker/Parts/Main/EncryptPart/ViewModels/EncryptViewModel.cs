@@ -2,7 +2,6 @@
 
 using System.IO;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
 using DocumentPacker.Extensions;
 using DocumentPacker.Models;
@@ -150,10 +149,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                         cancellationToken),
                     this.saveCommand),
                 CommandExecutor.PostExecute),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_save.png",
-                    UriKind.Absolute)),
+            "material_symbol_save.png".ToBitmapImage(),
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.SaveCommandLabel),
             nameof(EncryptPartTranslation.SaveCommandToolTip),

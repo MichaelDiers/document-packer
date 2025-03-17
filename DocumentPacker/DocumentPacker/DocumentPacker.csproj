@@ -15,23 +15,17 @@
     <None Remove="Assets\license.txt" />
     <None Remove="Assets\material_symbol_add.png" />
     <None Remove="Assets\material_symbol_arrow_back.png" />
-    <None Remove="Assets\material_symbol_attach_file.png" />
-    <None Remove="Assets\material_symbol_change_circle.png" />
-    <None Remove="Assets\material_symbol_collapse_all.png" />
     <None Remove="Assets\material_symbol_compress.png" />
     <None Remove="Assets\material_symbol_compress_96dp.png" />
     <None Remove="Assets\material_symbol_delete.png" />
-    <None Remove="Assets\material_symbol_error.png" />
     <None Remove="Assets\material_symbol_expand.png" />
     <None Remove="Assets\material_symbol_expand_96dp.png" />
     <None Remove="Assets\material_symbol_file_open.png" />
     <None Remove="Assets\material_symbol_folder.png" />
-    <None Remove="Assets\material_symbol_home.png" />
     <None Remove="Assets\material_symbol_key.png" />
     <None Remove="Assets\material_symbol_language.png" />
     <None Remove="Assets\material_symbol_refresh.png" />
     <None Remove="Assets\material_symbol_save.png" />
-    <None Remove="Assets\material_symbol_unfold_more.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,12 +39,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\license.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\material_symbol_attach_file.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\material_symbol_collapse_all.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Assets\material_symbol_delete.png">
@@ -71,16 +59,10 @@
     <Content Include="Assets\material_symbol_arrow_back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\material_symbol_change_circle.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Assets\material_symbol_compress.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\material_symbol_compress_96dp.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\material_symbol_error.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\material_symbol_expand.png">
@@ -95,18 +77,12 @@
     <Content Include="Assets\material_symbol_folder.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\material_symbol_home.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Assets\material_symbol_language.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Assets\material_symbol_save.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Assets\material_symbol_unfold_more.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -1,8 +1,8 @@
 ﻿namespace DocumentPacker.Parts.Header.Links.ChangeLanguageLinkPart;
 
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using DocumentPacker.EventHandling;
+using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
 using Libs.Wpf.ViewModels;
@@ -25,10 +25,7 @@ internal class ChangeLanguageLinkViewModel : ApplicationBaseViewModel
                 _ => this.InvokeShowViewRequested(
                     this,
                     new ShowViewRequestedEventArgs(ApplicationElementPart.ChangeLanguage))),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_language.png",
-                    UriKind.Absolute)),
+            "material_symbol_language.png".ToBitmapImage(),
             ChangeLanguageLinkPartTranslation.ResourceManager,
             toolTipResourceKey: nameof(ChangeLanguageLinkPartTranslation.ChangeLanguage));
     }
