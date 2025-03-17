@@ -1,4 +1,4 @@
-﻿namespace DocumentPacker.Parts.Main.CreateConfigurationPart;
+﻿namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Views;
 
 using DocumentPacker.EventHandling;
 

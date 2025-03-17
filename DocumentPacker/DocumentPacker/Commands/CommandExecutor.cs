@@ -2,13 +2,15 @@
 
 using System.Windows;
 using Libs.Wpf.Localization;
+using Libs.Wpf.ViewModels;
 
 internal static class CommandExecutor
 {
     public static async Task<(bool success, string? message)> Execute(
         Func<bool> validate,
         ICommandSync commandSync,
-        Func<Task<(bool success, string? message)>> execute
+        Func<Task<(bool success, string? message)>> execute,
+        TranslatableCancellableButton? translatableCancellableButton
     )
     {
         if (!validate())
@@ -16,7 +18,7 @@ internal static class CommandExecutor
             return (false, null);
         }
 
-        if (!commandSync.Enter())
+        if (!commandSync.Enter(translatableCancellableButton: translatableCancellableButton))
         {
             return (false, CommandTranslations.ResourceManager.GetString(
                 nameof(CommandTranslations.UnknownError),

@@ -12,6 +12,7 @@ using DocumentPacker.Extensions;
 using DocumentPacker.Models;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
+using DocumentPacker.Parts.Main.CreateConfigurationPart.Views;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Localization;
@@ -241,7 +242,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             null,
             nameof(CreateConfigurationPartTranslation.DeleteConfigurationItemCommandToolTip));
 
-        this.GenerateRsaKeysCommand = new TranslatableButton<ICommand>(
+        this.GenerateRsaKeysCommand = new TranslatableButton<IAsyncCommand>(
             commandFactory.CreateAsyncCommand<object, (string privateKey, string publicKey)>(
                 _ => !commandSync.IsCommandActive,
                 null,
@@ -287,7 +288,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             null,
             nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandToolTip));
 
-        this.SaveCommand = new TranslatableButton<ICancellableCommand>(
+        this.SaveCommand = new TranslatableCancellableButton(
             commandFactory.CreateAsyncCommand<PasswordBox, (bool succeeds, string? message)>(
                 passwordBox => !commandSync.IsCommandActive && this.Password.Validate(passwordBox?.Password),
                 passwordBox => this.Validate(passwordBox),
@@ -296,12 +297,17 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                     commandSync,
                     () => this.SaveCommandExecute(
                         passwordBox,
-                        cancellationToken)),
+                        cancellationToken),
+                    this.SaveCommand),
                 CommandExecutor.PostExecute),
             "material_symbol_save.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.SaveLabel),
-            nameof(CreateConfigurationPartTranslation.SaveToolTip));
+            nameof(CreateConfigurationPartTranslation.SaveToolTip),
+            nameof(CreateConfigurationPartTranslation.CancelLabel),
+            null,
+            "material_symbol_cancel.png".ToBitmapImage(),
+            nameof(CreateConfigurationPartTranslation.SaveCancelInfoText));
 
         this.SelectOutputFolderCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateOpenFolderDialogCommand(
@@ -404,7 +410,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets a command to generate RSA keys.
     /// </summary>
-    public TranslatableButton<ICommand> GenerateRsaKeysCommand { get; }
+    public TranslatableButton<IAsyncCommand> GenerateRsaKeysCommand { get; }
 
     /// <summary>
     ///     Gets or sets the output folder.
@@ -505,7 +511,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets the save command.
     /// </summary>
-    public TranslatableButton<ICancellableCommand> SaveCommand { get; }
+    public TranslatableCancellableButton SaveCommand { get; }
 
     /// <summary>
     ///     Gets the command to select the output folder.
@@ -639,6 +645,10 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             return (true,
                 CreateConfigurationViewModel.GetTranslation(
                     () => CreateConfigurationPartTranslation.SaveConfigurationSucceeds));
+        }
+        catch (TaskCanceledException)
+        {
+            return (false, null);
         }
         catch
         {

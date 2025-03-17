@@ -1,5 +1,7 @@
 ﻿namespace DocumentPacker.Commands;
 
+using Libs.Wpf.ViewModels;
+
 /// <summary>
 ///     Synchronizes the execution of commands.
 /// </summary>
@@ -20,7 +22,7 @@ public interface ICommandSync
     /// </summary>
     /// <param name="force">Indicates that <see cref="Enter" /> should succeed even if a command is active.</param>
     /// <returns><c>True</c> if the command is allowed to start; <c>false</c> otherwise.</returns>
-    bool Enter(bool force = false);
+    bool Enter(bool force = false, TranslatableCancellableButton? translatableCancellableButton = null);
 
     /// <summary>
     ///     Indicates that a command is terminated.

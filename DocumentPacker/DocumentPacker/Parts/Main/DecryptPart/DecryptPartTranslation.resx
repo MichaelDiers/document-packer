@@ -179,4 +179,10 @@
   <data name="PrivateRsaKeyWatermark" xml:space="preserve">
     <value>private RSA key</value>
   </data>
+  <data name="DecryptCommandCancelLabel" xml:space="preserve">
+    <value>Abort</value>
+  </data>
+  <data name="DecryptCommandCancelInfoText" xml:space="preserve">
+    <value>The Document Packer file is decrypted.</value>
+  </data>
 </root>

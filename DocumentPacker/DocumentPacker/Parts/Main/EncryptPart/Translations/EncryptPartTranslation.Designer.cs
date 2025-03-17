@@ -450,6 +450,24 @@ namespace DocumentPacker.Parts.Main.EncryptPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Encrypted Document Packer file is created..
+        /// </summary>
+        public static string SaveCommandCancelInfoText {
+            get {
+                return ResourceManager.GetString("SaveCommandCancelInfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abort.
+        /// </summary>
+        public static string SaveCommandCancelLabel {
+            get {
+                return ResourceManager.GetString("SaveCommandCancelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveCommandLabel {

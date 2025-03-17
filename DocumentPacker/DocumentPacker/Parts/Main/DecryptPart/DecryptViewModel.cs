@@ -2,8 +2,8 @@
 
 using System.IO;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
+using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
 using DocumentPacker.Services;
@@ -20,7 +20,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The command to decrypt the data.
     /// </summary>
-    private TranslatableButton<ICommand> decryptCommand;
+    private TranslatableCancellableButton decryptCommand;
 
     /// <summary>
     ///     The encrypted file.
@@ -123,7 +123,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
         ICommandSync commandSync
     )
     {
-        this.decryptCommand = new TranslatableButton<ICommand>(
+        this.decryptCommand = new TranslatableCancellableButton(
             commandFactory.CreateAsyncCommand<object, (bool success, string? error)>(
                 _ => true,
                 _ => this.Validate(),
@@ -157,15 +157,17 @@ internal class DecryptViewModel : ApplicationBaseViewModel
                                 message,
                                 ex.Message));
                         }
-                    }),
+                    },
+                    this.decryptCommand),
                 CommandExecutor.PostExecute),
-            new BitmapImage(
-                new Uri(
-                    "pack://application:,,,/DocumentPacker;component/Assets/material_symbol_expand.png",
-                    UriKind.Absolute)),
+            "material_symbol_expand.png".ToBitmapImage(),
             DecryptPartTranslation.ResourceManager,
             nameof(DecryptPartTranslation.DecryptCommandLabel),
-            nameof(DecryptPartTranslation.DecryptCommandToolTip));
+            nameof(DecryptPartTranslation.DecryptCommandToolTip),
+            nameof(DecryptPartTranslation.DecryptCommandCancelLabel),
+            null,
+            "material_symbol_cancel.png".ToBitmapImage(),
+            nameof(DecryptPartTranslation.DecryptCommandCancelInfoText));
 
         this.loadConfigurationViewModel = new LoadConfigurationViewModel(
             commandFactory,
@@ -187,7 +189,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the command to decrypt the data.
     /// </summary>
-    public TranslatableButton<ICommand> DecryptCommand
+    public TranslatableCancellableButton DecryptCommand
     {
         get => this.decryptCommand;
         set =>

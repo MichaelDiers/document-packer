@@ -2,6 +2,7 @@
 
 using DocumentPacker.EventHandling;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
+using DocumentPacker.Parts.Main.CreateConfigurationPart.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

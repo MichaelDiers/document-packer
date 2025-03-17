@@ -7,6 +7,7 @@ Material Design by Google
 	- material_symbol_add.png
 	- material_symbol_arrow_back.png
 	- material_symbol_attach_file.png
+	- material_symbol_cancel.png
 	- material_symbol_change_circle.png
 	- material_symbol_collapse_all.png
 	- material_symbol_compress.png

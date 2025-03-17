@@ -71,6 +71,15 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abort.
+        /// </summary>
+        public static string CancelLabel {
+            get {
+                return ResourceManager.GetString("CancelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string ConfigurationItemTypeFile {
@@ -157,6 +166,15 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         public static string DescriptionWatermark {
             get {
                 return ResourceManager.GetString("DescriptionWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RSA keys are generated..
+        /// </summary>
+        public static string GenerateRsaKeysCommandCancelInfoText {
+            get {
+                return ResourceManager.GetString("GenerateRsaKeysCommandCancelInfoText", resourceCulture);
             }
         }
         
@@ -597,6 +615,15 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         public static string RsaPublicKeyWatermark {
             get {
                 return ResourceManager.GetString("RsaPublicKeyWatermark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving the Document Packer configuration in progress..
+        /// </summary>
+        public static string SaveCancelInfoText {
+            get {
+                return ResourceManager.GetString("SaveCancelInfoText", resourceCulture);
             }
         }
         

@@ -248,6 +248,12 @@
   <data name="RsaPublicKeyToolTip" xml:space="preserve">
     <value>RSA Public Key im PEM Format.</value>
   </data>
+  <data name="SaveCommandCancelInfoText" xml:space="preserve">
+    <value>Verschlüsselte Document Packer-Datei wird erstellt.</value>
+  </data>
+  <data name="SaveCommandCancelLabel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
   <data name="SaveCommandLabel" xml:space="preserve">
     <value>Speichern</value>
   </data>

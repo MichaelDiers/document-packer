@@ -61,6 +61,24 @@ namespace DocumentPacker.Parts.Main.DecryptPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Document Packer file is decrypted..
+        /// </summary>
+        public static string DecryptCommandCancelInfoText {
+            get {
+                return ResourceManager.GetString("DecryptCommandCancelInfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abort.
+        /// </summary>
+        public static string DecryptCommandCancelLabel {
+            get {
+                return ResourceManager.GetString("DecryptCommandCancelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot decrypt the file.
         ///
         ///{0}.

@@ -20,6 +20,8 @@
         <ResourceDictionary
             Source="MainContentControlTemplate.xaml" />
         <ResourceDictionary
+            Source="OverlayStyle.xaml" />
+        <ResourceDictionary
             Source="PasswordBoxStyle.xaml" />
         <ResourceDictionary
             Source="TextBlockStyle.xaml" />

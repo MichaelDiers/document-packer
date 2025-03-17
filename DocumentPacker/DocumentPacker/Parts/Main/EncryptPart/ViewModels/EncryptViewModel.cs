@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DocumentPacker.Commands;
+using DocumentPacker.Extensions;
 using DocumentPacker.Models;
 using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
@@ -46,7 +47,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The save command.
     /// </summary>
-    private TranslatableButton<ICommand> saveCommand;
+    private TranslatableCancellableButton saveCommand;
 
     /// <summary>
     ///     The command to select the output folder.
@@ -137,7 +138,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
             nameof(EncryptPartTranslation.OutputFolderToolTip),
             nameof(EncryptPartTranslation.OutputFolderWatermark));
 
-        this.saveCommand = new TranslatableButton<ICommand>(
+        this.saveCommand = new TranslatableCancellableButton(
             commandFactory.CreateAsyncCommand<object, (bool success, string? message)>(
                 _ => !commandSync.IsCommandActive && this.Validate(),
                 null,
@@ -146,7 +147,8 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                     commandSync,
                     () => this.SaveCommandExecuteAsync(
                         encryptService,
-                        cancellationToken)),
+                        cancellationToken),
+                    this.saveCommand),
                 CommandExecutor.PostExecute),
             new BitmapImage(
                 new Uri(
@@ -154,7 +156,11 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                     UriKind.Absolute)),
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.SaveCommandLabel),
-            nameof(EncryptPartTranslation.SaveCommandToolTip));
+            nameof(EncryptPartTranslation.SaveCommandToolTip),
+            nameof(EncryptPartTranslation.SaveCommandCancelLabel),
+            null,
+            "material_symbol_cancel.png".ToBitmapImage(),
+            nameof(EncryptPartTranslation.SaveCommandCancelInfoText));
 
         this.selectOutputFolderCommand = new SelectFolderCommand(
             commandFactory,
@@ -222,7 +228,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the save command.
     /// </summary>
-    public TranslatableButton<ICommand> SaveCommand
+    public TranslatableCancellableButton SaveCommand
     {
         get => this.saveCommand;
         set =>

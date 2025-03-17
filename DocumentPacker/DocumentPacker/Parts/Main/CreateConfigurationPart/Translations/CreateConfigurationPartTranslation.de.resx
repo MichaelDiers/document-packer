@@ -326,4 +326,13 @@ MIICCgKCAgEA...
   <data name="IdDuplicate" xml:space="preserve">
     <value>Name mehrfach verwendet.</value>
   </data>
+  <data name="CancelLabel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="SaveCancelInfoText" xml:space="preserve">
+    <value>Speichere die Document Packer Konfiguration.</value>
+  </data>
+  <data name="GenerateRsaKeysCommandCancelInfoText" xml:space="preserve">
+    <value>RSA-Schlüssel werden generiert.</value>
+  </data>
 </root>

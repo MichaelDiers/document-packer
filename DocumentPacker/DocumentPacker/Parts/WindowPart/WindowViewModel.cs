@@ -1,7 +1,6 @@
 ﻿namespace DocumentPacker.Parts.WindowPart;
 
 using System.Windows;
-using System.Windows.Input;
 using DocumentPacker.Commands;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
@@ -11,16 +10,9 @@ using Libs.Wpf.ViewModels;
 ///     View model of the <see cref="WindowView" />.
 /// </summary>
 /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
-internal class WindowViewModel : ApplicationBaseViewModel
+internal class WindowViewModel : ApplicationBaseViewModel, ITranslatableCancellableButton
 {
     private readonly ICommandSync commandSync;
-
-    private readonly Stack<Cursor> cursors = new();
-
-    /// <summary>
-    ///     The fatal error message text.
-    /// </summary>
-    private string? fatalErrorMessage;
 
     /// <summary>
     ///     The is command active.
@@ -40,6 +32,11 @@ internal class WindowViewModel : ApplicationBaseViewModel
         nameof(WindowPartTranslation.Title));
 
     /// <summary>
+    ///     The translatable cancellable button.
+    /// </summary>
+    private TranslatableCancellableButton? translatableCancellableButton;
+
+    /// <summary>
     ///     The view that is displayed in the window.
     /// </summary>
     private object? view;
@@ -50,20 +47,10 @@ internal class WindowViewModel : ApplicationBaseViewModel
     public WindowViewModel(ICommandSync commandSync)
     {
         this.commandSync = commandSync;
+
         commandSync.CommandSyncChanged += this.OnCommandSyncChanged;
         this.IsCommandActive = false;
-    }
-
-    /// <summary>
-    ///     Gets or sets the fatal error message text.
-    /// </summary>
-    public string? FatalErrorMessage
-    {
-        get => this.fatalErrorMessage;
-        set =>
-            this.SetField(
-                ref this.fatalErrorMessage,
-                value);
+        this.IsWindowEnabled = !this.IsCommandActive;
     }
 
     /// <summary>
@@ -72,13 +59,10 @@ internal class WindowViewModel : ApplicationBaseViewModel
     public bool IsCommandActive
     {
         get => this.isCommandActive;
-        set
-        {
+        set =>
             this.SetField(
                 ref this.isCommandActive,
                 value);
-            this.IsWindowEnabled = !value;
-        }
     }
 
     /// <summary>
@@ -106,6 +90,18 @@ internal class WindowViewModel : ApplicationBaseViewModel
     }
 
     /// <summary>
+    ///     Gets or sets the translatable cancellable button.
+    /// </summary>
+    public TranslatableCancellableButton? TranslatableCancellableButton
+    {
+        get => this.translatableCancellableButton;
+        set =>
+            this.SetField(
+                ref this.translatableCancellableButton,
+                value);
+    }
+
+    /// <summary>
     ///     Gets or sets the view that is displayed in the window.
     /// </summary>
     [ApplicationPart(ApplicationElementPart.Layout)]
@@ -129,20 +125,19 @@ internal class WindowViewModel : ApplicationBaseViewModel
 
     private void OnCommandSyncChanged(object? sender, CommandSyncChangedEventArgs e)
     {
+        if (Application.Current.Dispatcher.Thread != Thread.CurrentThread)
+        {
+            Application.Current.Dispatcher.Invoke(
+                () => this.OnCommandSyncChanged(
+                    sender,
+                    e));
+        }
+
         this.IsCommandActive = e.IsCommandActive;
-        if (e.IsCommandActive)
-        {
-            Application.Current.Dispatcher.Invoke(
-                () =>
-                {
-                    this.cursors.Push(Mouse.OverrideCursor);
-                    Mouse.OverrideCursor = Cursors.Wait;
-                });
-        }
-        else
-        {
-            Application.Current.Dispatcher.Invoke(
-                () => { Mouse.OverrideCursor = this.cursors.TryPop(out var cursor) ? cursor : null; });
-        }
+        this.isWindowEnabled = !this.IsCommandActive;
+
+        this.TranslatableCancellableButton = e is {IsCommandActive: true, TranslatableCancellableButton: not null}
+            ? e.TranslatableCancellableButton
+            : null;
     }
 }

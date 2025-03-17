@@ -1,5 +1,7 @@
 ﻿namespace DocumentPacker.Commands;
 
+using Libs.Wpf.ViewModels;
+
 /// <summary>
 ///     Synchronizes the execution of commands.
 /// </summary>
@@ -30,7 +32,7 @@ internal class CommandSync : ICommandSync
     /// </summary>
     /// <param name="force">Indicates that <see cref="Enter" /> should succeed even if a command is active.</param>
     /// <returns><c>True</c> if the command is allowed to start; <c>false</c> otherwise.</returns>
-    public bool Enter(bool force = false)
+    public bool Enter(bool force = false, TranslatableCancellableButton? translatableCancellableButton = null)
     {
         if (this.IsCommandActive && !force)
         {
@@ -46,7 +48,9 @@ internal class CommandSync : ICommandSync
                 {
                     this.CommandSyncChanged?.Invoke(
                         this,
-                        new CommandSyncChangedEventArgs(true));
+                        new CommandSyncChangedEventArgs(
+                            true,
+                            translatableCancellableButton));
                 }
 
                 return true;
@@ -68,7 +72,9 @@ internal class CommandSync : ICommandSync
             {
                 this.CommandSyncChanged?.Invoke(
                     this,
-                    new CommandSyncChangedEventArgs(false));
+                    new CommandSyncChangedEventArgs(
+                        false,
+                        null));
             }
         }
     }
