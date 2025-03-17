@@ -503,7 +503,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PrivateConfigurationFile.
+        ///   Looks up a localized string similar to PublicConfigurationFile.
         /// </summary>
         public static string PublicOutputFileWatermark {
             get {

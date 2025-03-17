@@ -293,7 +293,7 @@ MIICCgKCAgEA...
     <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PublicOutputFileWatermark" xml:space="preserve">
-    <value>PrivateConfigurationFile</value>
+    <value>PublicConfigurationFile</value>
     <comment>CreateConfigurationPart</comment>
   </data>
   <data name="PublicOutputFileIsRequired" xml:space="preserve">
