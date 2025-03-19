@@ -8,6 +8,7 @@ using DocumentPacker.Mvvm;
 using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
@@ -120,7 +121,8 @@ internal class DecryptViewModel : ApplicationBaseViewModel
         ICommandFactory commandFactory,
         IDocumentPackerConfigurationFileService configurationFileService,
         IDecryptService decryptService,
-        ICommandSync commandSync
+        ICommandSync commandSync,
+        IMessageBoxService messageBoxService
     )
     {
         this.decryptCommand = new TranslatableCancellableButton(
@@ -159,7 +161,9 @@ internal class DecryptViewModel : ApplicationBaseViewModel
                         }
                     },
                     this.decryptCommand),
-                CommandExecutor.PostExecute),
+                task => CommandExecutor.PostExecute(
+                    task,
+                    messageBoxService)),
             "material_symbol_expand.png".ToBitmapImage(),
             DecryptPartTranslation.ResourceManager,
             nameof(DecryptPartTranslation.DecryptCommandLabel),

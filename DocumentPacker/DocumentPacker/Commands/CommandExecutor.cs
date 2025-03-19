@@ -1,6 +1,6 @@
 ﻿namespace DocumentPacker.Commands;
 
-using System.Windows;
+using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
@@ -45,7 +45,7 @@ internal static class CommandExecutor
         }
     }
 
-    public static void PostExecute(Task<(bool success, string? message)> task)
+    public static void PostExecute(Task<(bool success, string? message)> task, IMessageBoxService messageBoxService)
     {
         try
         {
@@ -61,27 +61,30 @@ internal static class CommandExecutor
                                   nameof(CommandTranslations.MessageBoxCaptionError),
                                   TranslationSource.Instance.CurrentCulture) ??
                               string.Empty;
-                MessageBox.Show(
+                messageBoxService.Show(
                     message,
                     caption,
-                    MessageBoxButton.OK,
+                    MessageBoxButtons.Ok,
+                    MessageBoxButtons.Ok,
                     MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show(
-                    message,
+                messageBoxService.Show(
+                    message ?? string.Empty,
                     string.Empty,
-                    MessageBoxButton.OK,
+                    MessageBoxButtons.Ok,
+                    MessageBoxButtons.Ok,
                     MessageBoxImage.Information);
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(
+            messageBoxService.Show(
                 ex.Message,
                 string.Empty,
-                MessageBoxButton.OK,
+                MessageBoxButtons.Ok,
+                MessageBoxButtons.Ok,
                 MessageBoxImage.Error);
         }
     }

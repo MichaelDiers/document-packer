@@ -17,6 +17,7 @@ using DocumentPacker.Parts.Main.MainPart;
 using DocumentPacker.Parts.WindowPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Controls.CustomMessageBox;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -55,6 +56,8 @@ public static class ServiceCollectionExtensions
         services.TryAddAllServices();
 
         services.TryAddCommands();
+
+        services.TryAddCustomMessageBoxServiceCollectionExtensions();
 
         return services;
     }

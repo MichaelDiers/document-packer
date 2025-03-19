@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using DocumentPacker.Commands;
@@ -15,6 +14,7 @@ using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.Views;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
@@ -212,7 +212,8 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
         ICommandFactory commandFactory,
         IRsaService rsaService,
         IDocumentPackerConfigurationFileService documentPackerConfigurationFileService,
-        ICommandSync commandSync
+        ICommandSync commandSync,
+        IMessageBoxService messageBoxService
     )
     {
         this.documentPackerConfigurationFileService = documentPackerConfigurationFileService;
@@ -271,11 +272,12 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(
+                        messageBoxService.Show(
                             $"{CreateConfigurationViewModel.GetTranslation(() => CreateConfigurationPartTranslation.GenerateRsaKeysCommandUnknownError)}{ex.Message}",
                             CreateConfigurationViewModel.GetTranslation(
                                 () => CreateConfigurationPartTranslation.GenerateRsaKeysCommandCaption),
-                            MessageBoxButton.OK,
+                            MessageBoxButtons.Ok,
+                            MessageBoxButtons.Ok,
                             MessageBoxImage.Error);
                     }
                     finally
@@ -299,7 +301,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                         passwordBox,
                         cancellationToken),
                     this.SaveCommand),
-                CommandExecutor.PostExecute),
+                task => CommandExecutor.PostExecute(
+                    task,
+                    messageBoxService)),
             "material_symbol_save.png".ToBitmapImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.SaveLabel),

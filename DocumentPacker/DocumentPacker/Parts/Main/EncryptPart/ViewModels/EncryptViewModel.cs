@@ -12,6 +12,7 @@ using DocumentPacker.Parts.Main.EncryptPart.Views;
 using DocumentPacker.Parts.SubParts.LoadConfigurationSubPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
@@ -75,7 +76,8 @@ internal class EncryptViewModel : ApplicationBaseViewModel
         ICommandFactory commandFactory,
         IDocumentPackerConfigurationFileService configurationFileService,
         IEncryptService encryptService,
-        ICommandSync commandSync
+        ICommandSync commandSync,
+        IMessageBoxService messageBoxService
     )
     {
         this.commandFactory = commandFactory;
@@ -148,7 +150,9 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                         encryptService,
                         cancellationToken),
                     this.saveCommand),
-                CommandExecutor.PostExecute),
+                task => CommandExecutor.PostExecute(
+                    task,
+                    messageBoxService)),
             "material_symbol_save.png".ToBitmapImage(),
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.SaveCommandLabel),
