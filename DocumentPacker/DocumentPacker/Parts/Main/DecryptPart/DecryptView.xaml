@@ -7,6 +7,8 @@
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     xmlns:loadConfigurationSubPart="clr-namespace:DocumentPacker.Parts.SubParts.LoadConfigurationSubPart"
     xmlns:converters="clr-namespace:Libs.Wpf.Converters;assembly=Libs.Wpf"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
     Template="{StaticResource MainContentControlTemplate}">
     <UserControl.Resources>
         <converters:NullOrEmptyToVisibilityConverter
@@ -61,7 +63,11 @@
                         Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
                         <TextBox
                             Grid.Column="0"
-                            DataContext="{Binding EncryptedFile}" />
+                            DataContext="{Binding EncryptedFile}">
+                            <b:Interaction.Behaviors>
+                                <behaviours:FilePathDragAndDropTextBoxBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
                         <Button
                             Grid.Column="1"
                             DataContext="{Binding SelectEncryptedFileCommand}" 
@@ -80,7 +86,11 @@
                         Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
                         <TextBox
                             Grid.Column="0"
-                            DataContext="{Binding OutputFolder}" />
+                            DataContext="{Binding OutputFolder}">
+                            <b:Interaction.Behaviors>
+                                <behaviours:FolderPathDragAndDropTextBoxBehavior/>
+                            </b:Interaction.Behaviors>
+                        </TextBox>
                         <Button
                             Grid.Column="1"
                             DataContext="{Binding SelectOutputFolderCommand}" 
