@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:windowPart="clr-namespace:DocumentPacker.Parts.WindowPart"
-    Icon="/Assets/icon.png"
+    Icon="pack://application:,,,/DocumentPacker;component/Assets/icon.png"
     Style="{StaticResource WindowStyle}"
     Title="{Binding Title.LabelTranslation}"
     IsEnabled="{Binding IsWindowEnabled}"
