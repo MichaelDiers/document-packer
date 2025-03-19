@@ -2,7 +2,6 @@
 
 using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
-using Libs.Wpf.ViewModels;
 
 internal static class CommandExecutor
 {

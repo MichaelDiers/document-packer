@@ -10,7 +10,7 @@ using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
 using DocumentPacker.Parts.Main.DecryptPart;
 using DocumentPacker.Parts.Main.EncryptPart.Translations;
 using Libs.Wpf.Commands;
-using Libs.Wpf.ViewModels;
+using Libs.Wpf.Localization;
 
 /// <summary>
 ///     View model of the <see cref="FeaturesView" />.

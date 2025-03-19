@@ -5,7 +5,7 @@ using DocumentPacker.EventHandling;
 using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
-using Libs.Wpf.ViewModels;
+using Libs.Wpf.Localization;
 
 /// <summary>
 ///     View model of the <see cref="ChangeLanguageLinkView" />.

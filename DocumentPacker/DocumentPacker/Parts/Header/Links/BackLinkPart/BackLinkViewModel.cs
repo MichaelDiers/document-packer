@@ -5,7 +5,7 @@ using DocumentPacker.EventHandling;
 using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
-using Libs.Wpf.ViewModels;
+using Libs.Wpf.Localization;
 
 /// <summary>
 ///     The view model of <see cref="BackLinkView" />.

@@ -9,6 +9,7 @@ using DocumentPacker.Extensions;
 using DocumentPacker.Models;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
 /// <summary>

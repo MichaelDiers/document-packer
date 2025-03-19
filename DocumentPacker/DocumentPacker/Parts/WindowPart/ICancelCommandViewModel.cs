@@ -3,7 +3,7 @@
 using System.ComponentModel;
 using System.Windows;
 using DocumentPacker.Commands;
-using Libs.Wpf.ViewModels;
+using Libs.Wpf.Localization;
 
 /// <summary>
 ///     The required data of the <see cref="CancelCommandBehavior" />.

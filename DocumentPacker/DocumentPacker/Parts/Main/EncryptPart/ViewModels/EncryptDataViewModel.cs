@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using DocumentPacker.Models;
 using DocumentPacker.Parts.Main.EncryptPart.Translations;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
 public class EncryptDataViewModel : ViewModelBase

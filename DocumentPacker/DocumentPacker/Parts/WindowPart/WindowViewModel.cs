@@ -4,7 +4,7 @@ using System.Windows;
 using DocumentPacker.Commands;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
-using Libs.Wpf.ViewModels;
+using Libs.Wpf.Localization;
 
 /// <summary>
 ///     View model of the <see cref="WindowView" />.

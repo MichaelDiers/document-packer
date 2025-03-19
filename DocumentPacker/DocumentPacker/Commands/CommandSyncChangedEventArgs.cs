@@ -1,6 +1,6 @@
 ﻿namespace DocumentPacker.Commands;
 
-using Libs.Wpf.ViewModels;
+using Libs.Wpf.Localization;
 
 public class CommandSyncChangedEventArgs(
     bool isCommandActive,

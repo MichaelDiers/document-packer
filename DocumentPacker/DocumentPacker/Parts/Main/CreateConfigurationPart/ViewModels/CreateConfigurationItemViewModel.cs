@@ -2,6 +2,7 @@
 
 using System.IO;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.Translations;
+using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
 /// <summary>

@@ -7,6 +7,7 @@ using DocumentPacker.Models;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
 using DocumentPacker.Parts.Main.EncryptPart.Translations;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
 public class EncryptDataItemViewModel : ViewModelBase
