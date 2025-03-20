@@ -71,6 +71,7 @@
                         dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
                         <TextBox
                             Grid.Column="0"
+                            x:Name="OutputFolderTextBox"
                             DataContext="{Binding OutputFolder}">
                             <b:Interaction.Behaviors>
                                 <behaviours:FolderPathDragAndDropTextBoxBehavior />
@@ -78,8 +79,9 @@
                         </TextBox>
                         <Button
                             Grid.Column="1"
+                            CommandParameter="{Binding ElementName=OutputFolderTextBox, Path=Text}"
                             DataContext="{Binding SelectOutputFolderCommand}"
-                            Style="{StaticResource ImageOnlyButtonStyle}"/>
+                            Style="{StaticResource ImageOnlyButtonStyle}" />
                     </Grid>
                     <!-- output file-->
                     <Label

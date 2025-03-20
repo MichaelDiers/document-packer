@@ -63,15 +63,17 @@
                         Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
                         <TextBox
                             Grid.Column="0"
+                            x:Name="EncryptedFileTextBox"
                             DataContext="{Binding EncryptedFile}">
                             <b:Interaction.Behaviors>
-                                <behaviours:FilePathDragAndDropTextBoxBehavior/>
+                                <behaviours:FilePathDragAndDropTextBoxBehavior />
                             </b:Interaction.Behaviors>
                         </TextBox>
                         <Button
                             Grid.Column="1"
-                            DataContext="{Binding SelectEncryptedFileCommand}" 
-                            Style="{StaticResource ImageOnlyButtonStyle}"/>
+                            CommandParameter="{Binding ElementName=EncryptedFileTextBox, Path=Text}"
+                            DataContext="{Binding SelectEncryptedFileCommand}"
+                            Style="{StaticResource ImageOnlyButtonStyle}" />
                     </Grid>
                     <!-- output folder -->
                     <Label
@@ -86,15 +88,17 @@
                         Visibility="{Binding ElementName=PrivateRsaKeyTextBox, Path=Visibility}">
                         <TextBox
                             Grid.Column="0"
+                            x:Name="OutputFolderTextBox"
                             DataContext="{Binding OutputFolder}">
                             <b:Interaction.Behaviors>
-                                <behaviours:FolderPathDragAndDropTextBoxBehavior/>
+                                <behaviours:FolderPathDragAndDropTextBoxBehavior />
                             </b:Interaction.Behaviors>
                         </TextBox>
                         <Button
                             Grid.Column="1"
-                            DataContext="{Binding SelectOutputFolderCommand}" 
-                            Style="{StaticResource ImageOnlyButtonStyle}"/>
+                            CommandParameter="{Binding ElementName=OutputFolderTextBox, Path=Text}"
+                            DataContext="{Binding SelectOutputFolderCommand}"
+                            Style="{StaticResource ImageOnlyButtonStyle}" />
                     </Grid>
                     <Button
                         Grid.Row="3"

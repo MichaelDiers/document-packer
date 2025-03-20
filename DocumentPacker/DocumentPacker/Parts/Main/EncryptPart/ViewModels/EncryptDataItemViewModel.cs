@@ -66,7 +66,7 @@ public class EncryptDataItemViewModel : ViewModelBase
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.IsRequiredLabel));
 
-        this.selectFileCommand = new SelectFileCommand<object>(
+        this.selectFileCommand = new SelectFileCommand(
             commandFactory,
             (_, path) => this.Value.Value = path);
 

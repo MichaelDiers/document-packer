@@ -125,6 +125,7 @@
                                     </Grid.Style>
                                     <TextBox
                                         Grid.Column="0"
+                                        x:Name="TextBoxValue"
                                         DataContext="{Binding Value}">
                                         <b:Interaction.Behaviors>
                                             <behaviours:FilePathDragAndDropTextBoxBehavior />
@@ -132,8 +133,9 @@
                                     </TextBox>
                                     <Button
                                         Grid.Column="1"
-                                        DataContext="{Binding SelectFileCommand}" 
-                                        Style="{StaticResource ImageOnlyButtonStyle}"/>
+                                        CommandParameter="{Binding ElementName=TextBoxValue, Path=Text }"
+                                        DataContext="{Binding SelectFileCommand}"
+                                        Style="{StaticResource ImageOnlyButtonStyle}" />
                                 </Grid>
                             </Grid>
                         </Border>

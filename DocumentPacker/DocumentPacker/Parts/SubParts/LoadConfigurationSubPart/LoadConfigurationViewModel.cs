@@ -103,7 +103,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
             nameof(LoadConfigurationTranslation.LoadConfigurationCommandLabel),
             nameof(LoadConfigurationTranslation.LoadConfigurationCommandToolTip));
 
-        this.selectConfigurationFileCommand = new SelectFileCommand<object>(
+        this.selectConfigurationFileCommand = new SelectFileCommand(
             commandFactory,
             (_, path) => this.ConfigurationFile.Value = path,
             loadPrivateConfiguration

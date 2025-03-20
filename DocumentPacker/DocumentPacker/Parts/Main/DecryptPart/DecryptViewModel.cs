@@ -10,7 +10,6 @@ using DocumentPacker.Services;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
-using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     The view model of <see cref="DecryptView" />.
@@ -180,7 +179,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
         this.loadConfigurationViewModel.ConfigurationInvalidated += this.OnConfigurationInvalidated;
         this.loadConfigurationViewModel.ConfigurationLoaded += this.OnConfigurationLoaded;
 
-        this.selectEncryptedFileCommand = new SelectFileCommand<object?>(
+        this.selectEncryptedFileCommand = new SelectFileCommand(
             commandFactory,
             (_, path) => this.EncryptedFile.Value = path,
             "Document Packer File (*.dp)|*.dp");

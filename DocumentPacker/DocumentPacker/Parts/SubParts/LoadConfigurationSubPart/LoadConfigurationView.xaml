@@ -27,6 +27,7 @@
             dependencyProperties:GridColumnsDependencyProperty.GridColumns="*|Auto">
             <TextBox
                 Grid.Column="0"
+                x:Name="ConfigurationFileTextBox"
                 DataContext="{Binding ConfigurationFile, UpdateSourceTrigger=PropertyChanged}">
                 <b:Interaction.Behaviors>
                     <behaviours:FilePathDragAndDropTextBoxBehavior
@@ -35,8 +36,9 @@
             </TextBox>
             <Button
                 Grid.Column="1"
-                DataContext="{Binding SelectConfigurationFileCommand}" 
-                Style="{StaticResource ImageOnlyButtonStyle}"/>
+                CommandParameter="{Binding ElementName=ConfigurationFileTextBox, Path=Text }"
+                DataContext="{Binding SelectConfigurationFileCommand}"
+                Style="{StaticResource ImageOnlyButtonStyle}" />
         </Grid>
         <!-- password -->
         <Label
