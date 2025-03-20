@@ -148,7 +148,7 @@
     <value>Eintrag löschen.</value>
   </data>
   <data name="Description" xml:space="preserve">
-    <value>Du möchstest Dateien und Informationen verschlüsseln? Generiere Deine persönlichen Keys zum Verschlüsseln. Erstelle eine verschlüsselte Document Packer Datei und versende diese an Deine Freunde.</value>
+    <value>Du möchtest Dateien und Informationen verschlüsseln? Generiere Deine persönlichen Keys zum Verschlüsseln. Erstelle eine verschlüsselte Document Packer Datei und versende diese an Deine Freunde.</value>
   </data>
   <data name="DescriptionLabel" xml:space="preserve">
     <value>Description</value>
@@ -213,7 +213,7 @@
     <value>Die Dateiendung für Document Packer Dateien.</value>
   </data>
   <data name="OutputFileIsRequired" xml:space="preserve">
-    <value>Ausgabedatei ist erfolderlich.</value>
+    <value>Ausgabedatei ist erforderlich.</value>
   </data>
   <data name="OutputFileLabel" xml:space="preserve">
     <value>Ausgabedatei</value>
@@ -234,7 +234,7 @@
     <value>Ausgabeverzeichnis</value>
   </data>
   <data name="OutputFolderToolTip" xml:space="preserve">
-    <value>Der Ausgabeordner der Dokument Packer-Datei.</value>
+    <value>Der Ausgabeordner der Document Packer Datei.</value>
   </data>
   <data name="OutputFolderWatermark" xml:space="preserve">
     <value>Ausgabeverzeichnis</value>

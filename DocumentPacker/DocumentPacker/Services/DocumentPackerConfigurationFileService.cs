@@ -14,8 +14,8 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
         CancellationToken cancellationToken
     )
     {
-        var aesKey = this.ToAesPassword(password);
-        return await this.FromFileAsync(
+        var aesKey = DocumentPackerConfigurationFileService.ToAesPassword(password);
+        return await DocumentPackerConfigurationFileService.FromFileAsync(
             configurationFile,
             aesKey,
             cancellationToken);
@@ -29,8 +29,8 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
         CancellationToken cancellationToken
     )
     {
-        var aesKey = this.ToAesPassword(password);
-        await this.ToFileAsync(
+        var aesKey = DocumentPackerConfigurationFileService.ToAesPassword(password);
+        await DocumentPackerConfigurationFileService.ToFileAsync(
             privateConfigurationFile,
             aesKey,
             configurationModel,
@@ -38,7 +38,7 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
 
         var privateRsaKey = configurationModel.RsaPrivateKey;
         configurationModel.RsaPrivateKey = null;
-        await this.ToFileAsync(
+        await DocumentPackerConfigurationFileService.ToFileAsync(
             publicConfigurationFile,
             aesKey,
             configurationModel,
@@ -46,7 +46,7 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
         configurationModel.RsaPrivateKey = privateRsaKey;
     }
 
-    private async Task<ConfigurationModel> FromFileAsync(
+    private static async Task<ConfigurationModel> FromFileAsync(
         FileInfo configurationFile,
         byte[] aesKey,
         CancellationToken cancellationToken
@@ -82,7 +82,7 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
         }
     }
 
-    private byte[] ToAesPassword(string password)
+    private static byte[] ToAesPassword(string password)
     {
         var bytePassword = Encoding.UTF8.GetBytes(password);
         var sizes = new[]
@@ -109,7 +109,7 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
         throw new InvalidOperationException();
     }
 
-    private async Task ToFileAsync(
+    private static async Task ToFileAsync(
         FileInfo configurationFile,
         byte[] aesKey,
         ConfigurationModel configurationModel,

@@ -242,7 +242,7 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a unique name or ID for the entry. This name will be used as the file name when decrypting the Document Packer entry. These characters must not be used: &quot;, &lt;, &gt;, |, :, *, ?, \, /.
+        ///   Looks up a localized string similar to Enter a unique name or ID for the entry. This name will be used as the file name when decrypting the Document Packer entry. These characters must not be used: &quot;, &lt;, &gt;, |, :, *, ?, \, /&quot;.
         /// </summary>
         public static string IdToolTip {
             get {

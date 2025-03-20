@@ -21,7 +21,7 @@ public static class WindowPartServiceCollectionExtensions
         services.TryAddKeyedSingleton<IApplicationWindow>(
             ApplicationElementPart.Window,
             window);
-        services.TryAddSingleton(window as Window);
+        services.TryAddSingleton<Window>(window);
         services.AddKeyedTransient<IApplicationViewModel, WindowViewModel>(ApplicationElementPart.Window);
 
         return services;

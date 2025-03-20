@@ -11,8 +11,11 @@
     dependencyProperties:ImageSourceDependencyProperty.ImageSource="pack://application:,,,/DocumentPacker;component/Assets/material_symbol_edit_square_96dp.png"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ignore="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:views="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.Views"
-    mc:Ignorable="ignore">
+    xmlns:viewModels="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels"
+    mc:Ignorable="d ignore"
+    d:DataContext="{d:DesignInstance d:Type={x:Type viewModels:CreateConfigurationViewModel}}">
     <mvvm:BaseUserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

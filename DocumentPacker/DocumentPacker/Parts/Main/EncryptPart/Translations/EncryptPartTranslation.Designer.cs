@@ -196,7 +196,7 @@ namespace DocumentPacker.Parts.Main.EncryptPart.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data enryption fails:
+        ///   Looks up a localized string similar to Data encryption fails:
         ///
         ///{0}.
         /// </summary>

@@ -6,7 +6,11 @@
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
-    xmlns:loadConfigurationSubPart="clr-namespace:DocumentPacker.Parts.SubParts.LoadConfigurationSubPart">
+    xmlns:loadConfigurationSubPart="clr-namespace:DocumentPacker.Parts.SubParts.LoadConfigurationSubPart"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance d:Type={x:Type loadConfigurationSubPart:LoadConfigurationViewModel}}">
     <Grid
         dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto"
         dependencyProperties:GridColumnsDependencyProperty.GridColumns="Auto|*">

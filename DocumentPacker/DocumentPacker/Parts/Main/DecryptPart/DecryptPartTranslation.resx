@@ -144,7 +144,7 @@
     <value>Encrypted Document Packer file</value>
   </data>
   <data name="EncryptedFileToolTip" xml:space="preserve">
-    <value>Please select the enrypted Document Packer file.</value>
+    <value>Please select the encrypted Document Packer file.</value>
   </data>
   <data name="EncryptedFileWatermark" xml:space="preserve">
     <value>*.dp</value>

@@ -183,7 +183,7 @@ MIICCgKCAgEA...
     <value>Bitte gebe eine Beschreibung an.</value>
   </data>
   <data name="AddConfigurationItemToolTip" xml:space="preserve">
-    <value>Füge ein neues Konfigurationseintrag hinzu.</value>
+    <value>Füge einen neuen Konfigurationseintrag hinzu.</value>
   </data>
   <data name="ConfigurationItemTypeLabel" xml:space="preserve">
     <value>Typ</value>
@@ -297,7 +297,7 @@ MIICCgKCAgEA...
     <value>Geheimakte</value>
   </data>
   <data name="IdToolTip" xml:space="preserve">
-    <value>Hinterlege einen eindeutigen Namen oder eine Id für den Eintrag. Bei der Entschlüsselung des Document Packer Eintrages wird dieser Name als Dateiname verwendet. Diese Zeichen dürfen nicht verwendet werden: ", &lt;, &gt;, |, :, *, ?, \, /</value>
+    <value>Hinterlege einen eindeutigen Namen oder eine Id für den Eintrag. Bei der Entschlüsselung des Document Packer Eintrages wird dieser Name als Dateiname verwendet. Diese Zeichen dürfen nicht verwendet werden: ", &lt;, &gt;, |, :, *, ?, \, /"</value>
   </data>
   <data name="IdIsRequired" xml:space="preserve">
     <value>Bitte gebe einen Namen an</value>

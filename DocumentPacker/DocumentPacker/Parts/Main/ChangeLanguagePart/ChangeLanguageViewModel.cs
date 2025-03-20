@@ -7,7 +7,6 @@ using System.Windows.Media.Imaging;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Localization;
-using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     The view model of <see cref="ChangeLanguageView" />.

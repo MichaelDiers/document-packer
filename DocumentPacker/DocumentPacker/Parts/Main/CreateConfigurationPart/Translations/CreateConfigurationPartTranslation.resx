@@ -353,7 +353,7 @@ MIICCgKCAgEA...
     <comment>CreateConfigurationPart</comment>
   </data>
   <data name="IdToolTip" xml:space="preserve">
-    <value>Enter a unique name or ID for the entry. This name will be used as the file name when decrypting the Document Packer entry. These characters must not be used: ", &lt;, &gt;, |, :, *, ?, \, /</value>
+    <value>Enter a unique name or ID for the entry. This name will be used as the file name when decrypting the Document Packer entry. These characters must not be used: ", &lt;, &gt;, |, :, *, ?, \, /"</value>
     <comment>CreateConfigurationPart</comment>
   </data>
   <data name="IdIsRequired" xml:space="preserve">

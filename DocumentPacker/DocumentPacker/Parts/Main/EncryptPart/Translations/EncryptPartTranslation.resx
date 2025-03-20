@@ -163,7 +163,7 @@
     <value>Encrypt</value>
   </data>
   <data name="EncryptFails" xml:space="preserve">
-    <value>Data enryption fails:
+    <value>Data encryption fails:
 
 {0}</value>
   </data>

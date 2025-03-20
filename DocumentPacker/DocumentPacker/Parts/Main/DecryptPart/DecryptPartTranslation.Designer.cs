@@ -153,7 +153,7 @@ namespace DocumentPacker.Parts.Main.DecryptPart {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select the enrypted Document Packer file..
+        ///   Looks up a localized string similar to Please select the encrypted Document Packer file..
         /// </summary>
         public static string EncryptedFileToolTip {
             get {

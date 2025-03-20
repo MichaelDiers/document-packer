@@ -34,12 +34,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
                 return nameof(DecryptPartTranslation.EncryptedFileIsRequired);
             }
 
-            if (!File.Exists(data.Value))
-            {
-                return nameof(DecryptPartTranslation.EncryptedFileDoesNotExist);
-            }
-
-            return null;
+            return !File.Exists(data.Value) ? nameof(DecryptPartTranslation.EncryptedFileDoesNotExist) : null;
         },
         false,
         DecryptPartTranslation.ResourceManager,
@@ -64,12 +59,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
                 return nameof(DecryptPartTranslation.OutputFolderIsRequired);
             }
 
-            if (!Directory.Exists(data.Value))
-            {
-                return nameof(DecryptPartTranslation.OutputFolderDoesNotExist);
-            }
-
-            return null;
+            return !Directory.Exists(data.Value) ? nameof(DecryptPartTranslation.OutputFolderDoesNotExist) : null;
         },
         false,
         DecryptPartTranslation.ResourceManager,

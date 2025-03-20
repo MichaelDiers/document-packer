@@ -9,7 +9,12 @@
     xmlns:converters="clr-namespace:Libs.Wpf.Converters;assembly=Libs.Wpf"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
-    Template="{StaticResource MainContentControlTemplate}">
+    Template="{StaticResource MainContentControlTemplate}"
+    xmlns:decryptPart="clr-namespace:DocumentPacker.Parts.Main.DecryptPart"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance d:Type={x:Type decryptPart:DecryptViewModel}}">
     <UserControl.Resources>
         <converters:NullOrEmptyToVisibilityConverter
             x:Key="NullOrEmptyToVisibilityConverter" />

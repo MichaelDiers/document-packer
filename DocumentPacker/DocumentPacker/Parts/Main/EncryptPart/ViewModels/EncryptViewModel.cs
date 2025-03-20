@@ -14,7 +14,6 @@ using DocumentPacker.Services;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
-using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     The view model of <see cref="EncryptView" />.
@@ -126,12 +125,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                     return nameof(EncryptPartTranslation.OutputFolderIsRequired);
                 }
 
-                if (!Directory.Exists(data.Value))
-                {
-                    return nameof(EncryptPartTranslation.OutputFolderDoesNotExist);
-                }
-
-                return null;
+                return !Directory.Exists(data.Value) ? nameof(EncryptPartTranslation.OutputFolderDoesNotExist) : null;
             },
             false,
             EncryptPartTranslation.ResourceManager,

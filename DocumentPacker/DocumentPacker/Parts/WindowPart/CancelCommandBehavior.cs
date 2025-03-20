@@ -87,16 +87,18 @@ public class CancelCommandBehavior : Behavior<Window>
             this.cancelWindow = null;
         }
 
-        if (cancelCommandViewModel.TranslatableCancellableButton is not null)
+        if (cancelCommandViewModel.TranslatableCancellableButton is null)
         {
-            this.cancelWindow = new CancelCommandWindow
-            {
-                DataContext = cancelCommandViewModel.TranslatableCancellableButton,
-                Owner = this.AssociatedObject
-            };
-
-            this.cancelWindow.Show();
+            return;
         }
+
+        this.cancelWindow = new CancelCommandWindow
+        {
+            DataContext = cancelCommandViewModel.TranslatableCancellableButton,
+            Owner = this.AssociatedObject
+        };
+
+        this.cancelWindow.Show();
     }
 
     /// <summary>

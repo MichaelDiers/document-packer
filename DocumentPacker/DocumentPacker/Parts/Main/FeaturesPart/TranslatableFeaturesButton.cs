@@ -5,7 +5,6 @@ using System.Resources;
 using System.Windows.Input;
 using System.Windows.Media;
 using Libs.Wpf.Localization;
-using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     Describes the data of a feature button.

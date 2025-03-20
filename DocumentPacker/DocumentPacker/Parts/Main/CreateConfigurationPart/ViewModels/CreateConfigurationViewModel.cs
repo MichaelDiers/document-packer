@@ -16,7 +16,6 @@ using DocumentPacker.Services;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
-using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     The view model of <see cref="CreateConfigurationView" />.
@@ -56,7 +55,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The configuration items.
     /// </summary>
-    private ObservableCollection<CreateConfigurationItemViewModel> configurationItems = new();
+    private ObservableCollection<CreateConfigurationItemViewModel> configurationItems = [];
 
     /// <summary>
     ///     The description of the configuration.
@@ -84,12 +83,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                 return nameof(CreateConfigurationPartTranslation.OutputFolderIsRequired);
             }
 
-            if (!Directory.Exists(data.Value))
-            {
-                return nameof(CreateConfigurationPartTranslation.OutputFolderDoesNotExist);
-            }
-
-            return null;
+            return !Directory.Exists(data.Value)
+                ? nameof(CreateConfigurationPartTranslation.OutputFolderDoesNotExist)
+                : null;
         },
         false,
         CreateConfigurationPartTranslation.ResourceManager,
@@ -152,12 +148,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                 return nameof(CreateConfigurationPartTranslation.RsaPrivateKeyIsRequired);
             }
 
-            if (!CreateConfigurationViewModel.PrivatePemRegex.IsMatch(data.Value))
-            {
-                return nameof(CreateConfigurationPartTranslation.RsaPrivateKeyFormatError);
-            }
-
-            return null;
+            return !CreateConfigurationViewModel.PrivatePemRegex.IsMatch(data.Value)
+                ? nameof(CreateConfigurationPartTranslation.RsaPrivateKeyFormatError)
+                : null;
         },
         false,
         CreateConfigurationPartTranslation.ResourceManager,
@@ -177,12 +170,9 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                 return nameof(CreateConfigurationPartTranslation.RsaPublicKeyIsRequired);
             }
 
-            if (!CreateConfigurationViewModel.PublicPemRegex.IsMatch(data.Value))
-            {
-                return nameof(CreateConfigurationPartTranslation.RsaPublicKeyFormatError);
-            }
-
-            return null;
+            return !CreateConfigurationViewModel.PublicPemRegex.IsMatch(data.Value)
+                ? nameof(CreateConfigurationPartTranslation.RsaPublicKeyFormatError)
+                : null;
         },
         false,
         CreateConfigurationPartTranslation.ResourceManager,
@@ -567,7 +557,11 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
                         createConfigurationItemViewModel.Id.Value,
                         StringComparison.OrdinalIgnoreCase))
                 .ToArray();
-            if (items.Length > 1)
+            if (items.Length <= 1)
+            {
+                continue;
+            }
+
             {
                 isValid = false;
                 foreach (var item in items)

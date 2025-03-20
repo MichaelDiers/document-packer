@@ -21,6 +21,7 @@ public interface ICommandSync
     ///     Requests to start a new command.
     /// </summary>
     /// <param name="force">Indicates that <see cref="Enter" /> should succeed even if a command is active.</param>
+    /// <param name="translatableCancellableButton">The data of the cancellable command.</param>
     /// <returns><c>True</c> if the command is allowed to start; <c>false</c> otherwise.</returns>
     bool Enter(bool force = false, TranslatableCancellableButton? translatableCancellableButton = null);
 

@@ -31,6 +31,7 @@ internal class CommandSync : ICommandSync
     ///     Requests to start a new command.
     /// </summary>
     /// <param name="force">Indicates that <see cref="Enter" /> should succeed even if a command is active.</param>
+    /// <param name="translatableCancellableButton">The data of the cancellable command.</param>
     /// <returns><c>True</c> if the command is allowed to start; <c>false</c> otherwise.</returns>
     public bool Enter(bool force = false, TranslatableCancellableButton? translatableCancellableButton = null)
     {
@@ -41,22 +42,22 @@ internal class CommandSync : ICommandSync
 
         lock (this.lockObject)
         {
-            if (this.numberOfActiveCommands == 0 || force)
+            if (this.numberOfActiveCommands != 0 && !force)
             {
-                this.numberOfActiveCommands++;
-                if (this.numberOfActiveCommands == 1)
-                {
-                    this.CommandSyncChanged?.Invoke(
-                        this,
-                        new CommandSyncChangedEventArgs(
-                            true,
-                            translatableCancellableButton));
-                }
-
-                return true;
+                return false;
             }
 
-            return false;
+            this.numberOfActiveCommands++;
+            if (this.numberOfActiveCommands == 1)
+            {
+                this.CommandSyncChanged?.Invoke(
+                    this,
+                    new CommandSyncChangedEventArgs(
+                        true,
+                        translatableCancellableButton));
+            }
+
+            return true;
         }
     }
 

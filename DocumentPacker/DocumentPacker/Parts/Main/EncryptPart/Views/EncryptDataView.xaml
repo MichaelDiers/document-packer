@@ -11,7 +11,8 @@
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:behaviours="clr-namespace:Libs.Wpf.Behaviours;assembly=Libs.Wpf"
     xmlns:encryptPart1="clr-namespace:DocumentPacker.Parts.Main.EncryptPart.ViewModels"
-    mc:Ignorable="d ignore">
+    mc:Ignorable="d ignore"
+    d:DataContext="{d:DesignInstance d:Type={x:Type encryptPart1:EncryptDataViewModel}}">
     <Grid
         dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto">
         <!-- description -->

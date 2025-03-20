@@ -39,7 +39,7 @@ public class EncryptDataViewModel : ViewModelBase
                     item,
                     commandFactory)));
 
-        this.RsaPublicKey = configurationModel.RsaPublicKey;
+        this.rsaPublicKey = configurationModel.RsaPublicKey;
     }
 
     /// <summary>

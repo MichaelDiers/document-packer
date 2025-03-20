@@ -15,12 +15,12 @@ internal class EventHandlerCenter : IEventHandlerCenter
     private bool suppressClosed;
     public event EventHandler? Closed;
 
-    public void Initialize(IServiceProvider serviceProvider)
+    public void Initialize(IServiceProvider provider)
     {
-        this.serviceProvider = serviceProvider;
+        this.serviceProvider = provider;
 
         this.applicationWindow =
-            serviceProvider.GetRequiredKeyedService<IApplicationWindow>(ApplicationElementPart.Window);
+            this.serviceProvider.GetRequiredKeyedService<IApplicationWindow>(ApplicationElementPart.Window);
         this.Inject(this.applicationWindow);
         this.applicationWindow.Closed += this.HandleClosed;
         this.applicationWindow.Show();

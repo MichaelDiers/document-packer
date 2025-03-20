@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dependencyProperties="clr-namespace:Libs.Wpf.DependencyProperties;assembly=Libs.Wpf"
-    xmlns:createConfigurationPart="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart"
     xmlns:converters="clr-namespace:Libs.Wpf.Converters;assembly=Libs.Wpf"
     xmlns:viewModels="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels"
     xmlns:views="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.Views">
@@ -91,7 +90,7 @@
                 <!-- delete configuration item -->
                 <Button
                     Grid.Column="1"
-                    DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=views:CreateConfigurationView}, Path=DataContext.DeleteConfigurationItemCommand}"
+                    DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=views:CreateConfigurationView}, Path=DataContext.(viewModels:CreateConfigurationViewModel.DeleteConfigurationItemCommand)}"
                     CommandParameter="{Binding ElementName=RootElement,Path=DataContext}"
                     Style="{StaticResource ImageOnlyButtonStyle}"
                     VerticalAlignment="Top" />

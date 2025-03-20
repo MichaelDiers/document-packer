@@ -26,21 +26,16 @@ public class EncryptService(IDocumentPackerService documentPackerService) : IEnc
                 continue;
             }
 
-            switch (encryptModelItem.ConfigurationItemType)
+            addData = encryptModelItem.ConfigurationItemType switch
             {
-                case ConfigurationItemType.File:
-                    addData = addData.Add(
-                        encryptModelItem.Id,
-                        new FileInfo(encryptModelItem.Value));
-                    break;
-                case ConfigurationItemType.Text:
-                    addData = addData.Add(
-                        encryptModelItem.Id,
-                        encryptModelItem.Value);
-                    break;
-                default:
-                    throw new ArgumentException($"Unsupported value: {encryptModelItem.ConfigurationItemType}");
-            }
+                ConfigurationItemType.File => addData.Add(
+                    encryptModelItem.Id,
+                    new FileInfo(encryptModelItem.Value)),
+                ConfigurationItemType.Text => addData.Add(
+                    encryptModelItem.Id,
+                    encryptModelItem.Value),
+                _ => throw new ArgumentException($"Unsupported value: {encryptModelItem.ConfigurationItemType}")
+            };
         }
 
         await addData.ExecuteAsync(cancellationToken);

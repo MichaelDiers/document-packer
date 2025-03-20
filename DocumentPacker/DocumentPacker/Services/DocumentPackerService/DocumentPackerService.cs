@@ -41,11 +41,6 @@ internal class DocumentPackerService : IRsaSetup, IAesSetup, IAddData, IDocument
     private string? archiveFileName;
 
     /// <summary>
-    ///     Indicates that the processing already terminated.
-    /// </summary>
-    private bool closed;
-
-    /// <summary>
     ///     The RSA encryption padding.
     /// </summary>
     private RSAEncryptionPadding? rsaEncryptionPadding;

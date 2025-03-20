@@ -24,12 +24,9 @@ public class CreateConfigurationItemViewModel : ViewModelBase
             }
 
             var invalidCharacters = Path.GetInvalidFileNameChars();
-            if (data.Value.Any(c => invalidCharacters.Contains(c)))
-            {
-                return nameof(CreateConfigurationPartTranslation.IdConatainsInvalidCharacters);
-            }
-
-            return null;
+            return data.Value.Any(c => invalidCharacters.Contains(c))
+                ? nameof(CreateConfigurationPartTranslation.IdConatainsInvalidCharacters)
+                : null;
         },
         false,
         CreateConfigurationPartTranslation.ResourceManager,
@@ -76,8 +73,7 @@ public class CreateConfigurationItemViewModel : ViewModelBase
                         false,
                         CreateConfigurationPartTranslation.ResourceManager,
                         $"{nameof(ConfigurationItemType)}{itemType}")),
-            data => data is TranslatableAndValidableComboBox<ConfigurationItemType> comboBoxData &&
-                    comboBoxData.SelectedValue is not null
+            data => data is TranslatableAndValidableComboBox<ConfigurationItemType> {SelectedValue: not null}
                 ? null
                 : nameof(CreateConfigurationPartTranslation.SelectedConfigurationItemTypeMissing),
             false,

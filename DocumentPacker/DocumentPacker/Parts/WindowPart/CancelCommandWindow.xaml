@@ -8,7 +8,12 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     ResizeMode="NoResize"
-    ShowInTaskbar="False">
+    ShowInTaskbar="False"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localization="clr-namespace:Libs.Wpf.Localization;assembly=Libs.Wpf"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance d:Type={x:Type localization:TranslatableCancellableButton}}">
     <Grid
         dependencyProperties:GridRowsDependencyProperty.GridRows="Auto|Auto|Auto">
         <TextBlock
