@@ -2,7 +2,7 @@ name: Build and test DocumentPacker
 on:
   push:
     paths:
-      - DocumentPacker
+      - DocumentPacker/**
       - .github/workflows/DocumentPacker.yaml
   workflow_dispatch:
 permissions:
