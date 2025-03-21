@@ -12,3 +12,4 @@ jobs:
     uses: MichaelDiers/github-workflows/.github/workflows/dotnet-build-and-test.yaml@main
     with:
       solution-directory: DocumentPacker
+      runs-on: windows-latest
