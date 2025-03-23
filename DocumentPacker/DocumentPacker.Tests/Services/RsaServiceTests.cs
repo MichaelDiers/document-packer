@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 public class RsaServiceTests
 {
     private readonly IRsaService service = CustomServiceProviderBuilder
-        .Build(ServiceCollectionExtensionsForServices.TryAddAllServices)
+        .Build(ServicesServiceCollectionExtensions.TryAddServices)
         .GetRequiredService<IRsaService>();
 
     [Fact]

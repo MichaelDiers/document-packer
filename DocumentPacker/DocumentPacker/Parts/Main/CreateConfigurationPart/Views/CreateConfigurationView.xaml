@@ -181,7 +181,7 @@
                 HorizontalAlignment="Center"
                 Margin="32">
                 <Button
-                    CommandParameter="{Binding ElementName=PasswordBox}"
+                    CommandParameter="{Binding ElementName=PasswordBox, Path=Password}"
                     DataContext="{Binding SaveCommand}"
                     Style="{StaticResource CancellableTranslatableButtonStyle}" />
             </Grid>

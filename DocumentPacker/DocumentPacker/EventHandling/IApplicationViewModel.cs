@@ -2,8 +2,8 @@
 
 public interface IApplicationViewModel : IDisposable
 {
-    event EventHandler<BackLinkEventArgs> BackLinkCreated;
-    void HandleShowViewRequested(object? sender, ShowViewRequestedEventArgs eventArgs);
+    public event EventHandler<BackLinkEventArgs> BackLinkCreated;
+    public void HandleShowViewRequested(object? sender, ShowViewRequestedEventArgs eventArgs);
 
-    event EventHandler<ShowViewRequestedEventArgs> ShowViewRequested;
+    public event EventHandler<ShowViewRequestedEventArgs> ShowViewRequested;
 }

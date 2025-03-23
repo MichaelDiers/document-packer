@@ -32,7 +32,7 @@ public class DocumentPackerConfigurationFileServiceTests : IDisposable
     private readonly FileInfo publicConfigurationFile = new(Guid.NewGuid().ToString());
 
     private readonly IDocumentPackerConfigurationFileService service = CustomServiceProviderBuilder
-        .Build(ServiceCollectionExtensionsForServices.TryAddAllServices)
+        .Build(ServicesServiceCollectionExtensions.TryAddServices)
         .GetRequiredService<IDocumentPackerConfigurationFileService>();
 
     /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>

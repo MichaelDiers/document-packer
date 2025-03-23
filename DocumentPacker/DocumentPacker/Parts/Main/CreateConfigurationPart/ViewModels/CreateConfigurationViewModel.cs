@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Windows.Controls;
 using System.Windows.Input;
 using DocumentPacker.Commands;
 using DocumentPacker.Extensions;
@@ -21,7 +20,7 @@ using Libs.Wpf.Localization;
 ///     The view model of <see cref="CreateConfigurationView" />.
 /// </summary>
 /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
-internal class CreateConfigurationViewModel : ApplicationBaseViewModel
+internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateConfigurationViewModel
 {
     /// <summary>
     ///     A pattern to match the rsa private key format.
@@ -281,14 +280,15 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandToolTip));
 
         this.SaveCommand = new TranslatableCancellableButton(
-            commandFactory.CreateAsyncCommand<PasswordBox, (bool succeeds, string? message)>(
-                passwordBox => !commandSync.IsCommandActive && this.Password.Validate(passwordBox?.Password),
-                passwordBox => this.Validate(passwordBox),
-                (passwordBox, cancellationToken) => CommandExecutor.Execute(
-                    () => this.Validate(passwordBox),
+            commandFactory.CreateAsyncCommand<string, (bool succeeds, string? message)>(
+                passwordCommandParameter =>
+                    !commandSync.IsCommandActive && this.Password.Validate(passwordCommandParameter),
+                passwordCommandParameter => this.Validate(passwordCommandParameter),
+                (passwordCommandParameter, cancellationToken) => CommandExecutor.Execute(
+                    () => this.Validate(passwordCommandParameter),
                     commandSync,
                     () => this.SaveCommandExecute(
-                        passwordBox,
+                        passwordCommandParameter,
                         cancellationToken),
                     this.SaveCommand),
                 task => CommandExecutor.PostExecute(
@@ -540,7 +540,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     ///     Executes the view model validation.
     /// </summary>
     /// <returns><c>True</c> if the validation succeeds; <c>false</c> otherwise.</returns>
-    public bool Validate(PasswordBox? passwordBox)
+    public bool Validate(string? passwordCommandParameter)
     {
         var isValid = true;
         foreach (var createConfigurationItemViewModel in this.ConfigurationItems)
@@ -573,7 +573,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
 
         this.Description.Validate();
         this.OutputFolder.Validate();
-        this.Password.Validate(passwordBox?.Password);
+        this.Password.Validate(passwordCommandParameter);
         this.PrivateOutputFile.Validate();
         this.PrivateOutputFileExtension.Validate();
         this.PublicOutputFile.Validate();
@@ -608,7 +608,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
     }
 
     private async Task<(bool succeeds, string? message)> SaveCommandExecute(
-        PasswordBox? passwordBox,
+        string? passwordCommandParameter,
         CancellationToken cancellationToken
     )
     {
@@ -637,7 +637,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel
             await this.documentPackerConfigurationFileService.ToFileAsync(
                 privateConfigurationFile,
                 publicConfigurationFile,
-                passwordBox!.Password,
+                passwordCommandParameter!,
                 configuration,
                 cancellationToken);
             return (true,

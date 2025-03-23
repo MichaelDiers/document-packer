@@ -627,16 +627,56 @@ public ICommand $MVVM_COMMAND_NAME$Command =&gt;&#xD;
 			return Task.CompletedTask;&#xD;
 		}&#xD;
 	);</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Description/@EntryValue">adds a method to a ServiceCollectionExtension</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=ADD_005FNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=ADD_005FNAME/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=INAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=INAME/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=INAME/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=NAME/Expression/@EntryValue">capitalize(INAME)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Field/=NAME/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Shortcut/@EntryValue">ServiceCollectionExtensionMethod</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BCDEDEF23DE91C4F96724D89AEFB17F8/Text/@EntryValue">/// &lt;summary&gt;&#xD;
+///     Adds the &lt;see cref="I$INAME$" /&gt; to the given &lt;paramref name="services" /&gt;.&#xD;
+/// &lt;/summary&gt;&#xD;
+/// &lt;param name="services"&gt;The dependencies are added to this &lt;see cref="IServiceCollection" /&gt;.&lt;/param&gt;&#xD;
+/// &lt;returns&gt;The given &lt;paramref name="services" /&gt;.&lt;/returns&gt;&#xD;
+public static IServiceCollection TryAdd$ADD_NAME$(this IServiceCollection services)&#xD;
+{&#xD;
+    services.TryAddSingleton&lt;I$INAME$, $NAME$&gt;();&#xD;
+&#xD;
+    return services;&#xD;
+}&#xD;
+</s:String>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/@KeyIndexDefined">True</s:Boolean>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Description/@EntryValue">Add an extension of IServiceCollection</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=ADD_005FALL/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=ADD_005FALL/Expression/@EntryValue">capitalize(CLASS)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=ADD_005FALL/Order/@EntryValue">2</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=ADD_005FNAME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=ADD_005FNAME/Expression/@EntryValue">capitalize(INAME)</s:String>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=ADD_005FNAME/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=ADD_005FNAME/Order/@EntryValue">5</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=CLASS/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=CLASS/Expression/@EntryValue">getFileNameWithoutExtension()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=CLASS/InitialRange/@EntryValue">-1</s:Int64>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=CLASS/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=INAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=INAME/InitialRange/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=INAME/Order/@EntryValue">3</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAME/Expression/@EntryValue">capitalize(INAME)</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAME/InitialRange/@EntryValue">4</s:Int64>
-	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAME/Order/@EntryValue">2</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAME/Order/@EntryValue">4</s:Int64>
 	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAMESPACE/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAMESPACE/Expression/@EntryValue">fileDefaultNamespace()</s:String>
 	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=BD6FA82953A2E44EA6769637E93BC712/Field/=NAMESPACE/InitialRange/@EntryValue">-1</s:Int64>
@@ -662,21 +702,21 @@ public static class $CLASS$&#xD;
     /// &lt;/summary&gt;&#xD;
     /// &lt;param name="services"&gt;The dependencies are added to this &lt;see cref="IServiceCollection" /&gt;.&lt;/param&gt;&#xD;
     /// &lt;returns&gt;The given &lt;paramref name="services" /&gt;.&lt;/returns&gt;&#xD;
-    public static IServiceCollection TryAdd$CLASS$(this IServiceCollection services)&#xD;
+    public static IServiceCollection TryAdd$ADD_ALL$(this IServiceCollection services)&#xD;
     {&#xD;
-        services.TryAdd$NAME$();&#xD;
+        services.TryAdd$ADD_NAME$();&#xD;
 &#xD;
         return services;&#xD;
     }&#xD;
 &#xD;
     /// &lt;summary&gt;&#xD;
-    ///     Adds the &lt;see cref="I$NAME$" /&gt; to the given &lt;paramref name="services" /&gt;.&#xD;
+    ///     Adds the &lt;see cref="I$INAME$" /&gt; to the given &lt;paramref name="services" /&gt;.&#xD;
     /// &lt;/summary&gt;&#xD;
     /// &lt;param name="services"&gt;The dependencies are added to this &lt;see cref="IServiceCollection" /&gt;.&lt;/param&gt;&#xD;
     /// &lt;returns&gt;The given &lt;paramref name="services" /&gt;.&lt;/returns&gt;&#xD;
-    public static IServiceCollection TryAdd$NAME$(this IServiceCollection services)&#xD;
+    public static IServiceCollection TryAdd$ADD_NAME$(this IServiceCollection services)&#xD;
     {&#xD;
-        services.TryAddSingleton&lt;I$NAME$, $NAME$&gt;();&#xD;
+        services.TryAddSingleton&lt;I$INAME$, $NAME$&gt;();&#xD;
 &#xD;
         return services;&#xD;
     }&#xD;
