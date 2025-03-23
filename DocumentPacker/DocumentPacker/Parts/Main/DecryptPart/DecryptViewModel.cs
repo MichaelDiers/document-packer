@@ -153,13 +153,13 @@ internal class DecryptViewModel : ApplicationBaseViewModel
                 task => CommandExecutor.PostExecute(
                     task,
                     messageBoxService)),
-            "material_symbol_expand.png".ToBitmapImage(),
+            "material_symbol_expand.png".ToPackImage(),
             DecryptPartTranslation.ResourceManager,
             nameof(DecryptPartTranslation.DecryptCommandLabel),
             nameof(DecryptPartTranslation.DecryptCommandToolTip),
             nameof(DecryptPartTranslation.DecryptCommandCancelLabel),
             null,
-            "material_symbol_cancel.png".ToBitmapImage(),
+            "material_symbol_cancel.png".ToPackImage(),
             nameof(DecryptPartTranslation.DecryptCommandCancelInfoText));
 
         this.loadConfigurationViewModel = new LoadConfigurationViewModel(

@@ -17,6 +17,6 @@ internal class SelectFileCommand(ICommandFactory commandFactory, Action<string?,
         commandFactory.CreateOpenFileDialogCommand(
             execute,
             filter),
-        "material_symbol_file_open.png".ToBitmapImage(),
+        "material_symbol_file_open.png".ToPackImage(),
         CommandTranslations.ResourceManager,
         toolTipResourceKey: nameof(CommandTranslations.SelectFileCommandToolTip));

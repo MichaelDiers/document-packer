@@ -98,7 +98,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
                             new LoadConfigurationEventArgs(task.Result));
                     }
                 }),
-            "material_symbol_refresh.png".ToBitmapImage(),
+            "material_symbol_refresh.png".ToPackImage(),
             LoadConfigurationTranslation.ResourceManager,
             nameof(LoadConfigurationTranslation.LoadConfigurationCommandLabel),
             nameof(LoadConfigurationTranslation.LoadConfigurationCommandToolTip));

@@ -3,7 +3,7 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
+using DocumentPacker.Extensions;
 using DocumentPacker.Mvvm;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Localization;
@@ -45,20 +45,14 @@ internal class ChangeLanguageViewModel : ApplicationBaseViewModel
                     commandFactory.CreateSyncCommand(
                         _ => !TranslationSource.Instance.CurrentCulture.Equals(CultureInfo.InvariantCulture),
                         _ => TranslationSource.Instance.CurrentCulture = CultureInfo.InvariantCulture),
-                    new BitmapImage(
-                        new Uri(
-                            "pack://application:,,,/DocumentPacker;component/Assets/92402_kingdom_united_icon.png",
-                            UriKind.Absolute)),
+                    "92402_kingdom_united_icon.png".ToPackImage(),
                     ChangeLanguagePartTranslation.ResourceManager,
                     nameof(ChangeLanguagePartTranslation.LanguageNameUK)),
                 new TranslatableButton<ICommand>(
                     commandFactory.CreateSyncCommand(
                         _ => TranslationSource.Instance.CurrentCulture.TwoLetterISOLanguageName != "de",
                         _ => TranslationSource.Instance.CurrentCulture = new CultureInfo("de")),
-                    new BitmapImage(
-                        new Uri(
-                            "pack://application:,,,/DocumentPacker;component/Assets/92094_germany_icon.png",
-                            UriKind.Absolute)),
+                    "92094_germany_icon.png".ToPackImage(),
                     ChangeLanguagePartTranslation.ResourceManager,
                     nameof(ChangeLanguagePartTranslation.LanguageNameDE))
             });

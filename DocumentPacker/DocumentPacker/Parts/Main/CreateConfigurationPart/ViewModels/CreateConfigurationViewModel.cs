@@ -212,7 +212,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
             commandFactory.CreateSyncCommand(
                 _ => !commandSync.IsCommandActive,
                 _ => this.ConfigurationItems.Add(new CreateConfigurationItemViewModel())),
-            "material_symbol_add.png".ToBitmapImage(),
+            "material_symbol_add.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.AddConfigurationItemToolTip));
@@ -227,7 +227,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
                         this.ConfigurationItems.Remove(item);
                     }
                 }),
-            "material_symbol_delete.png".ToBitmapImage(),
+            "material_symbol_delete.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.DeleteConfigurationItemCommandToolTip));
@@ -274,7 +274,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
                         commandSync.Exit();
                     }
                 }),
-            "material_symbol_key.png".ToBitmapImage(),
+            "material_symbol_key.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandToolTip));
@@ -294,20 +294,20 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
                 task => CommandExecutor.PostExecute(
                     task,
                     messageBoxService)),
-            "material_symbol_save.png".ToBitmapImage(),
+            "material_symbol_save.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.SaveLabel),
             nameof(CreateConfigurationPartTranslation.SaveToolTip),
             nameof(CreateConfigurationPartTranslation.CancelLabel),
             null,
-            "material_symbol_cancel.png".ToBitmapImage(),
+            "material_symbol_cancel.png".ToPackImage(),
             nameof(CreateConfigurationPartTranslation.SaveCancelInfoText));
 
         this.SelectOutputFolderCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateOpenFolderDialogCommand(
                 new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)),
                 folder => this.OutputFolder.Value = folder),
-            "material_symbol_folder.png".ToBitmapImage(),
+            "material_symbol_folder.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             null,
             nameof(CreateConfigurationPartTranslation.OpenFileDialogToolTip));

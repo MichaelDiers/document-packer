@@ -147,13 +147,13 @@ internal class EncryptViewModel : ApplicationBaseViewModel
                 task => CommandExecutor.PostExecute(
                     task,
                     messageBoxService)),
-            "material_symbol_save.png".ToBitmapImage(),
+            "material_symbol_save.png".ToPackImage(),
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.SaveCommandLabel),
             nameof(EncryptPartTranslation.SaveCommandToolTip),
             nameof(EncryptPartTranslation.SaveCommandCancelLabel),
             null,
-            "material_symbol_cancel.png".ToBitmapImage(),
+            "material_symbol_cancel.png".ToPackImage(),
             nameof(EncryptPartTranslation.SaveCommandCancelInfoText));
 
         this.selectOutputFolderCommand = new SelectFolderCommand(

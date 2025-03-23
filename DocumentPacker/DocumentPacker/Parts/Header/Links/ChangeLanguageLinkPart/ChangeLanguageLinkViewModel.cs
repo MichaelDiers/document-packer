@@ -25,7 +25,7 @@ internal class ChangeLanguageLinkViewModel : ApplicationBaseViewModel
                 _ => this.InvokeShowViewRequested(
                     this,
                     new ShowViewRequestedEventArgs(ApplicationElementPart.ChangeLanguage))),
-            "material_symbol_language.png".ToBitmapImage(),
+            "material_symbol_language.png".ToPackImage(),
             ChangeLanguageLinkPartTranslation.ResourceManager,
             toolTipResourceKey: nameof(ChangeLanguageLinkPartTranslation.ChangeLanguage));
     }

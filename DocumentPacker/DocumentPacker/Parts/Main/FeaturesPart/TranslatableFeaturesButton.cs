@@ -31,7 +31,7 @@ internal class TranslatableFeaturesButton : TranslatableButton<ICommand>
     /// </summary>
     public TranslatableFeaturesButton(
         ICommand command,
-        ImageSource? imageSource,
+        string? imageSource,
         ResourceManager resourceManager,
         string? labelResourceKey = null,
         string? toolTipResourceKey = null,

@@ -49,7 +49,7 @@ internal class BackLinkViewModel : ApplicationBaseViewModel, IHandleBackLink
                             });
                     }
                 }),
-            "material_symbol_arrow_back.png".ToBitmapImage(),
+            "material_symbol_arrow_back.png".ToPackImage(),
             BackLinkPartTranslation.ResourceManager,
             toolTipResourceKey: nameof(BackLinkPartTranslation.Back));
     }

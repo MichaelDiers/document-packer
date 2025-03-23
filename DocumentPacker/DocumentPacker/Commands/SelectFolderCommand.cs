@@ -17,6 +17,6 @@ internal class SelectFolderCommand(ICommandFactory commandFactory, Action<string
         commandFactory.CreateOpenFolderDialogCommand(
             new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)),
             execute),
-        "material_symbol_folder.png".ToBitmapImage(),
+        "material_symbol_folder.png".ToPackImage(),
         CommandTranslations.ResourceManager,
         toolTipResourceKey: nameof(CommandTranslations.SelectFolderCommandToolTip));

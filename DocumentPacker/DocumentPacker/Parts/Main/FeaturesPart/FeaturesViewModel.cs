@@ -35,7 +35,7 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                                 this,
                                 new ShowViewRequestedEventArgs(ApplicationElementPart.CreateConfiguration));
                         }),
-                    "material_symbol_edit_square_96dp.png".ToBitmapImage(),
+                    "material_symbol_edit_square_96dp.png".ToPackImage(),
                     CreateConfigurationPartTranslation.ResourceManager,
                     nameof(CreateConfigurationPartTranslation.ViewHeadline),
                     descriptionResourceKey: nameof(CreateConfigurationPartTranslation.ViewDescription),
@@ -57,7 +57,7 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                                 this,
                                 new ShowViewRequestedEventArgs(ApplicationElementPart.EncryptFeature));
                         }),
-                    "material_symbol_compress_96dp.png".ToBitmapImage(),
+                    "material_symbol_compress_96dp.png".ToPackImage(),
                     EncryptPartTranslation.ResourceManager,
                     nameof(EncryptPartTranslation.Headline),
                     descriptionResourceKey: nameof(EncryptPartTranslation.Description),
@@ -79,7 +79,7 @@ internal class FeaturesViewModel : ApplicationBaseViewModel
                                 this,
                                 new ShowViewRequestedEventArgs(ApplicationElementPart.DecryptFeature));
                         }),
-                    "material_symbol_expand_96dp.png".ToBitmapImage(),
+                    "material_symbol_expand_96dp.png".ToPackImage(),
                     DecryptPartTranslation.ResourceManager,
                     nameof(DecryptPartTranslation.Headline),
                     descriptionResourceKey: nameof(DecryptPartTranslation.Description),
