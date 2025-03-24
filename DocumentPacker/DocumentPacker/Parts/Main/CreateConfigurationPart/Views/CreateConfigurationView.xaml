@@ -14,6 +14,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:views="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.Views"
     xmlns:viewModels="clr-namespace:DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels"
+    xmlns:password="clr-namespace:Libs.Wpf.Behaviours.Password;assembly=Libs.Wpf"
     mc:Ignorable="d ignore"
     d:DataContext="{d:DesignInstance d:Type={x:Type viewModels:CreateConfigurationViewModel}}">
     <mvvm:BaseUserControl.Resources>
@@ -110,8 +111,11 @@
             <PasswordBox
                 Grid.Row="4"
                 Grid.Column="1"
-                x:Name="PasswordBox"
-                DataContext="{Binding Password}" />
+                DataContext="{Binding Password}">
+                <b:Interaction.Behaviors>
+                    <password:PasswordBehavior/>
+                </b:Interaction.Behaviors>
+            </PasswordBox>
             <!-- output folder -->
             <Label
                 Grid.Row="5"
@@ -181,7 +185,6 @@
                 HorizontalAlignment="Center"
                 Margin="32">
                 <Button
-                    CommandParameter="{Binding ElementName=PasswordBox, Path=Password}"
                     DataContext="{Binding SaveCommand}"
                     Style="{StaticResource CancellableTranslatableButtonStyle}" />
             </Grid>

@@ -1,6 +1,8 @@
 ﻿namespace DocumentPacker.Services;
 
 using System.IO;
+using System.Net;
+using System.Security;
 using System.Text;
 using System.Text.Json;
 using DocumentPacker.Models;
@@ -10,7 +12,7 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
 {
     public async Task<ConfigurationModel> FromFileAsync(
         FileInfo configurationFile,
-        string password,
+        SecureString password,
         CancellationToken cancellationToken
     )
     {
@@ -24,7 +26,7 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
     public async Task ToFileAsync(
         FileInfo privateConfigurationFile,
         FileInfo publicConfigurationFile,
-        string password,
+        SecureString password,
         ConfigurationModel configurationModel,
         CancellationToken cancellationToken
     )
@@ -82,9 +84,13 @@ internal class DocumentPackerConfigurationFileService : IDocumentPackerConfigura
         }
     }
 
-    private static byte[] ToAesPassword(string password)
+    private static byte[] ToAesPassword(SecureString secureString)
     {
-        var bytePassword = Encoding.UTF8.GetBytes(password);
+        var password = new NetworkCredential(
+            string.Empty,
+            secureString).Password;
+
+        var bytePassword = Encoding.UTF8.GetBytes(password!);
         var sizes = new[]
         {
             256 / 8,

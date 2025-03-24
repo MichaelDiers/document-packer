@@ -1,5 +1,6 @@
 ﻿namespace DocumentPacker.Tests.Services;
 
+using System.Security;
 using DocumentPacker.Models;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
 using DocumentPacker.Services;
@@ -25,7 +26,7 @@ public class DocumentPackerConfigurationFileServiceTests : IDisposable
         Guid.NewGuid().ToString(),
         Guid.NewGuid().ToString());
 
-    private readonly string password = Guid.NewGuid().ToString();
+    private readonly SecureString password;
 
     private readonly FileInfo privateConfigurationFile = new(Guid.NewGuid().ToString());
 
@@ -34,6 +35,15 @@ public class DocumentPackerConfigurationFileServiceTests : IDisposable
     private readonly IDocumentPackerConfigurationFileService service = CustomServiceProviderBuilder
         .Build(ServicesServiceCollectionExtensions.TryAddServices)
         .GetRequiredService<IDocumentPackerConfigurationFileService>();
+
+    public DocumentPackerConfigurationFileServiceTests()
+    {
+        this.password = new SecureString();
+        foreach (var character in Guid.NewGuid().ToString())
+        {
+            this.password.AppendChar(character);
+        }
+    }
 
     /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
     public void Dispose()

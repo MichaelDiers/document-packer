@@ -2,6 +2,7 @@
 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Security;
 using System.Windows.Input;
 using DocumentPacker.EventHandling;
 using Libs.Wpf.Commands;
@@ -47,7 +48,7 @@ public interface ICreateConfigurationViewModel : IApplicationViewModel, INotifyP
     /// <summary>
     ///     Gets the password.
     /// </summary>
-    TranslatableAndValidablePasswordBox Password { get; }
+    TranslatableAndValidable<SecureString> Password { get; }
 
     /// <summary>
     ///     Gets the private configuration output file.
@@ -103,5 +104,5 @@ public interface ICreateConfigurationViewModel : IApplicationViewModel, INotifyP
     ///     Executes the view model validation.
     /// </summary>
     /// <returns><c>True</c> if the validation succeeds; <c>false</c> otherwise.</returns>
-    bool Validate(string? password);
+    bool Validate();
 }

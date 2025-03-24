@@ -2,7 +2,7 @@
 
 using System.ComponentModel;
 using System.IO;
-using System.Windows.Controls;
+using System.Security;
 using System.Windows.Input;
 using DocumentPacker.Commands;
 using DocumentPacker.Extensions;
@@ -40,9 +40,12 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     /// <summary>
     ///     The password to decrypt the document packer configuration file.
     /// </summary>
-    private TranslatableAndValidablePasswordBox password = new(
+    private TranslatableAndValidable<SecureString> password = new(
         null,
-        pwd => string.IsNullOrWhiteSpace(pwd) ? nameof(LoadConfigurationTranslation.PasswordIsRequired) : null,
+        pwd => pwd.Value is not null && pwd.Value.Length > 0
+            ? null
+            : nameof(LoadConfigurationTranslation.PasswordIsRequired),
+        false,
         LoadConfigurationTranslation.ResourceManager,
         nameof(LoadConfigurationTranslation.PasswordLabel),
         nameof(LoadConfigurationTranslation.PasswordToolTip),
@@ -85,10 +88,10 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
         this.configurationFile.PropertyChanged += this.InvalidateConfiguration;
 
         this.loadConfigurationCommand = new TranslatableButton<ICommand>(
-            commandFactory.CreateAsyncCommand<PasswordBox, ConfigurationModel?>(
-                this.LoadConfigurationCommandCanExecute,
+            commandFactory.CreateAsyncCommand<object?, ConfigurationModel?>(
+                _ => this.LoadConfigurationCommandCanExecute(),
                 null,
-                this.LoadConfigurationCommandExecute,
+                (_, cancellationToken) => this.LoadConfigurationCommandExecute(cancellationToken),
                 task =>
                 {
                     if (task.Result is not null)
@@ -151,7 +154,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     /// <summary>
     ///     Gets or sets the password.
     /// </summary>
-    public TranslatableAndValidablePasswordBox Password
+    public TranslatableAndValidable<SecureString> Password
     {
         get => this.password;
         set =>
@@ -208,10 +211,10 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
         }
     }
 
-    private bool LoadConfigurationCommandCanExecute(PasswordBox? passwordBox)
+    private bool LoadConfigurationCommandCanExecute()
     {
         this.ConfigurationFile.Validate();
-        this.Password.Validate(passwordBox?.Password);
+        this.Password.Validate();
 
         return !this.ConfigurationFile.HasError && !this.Password.HasError;
     }
@@ -219,22 +222,18 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     /// <summary>
     ///     The execute function of the <see cref="LoadConfigurationCommand" />.
     /// </summary>
-    /// <param name="passwordBox">The command parameter as a <see cref="PasswordBox" />.</param>
     /// <param name="cancellationToken">Indicates that the start process has been aborted.</param>
     /// <returns>The loaded <see cref="ConfigurationModel" />.</returns>
-    private async Task<ConfigurationModel?> LoadConfigurationCommandExecute(
-        PasswordBox? passwordBox,
-        CancellationToken cancellationToken
-    )
+    private async Task<ConfigurationModel?> LoadConfigurationCommandExecute(CancellationToken cancellationToken)
     {
-        if (!this.LoadConfigurationCommandCanExecute(passwordBox))
+        if (!this.LoadConfigurationCommandCanExecute())
         {
             return null;
         }
 
         var configuration = await this.configurationFileService.FromFileAsync(
             new FileInfo(this.ConfigurationFile.Value!),
-            passwordBox!.Password,
+            this.password.Value!,
             cancellationToken);
 
         return configuration;

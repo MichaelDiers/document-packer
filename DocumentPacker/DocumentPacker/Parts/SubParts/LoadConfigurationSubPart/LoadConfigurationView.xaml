@@ -9,6 +9,7 @@
     xmlns:loadConfigurationSubPart="clr-namespace:DocumentPacker.Parts.SubParts.LoadConfigurationSubPart"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:password="clr-namespace:Libs.Wpf.Behaviours.Password;assembly=Libs.Wpf"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance d:Type={x:Type loadConfigurationSubPart:LoadConfigurationViewModel}}">
     <Grid
@@ -52,13 +53,15 @@
         <PasswordBox
             Grid.Row="1"
             Grid.Column="1"
-            x:Name="PasswordBox"
-            DataContext="{Binding Password}" />
+            DataContext="{Binding Password}">
+            <b:Interaction.Behaviors>
+                <password:PasswordBehavior />
+            </b:Interaction.Behaviors>
+        </PasswordBox>
         <!-- load configuration -->
         <Button
             Grid.Row="2"
             Grid.Column="1"
-            CommandParameter="{Binding ElementName=PasswordBox}"
             DataContext="{Binding LoadConfigurationCommand}"
             HorizontalAlignment="Right" />
     </Grid>

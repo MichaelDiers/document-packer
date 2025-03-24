@@ -3,6 +3,7 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Security;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
 using DocumentPacker.Commands;
@@ -95,9 +96,12 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
     /// <summary>
     ///     The password.
     /// </summary>
-    private TranslatableAndValidablePasswordBox password = new(
+    private TranslatableAndValidable<SecureString> password = new(
         null,
-        pwd => string.IsNullOrWhiteSpace(pwd) ? nameof(CreateConfigurationPartTranslation.PasswordIsRequired) : null,
+        pwd => pwd.Value is not null && pwd.Value.Length > 0
+            ? null
+            : nameof(CreateConfigurationPartTranslation.PasswordIsRequired),
+        false,
         CreateConfigurationPartTranslation.ResourceManager,
         nameof(CreateConfigurationPartTranslation.PasswordLabel),
         nameof(CreateConfigurationPartTranslation.PasswordToolTip),
@@ -280,16 +284,13 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
             nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandToolTip));
 
         this.SaveCommand = new TranslatableCancellableButton(
-            commandFactory.CreateAsyncCommand<string, (bool succeeds, string? message)>(
-                passwordCommandParameter =>
-                    !commandSync.IsCommandActive && this.Password.Validate(passwordCommandParameter),
-                passwordCommandParameter => this.Validate(passwordCommandParameter),
-                (passwordCommandParameter, cancellationToken) => CommandExecutor.Execute(
-                    () => this.Validate(passwordCommandParameter),
+            commandFactory.CreateAsyncCommand<SecureString, (bool succeeds, string? message)>(
+                _ => !commandSync.IsCommandActive,
+                _ => this.Validate(),
+                (_, cancellationToken) => CommandExecutor.Execute(
+                    this.Validate,
                     commandSync,
-                    () => this.SaveCommandExecute(
-                        passwordCommandParameter,
-                        cancellationToken),
+                    () => this.SaveCommandExecute(cancellationToken),
                     this.SaveCommand),
                 task => CommandExecutor.PostExecute(
                     task,
@@ -421,7 +422,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
     /// <summary>
     ///     Gets or sets the password.
     /// </summary>
-    public TranslatableAndValidablePasswordBox Password
+    public TranslatableAndValidable<SecureString> Password
     {
         get => this.password;
         set =>
@@ -540,7 +541,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
     ///     Executes the view model validation.
     /// </summary>
     /// <returns><c>True</c> if the validation succeeds; <c>false</c> otherwise.</returns>
-    public bool Validate(string? passwordCommandParameter)
+    public bool Validate()
     {
         var isValid = true;
         foreach (var createConfigurationItemViewModel in this.ConfigurationItems)
@@ -573,7 +574,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
 
         this.Description.Validate();
         this.OutputFolder.Validate();
-        this.Password.Validate(passwordCommandParameter);
+        this.Password.Validate();
         this.PrivateOutputFile.Validate();
         this.PrivateOutputFileExtension.Validate();
         this.PublicOutputFile.Validate();
@@ -607,10 +608,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
         return translation;
     }
 
-    private async Task<(bool succeeds, string? message)> SaveCommandExecute(
-        string? passwordCommandParameter,
-        CancellationToken cancellationToken
-    )
+    private async Task<(bool succeeds, string? message)> SaveCommandExecute(CancellationToken cancellationToken)
     {
         var configuration = new ConfigurationModel(
             this.ConfigurationItems.Select(
@@ -637,7 +635,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
             await this.documentPackerConfigurationFileService.ToFileAsync(
                 privateConfigurationFile,
                 publicConfigurationFile,
-                passwordCommandParameter!,
+                this.Password.Value,
                 configuration,
                 cancellationToken);
             return (true,
