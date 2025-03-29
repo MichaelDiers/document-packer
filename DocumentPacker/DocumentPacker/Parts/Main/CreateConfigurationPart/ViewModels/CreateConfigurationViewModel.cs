@@ -279,7 +279,6 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
                         return;
                     }
 
-                    await Task.Delay(5000);
                     var result = await this.SaveCommandExecute(cancellationToken);
                     var caption = result.succeeds
                         ? string.Empty
