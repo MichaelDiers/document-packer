@@ -20,7 +20,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The command to decrypt the data.
     /// </summary>
-    private TranslatableCancellableButton decryptCommand;
+    private TranslatableButton<IAsyncCommand> decryptCommand;
 
     /// <summary>
     ///     The encrypted file.
@@ -114,58 +114,67 @@ internal class DecryptViewModel : ApplicationBaseViewModel
         IMessageBoxService messageBoxService
     )
     {
-        this.decryptCommand = new TranslatableCancellableButton(
-            commandFactory.CreateAsyncCommand<object, (bool success, string? error)>(
-                _ => true,
-                _ => this.Validate(),
-                async (_, cancellationToken) => await CommandExecutor.Execute(
-                    this.Validate,
-                    commandSync,
-                    async () =>
+        this.decryptCommand = new TranslatableButton<IAsyncCommand>(
+            commandFactory.CreateAsyncCommand(
+                commandSync,
+                () => true,
+                async cancellationToken =>
+                {
+                    if (!this.Validate())
                     {
-                        try
-                        {
-                            await decryptService.DecryptAsync(
-                                this.PrivateRsaKey.Value!,
-                                new FileInfo(this.EncryptedFile.Value!),
-                                new DirectoryInfo(this.OutputFolder.Value!),
-                                cancellationToken);
-                            var message = DecryptPartTranslation.ResourceManager.GetString(
-                                              nameof(DecryptPartTranslation.DecryptCommandSucceeds),
-                                              TranslationSource.Instance.CurrentCulture) ??
-                                          "{0}";
-                            return (true, string.Format(
-                                message,
-                                this.OutputFolder.Value));
-                        }
-                        catch (Exception ex)
-                        {
-                            var message = DecryptPartTranslation.ResourceManager.GetString(
-                                              nameof(DecryptPartTranslation.DecryptCommandFails),
-                                              TranslationSource.Instance.CurrentCulture) ??
-                                          "{0}";
-                            return (true, string.Format(
-                                message,
-                                ex.Message));
-                        }
-                    },
-                    this.decryptCommand),
-                task => CommandExecutor.PostExecute(
-                    task,
-                    messageBoxService)),
+                        return;
+                    }
+
+                    await decryptService.DecryptAsync(
+                        this.PrivateRsaKey.Value!,
+                        new FileInfo(this.EncryptedFile.Value!),
+                        new DirectoryInfo(this.OutputFolder.Value!),
+                        cancellationToken);
+                    var message = DecryptPartTranslation.ResourceManager.GetString(
+                                      nameof(DecryptPartTranslation.DecryptCommandSucceeds),
+                                      TranslationSource.Instance.CurrentCulture) ??
+                                  "{0}";
+                    messageBoxService.Show(
+                        string.Format(
+                            message,
+                            this.OutputFolder.Value),
+                        string.Empty,
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        MessageBoxImage.Information);
+                },
+                async (ex, _) =>
+                {
+                    var message = DecryptPartTranslation.ResourceManager.GetString(
+                                      nameof(DecryptPartTranslation.DecryptCommandFails),
+                                      TranslationSource.Instance.CurrentCulture) ??
+                                  "{0}";
+                    messageBoxService.Show(
+                        string.Format(
+                            message,
+                            ex.Message),
+                        string.Empty,
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        MessageBoxImage.Information);
+                    await Task.CompletedTask;
+                },
+                translatableCancelButton: new TranslatableCancelButton(
+                    DecryptPartTranslation.ResourceManager,
+                    nameof(DecryptPartTranslation.DecryptCommandCancelLabel),
+                    infoTextResourceKey: nameof(DecryptPartTranslation.DecryptCommandCancelInfoText),
+                    imageSource: "material_symbol_cancel.png".ToPackImage())),
             "material_symbol_expand.png".ToPackImage(),
             DecryptPartTranslation.ResourceManager,
             nameof(DecryptPartTranslation.DecryptCommandLabel),
-            nameof(DecryptPartTranslation.DecryptCommandToolTip),
-            nameof(DecryptPartTranslation.DecryptCommandCancelLabel),
-            null,
-            "material_symbol_cancel.png".ToPackImage(),
-            nameof(DecryptPartTranslation.DecryptCommandCancelInfoText));
+            nameof(DecryptPartTranslation.DecryptCommandToolTip));
 
         this.loadConfigurationViewModel = new LoadConfigurationViewModel(
             commandFactory,
             configurationFileService,
-            true);
+            true,
+            commandSync,
+            messageBoxService);
         this.loadConfigurationViewModel.ConfigurationInvalidated += this.OnConfigurationInvalidated;
         this.loadConfigurationViewModel.ConfigurationLoaded += this.OnConfigurationLoaded;
 
@@ -182,7 +191,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the command to decrypt the data.
     /// </summary>
-    public TranslatableCancellableButton DecryptCommand
+    public TranslatableButton<IAsyncCommand> DecryptCommand
     {
         get => this.decryptCommand;
         set =>
