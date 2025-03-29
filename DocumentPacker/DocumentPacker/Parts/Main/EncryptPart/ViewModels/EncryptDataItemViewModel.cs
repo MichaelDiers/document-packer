@@ -10,7 +10,10 @@ using Libs.Wpf.Commands;
 using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
-public class EncryptDataItemViewModel : ViewModelBase
+/// <summary>
+///     Describes a data item that gets encrypted.
+/// </summary>
+internal class EncryptDataItemViewModel : ViewModelBase, IEncryptDataItemViewModel
 {
     /// <summary>
     ///     The configuration item type.

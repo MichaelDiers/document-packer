@@ -4,21 +4,46 @@ using DocumentPacker.EventHandling;
 using DocumentPacker.Parts.Main.EncryptPart.ViewModels;
 using DocumentPacker.Parts.Main.EncryptPart.Views;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 /// <summary>
-///     Extensions for <see cref="IServiceCollection" />
+///     Extensions of <see cref="IServiceCollection" />.
 /// </summary>
 public static class EncryptPartServiceCollectionExtensions
 {
     /// <summary>
-    ///     Adds the encrypt part of the application.
+    ///     Adds all supported dependencies to the given <see cref="IServiceCollection" />.
     /// </summary>
-    /// <param name="services">Dependencies are added to this <see cref="IServiceCollection" />.</param>
+    /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
     /// <returns>The given <paramref name="services" />.</returns>
-    public static IServiceCollection AddEncryptPart(this IServiceCollection services)
+    public static IServiceCollection TryAddEncryptPart(this IServiceCollection services)
     {
-        services.AddKeyedTransient<IApplicationView, EncryptView>(ApplicationElementPart.EncryptFeature);
-        services.AddKeyedTransient<IApplicationViewModel, EncryptViewModel>(ApplicationElementPart.EncryptFeature);
+        services.TryAddEncryptView();
+        services.TryAddEncryptViewModel();
+
+        return services;
+    }
+
+    /// <summary>
+    ///     Adds the <see cref="IApplicationView" /> to the given <paramref name="services" />.
+    /// </summary>
+    /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
+    /// <returns>The given <paramref name="services" />.</returns>
+    public static IServiceCollection TryAddEncryptView(this IServiceCollection services)
+    {
+        services.TryAddKeyedSingleton<IApplicationView, EncryptView>(ApplicationElementPart.EncryptFeature);
+
+        return services;
+    }
+
+    /// <summary>
+    ///     Adds the <see cref="IApplicationViewModel" /> to the given <paramref name="services" />.
+    /// </summary>
+    /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
+    /// <returns>The given <paramref name="services" />.</returns>
+    public static IServiceCollection TryAddEncryptViewModel(this IServiceCollection services)
+    {
+        services.TryAddKeyedSingleton<IApplicationViewModel, EncryptViewModel>(ApplicationElementPart.EncryptFeature);
 
         return services;
     }

@@ -7,7 +7,10 @@ using Libs.Wpf.Commands;
 using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
-public class EncryptDataViewModel : ViewModelBase
+/// <summary>
+///     Describes the data that gets encrypted.
+/// </summary>
+internal class EncryptDataViewModel : ViewModelBase, IEncryptDataViewModel
 {
     /// <summary>
     ///     The description.
@@ -17,13 +20,16 @@ public class EncryptDataViewModel : ViewModelBase
     /// <summary>
     ///     The items.
     /// </summary>
-    private ObservableCollection<EncryptDataItemViewModel>? items;
+    private ObservableCollection<IEncryptDataItemViewModel>? items;
 
     /// <summary>
     ///     The rsa public key.
     /// </summary>
     private string rsaPublicKey;
 
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="EncryptDataViewModel" /> class.
+    /// </summary>
     public EncryptDataViewModel(ConfigurationModel configurationModel, ICommandFactory commandFactory)
     {
         this.Description = new TranslatableAndValidable<string>(
@@ -33,7 +39,7 @@ public class EncryptDataViewModel : ViewModelBase
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.DescriptionLabel));
 
-        this.Items = new ObservableCollection<EncryptDataItemViewModel>(
+        this.Items = new ObservableCollection<IEncryptDataItemViewModel>(
             configurationModel.ConfigurationItems.Select(
                 item => new EncryptDataItemViewModel(
                     item,
@@ -57,7 +63,7 @@ public class EncryptDataViewModel : ViewModelBase
     /// <summary>
     ///     Gets or sets the items.
     /// </summary>
-    public ObservableCollection<EncryptDataItemViewModel>? Items
+    public ObservableCollection<IEncryptDataItemViewModel>? Items
     {
         get => this.items;
         set =>

@@ -19,19 +19,19 @@ using Libs.Wpf.Localization;
 ///     The view model of <see cref="EncryptView" />.
 /// </summary>
 /// <seealso cref="ApplicationBaseViewModel" />
-internal class EncryptViewModel : ApplicationBaseViewModel
+internal class EncryptViewModel : ApplicationBaseViewModel, IEncryptViewModel
 {
     private readonly ICommandFactory commandFactory;
 
     /// <summary>
     ///     The encrypt data view model.
     /// </summary>
-    private EncryptDataViewModel? encryptDataViewModel;
+    private IEncryptDataViewModel? encryptDataViewModel;
 
     /// <summary>
     ///     The load configuration view model.
     /// </summary>
-    private LoadConfigurationViewModel loadConfigurationViewModel;
+    private ILoadConfigurationViewModel loadConfigurationViewModel;
 
     /// <summary>
     ///     The output file.
@@ -46,7 +46,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The save command.
     /// </summary>
-    private TranslatableCancellableButton saveCommand;
+    private TranslatableButton<IAsyncCommand> saveCommand;
 
     /// <summary>
     ///     The command to select the output folder.
@@ -84,7 +84,9 @@ internal class EncryptViewModel : ApplicationBaseViewModel
         this.loadConfigurationViewModel = new LoadConfigurationViewModel(
             commandFactory,
             configurationFileService,
-            false);
+            false,
+            commandSync,
+            messageBoxService);
         this.loadConfigurationViewModel.ConfigurationLoaded += this.OnConfigurationLoaded;
         this.loadConfigurationViewModel.ConfigurationInvalidated += this.OnConfigurationInvalidated;
 
@@ -133,28 +135,46 @@ internal class EncryptViewModel : ApplicationBaseViewModel
             nameof(EncryptPartTranslation.OutputFolderToolTip),
             nameof(EncryptPartTranslation.OutputFolderWatermark));
 
-        this.saveCommand = new TranslatableCancellableButton(
-            commandFactory.CreateAsyncCommand<object, (bool success, string? message)>(
-                _ => !commandSync.IsCommandActive && this.Validate(),
-                null,
-                async (_, cancellationToken) => await CommandExecutor.Execute(
-                    this.Validate,
-                    commandSync,
-                    () => this.SaveCommandExecuteAsync(
+        this.saveCommand = new TranslatableButton<IAsyncCommand>(
+            commandFactory.CreateAsyncCommand(
+                commandSync,
+                () => true,
+                async cancellationToken =>
+                {
+                    if (!this.Validate())
+                    {
+                        return;
+                    }
+
+                    var result = await this.SaveCommandExecuteAsync(
                         encryptService,
-                        cancellationToken),
-                    this.saveCommand),
-                task => CommandExecutor.PostExecute(
-                    task,
-                    messageBoxService)),
+                        cancellationToken);
+                    messageBoxService.Show(
+                        result.message ?? string.Empty,
+                        string.Empty,
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        result.success ? MessageBoxImage.Information : MessageBoxImage.Error);
+                },
+                async (ex, _) =>
+                {
+                    messageBoxService.Show(
+                        ex.Message,
+                        string.Empty,
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        MessageBoxImage.Error);
+                    await Task.CompletedTask;
+                },
+                translatableCancelButton: new TranslatableCancelButton(
+                    EncryptPartTranslation.ResourceManager,
+                    nameof(EncryptPartTranslation.SaveCommandCancelLabel),
+                    infoTextResourceKey: nameof(EncryptPartTranslation.SaveCommandCancelInfoText),
+                    imageSource: "material_symbol_cancel.png".ToPackImage())),
             "material_symbol_save.png".ToPackImage(),
             EncryptPartTranslation.ResourceManager,
             nameof(EncryptPartTranslation.SaveCommandLabel),
-            nameof(EncryptPartTranslation.SaveCommandToolTip),
-            nameof(EncryptPartTranslation.SaveCommandCancelLabel),
-            null,
-            "material_symbol_cancel.png".ToPackImage(),
-            nameof(EncryptPartTranslation.SaveCommandCancelInfoText));
+            nameof(EncryptPartTranslation.SaveCommandToolTip));
 
         this.selectOutputFolderCommand = new SelectFolderCommand(
             commandFactory,
@@ -164,7 +184,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the encrypt data view model.
     /// </summary>
-    public EncryptDataViewModel? EncryptDataViewModel
+    public IEncryptDataViewModel? EncryptDataViewModel
     {
         get => this.encryptDataViewModel;
         set =>
@@ -176,7 +196,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the load configuration view model.
     /// </summary>
-    public LoadConfigurationViewModel LoadConfigurationViewModel
+    public ILoadConfigurationViewModel LoadConfigurationViewModel
     {
         get => this.loadConfigurationViewModel;
         set =>
@@ -222,7 +242,7 @@ internal class EncryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the save command.
     /// </summary>
-    public TranslatableCancellableButton SaveCommand
+    public TranslatableButton<IAsyncCommand> SaveCommand
     {
         get => this.saveCommand;
         set =>
