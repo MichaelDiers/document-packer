@@ -16,6 +16,7 @@ using DocumentPacker.Services;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
+using Sreid.Libs.Crypto.Factory;
 
 /// <summary>
 ///     The view model of <see cref="CreateConfigurationView" />.
@@ -203,7 +204,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
     /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
     public CreateConfigurationViewModel(
         ICommandFactory commandFactory,
-        IRsaService rsaService,
+        ICryptoFactory cryptoFactory,
         IDocumentPackerConfigurationFileService documentPackerConfigurationFileService,
         ICommandSync commandSync,
         IMessageBoxService messageBoxService
@@ -214,7 +215,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
 
         this.AddConfigurationItemCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateSyncCommand(
-                _ => !commandSync.IsCommandActive,
+                _ => !commandSync.IsActive,
                 _ => this.ConfigurationItems.Add(new CreateConfigurationItemViewModel())),
             "material_symbol_add.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
@@ -223,7 +224,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
 
         this.DeleteConfigurationItemCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateSyncCommand<CreateConfigurationItemViewModel>(
-                item => !commandSync.IsCommandActive && item is not null,
+                item => !commandSync.IsActive && item is not null,
                 item =>
                 {
                     if (item is not null)
@@ -236,73 +237,82 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
             null,
             nameof(CreateConfigurationPartTranslation.DeleteConfigurationItemCommandToolTip));
 
+        var rsaService = cryptoFactory.CreateRsaService();
         this.GenerateRsaKeysCommand = new TranslatableButton<IAsyncCommand>(
-            commandFactory.CreateAsyncCommand<object, (string privateKey, string publicKey)>(
-                _ => !commandSync.IsCommandActive,
-                null,
-                (_, _) =>
+            commandFactory.CreateAsyncCommand(
+                commandSync,
+                () => true,
+                async cancellationToken =>
                 {
-                    if (!commandSync.Enter())
-                    {
-                        return Task.FromResult((string.Empty, string.Empty));
-                    }
-
-                    var keys = rsaService.GenerateKeys();
-                    return Task.FromResult((keys.privateKey, keys.publicKey));
+                    var keys = await rsaService.GenerateRsaKeysAsync(cancellationToken);
+                    this.RsaPrivateKey.Value = keys.PrivateKey;
+                    this.RsaPublicKey.Value = keys.PublicKey;
                 },
-                task =>
+                async (ex, _) =>
                 {
-                    try
-                    {
-                        var (privateKey, publicKey) = task.Result;
-                        if (string.IsNullOrWhiteSpace(privateKey) || string.IsNullOrWhiteSpace(publicKey))
-                        {
-                            return;
-                        }
-
-                        this.RsaPrivateKey.Value = privateKey;
-                        this.RsaPublicKey.Value = publicKey;
-                    }
-                    catch (Exception ex)
-                    {
-                        messageBoxService.Show(
-                            $"{CreateConfigurationViewModel.GetTranslation(() => CreateConfigurationPartTranslation.GenerateRsaKeysCommandUnknownError)}{ex.Message}",
-                            CreateConfigurationViewModel.GetTranslation(
-                                () => CreateConfigurationPartTranslation.GenerateRsaKeysCommandCaption),
-                            MessageBoxButtons.Ok,
-                            MessageBoxButtons.Ok,
-                            MessageBoxImage.Error);
-                    }
-                    finally
-                    {
-                        commandSync.Exit();
-                    }
-                }),
+                    messageBoxService.Show(
+                        $"{CreateConfigurationViewModel.GetTranslation(() => CreateConfigurationPartTranslation.GenerateRsaKeysCommandUnknownError)}{ex.Message}",
+                        CreateConfigurationViewModel.GetTranslation(
+                            () => CreateConfigurationPartTranslation.GenerateRsaKeysCommandCaption),
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        MessageBoxImage.Error);
+                    await Task.CompletedTask;
+                },
+                translatableCancelButton: new TranslatableCancelButton(
+                    CreateConfigurationPartTranslation.ResourceManager,
+                    nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandCancelLabel),
+                    nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandCancelToolTip),
+                    "material_symbol_cancel.png".ToPackImage(),
+                    nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandCancelInfoText))),
             "material_symbol_key.png".ToPackImage(),
-            CreateConfigurationPartTranslation.ResourceManager,
-            null,
-            nameof(CreateConfigurationPartTranslation.GenerateRsaKeysCommandToolTip));
+            CreateConfigurationPartTranslation.ResourceManager);
 
-        this.SaveCommand = new TranslatableCancellableButton(
-            commandFactory.CreateAsyncCommand<SecureString, (bool succeeds, string? message)>(
-                _ => !commandSync.IsCommandActive,
-                _ => this.Validate(),
-                (_, cancellationToken) => CommandExecutor.Execute(
-                    this.Validate,
-                    commandSync,
-                    () => this.SaveCommandExecute(cancellationToken),
-                    this.SaveCommand),
-                task => CommandExecutor.PostExecute(
-                    task,
-                    messageBoxService)),
+        this.SaveCommand = new TranslatableButton<IAsyncCommand>(
+            commandFactory.CreateAsyncCommand(
+                commandSync,
+                () => true,
+                async cancellationToken =>
+                {
+                    if (!this.Validate())
+                    {
+                        return;
+                    }
+
+                    await Task.Delay(5000);
+                    var result = await this.SaveCommandExecute(cancellationToken);
+                    var caption = result.succeeds
+                        ? string.Empty
+                        : CommandTranslations.ResourceManager.GetString(
+                              nameof(CommandTranslations.MessageBoxCaptionError),
+                              TranslationSource.Instance.CurrentCulture) ??
+                          string.Empty;
+                    messageBoxService.Show(
+                        result.message ?? string.Empty,
+                        caption,
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        result.succeeds ? MessageBoxImage.Information : MessageBoxImage.Error);
+                },
+                async (ex, _) =>
+                {
+                    messageBoxService.Show(
+                        ex.Message,
+                        string.Empty,
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        MessageBoxImage.Error);
+                    await Task.CompletedTask;
+                },
+                translatableCancelButton: new TranslatableCancelButton(
+                    CreateConfigurationPartTranslation.ResourceManager,
+                    nameof(CreateConfigurationPartTranslation.CancelLabel),
+                    infoTextResourceKey: nameof(CreateConfigurationPartTranslation.SaveCancelInfoText),
+                    imageSource: "material_symbol_cancel.png".ToPackImage())),
             "material_symbol_save.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.SaveLabel),
-            nameof(CreateConfigurationPartTranslation.SaveToolTip),
-            nameof(CreateConfigurationPartTranslation.CancelLabel),
-            null,
-            "material_symbol_cancel.png".ToPackImage(),
-            nameof(CreateConfigurationPartTranslation.SaveCancelInfoText));
+            nameof(CreateConfigurationPartTranslation.SaveToolTip));
 
         this.SelectOutputFolderCommand = new TranslatableButton<ICommand>(
             commandFactory.CreateOpenFolderDialogCommand(
@@ -403,7 +413,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
     }
 
     /// <summary>
-    ///     Gets a command to generate RSA keys.
+    ///     Gets or sets the generate rsa keys command.
     /// </summary>
     public TranslatableButton<IAsyncCommand> GenerateRsaKeysCommand { get; }
 
@@ -506,7 +516,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
     /// <summary>
     ///     Gets the save command.
     /// </summary>
-    public TranslatableCancellableButton SaveCommand { get; }
+    public TranslatableButton<IAsyncCommand> SaveCommand { get; }
 
     /// <summary>
     ///     Gets the command to select the output folder.

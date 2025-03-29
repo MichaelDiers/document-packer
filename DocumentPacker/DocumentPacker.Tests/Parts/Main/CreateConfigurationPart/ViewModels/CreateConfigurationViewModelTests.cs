@@ -1,19 +1,18 @@
 ﻿namespace DocumentPacker.Tests.Parts.Main.CreateConfigurationPart.ViewModels;
 
 using System.Security;
-using System.Windows.Threading;
-using DocumentPacker.Commands;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Parts.Main.CreateConfigurationPart;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Commands.CancelWindow;
 using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.DependencyInjection;
-using Libs.Wpf.Threads;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
+using Sreid.Libs.Crypto.Factory;
 
 public class CreateConfigurationViewModelTests : IDisposable
 {
@@ -26,24 +25,22 @@ public class CreateConfigurationViewModelTests : IDisposable
     {
         var messageBoxServiceMock = new Mock<IMessageBoxService>();
 
-        var dispatcherWrapperMock = new Mock<IDispatcherWrapper>();
-        dispatcherWrapperMock.Setup(dispatcherWrapper => dispatcherWrapper.Dispatcher)
-            .Returns(Dispatcher.CurrentDispatcher);
+        var cancelWindow = new Mock<ICancelWindow>();
+
+        var cancelWindowService = new Mock<ICancelWindowService>();
+        cancelWindowService.Setup(service => service.CreateCancelWindow(It.IsAny<object?>()))
+            .Returns(cancelWindow.Object);
 
         var provider = CustomServiceProviderBuilder.Build(
+            services => services.AddSingleton(cancelWindowService.Object),
             CreateConfigurationServiceCollectionExtensions.TryAddCreateConfigurationViewModel,
-            ServiceCollectionExtensions.TryAddCommandFactory,
-            ServicesServiceCollectionExtensions.TryAddRsaService,
+            CommandsServiceCollectionExtensions.TryAddCommandFactory,
             ServicesServiceCollectionExtensions.TryAddDocumentPackerConfigurationFileService,
             CommandsServiceCollectionExtensions.TryAddCommandSync,
+            FactoryServiceCollectionExtensions.TryAddFactory,
             services =>
             {
                 services.TryAddSingleton(messageBoxServiceMock.Object);
-                return services;
-            },
-            services =>
-            {
-                services.TryAddSingleton(dispatcherWrapperMock.Object);
                 return services;
             });
 
@@ -60,54 +57,7 @@ public class CreateConfigurationViewModelTests : IDisposable
         this.createConfigurationViewModel.Dispose();
     }
 
-    [Fact]
-    public async Task SaveConfiguration()
-    {
-        var password = new SecureString();
-        password.AppendChar('1');
-
-        var outputFolder = Guid.NewGuid().ToString();
-        var privateOutputFile = Guid.NewGuid().ToString();
-        var publicOutputFile = Guid.NewGuid().ToString();
-
-        try
-        {
-            var _ = await this.ExecuteSaveCommand(
-                "description",
-                [("name1", "description1", ConfigurationItemType.Text, false)],
-                password,
-                outputFolder,
-                privateOutputFile,
-                publicOutputFile);
-        }
-        finally
-        {
-            var privateFileInfo = new FileInfo(
-                Path.Combine(
-                    outputFolder,
-                    $"{privateOutputFile}.private.dpc"));
-            if (privateFileInfo.Exists)
-            {
-                privateFileInfo.Delete();
-            }
-
-            var publicFileInfo = new FileInfo(
-                Path.Combine(
-                    outputFolder,
-                    $"{publicOutputFile}.public.dpc"));
-            if (publicFileInfo.Exists)
-            {
-                publicFileInfo.Delete();
-            }
-
-            if (Directory.Exists(outputFolder))
-            {
-                Directory.Delete(outputFolder);
-            }
-        }
-    }
-
-    private async Task<(string privateConfigurationFile, string publicConfigurationFile)> ExecuteSaveCommand(
+    public async Task<(string privateConfigurationFile, string publicConfigurationFile)> ExecuteSaveCommand(
         string description,
         IEnumerable<(string name, string description, ConfigurationItemType itemType, bool isRequired)>
             configurationItems,
@@ -142,19 +92,18 @@ public class CreateConfigurationViewModelTests : IDisposable
         this.createConfigurationViewModel.PrivateOutputFile.Value = privateOutputFile;
         this.createConfigurationViewModel.PublicOutputFile.Value = publicOutputFile;
 
-        for (var i = 0; i < 20 && this.createConfigurationViewModel.GenerateRsaKeysCommand.Command.IsActive; i++)
+        for (var i = 0; i < 50 && this.createConfigurationViewModel.GenerateRsaKeysCommand.Command.IsActive; i++)
         {
-            DispatcherHelperCore.DoEvents();
-            await Task.Delay(250);
+            await Task.Delay(100);
         }
 
+        Assert.False(this.createConfigurationViewModel.GenerateRsaKeysCommand.Command.IsActive);
         Assert.True(this.createConfigurationViewModel.Validate());
 
         this.createConfigurationViewModel.SaveCommand.Command.Execute(null);
-        for (var i = 0; i < 20 && this.createConfigurationViewModel.SaveCommand.Command.IsActive; i++)
+        for (var i = 0; i < 50 && this.createConfigurationViewModel.SaveCommand.Command.IsActive; i++)
         {
-            DispatcherHelperCore.DoEvents();
-            await Task.Delay(250);
+            await Task.Delay(100);
         }
 
         Assert.False(this.createConfigurationViewModel.SaveCommand.Command.IsActive);
@@ -170,5 +119,57 @@ public class CreateConfigurationViewModelTests : IDisposable
         Assert.True(File.Exists(publicFile));
 
         return (privateFile, publicFile);
+    }
+
+    [Fact]
+    public async Task SaveConfiguration()
+    {
+        var password = new SecureString();
+        password.AppendChar('1');
+
+        var outputFolder = Guid.NewGuid().ToString();
+        var privateOutputFile = Guid.NewGuid().ToString();
+        var publicOutputFile = Guid.NewGuid().ToString();
+
+        try
+        {
+            var _ = await this.ExecuteSaveCommand(
+                "description",
+                [
+                    ("name1", "description1", ConfigurationItemType.Text, false),
+                    ("name2", "description2", ConfigurationItemType.Text, true),
+                    ("name3", "description3", ConfigurationItemType.File, false),
+                    ("name4", "description4", ConfigurationItemType.File, true)
+                ],
+                password,
+                outputFolder,
+                privateOutputFile,
+                publicOutputFile);
+        }
+        finally
+        {
+            var privateFileInfo = new FileInfo(
+                Path.Combine(
+                    outputFolder,
+                    $"{privateOutputFile}.private.dpc"));
+            if (privateFileInfo.Exists)
+            {
+                privateFileInfo.Delete();
+            }
+
+            var publicFileInfo = new FileInfo(
+                Path.Combine(
+                    outputFolder,
+                    $"{publicOutputFile}.public.dpc"));
+            if (publicFileInfo.Exists)
+            {
+                publicFileInfo.Delete();
+            }
+
+            if (Directory.Exists(outputFolder))
+            {
+                Directory.Delete(outputFolder);
+            }
+        }
     }
 }

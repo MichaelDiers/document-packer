@@ -404,4 +404,12 @@ MIICCgKCAgEA...
     <value>RSA keys are generated.</value>
     <comment>CreateConfigurationPart</comment>
   </data>
+  <data name="GenerateRsaKeysCommandCancelLabel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
+  <data name="GenerateRsaKeysCommandCancelToolTip" xml:space="preserve">
+    <value>Aborts the current process.</value>
+    <comment>CreateConfigurationPart</comment>
+  </data>
 </root>

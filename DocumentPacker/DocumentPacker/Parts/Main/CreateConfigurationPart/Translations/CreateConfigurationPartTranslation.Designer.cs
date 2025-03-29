@@ -179,6 +179,24 @@ namespace DocumentPacker.Parts.Main.CreateConfigurationPart.Translations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string GenerateRsaKeysCommandCancelLabel {
+            get {
+                return ResourceManager.GetString("GenerateRsaKeysCommandCancelLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aborts the current process..
+        /// </summary>
+        public static string GenerateRsaKeysCommandCancelToolTip {
+            get {
+                return ResourceManager.GetString("GenerateRsaKeysCommandCancelToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string GenerateRsaKeysCommandCaption {

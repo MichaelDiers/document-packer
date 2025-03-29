@@ -83,7 +83,7 @@ public interface ICreateConfigurationViewModel : IApplicationViewModel, INotifyP
     /// <summary>
     ///     Gets the save command.
     /// </summary>
-    TranslatableCancellableButton SaveCommand { get; }
+    TranslatableButton<IAsyncCommand> SaveCommand { get; }
 
     /// <summary>
     ///     Gets the command to select the output folder.

@@ -335,4 +335,10 @@ MIICCgKCAgEA...
   <data name="GenerateRsaKeysCommandCancelInfoText" xml:space="preserve">
     <value>RSA-Schlüssel werden generiert.</value>
   </data>
+  <data name="GenerateRsaKeysCommandCancelLabel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="GenerateRsaKeysCommandCancelToolTip" xml:space="preserve">
+    <value>Bricht den aktuellen Prozess ab.</value>
+  </data>
 </root>

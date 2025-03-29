@@ -113,7 +113,7 @@
                 Grid.Column="1"
                 DataContext="{Binding Password}">
                 <b:Interaction.Behaviors>
-                    <password:PasswordBehavior/>
+                    <password:PasswordBehavior />
                 </b:Interaction.Behaviors>
             </PasswordBox>
             <!-- output folder -->
@@ -186,7 +186,7 @@
                 Margin="32">
                 <Button
                     DataContext="{Binding SaveCommand}"
-                    Style="{StaticResource CancellableTranslatableButtonStyle}" />
+                    Style="{StaticResource TranslatableButtonStyle}" />
             </Grid>
         </Grid>
     </Border>
