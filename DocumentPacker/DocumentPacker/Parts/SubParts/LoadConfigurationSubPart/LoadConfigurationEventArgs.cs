@@ -6,7 +6,7 @@ using DocumentPacker.Models;
 ///     Describes the <see cref="EventArgs" /> of the <see cref="LoadConfigurationViewModel.ConfigurationLoaded" /> event.
 /// </summary>
 /// <param name="configurationModel">The data of the <see cref="EventArgs" />.</param>
-internal class LoadConfigurationEventArgs(ConfigurationModel configurationModel) : EventArgs
+public class LoadConfigurationEventArgs(ConfigurationModel configurationModel) : EventArgs
 {
     /// <summary>
     ///     Gets the data of the <see cref="EventArgs" />.

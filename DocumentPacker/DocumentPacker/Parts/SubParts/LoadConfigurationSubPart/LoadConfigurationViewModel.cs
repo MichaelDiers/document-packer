@@ -9,13 +9,14 @@ using DocumentPacker.Extensions;
 using DocumentPacker.Models;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
+using Libs.Wpf.Controls.CustomMessageBox;
 using Libs.Wpf.Localization;
 using Libs.Wpf.ViewModels;
 
 /// <summary>
 ///     Describes the data of the <see cref="LoadConfigurationViewModel" />.
 /// </summary>
-internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
+internal class LoadConfigurationViewModel : ViewModelBase, ILoadConfigurationViewModel
 {
     /// <summary>
     ///     A service to load the document packer configuration file.
@@ -65,10 +66,14 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
     ///     If <c>true</c> load a private configuration; load a public configuration
     ///     otherwise.
     /// </param>
+    /// <param name="commandSync">Synchronizes the command execution to ensure only one command at the same is executed.</param>
+    /// <param name="messageBoxService">A service that shows a message box.</param>
     public LoadConfigurationViewModel(
         ICommandFactory commandFactory,
         IDocumentPackerConfigurationFileService configurationFileService,
-        bool loadPrivateConfiguration
+        bool loadPrivateConfiguration,
+        ICommandSync commandSync,
+        IMessageBoxService messageBoxService
     )
     {
         this.configurationFileService = configurationFileService;
@@ -88,18 +93,27 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
         this.configurationFile.PropertyChanged += this.InvalidateConfiguration;
 
         this.loadConfigurationCommand = new TranslatableButton<ICommand>(
-            commandFactory.CreateAsyncCommand<object?, ConfigurationModel?>(
-                _ => this.LoadConfigurationCommandCanExecute(),
-                null,
-                (_, cancellationToken) => this.LoadConfigurationCommandExecute(cancellationToken),
-                task =>
+            commandFactory.CreateAsyncCommand(
+                commandSync,
+                this.LoadConfigurationCommandCanExecute,
+                this.LoadConfigurationCommandExecuteAsync,
+                async (ex, _) =>
                 {
-                    if (task.Result is not null)
-                    {
-                        this.ConfigurationLoaded?.Invoke(
-                            this,
-                            new LoadConfigurationEventArgs(task.Result));
-                    }
+                    messageBoxService.Show(
+                        string.Format(
+                            LoadConfigurationTranslation.ResourceManager.GetString(
+                                nameof(LoadConfigurationTranslation.LoadConfigurationCommandExecuteAsyncErrorMessage),
+                                TranslationSource.Instance.CurrentCulture) ??
+                            "{0}",
+                            ex.Message),
+                        LoadConfigurationTranslation.ResourceManager.GetString(
+                            nameof(LoadConfigurationTranslation.LoadConfigurationCommandExecuteAsyncErrorCaption),
+                            TranslationSource.Instance.CurrentCulture) ??
+                        string.Empty,
+                        MessageBoxButtons.Ok,
+                        MessageBoxButtons.Ok,
+                        MessageBoxImage.Error);
+                    await Task.CompletedTask;
                 }),
             "material_symbol_refresh.png".ToPackImage(),
             LoadConfigurationTranslation.ResourceManager,
@@ -237,5 +251,23 @@ internal class LoadConfigurationViewModel : ViewModelBase, IDisposable
             cancellationToken);
 
         return configuration;
+    }
+
+    private async Task LoadConfigurationCommandExecuteAsync(CancellationToken cancellationToken)
+    {
+        if (!this.LoadConfigurationCommandCanExecute())
+        {
+            return;
+        }
+
+        var configurationModel = await this.LoadConfigurationCommandExecute(cancellationToken);
+        if (configurationModel is null)
+        {
+            return;
+        }
+
+        this.ConfigurationLoaded?.Invoke(
+            this,
+            new LoadConfigurationEventArgs(configurationModel));
     }
 }

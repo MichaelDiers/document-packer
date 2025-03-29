@@ -116,6 +116,24 @@ namespace DocumentPacker.Parts.SubParts.LoadConfigurationSubPart {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string LoadConfigurationCommandExecuteAsyncErrorCaption {
+            get {
+                return ResourceManager.GetString("LoadConfigurationCommandExecuteAsyncErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are sorry: {0}.
+        /// </summary>
+        internal static string LoadConfigurationCommandExecuteAsyncErrorMessage {
+            get {
+                return ResourceManager.GetString("LoadConfigurationCommandExecuteAsyncErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load.
         /// </summary>
         internal static string LoadConfigurationCommandLabel {

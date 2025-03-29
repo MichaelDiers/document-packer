@@ -153,4 +153,10 @@
   <data name="PasswordWatermark" xml:space="preserve">
     <value>Passwort</value>
   </data>
+  <data name="LoadConfigurationCommandExecuteAsyncErrorMessage" xml:space="preserve">
+    <value>Tut uns leid: {0}</value>
+  </data>
+  <data name="LoadConfigurationCommandExecuteAsyncErrorCaption" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
 </root>

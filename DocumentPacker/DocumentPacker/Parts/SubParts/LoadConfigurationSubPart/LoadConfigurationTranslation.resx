@@ -165,4 +165,11 @@
     <value>Password</value>
     <comment>LoadConfiguration</comment>
   </data>
+  <data name="LoadConfigurationCommandExecuteAsyncErrorMessage" xml:space="preserve">
+    <value>We are sorry: {0}</value>
+    <comment>LoadConfiguration</comment>
+  </data>
+  <data name="LoadConfigurationCommandExecuteAsyncErrorCaption" xml:space="preserve">
+    <value>Error</value>
+  </data>
 </root>
