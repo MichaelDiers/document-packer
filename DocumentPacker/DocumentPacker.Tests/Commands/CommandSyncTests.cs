@@ -1,6 +1,6 @@
 ﻿namespace DocumentPacker.Tests.Commands;
 
-using DocumentPacker.Commands;
+using Libs.Wpf.Commands;
 using Libs.Wpf.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -62,10 +62,10 @@ public class CommandSyncTests
     [Fact]
     public void IsCommandActive()
     {
-        Assert.False(this.commandSync.IsCommandActive);
+        Assert.False(this.commandSync.IsActive);
 
         this.commandSync.Enter();
 
-        Assert.True(this.commandSync.IsCommandActive);
+        Assert.True(this.commandSync.IsActive);
     }
 }
