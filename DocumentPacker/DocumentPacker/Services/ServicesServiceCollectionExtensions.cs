@@ -71,18 +71,6 @@ public static class ServicesServiceCollectionExtensions
     }
 
     /// <summary>
-    ///     Adds the <see cref="IRsaService" /> to the given <paramref name="services" />.
-    /// </summary>
-    /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
-    /// <returns>The given <paramref name="services" />.</returns>
-    public static IServiceCollection TryAddRsaService(this IServiceCollection services)
-    {
-        services.TryAddSingleton<IRsaService, RsaService>();
-
-        return services;
-    }
-
-    /// <summary>
     ///     Adds all supported dependencies to the given <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
@@ -94,7 +82,6 @@ public static class ServicesServiceCollectionExtensions
         services.TryAddDocumentPackerService();
         services.TryAddDocumentUnpackerService();
         services.TryAddEncryptService();
-        services.TryAddRsaService();
 
         return services;
     }

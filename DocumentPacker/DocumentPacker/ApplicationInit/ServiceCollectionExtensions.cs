@@ -1,6 +1,5 @@
 ﻿namespace DocumentPacker.ApplicationInit;
 
-using DocumentPacker.Commands;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Parts.FooterPart;
 using DocumentPacker.Parts.Header.HeaderPart;
@@ -18,8 +17,8 @@ using DocumentPacker.Parts.WindowPart;
 using DocumentPacker.Services;
 using Libs.Wpf.Commands;
 using Libs.Wpf.Controls.CustomMessageBox;
-using Libs.Wpf.Threads;
 using Microsoft.Extensions.DependencyInjection;
+using Sreid.Libs.Crypto.Factory;
 
 /// <summary>
 ///     Extensions for <see cref="IServiceCollection" />.
@@ -50,7 +49,7 @@ public static class ServiceCollectionExtensions
 
         services.AddChangeLanguagePart();
         services.AddFeaturesPart();
-        services.AddEncryptPart();
+        services.TryAddEncryptPart();
         services.AddDecryptPart();
         services.TryAddCreateConfigurationPart();
 
@@ -60,7 +59,7 @@ public static class ServiceCollectionExtensions
 
         services.TryAddCustomMessageBoxServiceCollectionExtensions();
 
-        services.TryAddDispatcherWrapper();
+        services.TryAddFactory();
 
         return services;
     }
