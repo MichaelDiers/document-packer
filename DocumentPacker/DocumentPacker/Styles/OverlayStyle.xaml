@@ -24,8 +24,8 @@
             Value="1" />
         <Style.Triggers>
             <DataTrigger
-                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window},Path=DataContext.IsCommandActive}"
-                Value="False">
+                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window},Path=DataContext.IsWindowEnabled}"
+                Value="True">
                 <Setter
                     Property="Visibility"
                     Value="Collapsed" />

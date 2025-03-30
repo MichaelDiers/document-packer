@@ -9,12 +9,8 @@
     IsEnabled="{Binding IsWindowEnabled}"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=windowPart:WindowViewModel, IsDesignTimeCreatable=False}">
-    <b:Interaction.Behaviors>
-        <windowPart:CancelCommandBehavior />
-    </b:Interaction.Behaviors>
     <Window.Resources>
         <ResourceDictionary
             Source="pack://application:,,,/DocumentPacker;component/Styles/OverlayStyle.xaml" />

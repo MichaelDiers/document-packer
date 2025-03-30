@@ -1,26 +1,21 @@
 ﻿namespace DocumentPacker.Parts.WindowPart;
 
 using System.Windows;
-using DocumentPacker.Commands;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Mvvm;
+using Libs.Wpf.Commands;
 using Libs.Wpf.Localization;
 
 /// <summary>
 ///     View model of the <see cref="WindowView" />.
 /// </summary>
 /// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
-internal class WindowViewModel : ApplicationBaseViewModel, ICancelCommandViewModel
+internal class WindowViewModel : ApplicationBaseViewModel
 {
-    /// <summary>
-    ///     A value that indicates if a command is active.
-    /// </summary>
-    private bool isCommandActive;
-
     /// <summary>
     ///     A value that indicates if the <see cref="Window.IsEnabled" />.
     /// </summary>
-    private bool isWindowEnabled;
+    private bool isWindowEnabled = true;
 
     /// <summary>
     ///     The title of the <see cref="Window" />.
@@ -28,11 +23,6 @@ internal class WindowViewModel : ApplicationBaseViewModel, ICancelCommandViewMod
     private Translatable title = new(
         WindowPartTranslation.ResourceManager,
         nameof(WindowPartTranslation.Title));
-
-    /// <summary>
-    ///     The translatable cancellable button.
-    /// </summary>
-    private TranslatableCancellableButton? translatableCancellableButton;
 
     /// <summary>
     ///     The view that is displayed in the window.
@@ -45,24 +35,13 @@ internal class WindowViewModel : ApplicationBaseViewModel, ICancelCommandViewMod
     public WindowViewModel(ICommandSync commandSync)
     {
         this.CommandSync = commandSync;
+        this.CommandSync.CommandSyncChanged += this.OnCommandSyncChanged;
     }
 
     /// <summary>
     ///     Gets the <see cref="ICommandSync" />.
     /// </summary>
     public ICommandSync CommandSync { get; }
-
-    /// <summary>
-    ///     Gets or sets a value that indicates if a command is active.
-    /// </summary>
-    public bool IsCommandActive
-    {
-        get => this.isCommandActive;
-        set =>
-            this.SetField(
-                ref this.isCommandActive,
-                value);
-    }
 
     /// <summary>
     ///     Gets or sets a value that indicates if the <see cref="Window.IsEnabled" />.
@@ -89,18 +68,6 @@ internal class WindowViewModel : ApplicationBaseViewModel, ICancelCommandViewMod
     }
 
     /// <summary>
-    ///     Gets or sets the translatable cancellable button.
-    /// </summary>
-    public TranslatableCancellableButton? TranslatableCancellableButton
-    {
-        get => this.translatableCancellableButton;
-        set =>
-            this.SetField(
-                ref this.translatableCancellableButton,
-                value);
-    }
-
-    /// <summary>
     ///     Gets or sets the view that is displayed in the window.
     /// </summary>
     [ApplicationPart(ApplicationElementPart.Layout)]
@@ -111,5 +78,24 @@ internal class WindowViewModel : ApplicationBaseViewModel, ICancelCommandViewMod
             this.SetField(
                 ref this.view,
                 value);
+    }
+
+    /// <summary>
+    ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+    /// </summary>
+    public override void Dispose()
+    {
+        this.CommandSync.CommandSyncChanged -= this.OnCommandSyncChanged;
+        base.Dispose();
+    }
+
+    /// <summary>
+    ///     Handles the <see cref="ICommandSync.CommandSyncChanged" /> event.
+    /// </summary>
+    /// <param name="sender">The sender of the event.</param>
+    /// <param name="e">The event args.</param>
+    private void OnCommandSyncChanged(object? sender, CommandSyncChangedEventArgs e)
+    {
+        this.IsWindowEnabled = !e.IsCommandActive;
     }
 }
