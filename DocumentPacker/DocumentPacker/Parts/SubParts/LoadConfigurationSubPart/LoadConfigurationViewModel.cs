@@ -36,7 +36,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, ILoadConfigurationVie
     /// <summary>
     ///     The command to load the configuration file.
     /// </summary>
-    private TranslatableButton<ICommand> loadConfigurationCommand;
+    private TranslatableButton<IAsyncCommand> loadConfigurationCommand;
 
     /// <summary>
     ///     The password to decrypt the document packer configuration file.
@@ -92,7 +92,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, ILoadConfigurationVie
                 : nameof(LoadConfigurationTranslation.ConfigurationFileWatermarkPublic));
         this.configurationFile.PropertyChanged += this.InvalidateConfiguration;
 
-        this.loadConfigurationCommand = new TranslatableButton<ICommand>(
+        this.loadConfigurationCommand = new TranslatableButton<IAsyncCommand>(
             commandFactory.CreateAsyncCommand(
                 commandSync,
                 this.LoadConfigurationCommandCanExecute,
@@ -156,7 +156,7 @@ internal class LoadConfigurationViewModel : ViewModelBase, ILoadConfigurationVie
     /// <summary>
     ///     Gets or sets the command to load the configuration file.
     /// </summary>
-    public TranslatableButton<ICommand> LoadConfigurationCommand
+    public TranslatableButton<IAsyncCommand> LoadConfigurationCommand
     {
         get => this.loadConfigurationCommand;
         set =>
