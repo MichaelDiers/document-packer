@@ -50,7 +50,7 @@ public static class ServiceCollectionExtensions
         services.AddChangeLanguagePart();
         services.AddFeaturesPart();
         services.TryAddEncryptPart();
-        services.AddDecryptPart();
+        services.TryAddDecryptPart();
         services.TryAddCreateConfigurationPart();
 
         services.TryAddServices();

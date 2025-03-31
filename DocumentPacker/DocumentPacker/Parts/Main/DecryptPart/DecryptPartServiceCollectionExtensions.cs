@@ -2,21 +2,47 @@
 
 using DocumentPacker.EventHandling;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 /// <summary>
-///     Extensions for <see cref="IServiceCollection" />
+///     Extensions of <see cref="IServiceCollection" />.
 /// </summary>
-public static class DecryptPartPartServiceCollectionExtensions
+public static class DecryptPartServiceCollectionExtensions
 {
     /// <summary>
-    ///     Adds the decrypt part of the application.
+    ///     Adds all supported dependencies to the given <see cref="IServiceCollection" />.
     /// </summary>
-    /// <param name="services">Dependencies are added to this <see cref="IServiceCollection" />.</param>
+    /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
     /// <returns>The given <paramref name="services" />.</returns>
-    public static IServiceCollection AddDecryptPart(this IServiceCollection services)
+    public static IServiceCollection TryAddDecryptPart(this IServiceCollection services)
     {
-        services.AddKeyedTransient<IApplicationView, DecryptView>(ApplicationElementPart.DecryptFeature);
-        services.AddKeyedTransient<IApplicationViewModel, DecryptViewModel>(ApplicationElementPart.DecryptFeature);
+        services.TryAddDecryptView();
+        services.TryAddDecryptViewModel();
+
+        return services;
+    }
+
+    /// <summary>
+    ///     Adds the <see cref="DecryptViewModel" /> to the given <paramref name="services" />.
+    /// </summary>
+    /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
+    /// <returns>The given <paramref name="services" />.</returns>
+    public static IServiceCollection TryAddDecryptView(this IServiceCollection services)
+    {
+        services.TryAddKeyedSingleton<IApplicationView, DecryptView>(ApplicationElementPart.DecryptFeature);
+
+        return services;
+    }
+
+    /// <summary>
+    ///     Adds the <see cref="IDecryptViewModel" /> to the given <paramref name="services" />.
+    /// </summary>
+    /// <param name="services">The dependencies are added to this <see cref="IServiceCollection" />.</param>
+    /// <returns>The given <paramref name="services" />.</returns>
+    public static IServiceCollection TryAddDecryptViewModel(this IServiceCollection services)
+    {
+        services.TryAddKeyedSingleton<IApplicationViewModel, DecryptViewModel>(ApplicationElementPart.DecryptFeature);
+        services.TryAddSingleton<IDecryptViewModel, DecryptViewModel>();
 
         return services;
     }

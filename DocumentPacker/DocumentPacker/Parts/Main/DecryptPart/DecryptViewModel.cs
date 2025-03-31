@@ -14,8 +14,9 @@ using Libs.Wpf.Localization;
 /// <summary>
 ///     The view model of <see cref="DecryptView" />.
 /// </summary>
-/// <seealso cref="DocumentPacker.Mvvm.ApplicationBaseViewModel" />
-internal class DecryptViewModel : ApplicationBaseViewModel
+/// <seealso cref="ApplicationBaseViewModel" />
+/// <seealso cref="IDecryptViewModel" />
+internal class DecryptViewModel : ApplicationBaseViewModel, IDecryptViewModel
 {
     /// <summary>
     ///     The command to decrypt the data.
@@ -45,7 +46,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     The load configuration view model.
     /// </summary>
-    private LoadConfigurationViewModel loadConfigurationViewModel;
+    private ILoadConfigurationViewModel loadConfigurationViewModel;
 
     /// <summary>
     ///     The output folder.
@@ -215,7 +216,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel
     /// <summary>
     ///     Gets or sets the load configuration view model.
     /// </summary>
-    public LoadConfigurationViewModel LoadConfigurationViewModel
+    public ILoadConfigurationViewModel LoadConfigurationViewModel
     {
         get => this.loadConfigurationViewModel;
         set =>
@@ -317,6 +318,10 @@ internal class DecryptViewModel : ApplicationBaseViewModel
         this.PrivateRsaKey.Value = e.ConfigurationModel.RsaPrivateKey;
     }
 
+    /// <summary>
+    ///     Validate all input related fields.
+    /// </summary>
+    /// <returns><c>True</c> if the view model is valid; <c>false</c> otherwise.</returns>
     private bool Validate()
     {
         this.EncryptedFile.Validate();
