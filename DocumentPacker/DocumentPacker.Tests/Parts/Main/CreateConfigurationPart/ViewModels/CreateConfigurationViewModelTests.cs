@@ -1,6 +1,5 @@
 ﻿namespace DocumentPacker.Tests.Parts.Main.CreateConfigurationPart.ViewModels;
 
-using System.Security;
 using DocumentPacker.EventHandling;
 using DocumentPacker.Parts.Main.CreateConfigurationPart;
 using DocumentPacker.Parts.Main.CreateConfigurationPart.ViewModels;
@@ -57,22 +56,14 @@ public class CreateConfigurationViewModelTests : IDisposable
         this.createConfigurationViewModel.Dispose();
     }
 
-    public async Task<(string privateConfigurationFile, string publicConfigurationFile)> ExecuteSaveCommand(
-        string description,
-        IEnumerable<(string name, string description, ConfigurationItemType itemType, bool isRequired)>
-            configurationItems,
-        SecureString password,
-        string outputFolder,
-        string privateOutputFile,
-        string publicOutputFile
-    )
+    public async Task ExecuteSaveCommand(CreateConfigurationViewModelTestData testData)
     {
-        this.createConfigurationViewModel.Description.Value = description;
+        this.createConfigurationViewModel.Description.Value = testData.Description;
 
         this.createConfigurationViewModel.GenerateRsaKeysCommand.Command.Execute(null);
 
         this.createConfigurationViewModel.ConfigurationItems.Clear();
-        foreach (var configurationItem in configurationItems)
+        foreach (var configurationItem in testData.Items)
         {
             this.createConfigurationViewModel.AddConfigurationItemCommand.Command.Execute(null);
             var item = this.createConfigurationViewModel.ConfigurationItems.Last();
@@ -84,13 +75,12 @@ public class CreateConfigurationViewModelTests : IDisposable
             item.IsRequired.Value = configurationItem.isRequired;
         }
 
-        this.createConfigurationViewModel.Password.Value = password;
+        this.createConfigurationViewModel.Password.Value = testData.Password;
 
-        Directory.CreateDirectory(outputFolder);
-        this.createConfigurationViewModel.OutputFolder.Value = outputFolder;
+        this.createConfigurationViewModel.OutputFolder.Value = testData.OutputFolder;
 
-        this.createConfigurationViewModel.PrivateOutputFile.Value = privateOutputFile;
-        this.createConfigurationViewModel.PublicOutputFile.Value = publicOutputFile;
+        this.createConfigurationViewModel.PrivateOutputFile.Value = testData.PrivateFileName;
+        this.createConfigurationViewModel.PublicOutputFile.Value = testData.PublicFileName;
 
         for (var i = 0; i < 50 && this.createConfigurationViewModel.GenerateRsaKeysCommand.Command.IsActive; i++)
         {
@@ -118,58 +108,21 @@ public class CreateConfigurationViewModelTests : IDisposable
         Assert.True(File.Exists(privateFile));
         Assert.True(File.Exists(publicFile));
 
-        return (privateFile, publicFile);
+        testData.Validate();
     }
 
     [Fact]
     public async Task SaveConfiguration()
     {
-        var password = new SecureString();
-        password.AppendChar('1');
-
-        var outputFolder = Guid.NewGuid().ToString();
-        var privateOutputFile = Guid.NewGuid().ToString();
-        var publicOutputFile = Guid.NewGuid().ToString();
+        var testData = new CreateConfigurationViewModelTestData();
 
         try
         {
-            var _ = await this.ExecuteSaveCommand(
-                "description",
-                [
-                    ("name1", "description1", ConfigurationItemType.Text, false),
-                    ("name2", "description2", ConfigurationItemType.Text, true),
-                    ("name3", "description3", ConfigurationItemType.File, false),
-                    ("name4", "description4", ConfigurationItemType.File, true)
-                ],
-                password,
-                outputFolder,
-                privateOutputFile,
-                publicOutputFile);
+            await this.ExecuteSaveCommand(testData);
         }
         finally
         {
-            var privateFileInfo = new FileInfo(
-                Path.Combine(
-                    outputFolder,
-                    $"{privateOutputFile}.private.dpc"));
-            if (privateFileInfo.Exists)
-            {
-                privateFileInfo.Delete();
-            }
-
-            var publicFileInfo = new FileInfo(
-                Path.Combine(
-                    outputFolder,
-                    $"{publicOutputFile}.public.dpc"));
-            if (publicFileInfo.Exists)
-            {
-                publicFileInfo.Delete();
-            }
-
-            if (Directory.Exists(outputFolder))
-            {
-                Directory.Delete(outputFolder);
-            }
+            testData.Dispose();
         }
     }
 }
