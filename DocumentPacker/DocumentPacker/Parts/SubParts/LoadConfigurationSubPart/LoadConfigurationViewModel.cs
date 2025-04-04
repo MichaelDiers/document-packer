@@ -100,19 +100,21 @@ internal class LoadConfigurationViewModel : ViewModelBase, ILoadConfigurationVie
                 async (ex, _) =>
                 {
                     messageBoxService.Show(
-                        string.Format(
+                        new MessageBoxData(
+                            string.Format(
+                                LoadConfigurationTranslation.ResourceManager.GetString(
+                                    nameof(
+                                        LoadConfigurationTranslation.LoadConfigurationCommandExecuteAsyncErrorMessage),
+                                    TranslationSource.Instance.CurrentCulture) ??
+                                "{0}",
+                                ex.Message),
                             LoadConfigurationTranslation.ResourceManager.GetString(
-                                nameof(LoadConfigurationTranslation.LoadConfigurationCommandExecuteAsyncErrorMessage),
+                                nameof(LoadConfigurationTranslation.LoadConfigurationCommandExecuteAsyncErrorCaption),
                                 TranslationSource.Instance.CurrentCulture) ??
-                            "{0}",
-                            ex.Message),
-                        LoadConfigurationTranslation.ResourceManager.GetString(
-                            nameof(LoadConfigurationTranslation.LoadConfigurationCommandExecuteAsyncErrorCaption),
-                            TranslationSource.Instance.CurrentCulture) ??
-                        string.Empty,
-                        MessageBoxButtons.Ok,
-                        MessageBoxButtons.Ok,
-                        MessageBoxImage.Error);
+                            string.Empty,
+                            MessageBoxButtons.Ok,
+                            MessageBoxButtons.Ok,
+                            MessageBoxImage.Error));
                     await Task.CompletedTask;
                 }),
             "material_symbol_refresh.png".ToPackImage(),

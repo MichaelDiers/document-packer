@@ -116,14 +116,14 @@ internal class DecryptViewModel : ApplicationBaseViewModel, IDecryptViewModel
     )
     {
         this.decryptCommand = new TranslatableButton<IAsyncCommand>(
-            commandFactory.CreateAsyncCommand(
+            commandFactory.CreateAsyncCommand<object?, MessageBoxData?>(
                 commandSync,
-                () => true,
-                async cancellationToken =>
+                _ => true,
+                async (_, cancellationToken) =>
                 {
                     if (!this.Validate())
                     {
-                        return;
+                        return null;
                     }
 
                     await decryptService.DecryptAsync(
@@ -135,7 +135,7 @@ internal class DecryptViewModel : ApplicationBaseViewModel, IDecryptViewModel
                                       nameof(DecryptPartTranslation.DecryptCommandSucceeds),
                                       TranslationSource.Instance.CurrentCulture) ??
                                   "{0}";
-                    messageBoxService.Show(
+                    return new MessageBoxData(
                         string.Format(
                             message,
                             this.OutputFolder.Value),
@@ -151,20 +151,31 @@ internal class DecryptViewModel : ApplicationBaseViewModel, IDecryptViewModel
                                       TranslationSource.Instance.CurrentCulture) ??
                                   "{0}";
                     messageBoxService.Show(
-                        string.Format(
-                            message,
-                            ex.Message),
-                        string.Empty,
-                        MessageBoxButtons.Ok,
-                        MessageBoxButtons.Ok,
-                        MessageBoxImage.Information);
+                        new MessageBoxData(
+                            string.Format(
+                                message,
+                                ex.Message),
+                            string.Empty,
+                            MessageBoxButtons.Ok,
+                            MessageBoxButtons.Ok,
+                            MessageBoxImage.Information));
                     await Task.CompletedTask;
                 },
                 translatableCancelButton: new TranslatableCancelButton(
                     DecryptPartTranslation.ResourceManager,
                     nameof(DecryptPartTranslation.DecryptCommandCancelLabel),
                     infoTextResourceKey: nameof(DecryptPartTranslation.DecryptCommandCancelInfoText),
-                    imageSource: "material_symbol_cancel.png".ToPackImage())),
+                    imageSource: "material_symbol_cancel.png".ToPackImage()),
+                postCommandFunc: async messageBoxData =>
+                {
+                    if (messageBoxData is null)
+                    {
+                        return;
+                    }
+
+                    messageBoxService.Show(messageBoxData);
+                    await Task.CompletedTask;
+                }),
             "material_symbol_expand.png".ToPackImage(),
             DecryptPartTranslation.ResourceManager,
             nameof(DecryptPartTranslation.DecryptCommandLabel),

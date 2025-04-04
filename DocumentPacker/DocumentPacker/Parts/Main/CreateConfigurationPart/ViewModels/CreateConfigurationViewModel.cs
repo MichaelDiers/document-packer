@@ -251,12 +251,13 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
                 async (ex, _) =>
                 {
                     messageBoxService.Show(
-                        $"{CreateConfigurationViewModel.GetTranslation(() => CreateConfigurationPartTranslation.GenerateRsaKeysCommandUnknownError)}{ex.Message}",
-                        CreateConfigurationViewModel.GetTranslation(
-                            () => CreateConfigurationPartTranslation.GenerateRsaKeysCommandCaption),
-                        MessageBoxButtons.Ok,
-                        MessageBoxButtons.Ok,
-                        MessageBoxImage.Error);
+                        new MessageBoxData(
+                            $"{CreateConfigurationViewModel.GetTranslation(() => CreateConfigurationPartTranslation.GenerateRsaKeysCommandUnknownError)}{ex.Message}",
+                            CreateConfigurationViewModel.GetTranslation(
+                                () => CreateConfigurationPartTranslation.GenerateRsaKeysCommandCaption),
+                            MessageBoxButtons.Ok,
+                            MessageBoxButtons.Ok,
+                            MessageBoxImage.Error));
                     await Task.CompletedTask;
                 },
                 translatableCancelButton: new TranslatableCancelButton(
@@ -269,14 +270,14 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
             CreateConfigurationPartTranslation.ResourceManager);
 
         this.SaveCommand = new TranslatableButton<IAsyncCommand>(
-            commandFactory.CreateAsyncCommand(
+            commandFactory.CreateAsyncCommand<object?, MessageBoxData?>(
                 commandSync,
-                () => true,
-                async cancellationToken =>
+                _ => true,
+                async (_, cancellationToken) =>
                 {
                     if (!this.Validate())
                     {
-                        return;
+                        return null;
                     }
 
                     var result = await this.SaveCommandExecute(cancellationToken);
@@ -286,7 +287,7 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
                               nameof(CommandTranslations.MessageBoxCaptionError),
                               TranslationSource.Instance.CurrentCulture) ??
                           string.Empty;
-                    messageBoxService.Show(
+                    return new MessageBoxData(
                         result.message ?? string.Empty,
                         caption,
                         MessageBoxButtons.Ok,
@@ -296,18 +297,29 @@ internal class CreateConfigurationViewModel : ApplicationBaseViewModel, ICreateC
                 async (ex, _) =>
                 {
                     messageBoxService.Show(
-                        ex.Message,
-                        string.Empty,
-                        MessageBoxButtons.Ok,
-                        MessageBoxButtons.Ok,
-                        MessageBoxImage.Error);
+                        new MessageBoxData(
+                            ex.Message,
+                            string.Empty,
+                            MessageBoxButtons.Ok,
+                            MessageBoxButtons.Ok,
+                            MessageBoxImage.Error));
                     await Task.CompletedTask;
                 },
                 translatableCancelButton: new TranslatableCancelButton(
                     CreateConfigurationPartTranslation.ResourceManager,
                     nameof(CreateConfigurationPartTranslation.CancelLabel),
                     infoTextResourceKey: nameof(CreateConfigurationPartTranslation.SaveCancelInfoText),
-                    imageSource: "material_symbol_cancel.png".ToPackImage())),
+                    imageSource: "material_symbol_cancel.png".ToPackImage()),
+                postCommandFunc: async messageBoxData =>
+                {
+                    if (messageBoxData is null)
+                    {
+                        return;
+                    }
+
+                    messageBoxService.Show(messageBoxData);
+                    await Task.CompletedTask;
+                }),
             "material_symbol_save.png".ToPackImage(),
             CreateConfigurationPartTranslation.ResourceManager,
             nameof(CreateConfigurationPartTranslation.SaveLabel),
